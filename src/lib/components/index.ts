@@ -6,3 +6,5 @@ export * from './alert.svelte';
 export { default as Alert } from './alert.svelte';
 export * from './banner.svelte';
 export { default as Banner } from './banner.svelte';
+export * from './progress.svelte';
+export { default as Progress } from './progress.svelte';
