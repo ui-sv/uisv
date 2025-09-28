@@ -9,19 +9,37 @@ import {
 import { type WebFontsOptions } from '@unocss/preset-web-fonts';
 import { presetIcons } from 'unocss';
 import { defu } from 'defu';
+import type { PropColor } from './types.js';
+import { getColors } from 'theme-colors';
 
 export type PluginOptions = {
-	transitions?: boolean;
-	colors?: string[];
-	primary?: string;
-	neutral?: string;
 	/**
-	 * Use the UnoCSS vite plugin
-	 * @default true
+	 * Colors as UnoCSS color name, hex color, or UnoCSS theme color object
+	 * @example
+	 * {
+	 *  primary: 'orange',
+	 *  secondary: 'neutral',
+	 *  info: '#00F',
+	 *  success: '#0F0',
+	 *  warning: 'FF0',
+	 *  error: {
+	 *    50: '#fef2f2';
+	 *    100: '#fee2e2';
+	 *    200: '#fecaca';
+	 *    300: '#fca5a5';
+	 *    400: '#f87171';
+	 *    500: '#ef4444';
+	 *    600: '#dc2626';
+	 *    700: '#b91c1c';
+	 *    800: '#991b1b';
+	 *    900: '#7f1d1d';
+	 *    950: '#450a0a';
+	 *  }
+	 * }
 	 */
-	unocss?: boolean;
+	colors?: Partial<Record<PropColor, string | Record<number, string>>>;
 	/**
-	 * Use the UnoCSS web fonts plugin
+	 * Options for the UnoCSS web fonts plugin
 	 */
 	fonts?: WebFontsOptions;
 };
@@ -64,23 +82,37 @@ export type PluginOptions = {
 // 	];
 // }
 
-export function unocss(options: Required<PluginOptions>) {
+export function uisv(options: Required<PluginOptions>) {
 	const _opts: PluginOptions = defu(options, {
-		primary: 'orange',
-		neutral: 'neutral',
+		colors: {
+			primary: 'orange',
+			secondary: 'neutral',
+			info: 'blue',
+			success: 'green',
+			warning: 'yellow',
+			error: 'red'
+		},
 		fonts: {
 			fonts: {
-				sans: 'Public Sans'
+				sans: 'Public Sans:400,500,600'
 			}
 		}
-	});
+	} as PluginOptions);
 
 	return uno_plugin({
+		theme: {},
 		presets: [presetWind3({}), presetWebFonts(_opts.fonts), presetIcons()],
 		transformers: [transformerVariantGroup(), transformerCompileClass(), transformerDirectives()],
 		extendTheme: (theme) => {
-			theme.colors.secondary = theme.colors[_opts.neutral!];
-			theme.colors.primary = theme.colors[_opts.primary!];
+			for (const [color, value] of Object.entries(_opts.colors!)) {
+				if (typeof value !== 'string') {
+					theme.colors[color] = value;
+					continue;
+				}
+
+				const in_theme = theme.colors[value];
+				theme.colors[color] = in_theme ? in_theme : getColors(value);
+			}
 		}
 	});
 }

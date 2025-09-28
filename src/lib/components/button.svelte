@@ -1,14 +1,11 @@
 <script lang="ts" module>
-	export type ButtonColor = 'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning';
 	export type ButtonVariant = 'link' | 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost';
-	export type ButtonSize = 'md' | 'xs' | 'sm' | 'lg' | 'xl';
-	export type ButtonTarget = null | '_blank' | '_parent' | '_self' | '_top' | (string & {});
 
 	export type ButtonProps = {
 		/** The underlying DOM element being rendered. You can bind to this to get a reference to the element. */
-		ref?: HTMLButtonElement;
+		ref?: HTMLButtonElement | HTMLAnchorElement;
 		/** Where to display the linked URL, as the name for a browsing context. */
-		target?: ButtonTarget;
+		target?: null | '_blank' | '_parent' | '_self' | '_top' | (string & {});
 		/** Force the link to be active independent of the current route. */
 		// active?: boolean;
 		disabled?: boolean;
@@ -28,8 +25,8 @@
 		/**
 		 * @defaultValue 'primary'
 		 */
-		color?: ButtonColor;
-		// activecolor?: ButtonColor;
+		color?: PropColor;
+		// activecolor?: PropColor;
 		/**
 		 * @defaultValue 'solid'
 		 */
@@ -38,7 +35,7 @@
 		/**
 		 * @defaultValue 'md'
 		 */
-		size?: ButtonSize;
+		size?: 'md' | 'xs' | 'sm' | 'lg' | 'xl';
 		/** Render the button full width. */
 		block?: boolean;
 		/** Set loading state automatically based on the `@click` promise state */
@@ -59,6 +56,7 @@
 	import { isSnippet } from '$lib/utils/common.js';
 	import { tv } from 'tailwind-variants';
 	import type { ClassValue } from 'svelte/elements';
+	import type { PropColor } from '$lib/types.js';
 
 	// let form_loading = getContext<{ value: boolean } | undefined>(FORM_LOADING_CONTEXT_KEY);
 	let {
@@ -96,7 +94,7 @@
 		tv({
 			slots: {
 				icon: '',
-				base: 'transition flex items-center'
+				base: 'transition flex items-center font-sans'
 			},
 			variants: {
 				color: {
@@ -333,16 +331,15 @@
 </script>
 
 {#if href}
-	<Button.Root
-		bind:ref
+	<a
+		bind:this={ref}
 		{href}
 		{target}
-		disabled={disabled || is_loading}
 		class={[classes.base(), !children && icon ? 'px-0 aspect-square' : '', ui.base]}
 		onclick={onClickWrapper}
 	>
 		{@render Inside()}
-	</Button.Root>
+	</a>
 {:else}
 	<Button.Root
 		bind:ref

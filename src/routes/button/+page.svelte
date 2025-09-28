@@ -1,16 +1,10 @@
 <script lang="ts">
-	import {
-		Button,
-		type ButtonColor,
-		type ButtonProps,
-		type ButtonSize,
-		type ButtonVariant
-	} from '$lib/index.js';
+	import { Button, type PropColor, type ButtonProps, type ButtonVariant } from '$lib/index.js';
 	import { pascalCase } from 'scule';
 	import '@unocss/reset/tailwind.css';
 	import './main.css';
 
-	const BUTTON_COLORS: ButtonColor[] = [
+	const BUTTON_COLORS: PropColor[] = [
 		'primary',
 		'secondary',
 		'info',
@@ -23,7 +17,7 @@
 
 	let button_label = $state('Button');
 	let button_variant = $state<ButtonVariant>('solid');
-	let button_size = $state<ButtonSize>('md');
+	let button_size = $state<ButtonProps['size']>('md');
 	let button_icon = $state('i-solar:rocket-2-linear');
 	let loading = $state(false);
 	let trailing_icon = $state(false);

@@ -1,10 +1,10 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 // @ts-expect-error ueah
-import { unocss } from './src/lib/vite';
+import { uisv } from './src/lib/vite';
 
 export default defineConfig({
-	plugins: [sveltekit(), unocss()],
+	plugins: [sveltekit(), uisv()],
 	test: {
 		expect: { requireAssertions: true },
 		projects: [

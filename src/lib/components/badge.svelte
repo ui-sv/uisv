@@ -3,24 +3,24 @@
 
 	export type BadgeProps = {
 		label?: string;
-		color?: ButtonColor;
+		color?: PropColor;
 		variant?: 'solid' | 'outline' | 'soft' | 'subtle';
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		icon?: string | Snippet | Component;
 		trailingicon?: boolean;
 		children?: Snippet;
 		ui?: {
-			base?: ClassValue;
-			icon?: ClassValue;
+			base?: ClassNameValue;
+			icon?: ClassNameValue;
 		};
 	};
 </script>
 
 <script lang="ts">
-	import type { ButtonColor } from './button.svelte';
 	import { tv } from 'tailwind-variants';
-	import type { ClassValue } from 'svelte/elements';
 	import { isSnippet } from '$lib/utils/common.js';
+	import type { PropColor } from '$lib/types.js';
+	import type { ClassNameValue } from 'tailwind-merge';
 
 	let {
 		icon,
@@ -35,7 +35,7 @@
 
 	const classes = $derived.by(() => {
 		return tv({
-			slots: { icon: '', base: 'flex-inline items-center' },
+			slots: { icon: '', base: 'flex-inline items-center font-sans' },
 			variants: {
 				color: {
 					primary: '',
@@ -58,8 +58,8 @@
 						base: 'font-medium text-[0.5rem] px-1 h-4 rounded gap-1',
 						icon: 'size-3'
 					},
-					sm: { base: 'font-medium text-xs px-1 h-5 rounded gap-1', icon: 'size-3' },
-					md: { base: 'font-medium text-sm rounded-md px-2 h-6 gap-2', icon: 'size-4' },
+					sm: { base: 'font-medium text-[0.625rem] px-1 h-5 rounded gap-1', icon: 'size-3' },
+					md: { base: 'font-medium text-xs rounded-md px-2 h-6 gap-2', icon: 'size-4' },
 					lg: { base: 'font-medium text-sm px-2 h-7 rounded-md gap-2', icon: 'size-5' },
 					xl: { base: 'font-medium px-3 h-8 rounded-md gap-2', icon: 'size-5' }
 				}
@@ -68,7 +68,7 @@
 				{
 					color: 'primary',
 					variant: 'solid',
-					class: 'bg-primary-500'
+					class: 'bg-primary-400'
 				},
 				{
 					color: 'secondary',
@@ -99,32 +99,32 @@
 				{
 					color: 'primary',
 					variant: 'outline',
-					class: 'border-primary-500 text-primary-500'
+					class: 'border-primary-300 text-primary-400'
 				},
 				{
 					color: 'secondary',
 					variant: 'outline',
-					class: 'border-secondary-900 text-secondary-500'
+					class: 'border-secondary-300 text-secondary-900'
 				},
 				{
 					color: 'info',
 					variant: 'outline',
-					class: 'border-blue-500 text-blue-500'
+					class: 'border-blue-300 text-blue-500'
 				},
 				{
 					color: 'success',
 					variant: 'outline',
-					class: 'border-green-500 text-green-500'
+					class: 'border-green-300 text-green-500'
 				},
 				{
 					color: 'error',
 					variant: 'outline',
-					class: 'border-red-500 text-red-500'
+					class: 'border-red-300 text-red-500'
 				},
 				{
 					color: 'warning',
 					variant: 'outline',
-					class: 'border-yellow-500 text-yellow-500'
+					class: 'border-yellow-300 text-yellow-500'
 				},
 
 				{
@@ -166,7 +166,7 @@
 				{
 					color: 'secondary',
 					variant: 'subtle',
-					class: 'bg-secondary-50 text-secondary-800 border-secondary-300 '
+					class: 'bg-secondary-100 text-secondary-800 border-secondary-300 '
 				},
 				{
 					color: 'info',
@@ -191,11 +191,13 @@
 			]
 		})({ variant, size, color });
 	});
-
-	$inspect(children, label);
 </script>
 
-<span class={[classes.base(), icon && !(children || label) ? 'px-0 aspect-square' : '', ui.base]}>
+<span
+	class={classes.base({
+		class: [icon && !(children || label) ? 'px-0 aspect-square justify-center' : '', ui.base]
+	})}
+>
 	{#if !trailingicon}
 		{@render Icon()}
 	{/if}
