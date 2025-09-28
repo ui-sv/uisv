@@ -6,17 +6,18 @@
 	import { tv } from 'tailwind-variants';
 	import { isSnippet } from '$lib/utils/common.js';
 	import { defu } from 'defu';
+	import { useId } from 'bits-ui';
 	import Button from './button.svelte';
 
-	export type AlertProps = {
-		title?: string | Snippet;
-		description?: string | Snippet;
+	export type BannerProps = {
+		title: string | Snippet;
 		icon?: string | Snippet | Component;
 		color?: PropColor;
 		variant?: 'solid' | 'outline' | 'soft' | 'subtle';
-		position?: 'bottom' | 'right';
 		actions?: ButtonProps[];
 		close?: boolean | ButtonProps;
+		href?: string;
+		target?: string;
 		ui?: {
 			base?: ClassNameValue;
 			icon?: ClassNameValue;
@@ -30,16 +31,17 @@
 <script lang="ts">
 	let {
 		title,
-		description,
 		close,
 		icon,
+		href,
+		target,
 		actions = [],
 		color = 'primary',
 		variant = 'solid',
-		position = 'bottom',
 		ui = {},
 		onclose = () => {}
-	}: AlertProps = $props();
+	}: BannerProps = $props();
+	const id = useId();
 
 	const close_props = $derived.by(() => {
 		return defu(typeof close === 'boolean' ? {} : close, {
@@ -54,11 +56,10 @@
 	const classes = $derived.by(() =>
 		tv({
 			slots: {
-				base: 'flex gap-2 font-sans p-4 rounded-lg',
+				base: 'flex items-center gap-2 font-sans p-4',
 				icon: 'pi size-6',
 				actions: '',
-				description: 'text-opacity-50 text-sm',
-				title: 'font-medium'
+				title: ''
 			},
 			variants: {
 				color: {
@@ -77,14 +78,6 @@
 					outline: 'border',
 					soft: '',
 					subtle: 'border'
-				},
-				position: {
-					right: {
-						base: ''
-					},
-					bottom: {
-						base: 'flex-col'
-					}
 				}
 			},
 			compoundVariants: [
@@ -212,12 +205,17 @@
 					class: 'bg-error-50 text-error-500  border-error-300'
 				}
 			]
-		})({ color, variant, position })
+		})({ color, variant })
 	);
 </script>
 
-<div class={classes.base({ class: [position === 'bottom' ? '' : 'flex', ui.base] })}>
-	<div class="flex gap-2 flex-grow">
+<svelte:element
+	this={href ? 'a' : 'button'}
+	{href}
+	{target}
+	class={classes.base({ class: [ui.base] })}
+>
+	<div class="flex flex-grow gap-2 text-sm items-center">
 		{#if icon}
 			<div class="size-6">
 				{#if typeof icon === 'string'}
@@ -231,44 +229,29 @@
 			</div>
 		{/if}
 
-		<div class="space-y-1 flex-grow">
-			{#if title}
-				<div class={classes.title({ class: [ui.title] })}>
-					{#if isSnippet(title)}
-						{@render title()}
-					{:else}
-						{title}
-					{/if}
-				</div>
-			{/if}
-
-			{#if description}
-				<div class={classes.description({ class: [ui.title] })}>
-					{#if isSnippet(description)}
-						{@render description()}
-					{:else}
-						{description}
-					{/if}
-				</div>
+		<div class={classes.title({ class: [ui.title] })}>
+			{#if isSnippet(title)}
+				{@render title()}
+			{:else}
+				{title}
 			{/if}
 		</div>
 
-		{#if close}
-			<div>
-				<Button {...close_props} onclick={onclose} />
-			</div>
-		{/if}
-	</div>
-
-	{#if actions.length > 0}
-		<div class="flex gap-2 items-center pl-8">
+		{#if actions.length > 0}
 			{#each actions as action (action.label)}
 				<Button
 					{...defu(action, {
-						size: 'xs'
+						size: 'xs',
+						color: 'secondary'
 					} as ButtonProps)}
 				/>
 			{/each}
+		{/if}
+	</div>
+
+	{#if close}
+		<div>
+			<Button {...close_props} onclick={onclose} />
 		</div>
 	{/if}
-</div>
+</svelte:element>
