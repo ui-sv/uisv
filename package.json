@@ -2,6 +2,9 @@
 	"name": "uisv",
 	"version": "0.0.1",
 	"description": "ui library for the rest of us",
+	"license": "MIT",
+	"repository": "ui-sv/uisv",
+	"homepage": "https://github.com/ui-sv/uisv",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
@@ -30,6 +33,10 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
+		},
+		"./vite": {
+			"types": "./dist/vite.d.ts",
+			"svelte": "./dist/vite.js"
 		}
 	},
 	"peerDependencies": {

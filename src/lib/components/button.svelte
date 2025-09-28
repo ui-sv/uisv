@@ -332,7 +332,6 @@
 
 {#if href}
 	<a
-		bind:this={ref}
 		{href}
 		{target}
 		class={[classes.base(), !children && icon ? 'px-0 aspect-square' : '', ui.base]}
@@ -342,7 +341,6 @@
 	</a>
 {:else}
 	<Button.Root
-		bind:ref
 		{type}
 		disabled={disabled || is_loading}
 		class={[classes.base(), !children && icon ? 'px-0 aspect-square' : '', ui.base]}

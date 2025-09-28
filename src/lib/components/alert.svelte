@@ -5,6 +5,8 @@
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
 	import { isSnippet } from '$lib/utils/common.js';
+	import { defu } from 'defu';
+	import Button from './button.svelte';
 
 	export type AlertProps = {
 		title?: string | Snippet;
@@ -15,7 +17,6 @@
 		position?: 'bottom' | 'right';
 		actions?: ButtonProps[];
 		close?: boolean | ButtonProps;
-		closeiicon?: string | Snippet | Component;
 		ui?: {
 			base?: ClassNameValue;
 			icon?: ClassNameValue;
@@ -27,13 +28,14 @@
 </script>
 
 <script lang="ts">
+	import { Label } from 'bits-ui';
+
 	let {
 		title,
 		description,
 		close,
 		icon,
 		actions = [],
-		closeiicon = '',
 		color = 'primary',
 		variant = 'solid',
 		position = 'bottom',
@@ -41,10 +43,20 @@
 		onclose = () => {}
 	}: AlertProps = $props();
 
+	const close_props = $derived.by(() => {
+		return defu(typeof close === 'boolean' ? {} : close, {
+			icon: 'i-lucide-x',
+			variant: 'link',
+			color: variant === 'solid' ? 'secondary' : color,
+			ui: {
+				icon: variant === 'solid' ? 'text-white' : ''
+			}
+		} as ButtonProps);
+	});
 	const classes = $derived.by(() =>
 		tv({
 			slots: {
-				base: 'flex gap-2 font-sans p-4 pb-2 rounded-lg',
+				base: 'flex gap-2 font-sans p-4 rounded-lg',
 				icon: 'pi size-6',
 				actions: '',
 				description: 'text-opacity-50 text-sm',
@@ -204,10 +216,12 @@
 			]
 		})({ color, variant, position })
 	);
+
+	$inspect(close_props);
 </script>
 
 <div class={classes.base({ class: [position === 'bottom' ? '' : 'flex', ui.base] })}>
-	<div class="flex gap-2">
+	<div class="flex gap-2 flex-grow">
 		{#if icon}
 			<div class="size-6">
 				{#if typeof icon === 'string'}
@@ -221,24 +235,44 @@
 			</div>
 		{/if}
 
-		<div class="space-y-1">
-			<div class={classes.title({ class: [ui.title] })}>
-				{#if isSnippet(title)}
-					{@render title()}
-				{:else}
-					{title}
-				{/if}
-			</div>
+		<div class="space-y-1 flex-grow">
+			{#if title}
+				<div class={classes.title({ class: [ui.title] })}>
+					{#if isSnippet(title)}
+						{@render title()}
+					{:else}
+						{title}
+					{/if}
+				</div>
+			{/if}
 
-			<div class={classes.description({ class: [ui.title] })}>
-				{#if isSnippet(description)}
-					{@render description()}
-				{:else}
-					{description}
-				{/if}
-			</div>
+			{#if description}
+				<div class={classes.description({ class: [ui.title] })}>
+					{#if isSnippet(description)}
+						{@render description()}
+					{:else}
+						{description}
+					{/if}
+				</div>
+			{/if}
 		</div>
+
+		{#if close}
+			<div>
+				<Button {...close_props} onclick={onclose} />
+			</div>
+		{/if}
 	</div>
 
-	<div></div>
+	{#if actions.length > 0}
+		<div class="flex gap-2 items-center pl-8">
+			{#each actions as action (action.label)}
+				<Button
+					{...defu(action, {
+						size: 'xs'
+					} as ButtonProps)}
+				/>
+			{/each}
+		</div>
+	{/if}
 </div>

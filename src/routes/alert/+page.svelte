@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Alert, type BadgeProps, type PropColor } from '$lib/index.js';
+	import { Alert, type AlertProps, type PropColor } from '$lib/index.js';
 	import { pascalCase } from 'scule';
 	import '@unocss/reset/tailwind.css';
 
@@ -14,16 +14,14 @@
 
 	const BUTTON_VARIANTS = ['solid', 'outline', 'soft', 'subtle'];
 
-	let button_label = $state('Button');
-	let button_variant = $state<BadgeProps['variant']>('solid');
+	let button_label = $state('Alert');
+	let button_variant = $state<AlertProps['variant']>('subtle');
+	let button_position = $state<AlertProps['position']>('bottom');
 	let button_icon = $state('i-lucide-terminal');
 </script>
 
 <div class="space-y-4 p-4">
 	<h1>title</h1>
-	<div>
-		<input bind:value={button_label} type="text" placeholder="button's label" />
-	</div>
 
 	<Alert title={button_label} />
 
@@ -47,9 +45,42 @@
 		icon: button_icon,
 		variant: button_variant
 	})}
+
+	<h1>Close</h1>
+
+	{@render alerts({
+		icon: button_icon,
+		variant: button_variant,
+		close: true
+	})}
+
+	<h1>Custom close icon</h1>
+
+	{@render alerts({
+		icon: button_icon,
+		variant: button_variant,
+		close: {
+			icon: 'i-lucide-rocket'
+		}
+	})}
+
+	<h1>Actions</h1>
+
+	<select bind:value={button_position}>
+		{#each ['bottom', 'right'] as pos (pos)}
+			<option value={pos}>{pos}</option>
+		{/each}
+	</select>
+
+	{@render alerts({
+		icon: button_icon,
+		variant: button_variant,
+		position: button_position,
+		actions: [{ label: 'Accept' }, { label: 'Cancel', color: 'secondary', variant: 'subtle' }]
+	})}
 </div>
 
-{#snippet alerts(props: BadgeProps, notext?: boolean)}
+{#snippet alerts(props: AlertProps, notext?: boolean)}
 	{#each BUTTON_COLORS as color (color)}
 		<Alert
 			{...props}
