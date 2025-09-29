@@ -93,9 +93,3 @@
 		{/each}
 	</div>
 {/snippet}
-
-<style>
-	h1:not(:first-child) {
-		padding-top: 2rem;
-	}
-</style>

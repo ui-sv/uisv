@@ -12,3 +12,5 @@ export * from './card.svelte';
 export { default as Card } from './card.svelte';
 export * from './chip.svelte';
 export { default as Chip } from './chip.svelte';
+export * from './switch.svelte';
+export { default as Switch } from './switch.svelte';
