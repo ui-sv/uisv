@@ -8,3 +8,7 @@ export * from './banner.svelte';
 export { default as Banner } from './banner.svelte';
 export * from './progress.svelte';
 export { default as Progress } from './progress.svelte';
+export * from './card.svelte';
+export { default as Card } from './card.svelte';
+export * from './chip.svelte';
+export { default as Chip } from './chip.svelte';

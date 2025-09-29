@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Banner, type BannerProps, type PropColor } from '$lib/index.js';
-	import '@unocss/reset/tailwind.css';
 
 	const BUTTON_COLORS: PropColor[] = [
 		'primary',

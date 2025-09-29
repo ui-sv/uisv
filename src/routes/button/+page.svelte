@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { Button, type PropColor, type ButtonProps, type ButtonVariant } from '$lib/index.js';
 	import { pascalCase } from 'scule';
-	import '@unocss/reset/tailwind.css';
-	import './main.css';
 
 	const BUTTON_COLORS: PropColor[] = [
 		'primary',
@@ -20,7 +18,7 @@
 	let button_size = $state<ButtonProps['size']>('md');
 	let button_icon = $state('i-solar:rocket-2-linear');
 	let loading = $state(false);
-	let trailing_icon = $state(false);
+	let icon_position = $state<ButtonProps['iconposition']>('left');
 </script>
 
 <div class="space-y-4 p-4">
@@ -75,15 +73,14 @@
 	{@render buttons({
 		icon: button_icon,
 		size: button_size,
-		variant: button_variant,
-		trailingicon: true
+		variant: button_variant
 	})}
 
 	{@render buttons({
 		icon: button_icon,
 		size: button_size,
 		variant: button_variant,
-		trailingicon: true
+		iconposition: 'right'
 	})}
 
 	<h1>Icon only</h1>
@@ -97,9 +94,9 @@
 		<option value={false}>false</option>
 	</select>
 
-	<select bind:value={trailing_icon}>
-		<option value={false}>left side icon</option>
-		<option value={true}>right side icon</option>
+	<select bind:value={icon_position}>
+		<option value="left">left side icon</option>
+		<option value="right">right side icon</option>
 	</select>
 
 	{@render buttons({
@@ -107,14 +104,14 @@
 		size: button_size,
 		variant: button_variant,
 		loading: loading,
-		trailingicon: trailing_icon
+		iconposition: icon_position
 	})}
 
 	{@render buttons({
 		icon: button_icon,
 		size: button_size,
 		variant: button_variant,
-		trailingicon: trailing_icon,
+		iconposition: icon_position,
 		loadingauto: true,
 		onclick() {
 			return new Promise<void>((res) => setTimeout(res, 1000));

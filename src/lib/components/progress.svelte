@@ -40,6 +40,13 @@
 
 		return (value / (max || 100)) * 100;
 	});
+	const indeterminate = $derived.by(() => {
+		if (value === undefined || percentage === null) return true;
+		if (value < 0) return true;
+		if (percentage > 100) return true;
+
+		return false;
+	});
 	const classes = $derived.by(() =>
 		tv({
 			slots: {
@@ -70,11 +77,10 @@
 					}
 				},
 				animation: {
-					swing: '',
-					carousel: '',
-					'carousel-inverse': '',
-					elastic: '',
-					indicator: 'left-0 w-([var(--ui-progress-width)])'
+					swing: [indeterminate ? 'animate-[swing_2s_ease-in-out_infinite' : ''],
+					carousel: [indeterminate ? '' : ''],
+					'carousel-inverse': [indeterminate ? '' : ''],
+					elastic: [indeterminate ? '' : '']
 				}
 			},
 			compoundVariants: []
@@ -85,12 +91,9 @@
 	);
 </script>
 
-<div data-state={value === undefined || value < 0 || percentage! > 100 ? 'interderminate' : ''}>
+<div data-state-indeterminate={indeterminate}>
 	<div class={classes.root({ class: [ui.base] })} style:height={`${height || 8}px`}>
-		<span
-			class={classes.indicator({ class: ['h-full'] })}
-			style:--ui-progress-width={`${percentage}%`}
-		>
+		<span class={classes.indicator({ class: ['h-full left-0'] })} style:width={`${percentage}%`}>
 		</span>
 	</div>
 
@@ -108,6 +111,14 @@
 
 <style>
 	@keyframe swing {
-		width: 1/3;
+		0% {
+			width: 0%;
+		}
+		50% {
+			width: 100%;
+		}
+		100% {
+			width: 0%;
+		}
 	}
 </style>

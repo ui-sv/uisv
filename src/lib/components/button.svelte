@@ -15,9 +15,9 @@
 		loadingicon?: string;
 		/** When true, the loading icon will be displayed. */
 		loading?: boolean;
-		/** When `true`, the icon will be displayed on the right side. */
-		trailingicon?: boolean;
-		/** Display an icon based on the `leading` and `trailing` props. */
+		/** The position of the icon, including the loading icon */
+		iconposition?: 'left' | 'right';
+		/** Icon when `loading` is `false` */
 		icon?: string | Snippet | Component;
 		/** Route Location the link should navigate to when clicked on. */
 		href?: string;
@@ -50,7 +50,6 @@
 </script>
 
 <script lang="ts">
-	import { Button } from 'bits-ui';
 	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
 	import { type Component, type Snippet } from 'svelte';
 	import { isSnippet } from '$lib/utils/common.js';
@@ -64,6 +63,7 @@
 		size = 'md',
 		variant = 'solid',
 		color = 'primary',
+		iconposition = 'left',
 		children,
 		// active,
 		// activecolor,
@@ -79,7 +79,6 @@
 		loading,
 		loadingicon,
 		target,
-		trailingicon,
 		type
 	}: ButtonProps = $props();
 
@@ -139,7 +138,7 @@
 				{
 					color: 'secondary',
 					variant: 'solid',
-					class: 'bg-secondary-900 hover:(bg-secondary-900)'
+					class: 'bg-secondary-900 hover:(bg-secondary-800)'
 				},
 				{
 					color: 'info',
@@ -165,32 +164,32 @@
 				{
 					color: 'primary',
 					variant: 'outline',
-					class: 'border-primary-500 text-primary-500 hover:(bg-primary-50)'
+					class: 'border-primary-300 text-primary-500 hover:(bg-primary-50)'
 				},
 				{
 					color: 'secondary',
 					variant: 'outline',
-					class: 'border-secondary-900 text-secondary-500 hover:(bg-secondary-50)'
+					class: 'border-secondary-300 hover:(bg-secondary-100)'
 				},
 				{
 					color: 'info',
 					variant: 'outline',
-					class: 'border-blue-500 text-blue-500 hover:(bg-blue-50)'
+					class: 'border-blue-300 text-blue-500 hover:(bg-blue-50)'
 				},
 				{
 					color: 'success',
 					variant: 'outline',
-					class: 'border-green-500 text-green-500 hover:(bg-green-50)'
+					class: 'border-green-300 text-green-500 hover:(bg-green-50)'
 				},
 				{
 					color: 'error',
 					variant: 'outline',
-					class: 'border-red-500 text-red-500 hover:(bg-red-50)'
+					class: 'border-red-300 text-red-500 hover:(bg-red-50)'
 				},
 				{
 					color: 'warning',
 					variant: 'outline',
-					class: 'border-yellow-500 text-yellow-500 hover:(bg-yellow-50)'
+					class: 'border-yellow-300 text-yellow-500 hover:(bg-yellow-50)'
 				},
 
 				{
@@ -201,7 +200,7 @@
 				{
 					color: 'secondary',
 					variant: 'soft',
-					class: 'bg-secondary-100 text-secondary-800 hover:(bg-secondary-50)'
+					class: 'bg-secondary-100 text-secondary-800 hover:(bg-secondary-200)'
 				},
 				{
 					color: 'info',
@@ -294,7 +293,7 @@
 				{
 					color: 'secondary',
 					variant: 'link',
-					class: 'text-secondary-900 hover:(text-secondary-900)'
+					class: 'text-secondary-500 hover:(text-secondary-700)'
 				},
 				{
 					color: 'info',
@@ -337,21 +336,21 @@
 		class={[classes.base(), !children && icon ? 'px-0 aspect-square' : '', ui.base]}
 		onclick={onClickWrapper}
 	>
-		{@render Inside()}
+		{@render Content()}
 	</a>
 {:else}
-	<Button.Root
+	<button
 		{type}
 		disabled={disabled || is_loading}
 		class={[classes.base(), !children && icon ? 'px-0 aspect-square' : '', ui.base]}
 		onclick={onClickWrapper}
 	>
-		{@render Inside()}
-	</Button.Root>
+		{@render Content()}
+	</button>
 {/if}
 
-{#snippet Inside()}
-	{#if !trailingicon}
+{#snippet Content()}
+	{#if iconposition === 'left'}
 		{@render Icon()}
 	{/if}
 
@@ -361,7 +360,7 @@
 		{@render children?.()}
 	{/if}
 
-	{#if trailingicon}
+	{#if iconposition !== 'left'}
 		{@render Icon()}
 	{/if}
 {/snippet}

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Progress, type ProgressProps, type PropColor } from '$lib/index.js';
-	import '@unocss/reset/tailwind.css';
 
 	const BUTTON_COLORS: PropColor[] = [
 		'primary',

@@ -3,7 +3,7 @@ import {
 	transformerVariantGroup,
 	transformerCompileClass,
 	transformerDirectives,
-	presetWind3,
+	presetWind4,
 	presetWebFonts
 } from 'unocss';
 import { type WebFontsOptions } from '@unocss/preset-web-fonts';
@@ -42,6 +42,10 @@ export type PluginOptions = {
 	 * Options for the UnoCSS web fonts plugin
 	 */
 	fonts?: WebFontsOptions;
+	/**
+	 * Corner radius for every* component
+	 */
+	radius?: number;
 };
 
 // export function uisv(opts: PluginOptions = {}) {
@@ -100,8 +104,20 @@ export function uisv(options: Required<PluginOptions>) {
 	} as PluginOptions);
 
 	return uno_plugin({
-		theme: {},
-		presets: [presetWind3({}), presetWebFonts(_opts.fonts), presetIcons()],
+		theme: {
+			radius: {
+				base: `${_opts.radius || 0.25}rem`
+			}
+		},
+		presets: [
+			presetWind4({
+				preflights: {
+					reset: true
+				}
+			}),
+			presetWebFonts(_opts.fonts),
+			presetIcons()
+		],
 		transformers: [transformerVariantGroup(), transformerCompileClass(), transformerDirectives()],
 		extendTheme: (theme) => {
 			for (const [color, value] of Object.entries(_opts.colors!)) {

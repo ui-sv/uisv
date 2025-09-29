@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Alert, type AlertProps, type PropColor } from '$lib/index.js';
 	import { pascalCase } from 'scule';
-	import '@unocss/reset/tailwind.css';
 
 	const BUTTON_COLORS: PropColor[] = [
 		'primary',

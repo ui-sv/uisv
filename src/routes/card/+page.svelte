@@ -1,98 +1,22 @@
 <script lang="ts">
-	import { Alert, type AlertProps, type PropColor } from '$lib/index.js';
-	import { pascalCase } from 'scule';
-	import '@unocss/reset/tailwind.css';
+	import Placeholder from '$lib/components/placeholder.svelte';
+	import { Card, type CardProps } from '$lib/index.js';
 
-	const BUTTON_COLORS: PropColor[] = [
-		'primary',
-		'secondary',
-		'info',
-		'success',
-		'warning',
-		'error'
-	];
-
-	const BUTTON_VARIANTS = ['solid', 'outline', 'soft', 'subtle'];
-
-	let button_label = $state('Alert');
-	let button_variant = $state<AlertProps['variant']>('subtle');
-	let button_position = $state<AlertProps['position']>('bottom');
-	let button_icon = $state('i-lucide-terminal');
+	const BUTTON_VARIANTS: CardProps['variant'][] = ['solid', 'outline', 'soft', 'subtle'];
 </script>
 
 <div class="space-y-4 p-4">
-	<h1>title</h1>
+	{#each BUTTON_VARIANTS as variant (variant)}
+		<Card {variant}>
+			{#snippet header()}
+				<Placeholder class="h-10" />
+			{/snippet}
 
-	<Alert title={button_label} />
+			<Placeholder class="h-32" />
 
-	<h1>color & variant</h1>
-
-	<div>
-		<select bind:value={button_variant}>
-			{#each BUTTON_VARIANTS as variant (variant)}
-				<option value={variant}>{variant}</option>
-			{/each}
-		</select>
-	</div>
-
-	{@render alerts({
-		variant: button_variant
-	})}
-
-	<h1>Icon</h1>
-
-	{@render alerts({
-		icon: button_icon,
-		variant: button_variant
-	})}
-
-	<h1>Close</h1>
-
-	{@render alerts({
-		icon: button_icon,
-		variant: button_variant,
-		close: true
-	})}
-
-	<h1>Custom close icon</h1>
-
-	{@render alerts({
-		icon: button_icon,
-		variant: button_variant,
-		close: {
-			icon: 'i-lucide-rocket'
-		}
-	})}
-
-	<h1>Actions</h1>
-
-	<select bind:value={button_position}>
-		{#each ['bottom', 'right'] as pos (pos)}
-			<option value={pos}>{pos}</option>
-		{/each}
-	</select>
-
-	{@render alerts({
-		icon: button_icon,
-		variant: button_variant,
-		position: button_position,
-		actions: [{ label: 'Accept' }, { label: 'Cancel', color: 'secondary', variant: 'subtle' }]
-	})}
-</div>
-
-{#snippet alerts(props: AlertProps, notext?: boolean)}
-	{#each BUTTON_COLORS as color (color)}
-		<Alert
-			{...props}
-			{color}
-			title={!notext ? `${pascalCase(color)} alert!` : undefined}
-			description="You can change the primary color in the uisv plugin."
-		/>
+			{#snippet footer()}
+				<Placeholder class="h-10" />
+			{/snippet}
+		</Card>
 	{/each}
-{/snippet}
-
-<style>
-	h1:not(:first-child) {
-		padding-top: 2rem;
-	}
-</style>
+</div>

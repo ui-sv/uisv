@@ -3,7 +3,7 @@
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
 
-	export type ProgressProps = {
+	export type CardProps = {
 		children: Snippet;
 		header?: Snippet;
 		footer?: Snippet;
@@ -18,29 +18,31 @@
 </script>
 
 <script lang="ts">
-	let { header, children, footer, variant = 'solid', ui = {} }: ProgressProps = $props();
+	let { header, children, footer, variant = 'solid', ui = {} }: CardProps = $props();
 
 	const classes = $derived.by(() =>
 		tv({
 			slots: {
-				root: 'rounded-lg overflow-hidden',
+				base: 'rounded overflow-hidden',
 				header: 'p-4 sm:px-6',
-				body: 'p-4 sm:p-6',
+				content: 'p-4 sm:p-6',
 				footer: 'p-4 sm:px-6'
 			},
 			variants: {
 				variant: {
 					solid: {
-						root: 'bg-secondary-950 text-secondary-50'
+						base: 'bg-secondary-900 text-secondary-50',
+						header: 'border-transparent',
+						footer: 'border-transparent'
 					},
 					outline: {
-						root: 'bg-default ring ring-default divide-y divide-default'
+						base: 'border border-secondary-300 divide-y divide-secondary-300'
 					},
 					soft: {
-						root: 'bg-elevated/50 divide-y divide-default'
+						base: 'bg-secondary-50 divide-y divide-secondary-300'
 					},
 					subtle: {
-						root: 'bg-elevated/50 ring ring-default divide-y divide-default'
+						base: 'bg-secondary-50 border-secondary-300 border divide-y divide-secondary-300'
 					}
 				}
 			},
@@ -50,8 +52,19 @@
 </script>
 
 <div class={classes.base({ class: [ui.base] })}>
-	{@render header?.()}
-	{@render children?.()}
+	{#if header}
+		<div class={classes.header({ class: [ui.header] })}>
+			{@render header()}
+		</div>
+	{/if}
 
-	{@render footer?.()}
+	<div class={classes.content({ class: ui.content })}>
+		{@render children()}
+	</div>
+
+	{#if footer}
+		<div class={classes.header({ class: [ui.header] })}>
+			{@render footer()}
+		</div>
+	{/if}
 </div>
