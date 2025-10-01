@@ -43,6 +43,10 @@
 	<h1>Labels</h1>
 
 	{@render components({ thumblabel: true })}
+
+	<h1>Disabled</h1>
+
+	{@render components({ disabled: true })}
 </div>
 
 {#snippet components(props?: SliderProps<any>, novalue?: boolean)}

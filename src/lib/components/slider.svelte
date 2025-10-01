@@ -148,7 +148,8 @@
 	{max}
 	{step}
 	{orientation}
-	class={classes.root({ class: [ui.root] })}
+	{disabled}
+	class={classes.root({ class: [disabled ? 'opacity-75 cursor-not-allowed' : '', ui.root] })}
 >
 	<Slider.Range class={classes.range({ class: [ui.range] })} />
 
@@ -159,8 +160,8 @@
 					{index}
 					position="bottom"
 					class={[
-						'group-hover:(opacity-100) opacity-0 transition pointer-events-none text-sm shadow-md px-2 h-6 flex items-center rounded-md mt-1 border border-secondary-200',
-						'data-active:(opacity-100 bg-red)'
+						'opacity-0 transition pointer-events-none text-sm shadow-md px-2 h-6 flex items-center rounded-md mt-1 border border-secondary-200',
+						'data-[active=""]:(opacity-100) group-hover:(opacity-100)'
 					]}
 				>
 					{slider_value.get()[index]}
