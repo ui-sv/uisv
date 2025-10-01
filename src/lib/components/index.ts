@@ -14,3 +14,5 @@ export * from './chip.svelte';
 export { default as Chip } from './chip.svelte';
 export * from './switch.svelte';
 export { default as Switch } from './switch.svelte';
+export * from './slider.svelte';
+export { default as Slider } from './slider.svelte';
