@@ -18,3 +18,5 @@ export * from './slider.svelte';
 export { default as Slider } from './slider.svelte';
 export * from './checkbox.svelte';
 export { default as Checkbox } from './checkbox.svelte';
+export * from './checkboxgroup.svelte';
+export { default as CheckboxGroup } from './checkboxgroup.svelte';

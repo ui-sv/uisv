@@ -17,10 +17,11 @@
 		description?: string | Snippet;
 		required?: boolean;
 		indicator?: 'start' | 'end' | 'hidden';
+		as?: string;
 		ui?: {
 			root?: ClassNameValue;
 			container?: ClassNameValue;
-			thumb?: ClassNameValue;
+			icon?: ClassNameValue;
 			label?: ClassNameValue;
 			description?: ClassNameValue;
 		};
@@ -39,6 +40,7 @@
 		description,
 		required,
 		indicator = 'start',
+		as = 'div',
 		ui = {}
 	}: CheckboxProps = $props();
 	const id = $props.id();
@@ -111,15 +113,17 @@
 	);
 </script>
 
-<div
+<svelte:element
+	this={as}
+	data-state={value ? 'checked' : 'unchecked'}
 	class={classes.root({
-		class: [disabled && 'opacity-50', ui.thumb]
+		class: [disabled && 'opacity-50', ui.root]
 	})}
 >
 	<button
 		{id}
 		aria-label="checkbox"
-		class={classes.container({ class: [ui.thumb] })}
+		class={classes.container({ class: [ui.container] })}
 		onclick={() => {
 			if (disabled) return;
 			if (value === 'intermediate') return (value = true);
@@ -135,7 +139,7 @@
 			<label
 				for={id}
 				class={classes.label({
-					class: [required ? 'after:content-["*"] after:text-error-500' : '', ui.thumb]
+					class: [required ? 'after:content-["*"] after:text-error-500' : '', ui.label]
 				})}
 			>
 				{#if typeof label === 'string'}
@@ -146,7 +150,7 @@
 			</label>
 
 			{#if description}
-				<div class={classes.description({ class: ui.thumb })}>
+				<div class={classes.description({ class: ui.description })}>
 					{#if typeof description === 'string'}
 						{description}
 					{:else}
@@ -156,12 +160,12 @@
 			{/if}
 		</div>
 	{/if}
-</div>
+</svelte:element>
 
 {#snippet Icon(ico?: CheckboxProps['icon'], icon_class?: ClassNameValue)}
 	<div class={['absolute', icon_class]}>
 		{#if typeof ico === 'string'}
-			<div class={classes.icon({ class: [ico] })}></div>
+			<div class={classes.icon({ class: [ico, ui.icon] })}></div>
 		{:else if isSnippet(ico)}
 			{@render ico()}
 		{:else if isComponent(ico)}
