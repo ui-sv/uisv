@@ -4,7 +4,16 @@ import { defineConfig } from 'vite';
 import { uisv } from './src/lib/vite';
 
 export default defineConfig({
-	plugins: [sveltekit(), uisv()],
+	plugins: [
+		sveltekit(),
+		uisv({
+			fonts: {
+				fonts: {
+					quicksand: 'Quicksand:600,700'
+				}
+			}
+		})
+	],
 	test: {
 		expect: { requireAssertions: true },
 		projects: [

@@ -72,6 +72,11 @@ export function uisv(options: Required<PluginOptions>) {
 					base: `${_opts.radius || 0.25}rem`
 				}
 			},
+			preflights: [
+				{
+					getCSS: () => 'body { font-size: var(--font-sans);}'
+				}
+			],
 			presets: [
 				presetWind4({
 					preflights: {
