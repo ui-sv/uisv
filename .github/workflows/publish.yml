@@ -11,6 +11,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: '24'
+      - run: npm prepack
       - uses: JS-DevTools/npm-publish@v4
         with:
           token: ${{ secrets.NPM_TOKEN }}
