@@ -122,6 +122,7 @@
 		data-state={value ? 'checked' : 'unchecked'}
 		class={classes.container({ class: [loading && 'cursor-not-allowed', ui.thumb] })}
 		onclick={() => {
+			console.log('click');
 			if (loading) return;
 			value = !value;
 		}}

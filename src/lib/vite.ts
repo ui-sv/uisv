@@ -69,7 +69,7 @@ export function uisv(options: Required<PluginOptions>) {
 		uno_plugin({
 			theme: {
 				radius: {
-					base: `${_opts.radius || 0.25}rem`
+					base: `${_opts.radius || 0.375}rem`
 				}
 			},
 			preflights: [

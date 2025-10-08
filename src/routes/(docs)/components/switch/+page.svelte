@@ -1,10 +1,12 @@
 <script lang="ts">
-	import { Switch, type SwitchProps, type PropColor } from '$lib/index.js';
+	import { Switch, type SwitchProps, type PropColor, Button } from '$lib/index.js';
 
 	let value = $state(false);
 </script>
 
 <div class="space-y-4 p-4">
+	<Button href="/slider">slider</Button>
+
 	<h1>Basic</h1>
 	{@render components({})}
 
@@ -37,8 +39,10 @@
 
 	<h1>Label</h1>
 	<Switch bind:value label="Switch to Svelte" />
+
 	<p>with description</p>
 	<Switch bind:value label="Switch to Svelte" description="web development for the rest of us" />
+
 	<p>and required</p>
 	<Switch
 		bind:value

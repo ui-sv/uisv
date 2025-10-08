@@ -93,7 +93,7 @@
 		tv({
 			slots: {
 				icon: '',
-				base: 'transition flex items-center font-sans'
+				base: 'transition flex-inline items-center font-sans'
 			},
 			variants: {
 				color: {
@@ -126,7 +126,8 @@
 					true: 'w-full'
 				},
 				disabled: {
-					true: 'cursor-not-allowed'
+					true: 'cursor-not-allowed',
+					false: 'cursor-pointer'
 				}
 			},
 			compoundVariants: [
@@ -370,7 +371,7 @@
 
 	{#if IconCom}
 		{#if typeof IconCom === 'string'}
-			<div class={['pi', IconCom, is_loading ? 'animate-spin' : '', classes.icon(), ui.icon]}></div>
+			<div class={['pi', IconCom, is_loading && 'animate-spin', classes.icon(), ui.icon]}></div>
 		{:else if isSnippet(IconCom)}
 			{@render IconCom()}
 		{:else}

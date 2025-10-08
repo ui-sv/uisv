@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { Slider, type SliderProps, type PropColor } from '$lib/index.js';
 
 	/* eslint @typescript-eslint/no-explicit-any: "off" */
@@ -10,6 +11,8 @@
 </script>
 
 <div class="space-y-4 p-4">
+	<a href={resolve('/switch')}>switch</a>
+
 	<h1>Basic</h1>
 	{@render components({})}
 
