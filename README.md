@@ -1,4 +1,4 @@
-[!WARNING]
+> [!WARNING]
 This project is heavily WIP
 
 # uisv
