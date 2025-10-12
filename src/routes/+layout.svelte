@@ -28,7 +28,7 @@
 <div class="min-h-vh flex flex-col <md:flex-col-reverse">
 	<nav
 		class={[
-			'sticky top-0 p-2 <md:bottom-0 z-10 flex border-b bg-white h-12',
+			'sticky top-0 p-2 <md:bottom-0 z-10 flex gap-2 <md:border-t md:border-b bg-white h-12',
 			is_home ? 'border-transparent' : 'border-neutral-200'
 		]}
 	>
@@ -44,8 +44,7 @@
 				<Button
 					color="secondary"
 					variant="soft"
-					size="xl"
-					ui={{ base: 'text-secondary-300 w-64 max-w-full' }}
+					ui={{ base: 'text-secondary-300 w-64 max-w-full <md:hidden' }}
 					onclick={() => {
 						search_opened = true;
 					}}
@@ -68,7 +67,6 @@
 		<Button
 			icon={nav_opened ? 'i-lucide-x' : 'i-lucide-menu'}
 			variant="ghost"
-			color="secondary"
 			ui={{ base: 'md:(hidden)' }}
 			onclick={() => {
 				nav_opened = !nav_opened;
@@ -86,7 +84,9 @@
 	<div class="flex flex-1 min-h-[calc(100vh-48px)]">
 		{#if !is_home}
 			<aside
-				class={['sticky left-0 top-12 bg-white w-64 bottom-0 border-r border-neutral-200']}
+				class={[
+					'sticky left-0 top-12 bg-white w-64 bottom-0 border-r border-neutral-200 <md:hidden'
+				]}
 			></aside>
 		{/if}
 

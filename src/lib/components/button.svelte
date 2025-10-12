@@ -1,5 +1,10 @@
 <script lang="ts" module>
-	export type ButtonVariant = 'link' | 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost';
+	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
+	import { type Component, type Snippet } from 'svelte';
+	import { isSnippet } from '$lib/utils/common.js';
+	import { tv } from 'tailwind-variants';
+	import type { PropColor } from '$lib/types.js';
+	import type { ClassNameValue } from 'tailwind-merge';
 
 	export type ButtonProps = {
 		/** The underlying DOM element being rendered. You can bind to this to get a reference to the element. */
@@ -30,7 +35,7 @@
 		/**
 		 * @defaultValue 'solid'
 		 */
-		variant?: ButtonVariant;
+		variant?: 'link' | 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost';
 		// activevariant?: ButtonVariant;
 		/**
 		 * @defaultValue 'md'
@@ -42,21 +47,14 @@
 		loadingauto?: boolean;
 		onclick?: (event: MouseEvent) => void | Promise<void>;
 		ui?: {
-			base?: ClassValue;
-			icon?: ClassValue;
+			base?: ClassNameValue;
+			icon?: ClassNameValue;
 		};
 		children?: Snippet;
 	};
 </script>
 
 <script lang="ts">
-	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
-	import { type Component, type Snippet } from 'svelte';
-	import { isSnippet } from '$lib/utils/common.js';
-	import { tv } from 'tailwind-variants';
-	import type { ClassValue } from 'svelte/elements';
-	import type { PropColor } from '$lib/types.js';
-
 	// let form_loading = getContext<{ value: boolean } | undefined>(FORM_LOADING_CONTEXT_KEY);
 	let {
 		ref = $bindable(),
@@ -334,7 +332,9 @@
 	<a
 		{href}
 		{target}
-		class={[classes.base(), !children && icon ? 'px-0 aspect-square' : '', ui.base]}
+		class={classes.base({
+			class: [!children && icon ? 'px-0 aspect-square justify-center' : '', ui.base]
+		})}
 		onclick={onClickWrapper}
 	>
 		{@render Content()}
@@ -343,7 +343,9 @@
 	<button
 		{type}
 		disabled={disabled || is_loading}
-		class={[classes.base(), !children && icon ? 'px-0 aspect-square' : '', ui.base]}
+		class={classes.base({
+			class: [!children && icon ? 'px-0 aspect-square justify-center' : '', ui.base]
+		})}
 		onclick={onClickWrapper}
 	>
 		{@render Content()}
@@ -371,7 +373,9 @@
 
 	{#if IconCom}
 		{#if typeof IconCom === 'string'}
-			<div class={['pi', IconCom, is_loading && 'animate-spin', classes.icon(), ui.icon]}></div>
+			<div
+				class={classes.icon({ class: ['pi', IconCom, is_loading && 'animate-spin', ui.icon] })}
+			></div>
 		{:else if isSnippet(IconCom)}
 			{@render IconCom()}
 		{:else}

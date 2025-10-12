@@ -1,3 +1,3 @@
-<main class="max-w-7xl mx-auto">
+<main class="max-w-5xl w-full mx-auto">
 	<slot />
 </main>

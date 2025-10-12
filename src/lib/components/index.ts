@@ -26,3 +26,5 @@ export * from './h2.svelte';
 export { default as H2 } from './h2.svelte';
 export * from './p.svelte';
 export { default as P } from './p.svelte';
+export * from './pin-input.svelte';
+export { default as PinInput } from './pin-input.svelte';
