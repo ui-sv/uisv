@@ -1,14 +1,5 @@
 <script lang="ts">
-	import { Banner, type BannerProps, type PropColor } from '$lib/index.js';
-
-	const BUTTON_COLORS: PropColor[] = [
-		'primary',
-		'secondary',
-		'info',
-		'success',
-		'warning',
-		'error'
-	];
+	import { Banner, type BannerProps, COLORS } from '$lib/index.js';
 
 	const BUTTON_VARIANTS = ['solid', 'outline', 'soft', 'subtle'];
 
@@ -79,7 +70,7 @@
 </div>
 
 {#snippet components(props: Omit<BannerProps, 'title'>, text?: string)}
-	{#each BUTTON_COLORS as color (color)}
+	{#each COLORS as color (color)}
 		<Banner
 			{...props}
 			{color}

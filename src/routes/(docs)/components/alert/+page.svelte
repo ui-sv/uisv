@@ -1,15 +1,6 @@
 <script lang="ts">
-	import { Alert, type AlertProps, type PropColor } from '$lib/index.js';
+	import { Alert, type AlertProps, COLORS } from '$lib/index.js';
 	import { pascalCase } from 'scule';
-
-	const BUTTON_COLORS: PropColor[] = [
-		'primary',
-		'secondary',
-		'info',
-		'success',
-		'warning',
-		'error'
-	];
 
 	const BUTTON_VARIANTS = ['solid', 'outline', 'soft', 'subtle'];
 
@@ -80,7 +71,7 @@
 </div>
 
 {#snippet alerts(props: AlertProps, notext?: boolean)}
-	{#each BUTTON_COLORS as color (color)}
+	{#each COLORS as color (color)}
 		<Alert
 			{...props}
 			{color}

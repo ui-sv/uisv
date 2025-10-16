@@ -1,14 +1,5 @@
 <script lang="ts">
-	import { Progress, type ProgressProps, type PropColor } from '$lib/index.js';
-
-	const BUTTON_COLORS: PropColor[] = [
-		'primary',
-		'secondary',
-		'info',
-		'success',
-		'warning',
-		'error'
-	];
+	import { Progress, type ProgressProps, COLORS } from '$lib/index.js';
 
 	let value = $state(0);
 	let max = $state(100);
@@ -55,7 +46,7 @@
 </div>
 
 {#snippet components(props?: Partial<ProgressProps>)}
-	{#each BUTTON_COLORS as color (color)}
+	{#each COLORS as color (color)}
 		<Progress {...props} {value} {color} />
 	{/each}
 {/snippet}

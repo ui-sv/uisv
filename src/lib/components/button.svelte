@@ -1,9 +1,8 @@
 <script lang="ts" module>
 	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
 	import { type Component, type Snippet } from 'svelte';
-	import { isSnippet } from '$lib/utils/common.js';
 	import { tv } from 'tailwind-variants';
-	import type { PropColor } from '$lib/types.js';
+	import { type PropColor, isSnippet } from '$lib/index.js';
 	import type { ClassNameValue } from 'tailwind-merge';
 
 	export type ButtonProps = {

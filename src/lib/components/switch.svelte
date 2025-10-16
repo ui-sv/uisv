@@ -1,6 +1,5 @@
 <script module lang="ts">
-	import type { PropColor } from '$lib/types.js';
-	import { isComponent, isSnippet } from '$lib/utils/common.js';
+	import { type PropColor, isComponent, isSnippet } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';

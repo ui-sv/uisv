@@ -19,7 +19,7 @@
 <script lang="ts">
 	import { tv } from 'tailwind-variants';
 	import { isSnippet } from '$lib/utils/common.js';
-	import type { PropColor } from '$lib/types.js';
+	import type { PropColor } from '$lib/index.js';
 	import type { ClassNameValue } from 'tailwind-merge';
 
 	let {

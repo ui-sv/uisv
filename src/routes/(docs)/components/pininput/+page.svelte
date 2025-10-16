@@ -1,17 +1,8 @@
 <script lang="ts">
-	import { PinInput, type PinInputProps, type PropColor } from '$lib/index.js';
+	import { PinInput, type PinInputProps, COLORS } from '$lib/index.js';
 
 	const VARIANTS: PinInputProps['variant'][] = ['outline', 'soft', 'subtle', 'ghost', 'none'];
 	const SIZES: PinInputProps['size'][] = ['xs', 'sm', 'md', 'lg', 'xl'];
-
-	const BUTTON_COLORS: PropColor[] = [
-		'primary',
-		'secondary',
-		'info',
-		'success',
-		'warning',
-		'error'
-	];
 
 	let value = $state([]);
 	let variant = $state<PinInputProps['variant']>('outline');
@@ -55,7 +46,7 @@
 </div>
 
 {#snippet components(props?: PinInputProps, noval?: boolean)}
-	{#each BUTTON_COLORS as color (color)}
+	{#each COLORS as color (color)}
 		{#if noval}
 			<PinInput {...props} {variant} {size} {color} />
 		{:else}

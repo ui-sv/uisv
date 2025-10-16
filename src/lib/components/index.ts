@@ -28,3 +28,7 @@ export * from './p.svelte';
 export { default as P } from './p.svelte';
 export * from './pin-input.svelte';
 export { default as PinInput } from './pin-input.svelte';
+export * from './accordion.svelte';
+export { default as Accordion } from './accordion.svelte';
+export * from './kbd.svelte';
+export { default as KBD } from './kbd.svelte';

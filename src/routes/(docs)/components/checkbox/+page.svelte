@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Checkbox, type CheckboxProps, type PropColor } from '$lib/index.js';
+	import { Checkbox, type CheckboxProps, COLORS } from '$lib/index.js';
 
 	let value = $state(false);
 	let indicator = $state<CheckboxProps['indicator']>('start');

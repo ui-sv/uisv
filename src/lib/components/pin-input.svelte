@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import type { PropColor } from '$lib/types.js';
+	import type { PropColor } from '$lib/index.js';
 	import { onMount } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';

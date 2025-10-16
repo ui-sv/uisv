@@ -1,12 +1,10 @@
 <script module lang="ts">
-	import type { PropColor } from '$lib/types.js';
+	import { type PropColor, isSnippet } from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
-	import type { ButtonProps } from './button.svelte';
+	import Button, { type ButtonProps } from './button.svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
-	import { isSnippet } from '$lib/utils/common.js';
 	import { defu } from 'defu';
-	import Button from './button.svelte';
 
 	export type AlertProps = {
 		title?: string | Snippet;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Switch, type SwitchProps, type PropColor, Button } from '$lib/index.js';
+	import { Switch, type SwitchProps, COLORS, Button } from '$lib/index.js';
 
 	let value = $state(false);
 </script>
@@ -54,8 +54,8 @@
 
 {#snippet components(props: SwitchProps)}
 	<div class="flex gap-2">
-		{#each ['primary', 'secondary', 'info', 'success', 'warning', 'error'] as color (color)}
-			<Switch bind:value {...props} color={color as PropColor} />
+		{#each COLORS as color (color)}
+			<Switch bind:value {...props} {color} />
 		{/each}
 	</div>
 {/snippet}

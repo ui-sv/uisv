@@ -1,2 +1,5 @@
 export * from './components/index.js';
-export * from './types.js';
+export * from './utils/common.js';
+
+export type PropColor = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
+export const COLORS: PropColor[] = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];

@@ -1,15 +1,6 @@
 <script lang="ts">
-	import { Badge, type BadgeProps, type PropColor } from '$lib/index.js';
+	import { Badge, type BadgeProps, COLORS } from '$lib/index.js';
 	import { pascalCase } from 'scule';
-
-	const BUTTON_COLORS: PropColor[] = [
-		'primary',
-		'secondary',
-		'info',
-		'success',
-		'warning',
-		'error'
-	];
 
 	const BUTTON_VARIANTS = ['solid', 'outline', 'soft', 'subtle'];
 
@@ -88,7 +79,7 @@
 
 {#snippet badges(props: BadgeProps, notext?: boolean)}
 	<div class="flex gap-1">
-		{#each BUTTON_COLORS as color (color)}
+		{#each COLORS as color (color)}
 			<Badge {...props} {color} label={!notext ? pascalCase(color) : undefined} />
 		{/each}
 	</div>

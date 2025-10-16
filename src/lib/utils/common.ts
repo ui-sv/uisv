@@ -1,7 +1,4 @@
 import type { Snippet, Component } from 'svelte';
-import { createTV } from 'tailwind-variants';
-
-export const tv = createTV({});
 
 /**
  * Checks if a value is a Svelte snippet

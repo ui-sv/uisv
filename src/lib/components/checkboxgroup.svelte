@@ -1,10 +1,9 @@
 <script module lang="ts">
-	import { isComponent, isSnippet } from '$lib/utils/common.js';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
 	import { Checkbox } from './index.js';
 	import type { Component, Snippet } from 'svelte';
-	import type { PropColor } from '$lib/types.js';
+	import { type PropColor, isComponent, isSnippet } from '$lib/index.js';
 
 	/* eslint @typescript-eslint/no-explicit-any: 0 */
 

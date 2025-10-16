@@ -1,20 +1,11 @@
 <script lang="ts">
-	import { Button, type PropColor, type ButtonProps, type ButtonVariant } from '$lib/index.js';
+	import { Button, COLORS, type ButtonProps } from '$lib/index.js';
 	import { pascalCase } from 'scule';
-
-	const BUTTON_COLORS: PropColor[] = [
-		'primary',
-		'secondary',
-		'info',
-		'success',
-		'warning',
-		'error'
-	];
 
 	const BUTTON_VARIANTS = ['link', 'solid', 'outline', 'soft', 'subtle', 'ghost'];
 
 	let button_label = $state('Button');
-	let button_variant = $state<ButtonVariant>('solid');
+	let button_variant = $state<ButtonProps['variant']>('solid');
 	let button_size = $state<ButtonProps['size']>('md');
 	let button_icon = $state('i-solar:rocket-2-linear');
 	let loading = $state(false);
@@ -121,7 +112,7 @@
 
 {#snippet buttons(props: ButtonProps, notext?: boolean)}
 	<div class="flex gap-1">
-		{#each BUTTON_COLORS as color (color)}
+		{#each COLORS as color (color)}
 			<Button {...props} {color}>
 				{#if !notext}
 					{pascalCase(color)}
