@@ -31,4 +31,6 @@ export { default as PinInput } from './pin-input.svelte';
 export * from './accordion.svelte';
 export { default as Accordion } from './accordion.svelte';
 export * from './kbd.svelte';
-export { default as KBD } from './kbd.svelte';
+export { default as Kbd } from './kbd.svelte';
+export * from './tabs.svelte';
+export { default as Tabs } from './tabs.svelte';
