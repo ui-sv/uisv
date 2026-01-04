@@ -66,7 +66,7 @@
 		icon: button_icon,
 		variant: button_variant,
 		position: button_position,
-		actions: [{ label: 'Accept' }, { label: 'Cancel', color: 'secondary', variant: 'subtle' }]
+		actions: [{ label: 'Accept' }, { label: 'Cancel', color: 'surface', variant: 'subtle' }]
 	})}
 </div>
 

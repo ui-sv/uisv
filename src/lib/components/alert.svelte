@@ -43,7 +43,7 @@
 		return defu(typeof close === 'boolean' ? {} : close, {
 			icon: 'i-lucide-x',
 			variant: 'link',
-			color: variant === 'solid' ? 'secondary' : color,
+			color: variant === 'solid' ? 'surface' : color,
 			ui: {
 				icon: variant === 'solid' ? 'text-white' : ''
 			}
@@ -61,7 +61,7 @@
 			variants: {
 				color: {
 					primary: '',
-					secondary: '',
+					surface: '',
 					info: '',
 					success: '',
 					warning: '',
@@ -93,8 +93,8 @@
 				},
 				{
 					variant: 'solid',
-					color: 'secondary',
-					class: 'bg-secondary-900'
+					color: 'surface',
+					class: 'bg-surface-900'
 				},
 				{
 					variant: 'solid',
@@ -124,8 +124,8 @@
 				},
 				{
 					variant: 'outline',
-					color: 'secondary',
-					class: 'border-secondary-300 text-secondary-900'
+					color: 'surface',
+					class: 'border-surface-300 text-surface-900'
 				},
 				{
 					variant: 'outline',
@@ -155,8 +155,8 @@
 				},
 				{
 					variant: 'soft',
-					color: 'secondary',
-					class: 'bg-secondary-50 text-secondary-900'
+					color: 'surface',
+					class: 'bg-surface-50 text-surface-900'
 				},
 				{
 					variant: 'soft',
@@ -186,8 +186,8 @@
 				},
 				{
 					variant: 'subtle',
-					color: 'secondary',
-					class: 'bg-secondary-50 text-secondary-900 border-secondary-300'
+					color: 'surface',
+					class: 'bg-surface-50 text-surface-900 border-surface-300'
 				},
 				{
 					variant: 'subtle',

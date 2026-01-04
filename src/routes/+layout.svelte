@@ -10,6 +10,22 @@
 		children: Snippet;
 	};
 
+	const LINKS = [
+		{
+			label: 'Docs',
+			href: '/get-started'
+		},
+		{
+			label: 'Components',
+			href: '/components'
+		},
+		{
+			label: 'GitHub',
+			href: 'https://github.com/ui-sv/uisv',
+			target: '_blank'
+		}
+	];
+
 	const { children }: Props = $props();
 	const is_home = $derived(page.url.pathname === '/');
 
@@ -29,7 +45,7 @@
 	<nav
 		class={[
 			'sticky top-0 p-2 <md:bottom-0 z-10 flex gap-2 <md:border-t md:border-b bg-white h-12',
-			is_home ? 'border-transparent' : 'border-neutral-200'
+			is_home ? 'border-transparent' : 'border-surface-200'
 		]}
 	>
 		<div class="w-64 max-w-full">
@@ -39,12 +55,12 @@
 			</Button>
 		</div>
 
-		<span class="flex-grow flex">
+		<span class={['flex-1 flex gap-2', is_home ? 'justify-center' : '']}>
 			{#if !is_home}
 				<Button
-					color="secondary"
+					color="surface"
 					variant="soft"
-					ui={{ base: 'text-secondary-300 w-64 max-w-full <md:hidden' }}
+					ui={{ base: 'text-surface-500 w-64 max-w-full <md:hidden' }}
 					onclick={() => {
 						search_opened = true;
 					}}
@@ -53,16 +69,27 @@
 
 					<span class="opacity-50"> Search docs... </span>
 				</Button>
+			{:else}
+				{#each LINKS as link (link.href)}
+					<Button
+						label={link.label}
+						href={link.href}
+						target={link.target}
+						variant="ghost"
+						color="surface"
+						ui={{ base: 'capitalize' }}
+					/>
+				{/each}
 			{/if}
 		</span>
 
 		<Button variant="ghost" icon="i-lucide-swatch-book" />
+
 		<Button
 			variant="ghost"
 			icon={mode.current === 'light' ? 'i-lucide-moon' : 'i-lucide-sun'}
 			onclick={toggleMode}
 		/>
-		<Button variant="ghost" href="https://github.com/ui-sv/uisv" icon="i-lucide-github" />
 
 		<Button
 			icon={nav_opened ? 'i-lucide-x' : 'i-lucide-menu'}
@@ -76,12 +103,12 @@
 
 	<div
 		class={[
-			'fixed h-1/2 bottom-16 left-2 right-2 bg-white transition z-20 border border-neutral-200 rounded-lg',
+			'fixed h-1/2 bottom-16 left-2 right-2 bg-white transition z-20 border border-surface-200 rounded-lg',
 			nav_opened ? '' : 'opacity-0 pointer-events-none'
 		]}
 	></div>
 
-	<div class="flex flex-1 min-h-[calc(100vh-48px)]">
+	<div class="flex flex-1 min-h-[calc(100vh-48px)] p-4">
 		{#if !is_home}
 			<aside
 				class={[

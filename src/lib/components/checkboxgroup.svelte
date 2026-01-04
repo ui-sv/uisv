@@ -57,7 +57,7 @@
 					primary: {
 						container: []
 					},
-					secondary: {
+					surface: {
 						container: []
 					},
 					info: {
@@ -125,11 +125,11 @@
 					}
 				},
 				{
-					color: 'secondary',
+					color: 'surface',
 					selected: true,
 					variant: ['table', 'card'],
 					class: {
-						checkbox: 'border-secondary-500'
+						checkbox: 'border-surface-500'
 					}
 				},
 				{
@@ -174,11 +174,11 @@
 					}
 				},
 				{
-					color: 'secondary',
+					color: 'surface',
 					selected: true,
 					variant: ['table'],
 					class: {
-						checkbox: 'bg-secondary-100'
+						checkbox: 'bg-surface-100'
 					}
 				},
 				{

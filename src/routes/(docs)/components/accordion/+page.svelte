@@ -10,7 +10,7 @@
 		{
 			label: 'Colors',
 			icon: 'i-lucide-palette',
-			content: 'Choose a primary and a secondary color from your UnoCSS theme.'
+			content: 'Choose a primary and a surface color from your UnoCSS theme.'
 		},
 		{
 			label: 'Components',

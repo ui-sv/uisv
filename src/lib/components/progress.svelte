@@ -50,7 +50,7 @@
 	const classes = $derived.by(() =>
 		tv({
 			slots: {
-				root: 'relative w-full rounded-full overflow-hidden bg-secondary-300',
+				root: 'relative w-full rounded-full overflow-hidden bg-surface-300',
 				status: '',
 				indicator: 'absolute transition-all rounded-full',
 				steps: ''
@@ -60,8 +60,8 @@
 					primary: {
 						indicator: 'bg-primary-500'
 					},
-					secondary: {
-						indicator: 'bg-secondary-500'
+					surface: {
+						indicator: 'bg-surface-500'
 					},
 					info: {
 						indicator: 'bg-info-500'
@@ -101,7 +101,7 @@
 		<p
 			class={[
 				'text-right transition',
-				value && value > 0 && max[value] ? 'text-primary-500' : 'text-secondary-500'
+				value && value > 0 && max[value] ? 'text-primary-500' : 'text-surface-500'
 			]}
 		>
 			{(value && max[value]) || max[0]}

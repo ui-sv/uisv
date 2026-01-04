@@ -31,18 +31,18 @@
 			variants: {
 				variant: {
 					solid: {
-						base: 'bg-secondary-900 text-secondary-50',
+						base: 'bg-surface-900 text-surface-50',
 						header: 'border-transparent',
 						footer: 'border-transparent'
 					},
 					outline: {
-						base: 'border border-secondary-300 divide-y divide-secondary-300'
+						base: 'border border-surface-300 divide-y divide-surface-300'
 					},
 					soft: {
-						base: 'bg-secondary-50 divide-y divide-secondary-300'
+						base: 'bg-surface-50 divide-y divide-surface-300'
 					},
 					subtle: {
-						base: 'bg-secondary-50 border-secondary-300 border divide-y divide-secondary-300'
+						base: 'bg-surface-50 border-surface-300 border divide-y divide-surface-300'
 					}
 				}
 			},

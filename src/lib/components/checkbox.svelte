@@ -59,7 +59,7 @@
 					primary: {
 						container: [value && 'bg-primary-500 border-primary-500 text-primary-500']
 					},
-					secondary: {
+					surface: {
 						container: [value && 'bg-neutral-900 border-neutral-900 text-neutral-900']
 					},
 					info: {

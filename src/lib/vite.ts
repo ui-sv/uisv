@@ -9,7 +9,7 @@ import {
 import { type WebFontsOptions } from '@unocss/preset-web-fonts';
 import { presetIcons } from 'unocss';
 import { defu } from 'defu';
-import type { PropColor } from './types.js';
+import type { PropColor } from './index.js';
 import { getColors } from 'theme-colors';
 
 export type PluginOptions = {
@@ -18,7 +18,7 @@ export type PluginOptions = {
 	 * @example
 	 * {
 	 *  primary: 'orange',
-	 *  secondary: 'neutral',
+	 *  surface: 'neutral',
 	 *  info: '#00F',
 	 *  success: '#0F0',
 	 *  warning: 'FF0',
@@ -39,20 +39,24 @@ export type PluginOptions = {
 	 */
 	colors?: Partial<Record<PropColor, string | Record<number, string>>>;
 	/**
-	 * Options for the UnoCSS web fonts plugin
+	 * Options for the UnoCSS web fonts preset
 	 */
 	fonts?: WebFontsOptions;
 	/**
 	 * Corner radius for every* component
 	 */
 	radius?: number;
+	/**
+	 * Options for the UnoCSS icon preset
+	 */
+	icons?: Parameters<typeof presetIcons>[0];
 };
 
 export function uisv(options: Required<PluginOptions>) {
 	const _opts: PluginOptions = defu(options, {
 		colors: {
 			primary: 'orange',
-			secondary: 'neutral',
+			surface: 'neutral',
 			info: 'blue',
 			success: 'green',
 			warning: 'yellow',
@@ -62,9 +66,9 @@ export function uisv(options: Required<PluginOptions>) {
 			fonts: {
 				sans: 'Public Sans:400,500,600'
 			}
-		}
+		},
+		icons: {}
 	} as PluginOptions);
-
 	return [
 		uno_plugin({
 			theme: {
@@ -84,7 +88,7 @@ export function uisv(options: Required<PluginOptions>) {
 					}
 				}),
 				presetWebFonts(_opts.fonts),
-				presetIcons()
+				presetIcons(_opts.icons)
 			],
 			transformers: [transformerVariantGroup(), transformerCompileClass(), transformerDirectives()],
 			extendTheme: (theme) => {

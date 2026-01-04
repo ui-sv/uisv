@@ -41,8 +41,8 @@
 					primary: {
 						chip: 'bg-primary'
 					},
-					secondary: {
-						chip: 'bg-secondary'
+					surface: {
+						chip: 'bg-surface'
 					},
 					success: {
 						chip: 'bg-success'

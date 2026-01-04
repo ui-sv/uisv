@@ -5,10 +5,7 @@
 </script>
 
 <svg
-	class={[
-		'inset-0 w-full stroke-secondary/10 border border-dashed border-secondary rounded-md',
-		klass
-	]}
+	class={['inset-0 w-full stroke-surface/10 border border-dashed border-surface rounded-md', klass]}
 	fill="none"
 >
 	<defs>

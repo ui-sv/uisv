@@ -56,7 +56,7 @@
 	{@render components({
 		icon: button_icon,
 		variant: button_variant,
-		actions: [{ label: 'Accept' }, { label: 'Cancel', color: 'secondary', variant: 'subtle' }]
+		actions: [{ label: 'Accept' }, { label: 'Cancel', color: 'surface', variant: 'subtle' }]
 	})}
 
 	<h1>Href</h1>

@@ -75,7 +75,7 @@
 						range: 'bg-primary-500',
 						thumb: 'border-primary-500'
 					},
-					secondary: {
+					surface: {
 						range: ['bg-neutral-900'],
 						thumb: 'border-neutral-900'
 					},
@@ -160,7 +160,7 @@
 					{index}
 					position="bottom"
 					class={[
-						'opacity-0 transition pointer-events-none text-sm shadow-md px-2 h-6 flex items-center rounded-md mt-1 border border-secondary-200',
+						'opacity-0 transition pointer-events-none text-sm shadow-md px-2 h-6 flex items-center rounded-md mt-1 border border-surface-200',
 						'data-[active=""]:(opacity-100) group-hover:(opacity-100)'
 					]}
 				>

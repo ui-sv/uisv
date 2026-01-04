@@ -50,9 +50,9 @@
 	const classes = $derived.by(() =>
 		tv({
 			slots: {
-				root: 'relative w-full flex bg-secondary-100',
+				root: 'relative w-full flex bg-surface-100',
 				list: '',
-				item: 'text-secondary-600 font-medium',
+				item: 'text-surface-600 font-medium',
 				icon: ''
 			},
 			variants: {
@@ -62,7 +62,7 @@
 						list: '',
 						item: ''
 					},
-					secondary: {
+					surface: {
 						root: '',
 						list: '',
 						item: ''

@@ -48,7 +48,7 @@
 
 {#snippet components(props?: CheckboxProps, noval?: boolean)}
 	<div class="flex gap-2">
-		{#each ['primary', 'secondary', 'info', 'success', 'warning', 'error'] as color (color)}
+		{#each ['primary', 'surface', 'info', 'success', 'warning', 'error'] as color (color)}
 			{#if noval}
 				<Checkbox {...props} color={color as PropColor} />
 			{:else}

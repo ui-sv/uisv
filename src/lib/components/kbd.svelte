@@ -83,7 +83,7 @@
 		variants: {
 			color: {
 				primary: '',
-				secondary: '',
+				surface: '',
 				info: '',
 				success: '',
 				warning: '',
@@ -108,9 +108,9 @@
 				class: 'border-primary text-primary'
 			},
 			{
-				color: 'secondary',
+				color: 'surface',
 				variant: 'outline',
-				class: 'border-secondary-600'
+				class: 'border-surface-600'
 			},
 			{
 				color: 'info',
@@ -140,9 +140,9 @@
 				class: 'bg-primary border-primary-600'
 			},
 			{
-				color: 'secondary',
+				color: 'surface',
 				variant: 'solid',
-				class: 'bg-secondary-600 border-secondary-700'
+				class: 'bg-surface-600 border-surface-700'
 			},
 			{
 				color: 'info',
@@ -172,9 +172,9 @@
 				class: 'bg-primary-100 text-primary'
 			},
 			{
-				color: 'secondary',
+				color: 'surface',
 				variant: 'soft',
-				class: 'bg-secondary-100 text-secondary-700'
+				class: 'bg-surface-100 text-surface-700'
 			},
 			{
 				color: 'info',
@@ -204,9 +204,9 @@
 				class: 'bg-primary-100 border-primary-200 text-primary'
 			},
 			{
-				color: 'secondary',
+				color: 'surface',
 				variant: 'subtle',
-				class: 'bg-secondary-100 border-secondary-200 text-secondary-700'
+				class: 'bg-surface-100 border-surface-200 text-surface-700'
 			},
 			{
 				color: 'info',

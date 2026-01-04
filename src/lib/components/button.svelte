@@ -95,7 +95,7 @@
 			variants: {
 				color: {
 					primary: '',
-					secondary: '',
+					surface: '',
 					error: '',
 					success: '',
 					info: '',
@@ -134,9 +134,9 @@
 					class: 'bg-primary-500 hover:(bg-primary-400)'
 				},
 				{
-					color: 'secondary',
+					color: 'surface',
 					variant: 'solid',
-					class: 'bg-secondary-900 hover:(bg-secondary-800)'
+					class: 'bg-surface-900 hover:(bg-surface-800)'
 				},
 				{
 					color: 'info',
@@ -165,9 +165,9 @@
 					class: 'border-primary-300 text-primary-500 hover:(bg-primary-50)'
 				},
 				{
-					color: 'secondary',
+					color: 'surface',
 					variant: 'outline',
-					class: 'border-secondary-300 hover:(bg-secondary-100)'
+					class: 'border-surface-300 hover:(bg-surface-100)'
 				},
 				{
 					color: 'info',
@@ -196,9 +196,9 @@
 					class: ' bg-primary-50 text-primary-500 hover:(bg-primary-100)'
 				},
 				{
-					color: 'secondary',
+					color: 'surface',
 					variant: 'soft',
-					class: 'bg-secondary-100 text-secondary-800 hover:(bg-secondary-200)'
+					class: 'bg-surface-100 text-surface-800 hover:(bg-surface-200)'
 				},
 				{
 					color: 'info',
@@ -227,9 +227,9 @@
 					class: 'bg-primary-50 text-primary-500 border-primary-200 hover:(bg-primary-100)'
 				},
 				{
-					color: 'secondary',
+					color: 'surface',
 					variant: 'subtle',
-					class: 'bg-secondary-50 text-secondary-800 border-secondary-300 hover:(bg-secondary-100)'
+					class: 'bg-surface-50 text-surface-800 border-surface-300 hover:(bg-surface-100)'
 				},
 				{
 					color: 'info',
@@ -258,9 +258,9 @@
 					class: 'text-primary-500 hover:(bg-primary-100)'
 				},
 				{
-					color: 'secondary',
+					color: 'surface',
 					variant: 'ghost',
-					class: 'text-secondary-900 hover:(bg-secondary-100)'
+					class: 'text-surface-900 hover:(bg-surface-100)'
 				},
 				{
 					color: 'info',
@@ -289,9 +289,9 @@
 					class: 'text-primary-500 hover:(text-primary-400)'
 				},
 				{
-					color: 'secondary',
+					color: 'surface',
 					variant: 'link',
-					class: 'text-secondary-500 hover:(text-secondary-700)'
+					class: 'text-surface-500 hover:(text-surface-700)'
 				},
 				{
 					color: 'info',

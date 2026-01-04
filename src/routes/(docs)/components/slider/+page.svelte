@@ -54,7 +54,7 @@
 
 {#snippet components(props?: SliderProps<any>, novalue?: boolean)}
 	<div class="flex gap-2">
-		{#each ['primary', 'secondary', 'info', 'success', 'warning', 'error'] as color (color)}
+		{#each ['primary', 'surface', 'info', 'success', 'warning', 'error'] as color (color)}
 			{#if novalue}
 				<Slider {...props} color={color as PropColor} />
 			{:else}

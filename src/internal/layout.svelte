@@ -28,7 +28,7 @@
 				nav_opened ? 'bg-white' : 'bg-white/50'
 			]}
 		>
-			<Button color="secondary" variant="link" ui={{ base: '' }} href={resolve('/')}>
+			<Button color="surface" variant="link" ui={{ base: '' }} href={resolve('/')}>
 				{#snippet icon()}
 					<img class="size-8" src="/favicon.svg" alt="logo" />
 				{/snippet}
@@ -41,7 +41,7 @@
 			<Button
 				icon={nav_opened ? 'i-lucide-x' : 'i-lucide-menu'}
 				variant="ghost"
-				color="secondary"
+				color="surface"
 				ui={{ base: 'md:(hidden)' }}
 				onclick={() => {
 					nav_opened = !nav_opened;

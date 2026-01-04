@@ -12,7 +12,7 @@
 	<div class="flex gap-4">
 		{#each COLORS as color (color)}
 			<Chip {color} {size} {text}>
-				<Button icon="i-lucide-mail" color="secondary" variant="subtle" />
+				<Button icon="i-lucide-mail" color="surface" variant="subtle" />
 			</Chip>
 		{/each}
 	</div>
