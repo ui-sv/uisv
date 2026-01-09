@@ -1,23 +1,15 @@
-<script module lang="ts">
-	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { cx } from 'tailwind-variants';
-
-	export type H1Props = {
-		children: Snippet;
-		ui?: { root?: ClassNameValue };
-	};
-</script>
-
 <script lang="ts">
-	const { children, ui = {} }: H1Props = $props();
+	import type { SvelteHTMLElements } from 'svelte/elements';
+	import { cn } from 'tailwind-variants';
+	const { children, class: classes, ...rest }: SvelteHTMLElements['h1'] = $props();
 </script>
 
 <h1
-	class={cx(
+	{...rest}
+	class={cn(
 		'text-4xl font-bold mb-8 scroll-mt-[calc(45px+var(--ui-header-height))] lg:scroll-mt-(--ui-header-height)',
-		ui.root
+		classes,
 	)}
 >
-	{@render children()}
+	{@render children?.()}
 </h1>

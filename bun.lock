@@ -10,6 +10,7 @@
         "@iconify-json/logos": "^1.2.10",
         "@iconify-json/lucide": "^1.2.82",
         "@iconify-json/solar": "^1.2.5",
+        "@iconify/svelte": "^5.2.1",
         "@sveltejs/adapter-auto": "^7.0.0",
         "@sveltejs/kit": "^2.49.2",
         "@sveltejs/package": "^2.5.7",
@@ -160,6 +161,8 @@
     "@iconify-json/lucide": ["@iconify-json/lucide@1.2.82", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-fHZWegspOZonl5GNTvOkHsjnTMdSslFh3EzpzUtRyLxO8bOonqk2OTU3hCl0k4VXzViMjqpRK3X1sotnuBXkFA=="],
 
     "@iconify-json/solar": ["@iconify-json/solar@1.2.5", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-WMAiNwchU8zhfrySww6KQBRIBbsQ6SvgIu2yA+CHGyMima/0KQwT5MXogrZPJGoQF+1Ye3Qj6K+1CiyNn3YkoA=="],
+
+    "@iconify/svelte": ["@iconify/svelte@5.2.1", "", { "dependencies": { "@iconify/types": "^2.0.0" }, "peerDependencies": { "svelte": ">5.0.0" } }, "sha512-zHmsIPmnIhGd5gc95bNN5FL+GifwMZv7M2rlZEpa7IXYGFJm/XGHdWf6PWQa6OBoC+R69WyiPO9NAj5wjfjbow=="],
 
     "@iconify/types": ["@iconify/types@2.0.0", "", {}, "sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg=="],
 

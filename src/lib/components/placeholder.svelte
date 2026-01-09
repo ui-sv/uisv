@@ -1,11 +1,16 @@
 <script lang="ts">
-	import type { ClassNameValue } from 'tailwind-merge';
+	import type { SvelteHTMLElements } from 'svelte/elements';
+	import { cx } from 'tailwind-variants';
 
-	let { class: klass }: { class?: ClassNameValue } = $props();
+	let { class: klass, ...rest }: SvelteHTMLElements['svg'] = $props();
 </script>
 
 <svg
-	class={['inset-0 w-full stroke-surface/10 border border-dashed border-surface rounded-md', klass]}
+	{...rest}
+	class={cx(
+		'inset-0 w-full stroke-surface/10 border border-dashed border-surface rounded-md',
+		klass
+	)}
 	fill="none"
 >
 	<defs>

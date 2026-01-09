@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { COLORS, KBD, type KbdProps } from '$lib/index.js';
+	import { COLORS, Kbd, type KbdProps } from '$lib/index.js';
 
 	let value = $state('k');
 </script>
@@ -18,7 +18,7 @@
 {#snippet components(props?: KbdProps)}
 	<div class="flex gap-2">
 		{#each COLORS as color (color)}
-			<KBD {...props} {value} {color} />
+			<Kbd {...props} {value} {color} />
 		{/each}
 	</div>
 {/snippet}

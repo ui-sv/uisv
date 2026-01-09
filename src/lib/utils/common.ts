@@ -2,7 +2,7 @@ import type { Snippet, Component } from 'svelte';
 
 /**
  * Checks if a value is a Svelte snippet
- * @param v - The value to check (should be Snippet | Component)
+ * @param v - The value to check
  * @returns true if the value is a snippet, false otherwise
  */
 export const isSnippet = (v: unknown): v is Snippet => {
@@ -11,7 +11,7 @@ export const isSnippet = (v: unknown): v is Snippet => {
 
 /**
  * Checks if a value is a Svelte component
- * @param v - The value to check (should be Snippet | Component)
+ * @param v - The value to check
  * @returns true if the value is a component, false otherwise
  */
 export const isComponent = (v: unknown): v is Component => {
