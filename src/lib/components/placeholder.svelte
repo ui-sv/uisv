@@ -9,7 +9,7 @@
 	{...rest}
 	class={cx(
 		'inset-0 w-full stroke-surface/10 border border-dashed border-surface rounded-md',
-		klass
+		klass,
 	)}
 	fill="none"
 >

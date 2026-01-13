@@ -16,7 +16,7 @@ export const ASIDE_LINKS: Record<string, Record<string, string[]>> = {
 		Form: ['Checkbox', 'CheckboxGroup', 'PinInput', 'Slider', 'Switch'],
 		Data: [],
 		Navigation: ['Tabs'],
-		Overlay: [],
+		Overlay: ['Popover'],
 	},
 	utilities: {
 		Overview: ['isSnippet', 'isComponent'],
