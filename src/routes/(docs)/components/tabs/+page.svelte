@@ -3,19 +3,21 @@
 
 	const ITEMS: TabsProps['items'] = [
 		{
-			label: 'vite',
+			label: 'Vite',
+			icon: 'ph:lightning-bold',
 			content: 'The Build Tool for the Web',
 		},
 		{
-			label: 'svelte',
+			label: 'Svelte',
+			icon: 'simple-icons:svelte',
 			content: 'web development for the rest of us',
 		},
-		{ label: 'uisv', content: 'ui library for the rest of us' },
+		{ label: 'UI Svelte', icon: 'ph:wall-bold', content: uisv },
 	];
 
-	let value = $state(0);
 	let size = $state<TabsProps['size']>('md');
 	let color = $state<TabsProps['color']>('primary');
+	let variant = $state<TabsProps['variant']>('pill');
 </script>
 
 <div class="space-y-4 p-4">
@@ -35,17 +37,37 @@
 		{/each}
 	</select>
 
-	<Tabs bind:value items={ITEMS.map((v) => (typeof v === 'object' ? v.label : v))} {size} {color} />
+	<select bind:value={variant} name="variants" id="variants">
+		<option value="pill">pill</option>
+		<option value="link">link</option>
+	</select>
+
+	<Tabs items={ITEMS.map((v) => (typeof v === 'object' ? v.label : v))} {size} {color} {variant} />
+
+	<h1>with icons</h1>
+
+	<Tabs
+		items={ITEMS.map((v) => (typeof v === 'object' ? { ...v, content: undefined } : v))}
+		{size}
+		{color}
+		{variant}
+	/>
 
 	<h1>with contents</h1>
 
-	<Tabs bind:value items={ITEMS} {size} {color} />
+	<Tabs items={ITEMS} {size} {color} {variant} />
+
+	<h1>vertical</h1>
+
+	<Tabs
+		items={ITEMS.map((v) => (typeof v === 'object' ? { ...v, content: undefined } : v))}
+		{size}
+		{color}
+		{variant}
+		orientation="vertical"
+	/>
 </div>
 
-{#snippet components(props: Omit<TabsProps, 'items'>)}
-	<div class="flex gap-2">
-		{#each COLORS as color (color)}
-			<Tabs bind:value {...props} {items} {color} />
-		{/each}
-	</div>
+{#snippet uisv()}
+	what
 {/snippet}

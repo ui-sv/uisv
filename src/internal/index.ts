@@ -19,7 +19,7 @@ export const ASIDE_LINKS: Record<string, Record<string, string[]>> = {
 		Overlay: ['Popover'],
 	},
 	utilities: {
-		Overview: ['isSnippet', 'isComponent'],
+		Overview: ['isSnippet', 'isComponent', 'useElementRects'],
 	},
 };
 
