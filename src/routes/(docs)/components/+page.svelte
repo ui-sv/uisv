@@ -5,7 +5,7 @@
 
 <H1>Components</H1>
 
-<P ui={{ root: 'text-lg text-surface-500' }}>
+<P class="text-lg text-surface-500">
 	Build beautiful, accessible, and responsive user interfaces with 125+ Vue components powered by
 	Tailwind CSS and Reka UI.
 </P>

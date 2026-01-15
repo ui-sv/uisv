@@ -13,7 +13,7 @@
 				label: string;
 				icon?: string | Component | Snippet;
 				iconposition?: 'before' | 'after';
-				content?: string | Component | Snippet<[{ item: TabItem; value: number }]>;
+				content?: string | Component;
 		  };
 
 	export type TabsProps = {
@@ -32,6 +32,7 @@
 			icon?: ClassNameValue;
 			indicator?: ClassNameValue;
 		};
+		[k: `content_${string}`]: Snippet<[{ item: TabItem; value: number }]>;
 	};
 </script>
 
@@ -45,6 +46,7 @@
 		disabled,
 		orientation = 'horizontal',
 		ui = {},
+		...rest
 	}: TabsProps = $props();
 
 	let container_el = $state<HTMLElement | null>(null);
@@ -180,6 +182,7 @@
 </script>
 
 <Tabs.Root
+	{disabled}
 	bind:value={() => value.toString(), (v) => (value = parseInt(v))}
 	class={classes.root({ class: ui.root })}
 	{orientation}
@@ -220,12 +223,12 @@
 		{#if typeof item === 'object' && item.content}
 			{@const Content = item.content}
 			<Tabs.Content value={idx.toString()} class={classes.content({ class: ui.content })}>
-				{#if isSnippet(Content)}
-					{@render Content()}
+				{#if `content_${idx}` in rest}
+					{@render rest[`content_${idx}`]({ item, value: idx })}
+				{:else if typeof Content === 'string'}
+					{Content}
 				{:else if isComponent(Content)}
 					<Content />
-				{:else}
-					{Content}
 				{/if}
 			</Tabs.Content>
 		{/if}

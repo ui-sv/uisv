@@ -12,7 +12,7 @@
 			icon: 'simple-icons:svelte',
 			content: 'web development for the rest of us',
 		},
-		{ label: 'UI Svelte', icon: 'ph:wall-bold', content: uisv },
+		{ label: 'UI Svelte', icon: 'ph:wall-bold', content: 'ui library for the rest of us' },
 	];
 
 	let size = $state<TabsProps['size']>('md');
@@ -55,7 +55,15 @@
 
 	<h1>with contents</h1>
 
-	<Tabs items={ITEMS} {size} {color} {variant} />
+	<Tabs items={ITEMS} {size} {color} {variant} content_0={testing}>
+		{#snippet content_1()}
+			hello
+		{/snippet}
+
+		{#snippet content_2()}
+			testing 2
+		{/snippet}
+	</Tabs>
 
 	<h1>vertical</h1>
 
@@ -68,6 +76,6 @@
 	/>
 </div>
 
-{#snippet uisv()}
+{#snippet testing()}
 	what
 {/snippet}

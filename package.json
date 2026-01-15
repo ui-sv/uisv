@@ -85,7 +85,8 @@
 		"vitest-browser-svelte": "^2.0.1"
 	},
 	"keywords": [
-		"svelte"
+		"svelte",
+		"ui"
 	],
 	"pnpm": {
 		"onlyBuiltDependencies": [

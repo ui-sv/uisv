@@ -1,7 +1,7 @@
 export const ASIDE_LINKS: Record<string, Record<string, string[]>> = {
 	guides: { Overview: ['Getting Started', 'Theming'] },
 	components: {
-		Layout: [],
+		// Layout: [],
 		Element: [
 			'Alert',
 			'Badge',
@@ -14,7 +14,7 @@ export const ASIDE_LINKS: Record<string, Record<string, string[]>> = {
 			'Placeholder',
 		],
 		Form: ['Checkbox', 'CheckboxGroup', 'PinInput', 'Slider', 'Switch'],
-		Data: [],
+		// Data: [],
 		Navigation: ['Tabs'],
 		Overlay: ['Popover'],
 	},
@@ -43,11 +43,5 @@ export const LINKS = [
 		label: 'Typography',
 		href: '/typography',
 		icon: 'lucide:square-pilcrow',
-	},
-	{
-		label: 'GitHub',
-		href: 'https://github.com/ui-sv/uisv',
-		target: '_blank',
-		icon: 'lucide:github',
 	},
 ];
