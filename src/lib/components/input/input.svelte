@@ -15,7 +15,7 @@
 		highlight,
 		leading,
 		loading,
-		loadingicon,
+		loadingicon = 'i-lucide-loader-circle',
 		required,
 		trailing,
 		mask,
@@ -29,18 +29,19 @@
 			size,
 			color,
 			variant,
-			disabled,
 			highlight,
 			loading,
-			leading: !!leading || (!!icon && iconposition === 'leading'),
+			leading: !!leading || (!!icon && iconposition === 'leading') || loading,
 			trailing: !!trailing || (!!icon && iconposition === 'trailing'),
-			type: type || undefined,
+			type: type === 'file' ? 'file' : undefined,
 		}),
 	);
 </script>
 
 <div class={variants.root({ class: ui.root })}>
-	{#if leading || iconposition === 'leading'}
+	{#if leading || (icon && iconposition === 'leading') || loading}
+		{@const TrailingIcon = loading ? loadingicon : icon}
+
 		<span class={variants.leading({ class: ui.leading })}>
 			{#if !!leading && !loading}
 				{#if typeof leading === 'string'}
@@ -51,22 +52,16 @@
 					{@const Leading = leading}
 					<Leading />
 				{/if}
-			{:else if typeof icon === 'string'}
+			{:else if typeof TrailingIcon === 'string'}
 				<div
 					class={variants.icon({
-						class: [
-							loading && 'animate-spin',
-							loading ? loadingicon || 'i-lucide-spinner' : icon,
-
-							ui.icon,
-						],
+						class: [loading && 'animate-spin', TrailingIcon, ui.icon],
 					})}
 				></div>
-			{:else if isSnippet(icon)}
-				{@render icon()}
-			{:else if isComponent(icon)}
-				{@const Icon = icon}
-				<Icon class={variants.icon({ class: [ui.icon] })} />
+			{:else if isSnippet(TrailingIcon)}
+				{@render TrailingIcon()}
+			{:else if isComponent(TrailingIcon)}
+				<TrailingIcon class={variants.icon({ class: [ui.icon] })} />
 			{/if}
 		</span>
 	{/if}
@@ -80,7 +75,7 @@
 		use:maska={mask}
 	/>
 
-	{#if trailing || iconposition === 'trailing'}
+	{#if trailing || (icon && iconposition === 'trailing')}
 		<span class={variants.trailing({ class: ui.trailing })}>
 			{#if !!trailing}
 				{#if typeof trailing === 'string'}

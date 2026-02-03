@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 export const INPUT_VARIANTS = tv({
 	slots: {
-		root: 'inline-flex items-center rounded transition-all',
+		root: 'inline-flex items-center rounded transition-all ring ring-inset ring-transparent',
 		base: 'appearance-none outline-none placeholder:text-muted',
 		leading: 'text-muted',
 		trailing: 'text-muted',
@@ -52,10 +52,10 @@ export const INPUT_VARIANTS = tv({
 			},
 		},
 		variant: {
-			outline: { root: 'border border-dimmed' },
-			soft: { root: '' },
-			subtle: { root: '' },
-			ghost: { root: '' },
+			outline: { root: 'ring ring-dimmed' },
+			soft: { root: 'bg-surface-muted hover:bg-surface-elevated focus-within:bg-surface-elevated' },
+			subtle: { root: 'ring ring-dimmed' },
+			ghost: { root: 'hover:bg-surface-elevated focus-within:bg-surface-elevated' },
 			none: { root: '' },
 		},
 		color: {
@@ -87,7 +87,42 @@ export const INPUT_VARIANTS = tv({
 			color: 'primary',
 			variant: ['outline', 'subtle'],
 			class: {
-				root: 'focus-within:(border-primary)',
+				root: 'focus-within:(ring-primary-500 ring-2)',
+			},
+		},
+		{
+			color: 'surface',
+			variant: ['outline', 'subtle'],
+			class: {
+				root: 'focus-within:(ring-surface-800 ring-2)',
+			},
+		},
+		{
+			color: 'info',
+			variant: ['outline', 'subtle'],
+			class: {
+				root: 'focus-within:(ring-info-500 ring-2)',
+			},
+		},
+		{
+			color: 'success',
+			variant: ['outline', 'subtle'],
+			class: {
+				root: 'focus-within:(ring-success-500 ring-2)',
+			},
+		},
+		{
+			color: 'warning',
+			variant: ['outline', 'subtle'],
+			class: {
+				root: 'focus-within:(ring-warning-500 ring-2)',
+			},
+		},
+		{
+			color: 'error',
+			variant: ['outline', 'subtle'],
+			class: {
+				root: 'focus-within:(ring-error-500 ring-2)',
 			},
 		},
 	],
