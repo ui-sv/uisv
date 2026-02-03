@@ -1,5 +1,8 @@
 <script lang="ts" module>
 	import type { Component, Snippet } from 'svelte';
+	import { tv } from 'tailwind-variants';
+	import { type PropColor, isSnippet } from '$lib/index.js';
+	import type { ClassNameValue } from 'tailwind-merge';
 
 	export type BadgeProps = {
 		label?: string;
@@ -17,11 +20,6 @@
 </script>
 
 <script lang="ts">
-	import { tv } from 'tailwind-variants';
-	import { isSnippet } from '$lib/utils/common.js';
-	import type { PropColor } from '$lib/index.js';
-	import type { ClassNameValue } from 'tailwind-merge';
-
 	let {
 		icon,
 		label,
@@ -30,7 +28,7 @@
 		size = 'md',
 		variant = 'solid',
 		ui = {},
-		children
+		children,
 	}: BadgeProps = $props();
 
 	const classes = $derived.by(() => {
@@ -43,7 +41,7 @@
 					error: '',
 					success: '',
 					info: '',
-					warning: ''
+					warning: '',
 				},
 				variant: {
 					link: '',
@@ -51,151 +49,151 @@
 					outline: 'border',
 					soft: '',
 					subtle: 'border',
-					ghost: ''
+					ghost: '',
 				},
 				size: {
 					xs: {
 						base: 'font-medium text-[0.5rem] px-1 h-4 rounded gap-1',
-						icon: 'size-3'
+						icon: 'size-3',
 					},
 					sm: { base: 'font-medium text-[0.625rem] px-1 h-5 rounded gap-1', icon: 'size-3' },
 					md: { base: 'font-medium text-xs rounded-md px-2 h-6 gap-2', icon: 'size-4' },
 					lg: { base: 'font-medium text-sm px-2 h-7 rounded-md gap-2', icon: 'size-5' },
-					xl: { base: 'font-medium px-3 h-8 rounded-md gap-2', icon: 'size-5' }
-				}
+					xl: { base: 'font-medium px-3 h-8 rounded-md gap-2', icon: 'size-5' },
+				},
 			},
 			compoundVariants: [
 				{
 					color: 'primary',
 					variant: 'solid',
-					class: 'bg-primary-400'
+					class: 'bg-primary-400',
 				},
 				{
 					color: 'surface',
 					variant: 'solid',
-					class: 'bg-surface-900'
+					class: 'bg-surface-900',
 				},
 				{
 					color: 'info',
 					variant: 'solid',
-					class: 'bg-blue-500'
+					class: 'bg-blue-500',
 				},
 				{
 					color: 'success',
 					variant: 'solid',
-					class: 'bg-green-500'
+					class: 'bg-green-500',
 				},
 				{
 					color: 'error',
 					variant: 'solid',
-					class: 'bg-red-500'
+					class: 'bg-red-500',
 				},
 				{
 					color: 'warning',
 					variant: 'solid',
-					class: 'bg-yellow-500'
+					class: 'bg-yellow-500',
 				},
 
 				{
 					color: 'primary',
 					variant: 'outline',
-					class: 'border-primary-300 text-primary-400'
+					class: 'border-primary-300 text-primary-400',
 				},
 				{
 					color: 'surface',
 					variant: 'outline',
-					class: 'border-surface-300 text-surface-900'
+					class: 'border-surface-300 text-surface-900',
 				},
 				{
 					color: 'info',
 					variant: 'outline',
-					class: 'border-blue-300 text-blue-500'
+					class: 'border-blue-300 text-blue-500',
 				},
 				{
 					color: 'success',
 					variant: 'outline',
-					class: 'border-green-300 text-green-500'
+					class: 'border-green-300 text-green-500',
 				},
 				{
 					color: 'error',
 					variant: 'outline',
-					class: 'border-red-300 text-red-500'
+					class: 'border-red-300 text-red-500',
 				},
 				{
 					color: 'warning',
 					variant: 'outline',
-					class: 'border-yellow-300 text-yellow-500'
+					class: 'border-yellow-300 text-yellow-500',
 				},
 
 				{
 					color: 'primary',
 					variant: 'soft',
-					class: ' bg-primary-50 text-primary-500'
+					class: ' bg-primary-50 text-primary-500',
 				},
 				{
 					color: 'surface',
 					variant: 'soft',
-					class: 'bg-surface-100 text-surface-800'
+					class: 'bg-surface-100 text-surface-800',
 				},
 				{
 					color: 'info',
 					variant: 'soft',
-					class: 'bg-blue-100 text-blue-500'
+					class: 'bg-blue-100 text-blue-500',
 				},
 				{
 					color: 'success',
 					variant: 'soft',
-					class: 'bg-green-100 text-green-500'
+					class: 'bg-green-100 text-green-500',
 				},
 				{
 					color: 'error',
 					variant: 'soft',
-					class: 'bg-red-100 text-red-500'
+					class: 'bg-red-100 text-red-500',
 				},
 				{
 					color: 'warning',
 					variant: 'soft',
-					class: 'bg-yellow-100 text-yellow-500 '
+					class: 'bg-yellow-100 text-yellow-500 ',
 				},
 
 				{
 					color: 'primary',
 					variant: 'subtle',
-					class: 'bg-primary-50 text-primary-500 border-primary-200 '
+					class: 'bg-primary-50 text-primary-500 border-primary-200 ',
 				},
 				{
 					color: 'surface',
 					variant: 'subtle',
-					class: 'bg-surface-100 text-surface-800 border-surface-300 '
+					class: 'bg-surface-100 text-surface-800 border-surface-300 ',
 				},
 				{
 					color: 'info',
 					variant: 'subtle',
-					class: 'bg-blue-50 text-blue-600 border-blue-200'
+					class: 'bg-blue-50 text-blue-600 border-blue-200',
 				},
 				{
 					color: 'success',
 					variant: 'subtle',
-					class: 'bg-green-100 text-green-600 border-green-300'
+					class: 'bg-green-100 text-green-600 border-green-300',
 				},
 				{
 					color: 'error',
 					variant: 'subtle',
-					class: 'bg-red-50 text-red-600 border-red-200'
+					class: 'bg-red-50 text-red-600 border-red-200',
 				},
 				{
 					color: 'warning',
 					variant: 'subtle',
-					class: 'bg-yellow-50 text-yellow-600 border-yellow-300'
-				}
-			]
+					class: 'bg-yellow-50 text-yellow-600 border-yellow-300',
+				},
+			],
 		})({ variant, size, color });
 	});
 </script>
 
 <span
 	class={classes.base({
-		class: [icon && !(children || label) ? 'px-0 aspect-square justify-center' : '', ui.base]
+		class: [icon && !(children || label) ? 'px-0 aspect-square justify-center' : '', ui.base],
 	})}
 >
 	{#if !trailingicon}

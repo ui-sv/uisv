@@ -1,9 +1,8 @@
 <script module lang="ts">
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
-	import { Checkbox } from './index.js';
 	import type { Component, Snippet } from 'svelte';
-	import { type PropColor, isComponent, isSnippet } from '$lib/index.js';
+	import { type PropColor, isComponent, isSnippet, Checkbox } from '$lib/index.js';
 
 	/* eslint @typescript-eslint/no-explicit-any: 0 */
 
@@ -50,70 +49,70 @@
 			slots: {
 				root: '',
 				container: 'flex',
-				checkbox: ''
+				checkbox: '',
 			},
 			variants: {
 				color: {
 					primary: {
-						container: []
+						container: [],
 					},
 					surface: {
-						container: []
+						container: [],
 					},
 					info: {
-						container: []
+						container: [],
 					},
 					success: {
-						container: []
+						container: [],
 					},
 					warning: {
-						container: []
+						container: [],
 					},
 					error: {
-						container: []
-					}
+						container: [],
+					},
 				},
 				size: {
 					xs: {
 						container: '',
-						icon: 'size-3'
+						icon: 'size-3',
 					},
 					sm: {
 						container: '',
-						icon: 'size-3.5'
+						icon: 'size-3.5',
 					},
 					md: {
 						container: '',
-						icon: 'size-4'
+						icon: 'size-4',
 					},
 					lg: {
 						container: '',
-						icon: 'size-4.5'
+						icon: 'size-4.5',
 					},
 					xl: {
 						container: '',
-						icon: 'size-5'
-					}
+						icon: 'size-5',
+					},
 				},
 				variant: {
 					list: { container: 'gap-2' },
 					card: { container: 'gap-2', checkbox: 'p-4 rounded-lg border border-neutral-200' },
 					table: {
 						container: 'gap-0 ',
-						checkbox: 'border border-neutral-200 p-4 data-[state=checked]:z-1'
-					}
+						checkbox: 'border border-neutral-200 p-4 data-[state=checked]:z-1',
+					},
 				},
 				orientation: {
 					horizontal: {
 						container: 'flex-row',
 						checkbox:
-							'[&:not(:last-child)]:(-me-px ms-0) first-of-type:rounded-s-lg last-of-type:rounded-e-lg'
+							'[&:not(:last-child)]:(-me-px ms-0) first-of-type:rounded-s-lg last-of-type:rounded-e-lg',
 					},
 					vertical: {
-						container: 'flex-col -space-y-px'
-					}
+						container: 'flex-col -space-y-px',
+					},
 				},
-				selected: { true: '', false: '' }
+				selected: { true: '', false: '' },
 			},
 			compoundVariants: [
 				{
@@ -121,48 +120,48 @@
 					selected: true,
 					variant: ['table', 'card'],
 					class: {
-						checkbox: 'border-primary-500'
-					}
+						checkbox: 'border-primary-500',
+					},
 				},
 				{
 					color: 'surface',
 					selected: true,
 					variant: ['table', 'card'],
 					class: {
-						checkbox: 'border-surface-500'
-					}
+						checkbox: 'border-surface-500',
+					},
 				},
 				{
 					color: 'info',
 					selected: true,
 					variant: ['table', 'card'],
 					class: {
-						checkbox: 'border-info-500'
-					}
+						checkbox: 'border-info-500',
+					},
 				},
 				{
 					color: 'success',
 					selected: true,
 					variant: ['table', 'card'],
 					class: {
-						checkbox: 'border-success-500'
-					}
+						checkbox: 'border-success-500',
+					},
 				},
 				{
 					color: 'warning',
 					selected: true,
 					variant: ['table', 'card'],
 					class: {
-						checkbox: 'border-warning-500'
-					}
+						checkbox: 'border-warning-500',
+					},
 				},
 				{
 					color: 'error',
 					selected: true,
 					variant: ['table', 'card'],
 					class: {
-						checkbox: 'border-error-500'
-					}
+						checkbox: 'border-error-500',
+					},
 				},
 
 				{
@@ -170,51 +169,51 @@
 					selected: true,
 					variant: ['table'],
 					class: {
-						checkbox: 'bg-primary-100'
-					}
+						checkbox: 'bg-primary-100',
+					},
 				},
 				{
 					color: 'surface',
 					selected: true,
 					variant: ['table'],
 					class: {
-						checkbox: 'bg-surface-100'
-					}
+						checkbox: 'bg-surface-100',
+					},
 				},
 				{
 					color: 'info',
 					selected: true,
 					variant: ['table'],
 					class: {
-						checkbox: 'bg-info-100'
-					}
+						checkbox: 'bg-info-100',
+					},
 				},
 				{
 					color: 'success',
 					selected: true,
 					variant: ['table'],
 					class: {
-						checkbox: 'bg-success-100'
-					}
+						checkbox: 'bg-success-100',
+					},
 				},
 				{
 					color: 'warning',
 					selected: true,
 					variant: ['table'],
 					class: {
-						checkbox: 'bg-warning-100'
-					}
+						checkbox: 'bg-warning-100',
+					},
 				},
 				{
 					color: 'error',
 					selected: true,
 					variant: ['table'],
 					class: {
-						checkbox: 'bg-error-100'
-					}
-				}
-			]
-		})({ color, size, variant, orientation })
+						checkbox: 'bg-error-100',
+					},
+				},
+			],
+		})({ color, size, variant, orientation }),
 	);
 </script>
 
@@ -239,8 +238,8 @@
 				ui={{
 					root: classes.checkbox({
 						class: [ui.checkbox],
-						selected: value.includes(key)
-					})
+						selected: value.includes(key),
+					}),
 				}}
 				bind:value={
 					() => value.includes(key),

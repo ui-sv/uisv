@@ -23,14 +23,14 @@
 	</div>
 
 	{@render components({
-		variant: button_variant
+		variant: button_variant,
 	})}
 
 	<h1>Icon</h1>
 
 	{@render components({
 		icon: button_icon,
-		variant: button_variant
+		variant: button_variant,
 	})}
 
 	<h1>Close</h1>
@@ -38,7 +38,7 @@
 	{@render components({
 		icon: button_icon,
 		variant: button_variant,
-		close: true
+		close: true,
 	})}
 
 	<h1>Custom close icon</h1>
@@ -47,8 +47,8 @@
 		icon: button_icon,
 		variant: button_variant,
 		close: {
-			icon: 'i-lucide-rocket'
-		}
+			icon: 'i-lucide-rocket',
+		},
 	})}
 
 	<h1>Actions</h1>
@@ -56,7 +56,7 @@
 	{@render components({
 		icon: button_icon,
 		variant: button_variant,
-		actions: [{ label: 'Accept' }, { label: 'Cancel', color: 'surface', variant: 'subtle' }]
+		actions: [{ label: 'Accept' }, { label: 'Cancel', color: 'surface', variant: 'subtle' }],
 	})}
 
 	<h1>Href</h1>
@@ -65,7 +65,7 @@
 		icon: button_icon,
 		variant: button_variant,
 		href: 'https://github.com/ui-sv/uisv',
-		target: '_blank'
+		target: '_blank',
 	})}
 </div>
 

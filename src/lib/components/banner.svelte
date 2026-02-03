@@ -1,7 +1,6 @@
 <script module lang="ts">
-	import { isSnippet, type PropColor } from '$lib/index.js';
+	import { isSnippet, type PropColor, type ButtonProps, Button } from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
-	import Button, { type ButtonProps } from './button.svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
 	import { defu } from 'defu';
@@ -37,7 +36,7 @@
 		color = 'primary',
 		variant = 'solid',
 		ui = {},
-		onclose = () => {}
+		onclose = () => {},
 	}: BannerProps = $props();
 	const id = useId();
 
@@ -47,8 +46,8 @@
 			variant: 'link',
 			color: variant === 'solid' ? 'surface' : color,
 			ui: {
-				icon: variant === 'solid' ? 'text-white' : ''
-			}
+				icon: variant === 'solid' ? 'text-white' : '',
+			},
 		} as ButtonProps);
 	});
 	const classes = $derived.by(() =>
@@ -57,7 +56,7 @@
 				base: 'flex items-center gap-2 font-sans p-4',
 				icon: 'pi size-6',
 				actions: '',
-				title: ''
+				title: '',
 			},
 			variants: {
 				color: {
@@ -66,144 +65,144 @@
 					info: '',
 					success: '',
 					warning: '',
-					error: ''
+					error: '',
 				},
 				variant: {
 					solid: {
 						base: 'text-white',
-						description: 'text-white/90'
+						description: 'text-white/90',
 					},
 					outline: 'border',
 					soft: '',
-					subtle: 'border'
-				}
+					subtle: 'border',
+				},
 			},
 			compoundVariants: [
 				{
 					variant: 'solid',
 					color: 'primary',
-					class: 'bg-primary-500'
+					class: 'bg-primary-500',
 				},
 				{
 					variant: 'solid',
 					color: 'surface',
-					class: 'bg-surface-900'
+					class: 'bg-surface-900',
 				},
 				{
 					variant: 'solid',
 					color: 'info',
-					class: 'bg-info-500'
+					class: 'bg-info-500',
 				},
 				{
 					variant: 'solid',
 					color: 'success',
-					class: 'bg-success-500'
+					class: 'bg-success-500',
 				},
 				{
 					variant: 'solid',
 					color: 'warning',
-					class: 'bg-warning-500'
+					class: 'bg-warning-500',
 				},
 				{
 					variant: 'solid',
 					color: 'error',
-					class: 'bg-error-500'
+					class: 'bg-error-500',
 				},
 
 				{
 					variant: 'outline',
 					color: 'primary',
-					class: 'border-primary-300 text-primary-500'
+					class: 'border-primary-300 text-primary-500',
 				},
 				{
 					variant: 'outline',
 					color: 'surface',
-					class: 'border-surface-300 text-surface-900'
+					class: 'border-surface-300 text-surface-900',
 				},
 				{
 					variant: 'outline',
 					color: 'info',
-					class: 'border-info-300 text-info-500'
+					class: 'border-info-300 text-info-500',
 				},
 				{
 					variant: 'outline',
 					color: 'success',
-					class: 'border-success-300 text-success-500'
+					class: 'border-success-300 text-success-500',
 				},
 				{
 					variant: 'outline',
 					color: 'warning',
-					class: 'border-warning-300 text-warning-500'
+					class: 'border-warning-300 text-warning-500',
 				},
 				{
 					variant: 'outline',
 					color: 'error',
-					class: 'border-error-300 text-error-500'
+					class: 'border-error-300 text-error-500',
 				},
 
 				{
 					variant: 'soft',
 					color: 'primary',
-					class: 'bg-primary-100 text-primary-500'
+					class: 'bg-primary-100 text-primary-500',
 				},
 				{
 					variant: 'soft',
 					color: 'surface',
-					class: 'bg-surface-50 text-surface-900'
+					class: 'bg-surface-50 text-surface-900',
 				},
 				{
 					variant: 'soft',
 					color: 'info',
-					class: 'bg-info-50 text-info-500'
+					class: 'bg-info-50 text-info-500',
 				},
 				{
 					variant: 'soft',
 					color: 'success',
-					class: 'bg-success-50 text-success-500'
+					class: 'bg-success-50 text-success-500',
 				},
 				{
 					variant: 'soft',
 					color: 'warning',
-					class: 'bg-warning-50 text-warning-500'
+					class: 'bg-warning-50 text-warning-500',
 				},
 				{
 					variant: 'soft',
 					color: 'error',
-					class: 'bg-error-50 text-error-500'
+					class: 'bg-error-50 text-error-500',
 				},
 
 				{
 					variant: 'subtle',
 					color: 'primary',
-					class: 'bg-primary-100 text-primary-500 border-primary-300'
+					class: 'bg-primary-100 text-primary-500 border-primary-300',
 				},
 				{
 					variant: 'subtle',
 					color: 'surface',
-					class: 'bg-surface-50 text-surface-900 border-surface-300'
+					class: 'bg-surface-50 text-surface-900 border-surface-300',
 				},
 				{
 					variant: 'subtle',
 					color: 'info',
-					class: 'bg-info-50 text-info-500 border-info-300'
+					class: 'bg-info-50 text-info-500 border-info-300',
 				},
 				{
 					variant: 'subtle',
 					color: 'success',
-					class: 'bg-success-50 text-success-500 border-success-300'
+					class: 'bg-success-50 text-success-500 border-success-300',
 				},
 				{
 					variant: 'subtle',
 					color: 'warning',
-					class: 'bg-warning-50 text-warning-500 border-warning-300'
+					class: 'bg-warning-50 text-warning-500 border-warning-300',
 				},
 				{
 					variant: 'subtle',
 					color: 'error',
-					class: 'bg-error-50 text-error-500  border-error-300'
-				}
-			]
-		})({ color, variant })
+					class: 'bg-error-50 text-error-500  border-error-300',
+				},
+			],
+		})({ color, variant }),
 	);
 </script>
 
@@ -240,7 +239,7 @@
 				<Button
 					{...defu(action, {
 						size: 'xs',
-						color: 'surface'
+						color: 'surface',
 					} as ButtonProps)}
 				/>
 			{/each}

@@ -1,28 +1,14 @@
 <script lang="ts">
-	import { Tabs, type TabsProps, COLORS } from '$lib/index.js';
 
-	const ITEMS: TabsProps['items'] = [
-		{
-			label: 'Vite',
-			icon: 'ph:lightning-bold',
-			content: 'The Build Tool for the Web',
-		},
-		{
-			label: 'Svelte',
-			icon: 'simple-icons:svelte',
-			content: 'web development for the rest of us',
-		},
-		{ label: 'UI Svelte', icon: 'ph:wall-bold', content: 'ui library for the rest of us' },
-	];
-
-	let size = $state<TabsProps['size']>('md');
-	let color = $state<TabsProps['color']>('primary');
-	let variant = $state<TabsProps['variant']>('pill');
 </script>
 
+## Usage
+
+Use the Tabs component to display a list of items in a tabs.
+
+<!--
 <div class="space-y-4 p-4">
 	<h1>Basic</h1>
-
 	<select bind:value={size} name="sizes" id="sizes">
 		<option value="xs">xs</option>
 		<option value="sm">sm</option>
@@ -79,3 +65,5 @@
 {#snippet testing()}
 	what
 {/snippet}
+
+w-->

@@ -3,14 +3,78 @@ import {
 	transformerVariantGroup,
 	transformerCompileClass,
 	transformerDirectives,
-	presetWind4,
 	presetWebFonts,
 	presetIcons,
+	presetWind4,
+	definePreset,
+	type Preset,
 } from 'unocss';
 import { type WebFontsOptions } from '@unocss/preset-web-fonts';
 import { defu } from 'defu';
 import type { PropColor } from './index.js';
 import { getColors } from 'theme-colors';
+import { presetTheme } from 'unocss-preset-theme';
+import { evaluatePath } from 'doc-path';
+
+export type Colors = Record<string, string | Record<string, string>>;
+
+export type NestedObject<K extends string, V> = {
+	[key in K]: NestedObject<K, V> | V;
+};
+
+// export type SemanticsOptions = {
+// 	light: Colors;
+// 	dark: Colors;
+// 	colors: PluginOptions['colors'];
+// };
+
+// export const semantics = definePreset<SemanticsOptions>(
+// 	(
+// 		options = {
+// 			dark: {},
+// 			light: {},
+// 			colors: {},
+// 		},
+// 	): Preset => {
+// 		return {
+// 			name: 'unocss-preset-semantics',
+// 			preflights: [
+// 				{
+// 					getCSS({ theme }) {
+// 						if (!('colors' in theme) || typeof theme.colors !== 'object') return;
+// 						const result: string[] = [
+// 							'body {@apply: var(--bg-surface-default);}',
+// 							'@media (prefers-color-scheme: dark) {}',
+// 						];
+// 						const colors = theme.colors as Colors;
+// 						if (typeof colors.surface !== 'object') return '';
+
+// 						// colors['base'] = colors.surface['700'];
+// 						// colors['dimmed'] = colors.surface['400'];
+// 						// colors['muted'] = colors.surface['500'];
+// 						// colors['toned'] = colors.surface['600'];
+// 						// colors['highlighted'] = colors.surface['900'];
+// 						// colors['inverted'] = 'white';
+// 						// colors['surface'] = defu(colors.surface, {
+// 						// 	base: colors.surface['900'],
+// 						// 	muted: colors.surface['800'],
+// 						// 	elevated: colors.surface['800'],
+// 						// 	accented: colors.surface['700'],
+// 						// 	inverted: 'white',
+// 						// });
+
+// 						return result.join('');
+// 					},
+// 				},
+// 			],
+// 			extendTheme(theme) {
+// 				return {
+// 					colors,
+// 				};
+// 			},
+// 		};
+// 	},
+// );
 
 export type PluginOptions = {
 	/**
@@ -79,18 +143,90 @@ export function uisv(options: PluginOptions) {
 		},
 	} as PluginOptions);
 
+	// const semantics_preset = semantics({
+	// 	colors: _opts.colors,
+	// 	light: {
+	// 		base: 'surface.700',
+	// 		dimmed: 'surface.400',
+	// 		muted: 'surface.500',
+	// 		toned: 'surface.600',
+	// 		highlighted: 'surface.900',
+	// 		inverted: 'white',
+	// 		surface: {
+	// 			base: 'white',
+	// 			muted: 'surface.50',
+	// 			elevated: 'surface.100',
+	// 			accented: 'surface.200',
+	// 			inverted: 'surface.900',
+	// 		},
+	// 	},
+	// 	dark: {
+	// 		base: 'surface.700',
+	// 		dimmed: 'surface.400',
+	// 		muted: 'surface.500',
+	// 		toned: 'surface.600',
+	// 		highlighted: 'surface.900',
+	// 		inverted: 'white',
+	// 		surface: {
+	// 			base: 'surface.900',
+	// 			muted: 'surface.800',
+	// 			elevated: 'surface.800',
+	// 			accented: 'surface.700',
+	// 			inverted: 'white',
+	// 		},
+	// 	},
+	// });
+
 	return [
 		uno_plugin({
+			content: {
+				pipeline: {
+					include: [
+						// the default
+						/\.(vue|svelte|[jt]sx|vine.ts|mdx?|astro|elm|php|phtml|marko|html)($|\?)/,
+						// include js/ts files
+						'src/**/*.{js,ts}',
+					],
+				},
+			},
 			theme: _opts.theme,
 			preflights: [
 				{
-					getCSS: ({ theme }) => `
-            body {
-              @apply: var(--bg-surface-default);
+					getCSS({ theme }) {
+						if (!('colors' in theme) || typeof theme.colors !== 'object') return;
+						const colors = theme.colors as Colors;
+						if (typeof colors.surface !== 'object') return '';
+
+						const variables = `
+              --colors-DEFAULT: ${colors.surface['200']};
+      				--colors-dimmed: ${colors.surface['500']};
+      				--colors-muted: ${colors.surface['400']};
+      				--colors-toned: ${colors.surface['300']};
+      				--colors-highlighted: white;
+      				--colors-inverted: ${colors.surface['900']};
+
+      				--colors-surface-DEFAULT: ${colors.surface['900']};
+      				--colors-surface-muted: ${colors.surface['800']};
+      				--colors-surface-elevated: ${colors.surface['800']};
+      				--colors-surface-accented: ${colors.surface['700']};
+      				--colors-surface-inverted: white;
+            `;
+
+						return `
+						body {
+						  background-color: var(--colors-inverted);
+						}
+
+
+
+            .dark {
+              ${variables}
             }
-          `,
+            `;
+					},
 				},
 			],
+
 			presets: [
 				presetWind4({
 					dark: 'media',
@@ -100,52 +236,40 @@ export function uisv(options: PluginOptions) {
 				}),
 				presetWebFonts(_opts.fonts),
 				presetIcons(_opts.icons),
+				// semantics_preset,
+				// theme_preset,
 			],
 			transformers: [transformerVariantGroup(), transformerCompileClass(), transformerDirectives()],
 			extendTheme: (theme) => {
-				if (!theme.colors) theme.colors = {};
+				if (!('colors' in theme) || typeof theme.colors !== 'object') theme.colors = {};
+				const colors = theme.colors as Colors;
+
 				for (const [color, value] of Object.entries(_opts.colors!)) {
 					if (typeof value !== 'string') {
-						theme.colors[color] = value;
+						colors[color] = value;
 						continue;
 					}
-
-					const in_theme = theme.colors[value];
-					theme.colors[color] = in_theme ? in_theme : getColors(value);
+					const in_theme = colors[value];
+					colors[color] = in_theme ? in_theme : getColors(value);
 				}
-				if (typeof theme.colors.surface !== 'object') return;
-				if (typeof theme.colors.dark !== 'object') theme.colors.dark = {};
 
-				theme.colors = defu(theme.colors, {
-					default: theme.colors.surface[700] as string,
-					dimmed: theme.colors.surface[400],
-					muted: theme.colors.surface[500],
-					toned: theme.colors.surface[600],
-					highlighted: theme.colors.surface[900],
-					inverted: 'white',
-					surface: {
-						default: 'white',
-						muted: theme.colors.surface[50],
-						elevated: theme.colors.surface[100],
-						accented: theme.colors.surface[200],
-						inverted: theme.colors.surface[900],
-					},
-					dark: {
-						default: theme.colors.surface[700] as string,
-						dimmed: theme.colors.surface[400],
-						muted: theme.colors.surface[500],
-						toned: theme.colors.surface[600],
-						highlighted: theme.colors.surface[900],
-						inverted: 'white',
-						surface: {
-							default: theme.colors.surface[900],
-							muted: theme.colors.surface[800],
-							elevated: theme.colors.surface[800],
-							accented: theme.colors.surface[700],
-							inverted: 'white',
-						},
-					},
-				});
+				if (typeof colors.surface === 'object') {
+					colors['DEFAULT'] = colors.surface['700'];
+					colors['dimmed'] = colors.surface['400'];
+					colors['muted'] = colors.surface['500'];
+					colors['toned'] = colors.surface['600'];
+					colors['highlighted'] = colors.surface['900'];
+					colors['inverted'] = 'white';
+					colors['surface'] = defu(colors.surface, {
+						DEFAULT: 'white',
+						muted: colors.surface['50'],
+						elevated: colors.surface['100'],
+						accented: colors.surface['200'],
+						inverted: colors.surface['900'],
+					});
+				}
+
+				if (theme.colors) theme.colors = colors;
 			},
 		}),
 	];

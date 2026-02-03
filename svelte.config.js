@@ -11,7 +11,7 @@ const config = {
 		vitePreprocess(),
 		mdsvex({
 			extension: '.md',
-			layout: resolve('./src/internal/layout.svelte'),
+			layout: resolve('src/internal/layout.svelte'),
 		}),
 	],
 	kit: {

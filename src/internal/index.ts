@@ -1,47 +1,58 @@
-export const ASIDE_LINKS: Record<string, Record<string, string[]>> = {
-	guides: { Overview: ['Getting Started', 'Theming'] },
+export type Links = Record<
+	string,
+	{
+		icon: string;
+		sections: Record<string, Record<string, string>>;
+	}
+>;
+
+export const links: Links = {
+	guides: {
+		icon: 'lucide:clock',
+		sections: {
+			Overview: { 'Getting Started': '', Theming: '' },
+		},
+	},
 	components: {
-		// Layout: [],
-		Element: [
-			'Alert',
-			'Badge',
-			'Banner',
-			'Button',
-			'Card',
-			'Chip',
-			'Kbd',
-			'Progress',
-			'Placeholder',
-		],
-		Form: ['Checkbox', 'CheckboxGroup', 'PinInput', 'Slider', 'Switch'],
-		// Data: [],
-		Navigation: ['Tabs'],
-		Overlay: ['Popover'],
+		icon: 'lucide:code-square',
+		sections: {
+			// Layout: {},
+			Element: {
+				Alert: '',
+				Badge: '',
+				Banner: '',
+				Button: '',
+				Card: '',
+				Chip: '',
+				Kbd: '',
+				Progress: '',
+				Placeholder: '',
+			},
+			Form: {
+				Checkbox: '',
+				CheckboxGroup: '',
+				ColorPicker: 'A component to select a color.',
+				Input: '',
+				PinInput: '',
+				Select: 'A select element to choose from a list of options.',
+				Slider: '',
+				Switch: '',
+			},
+			// Data: {},
+			Navigation: { Tabs: 'A set of tab panels that are displayed one at a time.' },
+			Overlay: { Popover: '' },
+		},
 	},
 	utilities: {
-		Overview: ['isSnippet', 'isComponent', 'useElementRects'],
+		icon: 'lucide:square-function',
+		sections: {
+			Overview: { isSnippet: '', isComponent: '', useElementRects: '' },
+		},
+	},
+	typography: {
+		icon: 'lucide:square-pilcrow',
+		sections: {
+			Overview: {},
+		},
 	},
 };
-
-export const LINKS = [
-	{
-		label: 'Guides',
-		href: '/guides',
-		icon: 'lucide:clock',
-	},
-	{
-		label: 'Components',
-		href: '/components',
-		icon: 'lucide:code-square',
-	},
-	{
-		label: 'Utilities',
-		href: '/utilities',
-		icon: 'lucide:square-function',
-	},
-	{
-		label: 'Typography',
-		href: '/typography',
-		icon: 'lucide:square-pilcrow',
-	},
-];

@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 	import { Button } from '$lib/index.js';
 	import 'virtual:uno.css';
-	import { LINKS } from '$internal/index.js';
+	import { links } from '$internal/index.js';
 
 	const { children } = $props();
 
@@ -20,7 +20,7 @@
 <ModeWatcher />
 
 <nav class="sticky top-0 z-5 bg-surface-default/75 backdrop-blur w-full">
-	<div class="border-b border-surface-200 h-16 flex items-center">
+	<div class="border-b border-surface-accented h-16 flex items-center">
 		<div class="container mx-auto flex items-center">
 			<div class="flex-1 flex items-center">
 				<Button variant="link" ui={{ base: 'px-0!' }} href="/">
@@ -30,16 +30,18 @@
 			</div>
 
 			<div class="flex-1 flex justify-center">
-				{#each LINKS as link (link.href)}
+				{#each Object.entries(links) as [label] (label)}
 					<Button
-						label={link.label}
-						href={link.href}
+						{label}
+						href="/{label}"
 						variant="link"
 						color="surface"
 						ui={{
 							base: [
 								'capitalize',
-								page.url.pathname.startsWith(link.href) ? 'text-primary hover:(text-primary)' : '',
+								page.url.pathname.startsWith(`/${label}`)
+									? 'text-primary hover:(text-primary)'
+									: '',
 							],
 						}}
 					/>
@@ -47,25 +49,30 @@
 			</div>
 
 			<div class="flex-1 flex justify-end">
-				<Button variant="ghost" color="surface" icon="lucide:swatch-book" />
-
 				<Button
 					variant="ghost"
 					color="surface"
-					icon={mode.current === 'light' ? 'lucide:moon' : 'lucide:sun'}
-					onclick={toggleMode}
+					icon="i-lucide-swatch-book"
+					ui={{ base: 'text-primary' }}
 				/>
+
+				<!-- <Button
+					variant="ghost"
+					color="surface"
+					icon={mode.current === 'light' ? 'i-lucide-moon' : 'i-lucide-sun'}
+					onclick={toggleMode}
+				/> -->
 
 				<Button
 					href="https://github.com/ui-sv/uisv"
 					target="_blank"
 					variant="ghost"
 					color="surface"
-					icon="lucide:github"
+					icon="i-lucide-github"
 				/>
 
 				<Button
-					icon={nav_opened ? 'lucide:x' : 'lucide:menu'}
+					icon={nav_opened ? 'i-lucide-x' : 'i-lucide-menu'}
 					variant="ghost"
 					color="surface"
 					ui={{ base: 'md:(hidden)' }}

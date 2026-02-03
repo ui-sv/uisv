@@ -1,3 +1,4 @@
+import type { Component, Snippet } from 'svelte';
 import {
 	extract,
 	useMutationObserver,
@@ -5,6 +6,24 @@ import {
 	type MaybeGetter,
 	type ElementSizeOptions,
 } from 'runed';
+
+/**
+ * Checks if a value is a Svelte component
+ * @param v - The value to check
+ * @returns true if the value is a component, false otherwise
+ */
+export const isComponent = (v: unknown): v is Component => {
+	return typeof v === 'function' || (typeof v === 'object' && v !== null && !('$$render' in v));
+};
+
+/**
+ * Checks if a value is a Svelte snippet
+ * @param v - The value to check
+ * @returns true if the value is a snippet, false otherwise
+ */
+export const isSnippet = (v: unknown): v is Snippet => {
+	return typeof v === 'object' && v !== null && '$$render' in v;
+};
 
 /**
  * Returns a reactive value holding the dom rect of `node`s.

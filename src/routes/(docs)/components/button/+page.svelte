@@ -5,7 +5,7 @@
 	const BUTTON_VARIANTS = ['link', 'solid', 'outline', 'soft', 'subtle', 'ghost'];
 
 	let button_label = $state('Button');
-	let button_variant = $state<ButtonProps['variant']>('solid');
+	let button_variant = $state<ButtonProps['variant']>('outline');
 	let button_size = $state<ButtonProps['size']>('md');
 	let button_icon = $state('i-solar:rocket-2-linear');
 	let loading = $state(false);
@@ -38,7 +38,7 @@
 		</div>
 
 		{@render buttons({
-			variant: button_variant
+			variant: button_variant,
 		})}
 	</div>
 
@@ -55,7 +55,7 @@
 
 		{@render buttons({
 			size: button_size,
-			variant: button_variant
+			variant: button_variant,
 		})}
 	</div>
 
@@ -64,14 +64,14 @@
 	{@render buttons({
 		icon: button_icon,
 		size: button_size,
-		variant: button_variant
+		variant: button_variant,
 	})}
 
 	{@render buttons({
 		icon: button_icon,
 		size: button_size,
 		variant: button_variant,
-		iconposition: 'right'
+		iconposition: 'right',
 	})}
 
 	<h1>Icon only</h1>
@@ -95,7 +95,7 @@
 		size: button_size,
 		variant: button_variant,
 		loading: loading,
-		iconposition: icon_position
+		iconposition: icon_position,
 	})}
 
 	{@render buttons({
@@ -106,7 +106,7 @@
 		loadingauto: true,
 		onclick() {
 			return new Promise<void>((res) => setTimeout(res, 1000));
-		}
+		},
 	})}
 </div>
 

@@ -40,7 +40,7 @@
 		label,
 		description,
 		required,
-		ui = {}
+		ui = {},
 	}: SwitchProps = $props();
 
 	const classes = $derived.by(() =>
@@ -50,70 +50,70 @@
 				container: 'rounded-full bg-neutral-200 p-0.5 relative transition',
 				thumb: [
 					'bg-white block rounded-full absolute top-0.5 transition grid place-items-center',
-					value ? 'translate-x-full' : 'text-neutral-500'
+					value ? 'translate-x-full' : 'text-neutral-500',
 				],
 				icon: 'pi',
 				label: 'text-sm',
-				description: 'text-sm text-neutral-500'
+				description: 'text-sm text-neutral-500',
 			},
 			variants: {
 				color: {
 					primary: {
-						container: ['', value && 'bg-primary-500 text-primary-500']
+						container: ['', value && 'bg-primary-500 text-primary-500'],
 					},
 					surface: {
-						container: ['', value && 'bg-neutral-900 text-neutral-900']
+						container: ['', value && 'bg-neutral-900 text-neutral-900'],
 					},
 					info: {
-						container: ['', value && 'bg-info-500 text-info-500']
+						container: ['', value && 'bg-info-500 text-info-500'],
 					},
 					success: {
-						container: ['', value && 'bg-success-500 text-success-500']
+						container: ['', value && 'bg-success-500 text-success-500'],
 					},
 					warning: {
-						container: ['', value && 'bg-warning-500 text-warning-500']
+						container: ['', value && 'bg-warning-500 text-warning-500'],
 					},
 					error: {
-						container: ['', value && 'bg-error-500 text-error-500']
-					}
+						container: ['', value && 'bg-error-500 text-error-500'],
+					},
 				},
 				size: {
 					xs: {
 						container: 'w-7 min-w-7 h-4',
 						thumb: 'size-3',
-						icon: 'size-2.5'
+						icon: 'size-2.5',
 					},
 					sm: {
 						container: 'w-8 min-w-8 h-4.5',
 						thumb: 'size-3.5',
-						icon: 'size-3'
+						icon: 'size-3',
 					},
 					md: {
 						container: 'w-9 min-w-9 h-5',
 						thumb: 'size-4',
-						icon: 'size-3.5'
+						icon: 'size-3.5',
 					},
 					lg: {
 						container: 'w-10 min-w-10 h-5.5',
 						thumb: 'size-4.5',
-						icon: 'size-4'
+						icon: 'size-4',
 					},
 					xl: {
 						container: 'w-11  min-w-11 h-6',
 						thumb: 'size-5',
-						icon: 'size-4.5'
-					}
-				}
+						icon: 'size-4.5',
+					},
+				},
 			},
-			compoundVariants: []
-		})({ color, size })
+			compoundVariants: [],
+		})({ color, size }),
 	);
 </script>
 
 <div
 	data-state={value ? 'checked' : 'unchecked'}
 	class={classes.root({
-		class: [(loading || disabled) && 'opacity-50', ui.thumb]
+		class: [(loading || disabled) && 'opacity-50', ui.thumb],
 	})}
 >
 	<button
@@ -131,7 +131,7 @@
 			{@render Icon(checkedicon, [(loading || !value) && 'opacity-0'])}
 			{@render Icon(loadingicon || 'i-lucide-loader-circle', [
 				'animate-spin',
-				!loading && 'opacity-0'
+				!loading && 'opacity-0',
 			])}
 		</span>
 	</button>
@@ -140,7 +140,7 @@
 		<span>
 			<div
 				class={classes.label({
-					class: [required ? 'after:content-["*"] after:text-error-500' : '', ui.thumb]
+					class: [required ? 'after:content-["*"] after:text-error-500' : '', ui.thumb],
 				})}
 			>
 				{#if typeof label === 'string'}

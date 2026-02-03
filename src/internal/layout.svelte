@@ -1,74 +1,81 @@
+<script module lang="ts">
+	export {
+		P as p,
+		H1 as h1,
+		H2 as h2,
+		H3 as h3,
+		H4 as h4,
+		H5 as h5,
+		H6 as h6,
+	} from '$lib/index.js';
+</script>
+
 <script lang="ts">
-	import { resolve } from '$app/paths';
 	import { Button } from '$lib/index.js';
+	import type { Snippet } from 'svelte';
+	import './docs.css';
+
+	type Props = {
+		children?: Snippet;
+		title?: string;
+		code?: string;
+		desc?: string;
+		docs: string;
+		bits?: string;
+	};
+
+	const { children, title, code, desc, docs, bits }: Props = $props();
 
 	let nav_opened = false;
-	export let title: string;
 
-	$: {
+	$effect(() => {
 		nav_opened = nav_opened;
-
-		console.log(nav_opened);
 
 		if (typeof document !== 'undefined') {
 			document.body.classList[nav_opened ? 'add' : 'remove']('overflow-hidden');
 		}
-	}
+	});
 </script>
 
 <svelte:head>
-	<title>{title}</title>
+	<title>{title} - uisv</title>
 </svelte:head>
 
-<div class="min-h-vh flex flex-col <md:flex-col-reverse">
-	<nav class={['sticky top-0 p-2 <md:bottom-0 z-10']}>
-		<div
-			class={[
-				'mx-auto max-w-7xl backdrop-blur-md rounded-lg h-12 p-2 py-4 flex items-center gap-2 border border-neutral-200',
-				nav_opened ? 'bg-white' : 'bg-white/50'
-			]}
-		>
-			<Button color="surface" variant="link" ui={{ base: '' }} href={resolve('/')}>
-				{#snippet icon()}
-					<img class="size-8" src="/favicon.svg" alt="logo" />
-				{/snippet}
+<div class="flex gap-2">
+	<h1 class="flex-1 text-3xl sm:text-4xl text-pretty font-bold text-highlighted">{title}</h1>
 
-				<span class="font-quicksand font-lg text-lg"> uisv </span>
-			</Button>
+	{#if bits}
+		<Button
+			href="https://bits-ui.com/{bits}"
+			label={title}
+			target="_blank"
+			icon="lucide:circle"
+			variant="outline"
+			color="surface"
+		/>
+	{/if}
 
-			<span class="flex-grow"></span>
+	<Button
+		href="https://github.com/ui-sv/uisv/blob/main/src/lib/{code}"
+		label="Github"
+		target="_blank"
+		icon="simple-icons:github"
+		variant="outline"
+		color="surface"
+	/>
 
-			<Button
-				icon={nav_opened ? 'i-lucide-x' : 'i-lucide-menu'}
-				variant="ghost"
-				color="surface"
-				ui={{ base: 'md:(hidden)' }}
-				onclick={() => {
-					nav_opened = !nav_opened;
-				}}
-			/>
-		</div>
-	</nav>
-
-	<div
-		class={[
-			'fixed h-1/2 bottom-16 md:(hidden) left-2 right-2 bg-white transition z-20 border border-neutral-200 rounded-lg',
-			nav_opened ? '' : 'opacity-0 pointer-events-none'
-		]}
-	></div>
-
-	<main class="flex-1">
-		<slot />
-	</main>
-
-	<button
-		aria-label="clear nav"
-		class={[
-			'fixed inset-0 bg-white/75 backdrop-blur-md z-5 transition md:(hidden)',
-			nav_opened ? '' : 'pointer-events-none opacity-0'
-		]}
-		onclick={() => {
-			nav_opened = false;
-		}}
-	></button>
+	<Button
+		href="https://github.com/ui-sv/uisv/blob/main/src/routes/(docs)/{docs}"
+		label="Edit Docs"
+		target="_blank"
+		icon="lucide:file-pen"
+		variant="outline"
+		color="surface"
+	/>
 </div>
+
+<p class="text-lg text-pretty text-muted mt-4">{desc}</p>
+
+<div class="h-px bg-surface-accented my-8"></div>
+
+{@render children?.()}
