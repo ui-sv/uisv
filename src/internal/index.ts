@@ -33,6 +33,7 @@ export const links: Links = {
 				CheckboxGroup: '',
 				ColorPicker: 'A component to select a color.',
 				Input: '',
+				InputTime: 'An input for selecting a time.',
 				PinInput: '',
 				Select: 'A select element to choose from a list of options.',
 				Slider: '',

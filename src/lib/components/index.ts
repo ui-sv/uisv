@@ -1,5 +1,6 @@
 export * from './button/index.js';
 export * from './input/index.js';
+export * from './input-time/index.js';
 export * from './badge.svelte';
 export { default as Badge } from './badge.svelte';
 export * from './alert.svelte';
