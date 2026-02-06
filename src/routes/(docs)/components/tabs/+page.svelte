@@ -1,10 +1,7 @@
 <script lang="ts">
-
 </script>
 
-## Usage
-
-Use the Tabs component to display a list of items in a tabs.
+## Usage Use the Tabs component to display a list of items in a tabs.
 
 <!--
 <div class="space-y-4 p-4">

@@ -1,7 +1,3 @@
----
-description: what
----
-
 <script>
 	import { COLORS, Select } from '$lib/index.js';
 
@@ -14,9 +10,8 @@ description: what
 	let highlight = $state(false);
 </script>
 
-
-Usage Use the `bind:value` directive to control the value of the Select or the
-`defaultvalue` prop to set the initial value when you do not need to control its state.
+--- description: what --- Usage Use the `bind:value` directive to control the value of the Select or
+the `defaultvalue` prop to set the initial value when you do not need to control its state.
 
 <!--
 <select bind:value={variant} name="variant" id="variant">
