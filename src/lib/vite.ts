@@ -13,68 +13,15 @@ import { type WebFontsOptions } from '@unocss/preset-web-fonts';
 import { defu } from 'defu';
 import type { PropColor } from './index.js';
 import { getColors } from 'theme-colors';
-import { presetTheme } from 'unocss-preset-theme';
-import { evaluatePath } from 'doc-path';
+import type { Plugin } from 'vite';
+import { dir, exists, write } from 'files';
+import { resolve } from 'node:path';
 
 export type Colors = Record<string, string | Record<string, string>>;
 
 export type NestedObject<K extends string, V> = {
 	[key in K]: NestedObject<K, V> | V;
 };
-
-// export type SemanticsOptions = {
-// 	light: Colors;
-// 	dark: Colors;
-// 	colors: PluginOptions['colors'];
-// };
-
-// export const semantics = definePreset<SemanticsOptions>(
-// 	(
-// 		options = {
-// 			dark: {},
-// 			light: {},
-// 			colors: {},
-// 		},
-// 	): Preset => {
-// 		return {
-// 			name: 'unocss-preset-semantics',
-// 			preflights: [
-// 				{
-// 					getCSS({ theme }) {
-// 						if (!('colors' in theme) || typeof theme.colors !== 'object') return;
-// 						const result: string[] = [
-// 							'body {@apply: var(--bg-surface-default);}',
-// 							'@media (prefers-color-scheme: dark) {}',
-// 						];
-// 						const colors = theme.colors as Colors;
-// 						if (typeof colors.surface !== 'object') return '';
-
-// 						// colors['base'] = colors.surface['700'];
-// 						// colors['dimmed'] = colors.surface['400'];
-// 						// colors['muted'] = colors.surface['500'];
-// 						// colors['toned'] = colors.surface['600'];
-// 						// colors['highlighted'] = colors.surface['900'];
-// 						// colors['inverted'] = 'white';
-// 						// colors['surface'] = defu(colors.surface, {
-// 						// 	base: colors.surface['900'],
-// 						// 	muted: colors.surface['800'],
-// 						// 	elevated: colors.surface['800'],
-// 						// 	accented: colors.surface['700'],
-// 						// 	inverted: 'white',
-// 						// });
-
-// 						return result.join('');
-// 					},
-// 				},
-// 			],
-// 			extendTheme(theme) {
-// 				return {
-// 					colors,
-// 				};
-// 			},
-// 		};
-// 	},
-// );
 
 export type PluginOptions = {
 	/**
@@ -143,39 +90,18 @@ export function uisv(options: PluginOptions) {
 		},
 	} as PluginOptions);
 
-	// const semantics_preset = semantics({
-	// 	colors: _opts.colors,
-	// 	light: {
-	// 		base: 'surface.700',
-	// 		dimmed: 'surface.400',
-	// 		muted: 'surface.500',
-	// 		toned: 'surface.600',
-	// 		highlighted: 'surface.900',
-	// 		inverted: 'white',
-	// 		surface: {
-	// 			base: 'white',
-	// 			muted: 'surface.50',
-	// 			elevated: 'surface.100',
-	// 			accented: 'surface.200',
-	// 			inverted: 'surface.900',
-	// 		},
-	// 	},
-	// 	dark: {
-	// 		base: 'surface.700',
-	// 		dimmed: 'surface.400',
-	// 		muted: 'surface.500',
-	// 		toned: 'surface.600',
-	// 		highlighted: 'surface.900',
-	// 		inverted: 'white',
-	// 		surface: {
-	// 			base: 'surface.900',
-	// 			muted: 'surface.800',
-	// 			elevated: 'surface.800',
-	// 			accented: 'surface.700',
-	// 			inverted: 'white',
-	// 		},
-	// 	},
-	// });
+	const theme_plugin: Plugin = {
+		name: 'vite-plugin-uisv',
+		enforce: 'pre',
+		async configResolved() {
+			const path = resolve('node_modules/uisv/theme.js');
+
+			console.log(await write(path, `export const button = {}`));
+		},
+		resolveId(source, importer, options) {
+			if (source === '$build') return resolve('node_modules/uisv/theme.js');
+		},
+	};
 
 	return [
 		uno_plugin({
@@ -217,8 +143,6 @@ export function uisv(options: PluginOptions) {
 						  background-color: var(--colors-inverted);
 						}
 
-
-
             .dark {
               ${variables}
             }
@@ -236,8 +160,6 @@ export function uisv(options: PluginOptions) {
 				}),
 				presetWebFonts(_opts.fonts),
 				presetIcons(_opts.icons),
-				// semantics_preset,
-				// theme_preset,
 			],
 			transformers: [transformerVariantGroup(), transformerCompileClass(), transformerDirectives()],
 			extendTheme: (theme) => {

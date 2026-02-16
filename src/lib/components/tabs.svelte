@@ -4,7 +4,6 @@
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
 	import { type Component, type Snippet } from 'svelte';
-	import Icon from '@iconify/svelte';
 	import { ElementRect } from 'runed';
 
 	export type TabItem =
@@ -241,6 +240,6 @@
 	{:else if isComponent(IconProp)}
 		<IconProp class={classes.icon({ class: ui.icon })} />
 	{:else if typeof IconProp === 'string'}
-		<Icon icon={IconProp} class={classes.icon({ class: ui.icon })} />
+		<div class={classes.icon({ class: [IconProp, ui.icon] })}></div>
 	{/if}
 {/snippet}
