@@ -7,7 +7,7 @@
 	"homepage": "https://uisv.pages.dev",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && bun prepack",
+		"build": "vite build && prepack",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"prepack": "svelte-kit sync && svelte-package && publint",
