@@ -19,7 +19,7 @@ jobs:
           node-version: lts/*
           registry-url: 'https://registry.npmjs.org'
       - run: pnpm i
-      - run: pnpm publish
+      - run: pnpm pack
       - run: npm publish --provenance --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
