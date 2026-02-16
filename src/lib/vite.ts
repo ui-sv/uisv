@@ -6,16 +6,13 @@ import {
 	presetWebFonts,
 	presetIcons,
 	presetWind4,
-	definePreset,
-	type Preset,
 } from 'unocss';
 import { type WebFontsOptions } from '@unocss/preset-web-fonts';
 import { defu } from 'defu';
 import type { PropColor } from './index.js';
 import { getColors } from 'theme-colors';
-import type { Plugin } from 'vite';
-import { dir, exists, write } from 'files';
-import { resolve } from 'node:path';
+// import type { Plugin } from 'vite';
+// import { resolve } from 'node:path';
 
 export type Colors = Record<string, string | Record<string, string>>;
 
@@ -90,18 +87,18 @@ export function uisv(options: PluginOptions) {
 		},
 	} as PluginOptions);
 
-	const theme_plugin: Plugin = {
-		name: 'vite-plugin-uisv',
-		enforce: 'pre',
-		async configResolved() {
-			const path = resolve('node_modules/uisv/theme.js');
+	// const theme_plugin: Plugin = {
+	// 	name: 'vite-plugin-uisv',
+	// 	enforce: 'pre',
+	// 	async configResolved() {
+	// 		const path = resolve('node_modules/uisv/theme.js');
 
-			console.log(await write(path, `export const button = {}`));
-		},
-		resolveId(source, importer, options) {
-			if (source === '$build') return resolve('node_modules/uisv/theme.js');
-		},
-	};
+	// 		console.log(await write(path, `export const button = {}`));
+	// 	},
+	// 	resolveId(source, importer, options) {
+	// 		if (source === '$build') return resolve('node_modules/uisv/theme.js');
+	// 	},
+	// };
 
 	return [
 		uno_plugin({
