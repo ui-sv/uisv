@@ -3,7 +3,7 @@
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { Popover, type PopoverContentProps } from 'bits-ui';
 	import { cn, tv } from 'tailwind-variants';
-	import Button, { type ButtonProps } from './button.svelte';
+	import { type ButtonProps,Button } from '$lib/index.js';
 	import type { PropColor } from '$lib/index.js';
 
 	export type PopoverContentSnippet = {
