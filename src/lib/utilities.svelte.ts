@@ -64,3 +64,5 @@ export function useElementRects(
 
 	return rects;
 }
+
+export function defineShortcuts(config: Record<string, () => unknown>) {}

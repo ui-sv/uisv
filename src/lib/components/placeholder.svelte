@@ -8,7 +8,7 @@
 <svg
 	{...rest}
 	class={cx(
-		'inset-0 w-full stroke-surface/10 border border-dashed border-surface rounded-md',
+		'inset-0 w-full stroke-surface-elevated border border-dashed border-surface-accented rounded-md',
 		klass,
 	)}
 	fill="none"

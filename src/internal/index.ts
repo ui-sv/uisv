@@ -24,6 +24,7 @@ export const links: Links = {
 				Button: '',
 				Card: '',
 				Chip: '',
+				Collapsible: '',
 				Kbd: '',
 				Progress: '',
 				Placeholder: '',

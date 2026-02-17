@@ -3,9 +3,8 @@
 	import type { Component, Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
-	import { Time } from '@internationalized/date';
+	import { Time } from '$lib/date.js';
 
-	export { Time };
 	export { default as InputTime } from './input-time.svelte';
 
 	export type InputTimeProps = {

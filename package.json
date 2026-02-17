@@ -39,6 +39,11 @@
 			"types": "./dist/vite.d.ts",
 			"svelte": "./dist/vite.js",
 			"default": "./dist/vite.js"
+		},
+		"./date": {
+			"types": "./dist/date.d.ts",
+			"svelte": "./dist/date.js",
+			"default": "./dist/date.js"
 		}
 	},
 	"peerDependencies": {

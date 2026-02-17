@@ -1,6 +1,6 @@
 <script module lang="ts">
 	import { type Component, type Snippet } from 'svelte';
-	import { type PropColor } from '$lib/index.js';
+	import { isComponent, type PropColor } from '$lib/index.js';
 	import type { ClassNameValue } from 'tailwind-merge';
 	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
 	import { isSnippet } from '$lib/index.js';
@@ -24,6 +24,8 @@
 		iconposition?: 'left' | 'right';
 		/** Icon when `loading` is `false` */
 		icon?: string | Snippet | Component;
+		leadingicon?: string | Snippet | Component;
+		trailingicon?: string | Snippet | Component;
 		/** Route Location the link should navigate to when clicked on. */
 		href?: string;
 		label?: string;
@@ -49,6 +51,8 @@
 		ui?: {
 			base?: ClassNameValue;
 			icon?: ClassNameValue;
+			leadingicon?: ClassNameValue;
+			trailingicon?: ClassNameValue;
 		};
 		children?: Snippet;
 	};
@@ -75,9 +79,11 @@
 		href,
 		icon,
 		loading,
-		loadingicon,
+		loadingicon = 'i-lucide-loader-circle',
 		target,
 		type,
+		trailingicon,
+		leadingicon,
 	}: ButtonProps = $props();
 
 	let internal_loading = $state(false);
@@ -379,8 +385,8 @@
 {/if}
 
 {#snippet Content()}
-	{#if iconposition === 'left'}
-		{@render Icon()}
+	{#if iconposition === 'left' || leadingicon}
+		{@render Icon(is_loading ? loadingicon : leadingicon || icon, ui.leadingicon)}
 	{/if}
 
 	{#if label}
@@ -389,21 +395,21 @@
 		{@render children?.()}
 	{/if}
 
-	{#if iconposition !== 'left'}
-		{@render Icon()}
+	{#if iconposition !== 'left' || trailingicon}
+		{@render Icon(trailingicon || icon, ui.trailingicon)}
 	{/if}
 {/snippet}
 
-{#snippet Icon()}
-	{@const IconCom = is_loading ? loadingicon || '-ph-lucide-loader-circle' : icon}
-
-	{#if IconCom}
-		{#if typeof IconCom === 'string'}
-			<div class={variants.icon({ class: [is_loading && 'animate-spin', IconCom, ui.icon] })}></div>
-		{:else if isSnippet(IconCom)}
-			{@render IconCom()}
-		{:else}
-			<IconCom />
-		{/if}
+{#snippet Icon(IconProp?: string | Snippet | Component, classvalue?: ClassNameValue)}
+	{#if typeof IconProp === 'string'}
+		<div
+			class={variants.icon({
+				class: [is_loading && 'animate-spin', IconProp, ui.icon, classvalue],
+			})}
+		></div>
+	{:else if isSnippet(IconProp)}
+		{@render IconProp()}
+	{:else if isComponent(IconProp)}
+		<IconProp />
 	{/if}
 {/snippet}

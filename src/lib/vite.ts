@@ -25,7 +25,7 @@ export type PluginOptions = {
 	 * Colors as UnoCSS color name, hex color, or UnoCSS theme color object
 	 * @example
 	 * {
-	 *  primary: 'orange',
+	 *  primary: '#FF3E00',
 	 *  surface: 'neutral',
 	 *  info: '#00F',
 	 *  success: '#0F0',
@@ -67,7 +67,20 @@ export type PluginOptions = {
 export function uisv(options: PluginOptions) {
 	const _opts: PluginOptions = defu(options, {
 		colors: {
-			primary: 'orange',
+			primary: {
+				DEFAULT: '#FF3E00',
+				50: '#FFECE5',
+				100: '#FFD8CC',
+				200: '#FFB299',
+				300: '#FF8B66',
+				400: '#FF6533',
+				500: '#FF3E00',
+				600: '#CC3200',
+				700: '#992500',
+				800: '#661900',
+				900: '#330C00',
+				950: '#1A0600',
+			},
 			surface: 'neutral',
 			info: 'blue',
 			success: 'green',

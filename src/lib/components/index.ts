@@ -43,3 +43,6 @@ export * from './color-picker.svelte';
 export { default as ColorPicker } from './color-picker.svelte';
 export * from './select.svelte';
 export { default as Select } from './select.svelte';
+export * from './collapsible.svelte';
+export { default as Collapsible } from './collapsible.svelte';
+export { default as Placeholder } from './placeholder.svelte';
