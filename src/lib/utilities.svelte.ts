@@ -65,4 +65,22 @@ export function useElementRects(
 	return rects;
 }
 
-export function defineShortcuts(config: Record<string, () => unknown>) {}
+let uisv_usestyle_id = 0;
+/**
+ * Inject reactive style element in head.
+ * @param css string
+ */
+export function useStyle(css: MaybeGetter<string>) {
+	const id = `uisv_styletag_${++uisv_usestyle_id}`;
+
+	$effect(() => {
+		const el = (document.getElementById(id) || document.createElement('style')) as HTMLStyleElement;
+
+		if (!el.isConnected) {
+			el.id = id;
+			document.head.appendChild(el);
+		}
+
+		el.textContent = extract(css);
+	});
+}

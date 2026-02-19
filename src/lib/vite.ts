@@ -92,7 +92,9 @@ export function uisv(options: PluginOptions) {
 				sans: 'Public Sans:400,500,600',
 			},
 		},
-		icons: {},
+		icons: {
+			autoInstall: true,
+		},
 		theme: {
 			radius: {
 				base: `${options.radius || 0.375}rem`,

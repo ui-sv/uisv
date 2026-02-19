@@ -25,9 +25,11 @@ export const links: Links = {
 				Card: '',
 				Chip: '',
 				Collapsible: '',
+				Icon: 'A component to display any icon from Iconify or another component.',
 				Kbd: '',
 				Progress: '',
 				Placeholder: '',
+				Seperator: 'Separates content horizontally or vertically.',
 			},
 			Form: {
 				Checkbox: '',
