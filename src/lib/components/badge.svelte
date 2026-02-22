@@ -7,7 +7,7 @@
 	export type BadgeProps = {
 		label?: string;
 		color?: PropColor;
-		variant?: 'solid' | 'outline' | 'soft' | 'subtle';
+		variant?: Omit<PropVariant, 'none' | 'ghost'>;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		icon?: string | Snippet | Component;
 		trailingicon?: boolean;

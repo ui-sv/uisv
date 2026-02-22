@@ -1,5 +1,11 @@
 <script module lang="ts">
-	import { type PropColor, isSnippet, type ButtonProps, Button } from '$lib/index.js';
+	import {
+		type PropColor,
+		isSnippet,
+		type ButtonProps,
+		Button,
+		type PropVariant,
+	} from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
@@ -10,7 +16,7 @@
 		description?: string | Snippet;
 		icon?: string | Snippet | Component;
 		color?: PropColor;
-		variant?: 'solid' | 'outline' | 'soft' | 'subtle';
+		variant?: Omit<PropVariant, 'none' | 'ghost'>;
 		position?: 'bottom' | 'right';
 		actions?: ButtonProps[];
 		close?: boolean | ButtonProps;

@@ -1,6 +1,6 @@
 <script module lang="ts">
 	import { type Component, type Snippet } from 'svelte';
-	import { isComponent, type PropColor } from '$lib/index.js';
+	import { isComponent, type PropColor, type PropVariant } from '$lib/index.js';
 	import type { ClassNameValue } from 'tailwind-merge';
 	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
 	import { isSnippet } from '$lib/index.js';
@@ -37,7 +37,7 @@
 		/**
 		 * @defaultValue 'solid'
 		 */
-		variant?: 'link' | 'solid' | 'outline' | 'soft' | 'subtle' | 'ghost';
+		variant?: Omit<PropVariant, 'none'> | 'link';
 		// activevariant?: ButtonVariant;
 		/**
 		 * @defaultValue 'md'

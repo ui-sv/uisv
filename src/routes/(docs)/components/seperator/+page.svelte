@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Seperator from '$lib/components/seperator.svelte';
-	import { Placeholder, COLORS, type SeperatorProps } from '$lib/index.js';
+	import { COLORS, type SeperatorProps, Seperator } from '$lib/index.js';
 
 	let color = $state<(typeof COLORS)[number]>('primary');
 	let type = $state<SeperatorProps['type']>('solid');

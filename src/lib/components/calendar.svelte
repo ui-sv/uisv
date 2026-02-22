@@ -1,14 +1,14 @@
 <script lang="ts" module>
 	import type { Component, Snippet } from 'svelte';
 	import { tv } from 'tailwind-variants';
-	import { type PropColor, isSnippet } from '$lib/index.js';
+	import { type PropColor, type PropVariant, isSnippet } from '$lib/index.js';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { type DateValue, today } from '$lib/date.js';
 	import { Calendar, type CalendarRootProps } from 'bits-ui';
 
 	export type CalendarProps = CalendarRootProps & {
 		color?: PropColor;
-		variant?: 'solid' | 'outline' | 'soft' | 'subtle';
+		variant?: Omit<PropVariant, 'none' | 'ghost'>;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		ui?: {
 			base?: ClassNameValue;

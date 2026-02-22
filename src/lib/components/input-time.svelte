@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { type PropColor } from '$lib/index.js';
+	import { type PropColor, type PropVariant } from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
@@ -24,7 +24,7 @@
 		/**
 		 * @default outline
 		 */
-		variant?: 'outline' | 'soft' | 'subtle' | 'ghost' | 'none';
+		variant?: Omit<PropVariant, 'solid'>;
 		/**
 		 * @default md
 		 */

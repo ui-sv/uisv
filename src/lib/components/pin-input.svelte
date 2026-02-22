@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import type { PropColor } from '$lib/index.js';
+	import type { PropColor, PropVariant } from '$lib/index.js';
 	import { onMount } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
@@ -7,7 +7,7 @@
 	export type PinInputProps = {
 		value?: number[] | string[];
 		color?: PropColor;
-		variant?: 'outline' | 'soft' | 'subtle' | 'ghost' | 'none';
+		variant?: Omit<PropVariant, 'solid'>;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		length?: number;
 		autofocus?: boolean | number;
@@ -36,7 +36,7 @@
 		'Tab',
 		'Shift',
 		'Control',
-		'Meta'
+		'Meta',
 	];
 
 	let {
@@ -54,7 +54,7 @@
 		placeholder,
 		required,
 		type = 'text',
-		ui = {}
+		ui = {},
 	}: PinInputProps = $props();
 	const internal_id = $props.id();
 	let input_els = $state<HTMLInputElement[]>([]);
@@ -69,60 +69,60 @@
 					info: '',
 					success: '',
 					warning: '',
-					error: ''
+					error: '',
 				},
 				size: {
 					xs: { root: '', cell: 'size-6' },
 					sm: { root: '', cell: 'size-7' },
 					md: { root: '', cell: 'size-8' },
 					lg: { root: '', cell: 'size-9' },
-					xl: { root: '', cell: 'size-10' }
+					xl: { root: '', cell: 'size-10' },
 				},
 				variant: {
 					outline: {
-						cell: 'border border-surface-300 focus:(border-2)'
+						cell: 'border border-surface-300 focus:(border-2)',
 					},
 					soft: {
-						cell: 'bg-surface-50 hover:(bg-surface-100) focus:(bg-surface-100)'
+						cell: 'bg-surface-50 hover:(bg-surface-100) focus:(bg-surface-100)',
 					},
 					subtle: { cell: 'border border-surface-300 bg-surface-100 focus:(border-2)' },
 					ghost: { cell: 'hover:(bg-surface-100) focus:(bg-surface-100)' },
-					none: { cell: '' }
-				}
+					none: { cell: '' },
+				},
 			},
 			compoundVariants: [
 				{
 					variant: ['outline', 'subtle'],
 					color: 'primary',
-					class: { cell: 'focus:(border-primary-500)' }
+					class: { cell: 'focus:(border-primary-500)' },
 				},
 				{
 					variant: ['outline', 'subtle'],
 					color: 'surface',
-					class: { cell: 'focus:(border-surface-900)' }
+					class: { cell: 'focus:(border-surface-900)' },
 				},
 				{
 					variant: ['outline', 'subtle'],
 					color: 'info',
-					class: { cell: 'focus:(border-info-500)' }
+					class: { cell: 'focus:(border-info-500)' },
 				},
 				{
 					variant: ['outline', 'subtle'],
 					color: 'success',
-					class: { cell: 'focus:(border-success-500)' }
+					class: { cell: 'focus:(border-success-500)' },
 				},
 				{
 					variant: ['outline', 'subtle'],
 					color: 'warning',
-					class: { cell: 'focus:(border-warning-500)' }
+					class: { cell: 'focus:(border-warning-500)' },
 				},
 				{
 					variant: ['outline', 'subtle'],
 					color: 'error',
-					class: { cell: 'focus:(border-error-500)' }
-				}
-			]
-		})({ size, color, variant, class: ui.root })
+					class: { cell: 'focus:(border-error-500)' },
+				},
+			],
+		})({ size, color, variant, class: ui.root }),
 	);
 
 	onMount(() => {

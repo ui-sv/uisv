@@ -17,22 +17,24 @@
 		if (typeof name !== 'string') return (css_style = '');
 		const url = `https://api.iconify.design/${name.replace(/^i-/, '')}.svg`;
 		let svg = await (await fetch(url)).text();
-		css_style = `.${name.replace(':', '\\:')} {
-	    --un-icon: url('data:image/svg+xml,${svg
-				.replaceAll(/[\n\t]/g, '')
-				.replaceAll('"', '\"')
-				.replace('<', '%3C')
-				.replace('>', '%3E')}');
-		display: inline-block;
-		width: 1em;
-		height: 1em;
-		background-color: currentColor;
-		-webkit-mask-image: var(--un-icon);
-		mask-image: var(--un-icon);
-		-webkit-mask-repeat: no-repeat;
-		mask-repeat: no-repeat;
-		-webkit-mask-size: 100% 100%;
-		mask-size: 100% 100%;
+		css_style = `@layer components {
+		.${name.replace(':', '\\:')} {
+   	        --un-icon: url('data:image/svg+xml,${svg
+							.replaceAll(/[\n\t]/g, '')
+							.replaceAll('"', '\"')
+							.replace('<', '%3C')
+							.replace('>', '%3E')}');
+    		display: inline-block;
+    		width: 1em;
+    		height: 1em;
+    		background-color: currentColor;
+    		-webkit-mask-image: var(--un-icon);
+    		mask-image: var(--un-icon);
+    		-webkit-mask-repeat: no-repeat;
+    		mask-repeat: no-repeat;
+    		-webkit-mask-size: 100% 100%;
+    		mask-size: 100% 100%;
+     	}
 	}`;
 	}
 

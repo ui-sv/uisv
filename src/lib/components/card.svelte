@@ -1,4 +1,5 @@
 <script module lang="ts">
+	import type { PropVariant } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
@@ -7,7 +8,7 @@
 		children: Snippet;
 		header?: Snippet;
 		footer?: Snippet;
-		variant?: 'solid' | 'outline' | 'soft' | 'subtle';
+		variant?: Omit<PropVariant, 'none' | 'ghost'>;
 		ui?: {
 			base?: ClassNameValue;
 			header?: ClassNameValue;
@@ -26,28 +27,28 @@
 				base: 'rounded overflow-hidden',
 				header: 'p-4 sm:px-6',
 				content: 'p-4 sm:p-6',
-				footer: 'p-4 sm:px-6'
+				footer: 'p-4 sm:px-6',
 			},
 			variants: {
 				variant: {
 					solid: {
 						base: 'bg-surface-900 text-surface-50',
 						header: 'border-transparent',
-						footer: 'border-transparent'
+						footer: 'border-transparent',
 					},
 					outline: {
-						base: 'border border-surface-300 divide-y divide-surface-300'
+						base: 'border border-surface-300 divide-y divide-surface-300',
 					},
 					soft: {
-						base: 'bg-surface-50 divide-y divide-surface-300'
+						base: 'bg-surface-50 divide-y divide-surface-300',
 					},
 					subtle: {
-						base: 'bg-surface-50 border-surface-300 border divide-y divide-surface-300'
-					}
-				}
+						base: 'bg-surface-50 border-surface-300 border divide-y divide-surface-300',
+					},
+				},
 			},
-			compoundVariants: []
-		})({ variant })
+			compoundVariants: [],
+		})({ variant }),
 	);
 </script>
 

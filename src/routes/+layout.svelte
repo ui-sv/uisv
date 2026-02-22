@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ModeWatcher, toggleMode, mode } from 'mode-watcher';
+	import { ModeWatcher } from 'mode-watcher';
 	import { page } from '$app/state';
 	import { Button } from '$lib/index.js';
 	import 'virtual:uno.css';

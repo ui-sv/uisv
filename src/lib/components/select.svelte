@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import type { PropColor } from '$lib/index.js';
+	import type { PropColor, PropVariant } from '$lib/index.js';
 	import { Select } from 'bits-ui';
 	import type { Component, Snippet } from 'svelte';
 	import { tv } from 'tailwind-variants';
@@ -18,7 +18,7 @@
 		item?: Snippet<[{ item: SelectItem<T> }]>;
 		color?: PropColor;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-		variant?: 'outline' | 'soft' | 'subtle' | 'ghost' | 'none';
+		variant?: Omit<PropVariant, 'solid'>;
 		highlight?: boolean;
 		placeholder?: string;
 	} & (

@@ -1,9 +1,9 @@
 <script module lang="ts">
-	import type { PropColor } from '$lib/index.js';
+	import { type PropColor, isComponent, isSnippet } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
-	import type { Component } from 'vitest-browser-svelte';
+	import type { Component } from 'svelte';
 
 	export type SeperatorProps = {
 		label?: string | Snippet<[ClassNameValue]> | Component;
@@ -23,8 +23,6 @@
 </script>
 
 <script lang="ts">
-	import { isComponent, isSnippet } from '$lib/utilities.svelte.js';
-
 	let {
 		label,
 		icon,
