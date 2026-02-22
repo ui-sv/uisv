@@ -51,3 +51,5 @@ export * from './seperator.svelte';
 export { default as Seperator } from './seperator.svelte';
 export * from './icon.svelte';
 export { default as Icon } from './icon.svelte';
+export * from './breadcrumb.svelte';
+export { default as Breadcrumb } from './breadcrumb.svelte';

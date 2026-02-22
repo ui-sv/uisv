@@ -43,7 +43,7 @@ export const links: Links = {
 				Switch: '',
 			},
 			// Data: {},
-			Navigation: { Tabs: 'A set of tab panels that are displayed one at a time.' },
+			Navigation: { Breadcrumb: '', Tabs: 'A set of tab panels that are displayed one at a time.' },
 			Overlay: { Popover: '' },
 		},
 	},
