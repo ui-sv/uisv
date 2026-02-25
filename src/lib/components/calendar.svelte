@@ -8,7 +8,7 @@
 
 	export type CalendarProps = CalendarRootProps & {
 		color?: PropColor;
-		variant?: Omit<PropVariant, 'none' | 'ghost'>;
+		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		ui?: {
 			base?: ClassNameValue;

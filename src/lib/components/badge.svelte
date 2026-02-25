@@ -1,13 +1,13 @@
 <script lang="ts" module>
 	import type { Component, Snippet } from 'svelte';
 	import { tv } from 'tailwind-variants';
-	import { type PropColor, isSnippet } from '$lib/index.js';
+	import { type PropColor, type PropVariant, isSnippet } from '$lib/index.js';
 	import type { ClassNameValue } from 'tailwind-merge';
 
 	export type BadgeProps = {
 		label?: string;
 		color?: PropColor;
-		variant?: Omit<PropVariant, 'none' | 'ghost'>;
+		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		icon?: string | Snippet | Component;
 		trailingicon?: boolean;
@@ -76,22 +76,22 @@
 				{
 					color: 'info',
 					variant: 'solid',
-					class: 'bg-blue-500',
+					class: 'bg-info-500',
 				},
 				{
 					color: 'success',
 					variant: 'solid',
-					class: 'bg-green-500',
+					class: 'bg-success-500',
 				},
 				{
 					color: 'error',
 					variant: 'solid',
-					class: 'bg-red-500',
+					class: 'bg-error-500',
 				},
 				{
 					color: 'warning',
 					variant: 'solid',
-					class: 'bg-yellow-500',
+					class: 'bg-warning-500',
 				},
 
 				{
@@ -107,22 +107,22 @@
 				{
 					color: 'info',
 					variant: 'outline',
-					class: 'border-blue-300 text-blue-500',
+					class: 'border-info-300 text-info-500',
 				},
 				{
 					color: 'success',
 					variant: 'outline',
-					class: 'border-green-300 text-green-500',
+					class: 'border-green-300 text-success-500',
 				},
 				{
 					color: 'error',
 					variant: 'outline',
-					class: 'border-red-300 text-red-500',
+					class: 'border-error-300 text-error-500',
 				},
 				{
 					color: 'warning',
 					variant: 'outline',
-					class: 'border-yellow-300 text-yellow-500',
+					class: 'border-warning-300 text-warning-500',
 				},
 
 				{
@@ -138,22 +138,22 @@
 				{
 					color: 'info',
 					variant: 'soft',
-					class: 'bg-blue-100 text-blue-500',
+					class: 'bg-info-100 text-info-500',
 				},
 				{
 					color: 'success',
 					variant: 'soft',
-					class: 'bg-green-100 text-green-500',
+					class: 'bg-success-100 text-success-500',
 				},
 				{
 					color: 'error',
 					variant: 'soft',
-					class: 'bg-red-100 text-red-500',
+					class: 'bg-error-100 text-error-500',
 				},
 				{
 					color: 'warning',
 					variant: 'soft',
-					class: 'bg-yellow-100 text-yellow-500 ',
+					class: 'bg-warning-100 text-warning-500 ',
 				},
 
 				{
@@ -169,22 +169,22 @@
 				{
 					color: 'info',
 					variant: 'subtle',
-					class: 'bg-blue-50 text-blue-600 border-blue-200',
+					class: 'bg-info-50 text-info-600 border-info-200',
 				},
 				{
 					color: 'success',
 					variant: 'subtle',
-					class: 'bg-green-100 text-green-600 border-green-300',
+					class: 'bg-success-100 text-success-600 border-success-300',
 				},
 				{
 					color: 'error',
 					variant: 'subtle',
-					class: 'bg-red-50 text-red-600 border-red-200',
+					class: 'bg-error-50 text-error-600 border-error-200',
 				},
 				{
 					color: 'warning',
 					variant: 'subtle',
-					class: 'bg-yellow-50 text-yellow-600 border-yellow-300',
+					class: 'bg-warning-50 text-warning-600 border-warning-300',
 				},
 			],
 		})({ variant, size, color });

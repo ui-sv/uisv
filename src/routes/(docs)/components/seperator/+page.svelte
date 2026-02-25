@@ -4,7 +4,7 @@
 	let color = $state<(typeof COLORS)[number]>('primary');
 	let type = $state<SeperatorProps['type']>('solid');
 	let label = $state('');
-	let icon = $state('i-ph:rocket');
+	let icon = $state('i-lucide:rocket');
 </script>
 
 <div class="space-y-4 p-4">

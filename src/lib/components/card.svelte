@@ -8,7 +8,7 @@
 		children: Snippet;
 		header?: Snippet;
 		footer?: Snippet;
-		variant?: Omit<PropVariant, 'none' | 'ghost'>;
+		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		ui?: {
 			base?: ClassNameValue;
 			header?: ClassNameValue;

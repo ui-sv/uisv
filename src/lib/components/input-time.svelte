@@ -24,7 +24,7 @@
 		/**
 		 * @default outline
 		 */
-		variant?: Omit<PropVariant, 'solid'>;
+		variant?: Exclude<PropVariant, 'solid'>;
 		/**
 		 * @default md
 		 */

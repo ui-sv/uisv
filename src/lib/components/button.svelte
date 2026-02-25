@@ -37,7 +37,7 @@
 		/**
 		 * @defaultValue 'solid'
 		 */
-		variant?: Omit<PropVariant, 'none'> | 'link';
+		variant?: Exclude<PropVariant, 'none'> | 'link';
 		// activevariant?: ButtonVariant;
 		/**
 		 * @defaultValue 'md'
@@ -138,32 +138,32 @@
 				{
 					color: 'primary',
 					variant: 'solid',
-					class: 'bg-primary-500 hover:(bg-primary-400)',
+					class: 'bg-primary-500 hover:bg-primary-400',
 				},
 				{
 					color: 'surface',
 					variant: 'solid',
-					class: 'bg-surface-inverted text-inverted hover:(bg-toned)',
+					class: 'bg-surface-inverted text-inverted hover:bg-toned',
 				},
 				{
 					color: 'info',
 					variant: 'solid',
-					class: 'bg-info-500 hover:(bg-info-400)',
+					class: 'bg-info-500 hover:bg-info-400',
 				},
 				{
 					color: 'success',
 					variant: 'solid',
-					class: 'bg-success-500 hover:(bg-success-400)',
+					class: 'bg-success-500 hover:bg-success-400',
 				},
 				{
 					color: 'error',
 					variant: 'solid',
-					class: 'bg-error-500 hover:(bg-error-400)',
+					class: 'bg-error-500 hover:bg-error-400',
 				},
 				{
 					color: 'warning',
 					variant: 'solid',
-					class: 'bg-warning-500 hover:(bg-warning-400)',
+					class: 'bg-warning-500 hover:bg-warning-400',
 				},
 
 				{
@@ -171,7 +171,7 @@
 					variant: 'outline',
 					class: {
 						base: [
-							'border-primary/50 text-primary-500 hover:(bg-primary-50)',
+							'border-primary/50 text-primary-500 hover:bg-primary-50',
 							'dark:hover:bg-primary-950',
 						],
 					},
@@ -190,7 +190,7 @@
 					color: 'info',
 					variant: 'outline',
 					class: {
-						base: ['border-info/50 text-blue-500 hover:bg-info/10', 'dark:hover:bg-info-950'],
+						base: ['border-info/50 text-info-500 hover:bg-info/10', 'dark:hover:bg-info-950'],
 					},
 				},
 				{
@@ -207,7 +207,7 @@
 					color: 'error',
 					variant: 'outline',
 					class: {
-						base: ['border-red/50 text-red-500 hover:bg-red/10', 'dark:hover:bg-red-950'],
+						base: ['border-error/50 text-error-500 hover:bg-error/10', 'dark:hover:bg-error-950'],
 					},
 				},
 				{
@@ -215,7 +215,7 @@
 					variant: 'outline',
 					class: {
 						base: [
-							'border-warning/50 text-warning-500 hover:(bg-warning/10)',
+							'border-warning/50 text-warning-500 hover:bg-warning/10',
 							'dark:hover:bg-warning-950',
 						],
 					},
@@ -224,125 +224,125 @@
 				{
 					color: 'primary',
 					variant: 'soft',
-					class: 'bg-primary-50 text-primary-500 hover:(bg-primary-100)',
+					class: 'bg-primary-50 text-primary-500 hover:bg-primary-100',
 				},
 				{
 					color: 'surface',
 					variant: 'soft',
-					class: 'bg-surface-100 text-surface-800 hover:(bg-surface-200)',
+					class: 'bg-surface-100 text-surface-800 hover:bg-surface-200',
 				},
 				{
 					color: 'info',
 					variant: 'soft',
-					class: 'bg-blue-100 text-blue-500 hover:(bg-blue-50)',
+					class: 'bg-info-100 text-info-500 hover:bg-info-50',
 				},
 				{
 					color: 'success',
 					variant: 'soft',
-					class: 'bg-green-100 text-green-500 hover:(bg-green-50)',
+					class: 'bg-success-100 text-success-500 hover:bg-success-50',
 				},
 				{
 					color: 'error',
 					variant: 'soft',
-					class: 'bg-red-100 text-red-500 hover:(bg-red-50)',
+					class: 'bg-error-100 text-error-500 hover:bg-error-50',
 				},
 				{
 					color: 'warning',
 					variant: 'soft',
-					class: 'bg-yellow-100 text-yellow-500 hover:(bg-yellow-50)',
+					class: 'bg-warning-100 text-warning-500 hover:bg-warning-50',
 				},
 
 				{
 					color: 'primary',
 					variant: 'subtle',
-					class: 'bg-primary-50 text-primary-500 border-primary-200 hover:(bg-primary-100)',
+					class: 'bg-primary-50 text-primary-500 border-primary-200 hover:bg-primary-100',
 				},
 				{
 					color: 'surface',
 					variant: 'subtle',
-					class: 'bg-surface-50 text-surface-800 border-surface-300 hover:(bg-surface-100)',
+					class: 'bg-surface-50 text-surface-800 border-surface-300 hover:bg-surface-100',
 				},
 				{
 					color: 'info',
 					variant: 'subtle',
-					class: 'bg-blue-50 text-blue-600 border-blue-200 hover:(bg-blue-100)',
+					class: 'bg-info-50 text-info-600 border-info-200 hover:bg-info-100',
 				},
 				{
 					color: 'success',
 					variant: 'subtle',
-					class: 'bg-green-100 text-green-600 border-green-300 hover:(bg-green-100)',
+					class: 'bg-success-100 text-success-600 border-success-300 hover:bg-success-100',
 				},
 				{
 					color: 'error',
 					variant: 'subtle',
-					class: 'bg-red-50 text-red-600 border-red-200 hover:(bg-red-100)',
+					class: 'bg-error-50 text-error-600 border-error-200 hover:bg-error-100',
 				},
 				{
 					color: 'warning',
 					variant: 'subtle',
-					class: 'bg-yellow-50 text-yellow-600 border-yellow-300 hover:(bg-yellow-100)',
+					class: 'bg-warning-50 text-warning-600 border-warning-300 hover:bg-warning-100',
 				},
 
 				{
 					color: 'primary',
 					variant: 'ghost',
-					class: 'text-primary-500 hover:(bg-primary-100)',
+					class: 'text-primary-500 hover:bg-primary-100',
 				},
 				{
 					color: 'surface',
 					variant: 'ghost',
-					class: 'text-surface-inverted hover:(bg-surface-elevated text-surface-inverted)',
+					class: 'text-surface-inverted hover-surface-elevated text-surface-inverted)',
 				},
 				{
 					color: 'info',
 					variant: 'ghost',
-					class: 'text-blue-600 hover:(bg-blue-100)',
+					class: 'text-info-600 hover:bg-info-100',
 				},
 				{
 					color: 'success',
 					variant: 'ghost',
-					class: 'text-green-600 hover:(bg-green-100)',
+					class: 'text-success-600 hover:bg-success-100',
 				},
 				{
 					color: 'error',
 					variant: 'ghost',
-					class: 'text-red-600 hover:(bg-red-100)',
+					class: 'text-error-600 hover:bg-error-100',
 				},
 				{
 					color: 'warning',
 					variant: 'ghost',
-					class: 'text-yellow-600 hover:(bg-yellow-100)',
+					class: 'text-warning-600 hover:bg-warning-100',
 				},
 
 				{
 					color: 'primary',
 					variant: 'link',
-					class: 'text-primary-500 hover:(text-primary-400)',
+					class: 'text-primary-500 hover:text-primary-400',
 				},
 				{
 					color: 'surface',
 					variant: 'link',
-					class: 'text-muted hover:(text-surface-inverted)',
+					class: 'text-muted hover:text-surface-inverted',
 				},
 				{
 					color: 'info',
 					variant: 'link',
-					class: 'text-blue-500 hover:(text-blue-400)',
+					class: 'text-info-500 hover:text-info-400',
 				},
 				{
 					color: 'success',
 					variant: 'link',
-					class: 'text-green-500 hover:(text-green-400)',
+					class: 'text-success-500 hover:text-success-400',
 				},
 				{
 					color: 'error',
 					variant: 'link',
-					class: 'text-red-500 hover:(text-red-400)',
+					class: 'text-error-500 hover:text-error-400',
 				},
 				{
 					color: 'warning',
 					variant: 'link',
-					class: 'text-yellow-500 hover:(text-yellow-400)',
+					class: 'text-warning-500 hover:text-warning-400',
 				},
 			],
 		})({ variant, color, size, block, disabled: disabled || is_loading }),

@@ -51,10 +51,7 @@ export * from './seperator.svelte';
 export { default as Seperator } from './seperator.svelte';
 export * from './icon.svelte';
 export { default as Icon } from './icon.svelte';
-<<<<<<< HEAD
 export * from './breadcrumb.svelte';
 export { default as Breadcrumb } from './breadcrumb.svelte';
-=======
 export * from './input-number.svelte';
 export { default as InputNumber } from './input-number.svelte';
->>>>>>> b66ae9e (shared variants type; draft input number component;)

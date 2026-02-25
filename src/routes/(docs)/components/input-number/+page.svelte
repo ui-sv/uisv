@@ -34,5 +34,5 @@
 		</select>
 	</div>
 
-	<InputNumber {variant} {color} {size} placeholder="Type something up..." />
+	<InputNumber {variant} {color} {size} placeholder="Enter a number" />
 </div>

@@ -8,7 +8,7 @@
 		children?: Snippet;
 		value?: string;
 		color?: PropColor;
-		variant?: Omit<PropVariant, 'none' | 'ghost'>;
+		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		size?: 'sm' | 'md' | 'lg';
 		class?: ClassNameValue;
 	};

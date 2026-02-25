@@ -16,7 +16,7 @@
 		description?: string | Snippet;
 		icon?: string | Snippet | Component;
 		color?: PropColor;
-		variant?: Omit<PropVariant, 'none' | 'ghost'>;
+		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		position?: 'bottom' | 'right';
 		actions?: ButtonProps[];
 		close?: boolean | ButtonProps;

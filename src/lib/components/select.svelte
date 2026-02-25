@@ -18,7 +18,7 @@
 		item?: Snippet<[{ item: SelectItem<T> }]>;
 		color?: PropColor;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-		variant?: Omit<PropVariant, 'solid'>;
+		variant?: Exclude<PropVariant, 'solid'>;
 		highlight?: boolean;
 		placeholder?: string;
 	} & (

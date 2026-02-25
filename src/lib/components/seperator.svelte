@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { type PropColor, isComponent, isSnippet } from '$lib/index.js';
+	import { Icon, type PropColor, isComponent, isSnippet } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
@@ -7,7 +7,7 @@
 
 	export type SeperatorProps = {
 		label?: string | Snippet<[ClassNameValue]> | Component;
-		icon?: string | Snippet<[ClassNameValue]> | Component;
+		icon?: string | Component;
 		color?: PropColor;
 		type?: 'dashed' | 'solid' | 'dotted';
 		children?: Snippet;
@@ -194,13 +194,8 @@
 	<span class={variants.border({ class: ui.border })}></span>
 
 	{#if icon || label || children}
-		{#if typeof icon === 'string' && icon.length > 0}
-			<div class={variants.icon({ class: [icon, ui.icon] })}></div>
-		{:else if isSnippet(icon)}
-			{@render icon()}
-		{:else if isComponent(icon)}
-			{@const IconCom = icon}
-			<IconCom class={variants.icon({ class: ui.icon })} />
+		{#if icon}
+			<Icon name={icon} class={variants.icon({})} />
 		{:else if typeof label === 'string' && label.length > 0}
 			<span class={variants.label({ class: ui.label })}>{label}</span>
 		{:else if isSnippet(label)}

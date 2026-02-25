@@ -2,6 +2,7 @@
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import type { Component } from 'svelte';
 	import { useStyle, isComponent } from '$lib/index.js';
+	import { useDebounce, watch } from 'runed';
 
 	export type IconProps = SvelteHTMLElements['base'] & {
 		name: string | Component;
@@ -13,10 +14,11 @@
 
 	let css_style = $state('');
 
-	async function resolve() {
+	const resolve = useDebounce(async () => {
 		if (typeof name !== 'string') return (css_style = '');
 		const url = `https://api.iconify.design/${name.replace(/^i-/, '')}.svg`;
 		let svg = await (await fetch(url)).text();
+		if (svg === 'Not found') return (css_style = '');
 		css_style = `@layer components {
 		.${name.replace(':', '\\:')} {
    	        --un-icon: url('data:image/svg+xml,${svg
@@ -36,12 +38,14 @@
     		mask-size: 100% 100%;
      	}
 	}`;
-	}
-
-	$effect(() => {
-		name;
-		resolve();
 	});
+
+	watch(
+		() => name,
+		() => {
+			resolve();
+		},
+	);
 
 	useStyle(() => css_style);
 </script>
