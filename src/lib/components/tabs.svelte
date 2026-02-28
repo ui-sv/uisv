@@ -70,7 +70,7 @@
 			slots: {
 				root: '',
 				list: 'flex relative p-1',
-				item: 'flex items-center justify-center text-muted data-[state="inactive"]:hover:(text-highlighted) font-medium z-1 transition-all',
+				item: 'flex items-center justify-center text-muted data-[state="inactive"]:hover:text-highlighted font-medium z-1 transition-all',
 				icon: '',
 				content: 'mt-2',
 				indicator: 'absolute z-0 transition-all duration-200 rounded-md w---width',
@@ -79,7 +79,7 @@
 				variant: {
 					pill: {
 						list: 'bg-surface-elevated rounded-lg',
-						item: 'flex-1 data-[state="active"]:(text-inverted)',
+						item: 'flex-1 data-[state="active"]:text-inverted',
 						trigger: 'flex-1',
 						indicator: 'rounded-md shadow-xs',
 					},

@@ -55,22 +55,22 @@
 			variants: {
 				color: {
 					primary: {
-						trigger: 'outline-primary focus:(border-primary)',
+						trigger: 'outline-primary focus:border-primary',
 					},
 					surface: {
-						trigger: 'outline-surface focus:(border-surface)',
+						trigger: 'outline-surface focus:border-surface)',
 					},
 					info: {
-						trigger: 'outline-info focus:(border-info)',
+						trigger: 'outline-info focus:border-info',
 					},
 					success: {
-						trigger: 'outline-success focus:(border-success)',
+						trigger: 'outline-success focus:border-success',
 					},
 					warning: {
-						trigger: 'outline-warning focus:(border-warning)',
+						trigger: 'outline-warning focus:border-warning',
 					},
 					error: {
-						trigger: 'outline-error focus:(border-error)',
+						trigger: 'outline-error focus:border-error',
 					},
 				},
 				size: {

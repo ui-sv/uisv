@@ -5,7 +5,7 @@
 	import { useDebounce, watch } from 'runed';
 
 	export type IconProps = SvelteHTMLElements['base'] & {
-		name: string | Component;
+		name?: string | Component;
 	};
 </script>
 

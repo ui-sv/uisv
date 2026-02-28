@@ -1,9 +1,8 @@
 <script module lang="ts">
-	import { type PropColor, isComponent, isSnippet } from '$lib/index.js';
-	import type { Snippet } from 'svelte';
+	import { type PropColor, Icon } from '$lib/index.js';
+	import type { Snippet, Component } from 'svelte';
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
-	import type { Component } from 'vitest-browser-svelte';
 
 	export type SwitchProps = {
 		value?: boolean;
@@ -11,9 +10,9 @@
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		disabled?: boolean;
 		loading?: boolean;
-		loadingicon?: string | Snippet | Component;
-		uncheckedicon?: string | Snippet | Component;
-		checkedicon?: string | Snippet | Component;
+		loadingicon?: string | Component;
+		uncheckedicon?: string | Component;
+		checkedicon?: string | Component;
 		label?: string | Snippet;
 		description?: string | Snippet;
 		required?: boolean;
@@ -121,18 +120,15 @@
 		data-state={value ? 'checked' : 'unchecked'}
 		class={classes.container({ class: [loading && 'cursor-not-allowed', ui.thumb] })}
 		onclick={() => {
-			console.log('click');
-			if (loading) return;
+			if (loading || disabled) return;
 			value = !value;
 		}}
 	>
 		<span data-state={value ? 'checked' : 'unchecked'} class={classes.thumb({ class: ui.thumb })}>
-			{@render Icon(uncheckedicon, [(loading || value) && 'opacity-0'])}
-			{@render Icon(checkedicon, [(loading || !value) && 'opacity-0'])}
-			{@render Icon(loadingicon || 'i-lucide-loader-circle', [
-				'animate-spin',
-				!loading && 'opacity-0',
-			])}
+			<Icon
+				name={loading ? loadingicon : value ? checkedicon : uncheckedicon}
+				class={classes.icon({ class: [loading && 'animate-spin'] })}
+			/>
 		</span>
 	</button>
 
@@ -163,18 +159,6 @@
 	{/if}
 </div>
 
-{#snippet Icon(ico?: SwitchProps['checkedicon'], icon_class?: ClassNameValue)}
-	<div class={['absolute', icon_class]}>
-		{#if typeof ico === 'string'}
-			<div
-				data-state={value ? 'checked' : 'unchecked'}
-				class={classes.icon({ class: [ico] })}
-			></div>
-		{:else if isSnippet(ico)}
-			{@render ico()}
-		{:else if isComponent(ico)}
-			{@const Iconn = ico}
-			<Iconn />
-		{/if}
-	</div>
+{#snippet icon(ico?: SwitchProps['checkedicon'], icon_class?: ClassNameValue)}
+	<div class={['absolute', icon_class]}></div>
 {/snippet}

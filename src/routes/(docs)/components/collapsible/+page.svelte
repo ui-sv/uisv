@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Collapsible, Placeholder, COLORS, type CollapsibleProps } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { Collapsible, Placeholder, type CollapsibleProps } from '$lib/index.js';
 
 	let color = $state<(typeof COLORS)[number]>('primary');
 	let variant = $state<CollapsibleProps['variant']>('subtle');

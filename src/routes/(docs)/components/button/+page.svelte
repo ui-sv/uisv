@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Button, COLORS, type ButtonProps } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { Button, type ButtonProps } from '$lib/index.js';
 	import { pascalCase } from 'scule';
 
 	const BUTTON_VARIANTS = ['link', 'solid', 'outline', 'soft', 'subtle', 'ghost'];

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { PinInput, type PinInputProps, COLORS } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { PinInput, type PinInputProps } from '$lib/index.js';
 
 	const VARIANTS: PinInputProps['variant'][] = ['outline', 'soft', 'subtle', 'ghost', 'none'];
 	const SIZES: PinInputProps['size'][] = ['xs', 'sm', 'md', 'lg', 'xl'];
@@ -27,21 +28,21 @@
 	<h1>number</h1>
 
 	{@render components({
-		type: 'number'
+		type: 'number',
 	})}
 
 	<h1>placeholder</h1>
 
 	{@render components({
 		type: 'number',
-		placeholder: '○'
+		placeholder: '○',
 	})}
 
 	<h1>mask</h1>
 
 	{@render components({
 		type: 'number',
-		mask: true
+		mask: true,
 	})}
 </div>
 

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Banner, type BannerProps, COLORS } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { Banner, type BannerProps } from '$lib/index.js';
 
 	const BUTTON_VARIANTS = ['solid', 'outline', 'soft', 'subtle'];
 

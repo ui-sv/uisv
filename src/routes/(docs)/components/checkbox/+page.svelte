@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Checkbox, type CheckboxProps, COLORS } from '$lib/index.js';
+	import { Checkbox, type CheckboxProps } from '$lib/index.js';
 
 	let value = $state(false);
 	let indicator = $state<CheckboxProps['indicator']>('start');
@@ -22,14 +22,14 @@
 	{@render components({
 		label: 'useSvelte',
 		description: "use svelte for it's greatness",
-		required: true
+		required: true,
 	})}
 
 	<h1>Custom icon</h1>
 	{@render components({
 		label: 'useSvelte',
 		description: "use svelte for it's greatness",
-		icon: 'i-lucide-award'
+		icon: 'i-lucide-award',
 	})}
 
 	<h1>indicator</h1>
@@ -42,7 +42,7 @@
 	{@render components({
 		label: 'useSvelte',
 		description: "use svelte for it's greatness",
-		indicator
+		indicator,
 	})}
 </div>
 

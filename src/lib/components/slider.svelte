@@ -35,7 +35,7 @@
 		step,
 		min,
 		max,
-		ui = {}
+		ui = {},
 	}: SliderProps<T> = $props();
 
 	const default_value = $derived.by(() => {
@@ -51,7 +51,7 @@
 		},
 		set(v: number[]) {
 			value = (v?.length !== 1 ? v : v[0]) as T;
-		}
+		},
 	});
 	const thumbs = $derived(slider_value.get()?.length ?? 1);
 	const classes = $derived.by(() =>
@@ -59,85 +59,85 @@
 			slots: {
 				root: [
 					'relative w-full flex rounded-full bg-neutral-300',
-					orientation === 'horizontal' ? 'items-center' : 'justify-center mx-1'
+					orientation === 'horizontal' ? 'items-center' : 'justify-center mx-1',
 				],
 				range: [
 					'rounded-full bg-neutral-200 p-0.5 relative transition',
-					orientation === 'horizontal' ? 'h-full' : 'w-full'
+					orientation === 'horizontal' ? 'h-full' : 'w-full',
 				],
 				thumb: 'bg-white rounded-full border-2 outline-none transition',
-				tick: ''
+				tick: '',
 			},
 			variants: {
 				color: {
 					primary: {
 						root: '',
 						range: 'bg-primary-500',
-						thumb: 'border-primary-500'
+						thumb: 'border-primary-500',
 					},
 					surface: {
 						range: ['bg-neutral-900'],
-						thumb: 'border-neutral-900'
+						thumb: 'border-neutral-900',
 					},
 					info: {
 						range: ['bg-info-500'],
-						thumb: 'border-info-500'
+						thumb: 'border-info-500',
 					},
 					success: {
 						range: ['bg-success-500'],
-						thumb: 'border-success-500'
+						thumb: 'border-success-500',
 					},
 					warning: {
 						range: ['bg-warning-500'],
-						thumb: 'border-warning-500'
+						thumb: 'border-warning-500',
 					},
 					error: {
 						range: ['bg-error-500'],
-						thumb: 'border-error-500'
-					}
+						thumb: 'border-error-500',
+					},
 				},
 				size: {
 					xs: {
 						root: [orientation === 'horizontal' ? 'h-1.5' : ''],
 						thumb: 'size-4',
-						tick: 'size-2.5'
+						tick: 'size-2.5',
 					},
 					sm: {
 						root: [orientation === 'horizontal' ? 'h-1.75' : ''],
 						thumb: 'size-4.5',
-						tick: 'size-3'
+						tick: 'size-3',
 					},
 					md: {
 						root: [orientation === 'horizontal' ? 'h-2' : 'w-2 h-48'],
 						thumb: 'size-5',
-						tick: 'size-3.5'
+						tick: 'size-3.5',
 					},
 					lg: {
 						root: [orientation === 'horizontal' ? 'h-2.5' : ''],
 						thumb: 'size-5.5',
-						tick: 'size-4'
+						tick: 'size-4',
 					},
 					xl: {
 						root: [orientation === 'horizontal' ? 'h-3' : 'w-3'],
 						thumb: 'size-6',
-						tick: 'size-4.5'
-					}
+						tick: 'size-4.5',
+					},
 				},
 				orientation: {
 					horizontal: {
 						root: '',
 						thumb: '',
-						tick: ''
+						tick: '',
 					},
 					vertical: {
 						root: '',
 						thumb: '',
-						tick: ''
-					}
-				}
+						tick: '',
+					},
+				},
 			},
-			compoundVariants: []
-		})({ color, size, orientation })
+			compoundVariants: [],
+		})({ color, size, orientation }),
 	);
 </script>
 
@@ -161,7 +161,7 @@
 					position="bottom"
 					class={[
 						'opacity-0 transition pointer-events-none text-sm shadow-md px-2 h-6 flex items-center rounded-md mt-1 border border-surface-200',
-						'data-[active=""]:(opacity-100) group-hover:(opacity-100)'
+						'data-[active=""]:opacity-100 group-hover:opacity-100',
 					]}
 				>
 					{slider_value.get()[index]}

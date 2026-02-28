@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { InputTime, COLORS, type InputTimeProps, type PropColor } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { InputTime, type InputTimeProps, type PropColor } from '$lib/index.js';
 
 	let variant = $state<InputTimeProps['variant']>('outline');
 	let color = $state<PropColor>('primary');

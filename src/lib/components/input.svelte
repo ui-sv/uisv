@@ -39,12 +39,12 @@
 		 */
 		highlight?: boolean;
 		value?: string;
-		icon?: string | Snippet | Component;
+		icon?: string | Component;
 		iconposition?: 'leading' | 'trailing';
-		leading?: string | Snippet | Component;
-		trailing?: string | Snippet | Component;
+		leading?: string | Component;
+		trailing?: string | Component;
 		loading?: boolean;
-		loadingicon?: string | Snippet | Component;
+		loadingicon?: string | Component;
 		mask?: string | MaskInputOptions;
 		ui?: {
 			root?: ClassNameValue;
@@ -57,6 +57,8 @@
 </script>
 
 <script lang="ts">
+	import Icon from './icon.svelte';
+
 	let {
 		type,
 		value = $bindable(),
@@ -83,8 +85,8 @@
 			slots: {
 				root: 'inline-flex items-center rounded transition-all ring ring-inset ring-transparent',
 				base: 'appearance-none outline-none placeholder:text-muted',
-				leading: 'text-muted',
-				trailing: 'text-muted',
+				leading: 'text-muted flex items-center',
+				trailing: 'text-muted flex items-center',
 				icon: '',
 			},
 			variants: {
@@ -135,7 +137,7 @@
 					soft: {
 						root: 'bg-surface-muted hover:bg-surface-elevated focus-within:bg-surface-elevated',
 					},
-					subtle: { root: 'ring ring-dimmed' },
+					subtle: { root: 'bg-surface-muted ring ring-dimmed' },
 					ghost: { root: 'hover:bg-surface-elevated focus-within:bg-surface-elevated' },
 					none: { root: '' },
 				},
@@ -234,16 +236,11 @@
 					{@const Leading = leading}
 					<Leading />
 				{/if}
-			{:else if typeof TrailingIcon === 'string'}
-				<div
-					class={variants.icon({
-						class: [loading && 'animate-spin', TrailingIcon, ui.icon],
-					})}
-				></div>
-			{:else if isSnippet(TrailingIcon)}
-				{@render TrailingIcon()}
-			{:else if isComponent(TrailingIcon)}
-				<TrailingIcon class={variants.icon({ class: [ui.icon] })} />
+			{:else}
+				<Icon
+					name={TrailingIcon}
+					class={variants.icon({ class: [loading ? 'animate-spin' : ''] })}
+				/>
 			{/if}
 		</span>
 	{/if}

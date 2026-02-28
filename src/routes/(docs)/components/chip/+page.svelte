@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Chip, Button, COLORS } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { Chip, Button } from '$lib/index.js';
 
 	let size = $state(8);
 	let text = $state('8');

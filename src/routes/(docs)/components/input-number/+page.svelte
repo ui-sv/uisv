@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { InputNumber, COLORS, type InputNumberProps, type PropColor } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { InputNumber, type InputNumberProps, type PropColor } from '$lib/index.js';
 
 	let variant = $state<InputNumberProps['variant']>('outline');
 	let color = $state<PropColor>('primary');

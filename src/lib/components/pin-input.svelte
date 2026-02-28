@@ -80,12 +80,12 @@
 				},
 				variant: {
 					outline: {
-						cell: 'border border-surface-300 focus:(border-2)',
+						cell: 'border border-surface-300 focus:border-2',
 					},
 					soft: {
 						cell: 'bg-surface-50 hover:bg-surface-100 focus:bg-surface-100',
 					},
-					subtle: { cell: 'border border-surface-300 bg-surface-100 focus:(border-2)' },
+					subtle: { cell: 'border border-surface-300 bg-surface-100 focus:border-2' },
 					ghost: { cell: 'hover:bg-surface-100 focus:bg-surface-100' },
 					none: { cell: '' },
 				},

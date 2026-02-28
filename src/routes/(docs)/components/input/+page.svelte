@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Input, COLORS, type InputProps, type PropColor } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { Input, type InputProps, type PropColor } from '$lib/index.js';
 	import { pascalCase } from 'scule';
 
 	let value = $state('');

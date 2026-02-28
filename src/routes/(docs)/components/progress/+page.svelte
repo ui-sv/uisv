@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Progress, type ProgressProps, COLORS } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { Progress, type ProgressProps } from '$lib/index.js';
 
 	let value = $state(0);
 	let max = $state(100);
@@ -26,22 +27,22 @@
 
 	{@render components({
 		max: ['Waiting...', 'Cloning...', 'Migrating...', 'Deploying...', 'Done!'],
-		status: true
+		status: true,
 	})}
 
 	<h1>animation</h1>
 
 	{@render components({
-		animation: 'carousel'
+		animation: 'carousel',
 	})}
 	{@render components({
-		animation: 'carousel-inverse'
+		animation: 'carousel-inverse',
 	})}
 	{@render components({
-		animation: 'elastic'
+		animation: 'elastic',
 	})}
 	{@render components({
-		animation: 'swing'
+		animation: 'swing',
 	})}
 </div>
 

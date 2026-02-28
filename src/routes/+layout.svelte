@@ -39,9 +39,7 @@
 						ui={{
 							base: [
 								'capitalize',
-								page.url.pathname.startsWith(`/${label}`)
-									? 'text-primary hover:(text-primary)'
-									: '',
+								page.url.pathname.startsWith(`/${label}`) ? 'text-primary hover:text-primary' : '',
 							],
 						}}
 					/>

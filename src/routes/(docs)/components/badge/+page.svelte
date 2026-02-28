@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Badge, type BadgeProps, COLORS } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { Badge, type BadgeProps } from '$lib/index.js';
 	import { pascalCase } from 'scule';
 
 	const BUTTON_VARIANTS = ['solid', 'outline', 'soft', 'subtle'];
@@ -36,7 +37,7 @@
 		</div>
 
 		{@render badges({
-			variant: button_variant
+			variant: button_variant,
 		})}
 	</div>
 
@@ -53,7 +54,7 @@
 
 		{@render badges({
 			size: button_size,
-			variant: button_variant
+			variant: button_variant,
 		})}
 	</div>
 
@@ -62,14 +63,14 @@
 	{@render badges({
 		icon: button_icon,
 		size: button_size,
-		variant: button_variant
+		variant: button_variant,
 	})}
 
 	{@render badges({
 		icon: button_icon,
 		size: button_size,
 		variant: button_variant,
-		trailingicon: true
+		trailingicon: true,
 	})}
 
 	<h1>Icon only</h1>

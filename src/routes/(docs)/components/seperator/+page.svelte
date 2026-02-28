@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { COLORS, type SeperatorProps, Seperator } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { type SeperatorProps, Seperator } from '$lib/index.js';
 
 	let color = $state<(typeof COLORS)[number]>('primary');
 	let type = $state<SeperatorProps['type']>('solid');

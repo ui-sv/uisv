@@ -1,3 +1,7 @@
+import type { PropColor } from '$lib/types.js';
+
+export const COLORS: PropColor[] = ['primary', 'surface', 'info', 'success', 'warning', 'error'];
+
 export type Links = Record<
 	string,
 	{
