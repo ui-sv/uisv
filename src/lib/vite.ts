@@ -170,17 +170,7 @@ export function uisv(options: PluginOptions) {
 				presetWebFonts(_opts.fonts),
 				presetIcons(_opts.icons),
 			],
-			transformers: [
-				transformerVariantGroup(),
-				transformerCompileClass(),
-				transformerDirectives(),
-				{
-					name: 'transformer-test',
-					transform(code, id, ctx) {
-						console.log(id);
-					},
-				},
-			],
+			transformers: [transformerVariantGroup(), transformerCompileClass(), transformerDirectives()],
 			extendTheme: (theme) => {
 				if (!('colors' in theme) || typeof theme.colors !== 'object') theme.colors = {};
 				const colors = theme.colors as Colors;

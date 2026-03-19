@@ -54,5 +54,5 @@
 	<div {...rest as SvelteHTMLElements['div']} class={[name, classname]}></div>
 {:else if isComponent(name)}
 	{@const Icon = name}
-	<Icon {...rest} />
+	<Icon {...rest} class={classname} />
 {/if}
