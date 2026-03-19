@@ -106,7 +106,7 @@
 					horizontal: {
 						container: 'flex-row',
 						checkbox:
-							'[&:not(:last-child)]:(-me-px ms-0) first-of-type:rounded-s-lg last-of-type:rounded-e-lg',
+							'[&:not(:last-child)]:-me-px [&:not(:last-child)]:ms-0 first-of-type:rounded-s-lg last-of-type:rounded-e-lg',
 					},
 					vertical: {
 						container: 'flex-col -space-y-px',

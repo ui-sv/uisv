@@ -9,8 +9,8 @@
 	class={cn(
 		'relative text-2xl text-highlighted font-bold mt-12 mb-6',
 		'scroll-mt-[calc(48px+45px+var(--ui-header-height))] lg:scroll-mt-[calc(48px+var(--ui-header-height))]',
-		'hover:[&>a>code]:(border-primary text-primary)',
-		'[&>a>code]:(transition-colors text-xl/7 font-bold border-dashed)',
+		'hover:[&>a>code]:border-primary hover:[&>a>code]:text-primary',
+		'[&>a>code]:transition-colors [&>a>code]:text-xl/7 [&>a>code]:font-bold [&>a>code]:border-dashed',
 		'[&>a]:focus-visible:outline-primary',
 		classes,
 	)}

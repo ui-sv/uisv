@@ -1,19 +1,18 @@
-<script>
-	import { COLORS, Select } from '$lib/index.js';
+<script lang="ts">
+	import { COLORS } from '$internal/index.js';
+	import { Select, type SelectProps } from '$lib/index.js';
+
+	type P = SelectProps<typeof ITEMS>;
 
 	const ITEMS = ['Vite', 'Svelte', 'UI Svelte', true, 69420];
 
 	let value = $state('Vite');
-	let variant = $state('outline');
-	let color = $state('primary');
-	let size = $state('md');
+	let variant = $state<P['variant']>('outline');
+	let color = $state<P['color']>('primary');
+	let size = $state<P['size']>('md');
 	let highlight = $state(false);
 </script>
 
---- description: what --- Usage Use the `bind:value` directive to control the value of the Select or
-the `defaultvalue` prop to set the initial value when you do not need to control its state.
-
-<!--
 <select bind:value={variant} name="variant" id="variant">
 	<option value="outline">outline</option>
 	<option value="soft">soft</option>
@@ -41,4 +40,4 @@ the `defaultvalue` prop to set the initial value when you do not need to control
 	<option value="xl">xl</option>
 </select>
 
-<Select bind:value {variant} {color} {highlight} {size} items={ITEMS}></Select> -->
+<Select bind:value {variant} {color} {highlight} {size} items={ITEMS}></Select>

@@ -170,42 +170,42 @@
 					color: 'primary',
 					variant: ['outline', 'subtle'],
 					class: {
-						root: 'focus-within:(ring-primary-500 ring-2)',
+						root: 'focus-within:ring-primary-500 focus-within:ring-2',
 					},
 				},
 				{
 					color: 'surface',
 					variant: ['outline', 'subtle'],
 					class: {
-						root: 'focus-within:(ring-surface-800 ring-2)',
+						root: 'focus-within:ring-surface-800 focus-within:ring-2',
 					},
 				},
 				{
 					color: 'info',
 					variant: ['outline', 'subtle'],
 					class: {
-						root: 'focus-within:(ring-info-500 ring-2)',
+						root: 'focus-within:ring-info-500 focus-within:ring-2',
 					},
 				},
 				{
 					color: 'success',
 					variant: ['outline', 'subtle'],
 					class: {
-						root: 'focus-within:(ring-success-500 ring-2)',
+						root: 'focus-within:ring-success-500 focus-within:ring-2',
 					},
 				},
 				{
 					color: 'warning',
 					variant: ['outline', 'subtle'],
 					class: {
-						root: 'focus-within:(ring-warning-500 ring-2)',
+						root: 'focus-within:ring-warning-500 focus-within:ring-2',
 					},
 				},
 				{
 					color: 'error',
 					variant: ['outline', 'subtle'],
 					class: {
-						root: 'focus-within:(ring-error-500 ring-2)',
+						root: 'focus-within:ring-error-500 focus-within:ring-2',
 					},
 				},
 			],

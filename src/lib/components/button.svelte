@@ -291,7 +291,7 @@
 				{
 					color: 'surface',
 					variant: 'ghost',
-					class: 'text-surface-inverted hover-surface-elevated text-surface-inverted)',
+					class: 'text-surface-inverted hover:bg-surface-elevated',
 				},
 				{
 					color: 'info',

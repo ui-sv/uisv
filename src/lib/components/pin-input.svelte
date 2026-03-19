@@ -7,7 +7,7 @@
 	export type PinInputProps = {
 		value?: number[] | string[];
 		color?: PropColor;
-		variant?: Omit<PropVariant, 'solid'>;
+		variant?: Exclude<PropVariant, 'solid'>;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		length?: number;
 		autofocus?: boolean | number;

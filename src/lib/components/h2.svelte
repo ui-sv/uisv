@@ -10,8 +10,8 @@
 		'relative text-2xl text-highlighted font-bold mt-12 mb-6',
 		'scroll-mt-[calc(48px+45px+var(--ui-header-height))] lg:scroll-mt-[calc(48px+var(--ui-header-height))]',
 		'[&>a]:focus-visible:outline-primary',
-		'[&>a>code]:(transition-colors border-dashed font-bold text-xl/7)',
-		'hover:[&>a>code]:(border-primary text-primary)',
+		'[&>a>code]:transition-colors [&>a>code]:border-dashed [&>a>code]:font-bold [&>a>code]:text-xl/7',
+		'hover:[&>a>code]:border-primary hover:[&>a>code]:text-primary',
 		classes,
 	)}
 >

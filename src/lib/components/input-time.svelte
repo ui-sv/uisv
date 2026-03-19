@@ -79,7 +79,7 @@
 				icon: '',
 				segment: [
 					'rounded text-center outline-hidden transition-all focus:bg-surface-accented shrink',
-					'aria-[valuetext="Empty"]:text-dimmed data-[segment="literal"]:(text-muted px-1) data-invalid:text-error data-disabled:(cursor-not-allowed opacity-75)',
+					'aria-[valuetext="Empty"]:text-dimmed data-[segment="literal"]:text-muted data-[segment="literal"]:px-1 data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75',
 				],
 			},
 			variants: {

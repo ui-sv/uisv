@@ -73,7 +73,7 @@
 					icon={nav_opened ? 'i-lucide-x' : 'i-lucide-menu'}
 					variant="ghost"
 					color="surface"
-					ui={{ base: 'md:(hidden)' }}
+					ui={{ base: 'md:hidden' }}
 					onclick={() => {
 						nav_opened = !nav_opened;
 					}}

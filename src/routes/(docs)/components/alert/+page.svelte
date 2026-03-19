@@ -14,7 +14,7 @@ set the title of the Alert.
 	/>
 
 	```svelte
-	<UAlert
+	<Alert
 		title="Heads up!"
 		description="You can change the primary color in your vite config."
 		icon="lucide:terminal"

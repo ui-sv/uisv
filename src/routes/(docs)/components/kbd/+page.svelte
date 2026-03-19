@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { COLORS, Kbd, type KbdProps } from '$lib/index.js';
+	import { COLORS } from '$internal/index.js';
+	import { Kbd, type KbdProps } from '$lib/index.js';
 
 	let value = $state('k');
 </script>

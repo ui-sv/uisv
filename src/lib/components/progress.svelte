@@ -30,8 +30,8 @@
 		value,
 		orientation = 'horizontal',
 		color = 'primary',
-		height = '',
-		ui = {}
+		height = 8,
+		ui = {},
 	}: ProgressProps = $props();
 
 	const percentage = $derived.by(() => {
@@ -53,46 +53,46 @@
 				root: 'relative w-full rounded-full overflow-hidden bg-surface-300',
 				status: '',
 				indicator: 'absolute transition-all rounded-full',
-				steps: ''
+				steps: '',
 			},
 			variants: {
 				color: {
 					primary: {
-						indicator: 'bg-primary-500'
+						indicator: 'bg-primary-500',
 					},
 					surface: {
-						indicator: 'bg-surface-500'
+						indicator: 'bg-surface-500',
 					},
 					info: {
-						indicator: 'bg-info-500'
+						indicator: 'bg-info-500',
 					},
 					success: {
-						indicator: 'bg-success-500'
+						indicator: 'bg-success-500',
 					},
 					warning: {
-						indicator: 'bg-warning-500'
+						indicator: 'bg-warning-500',
 					},
 					error: {
-						indicator: 'bg-error-500'
-					}
+						indicator: 'bg-error-500',
+					},
 				},
 				animation: {
 					swing: [indeterminate ? 'animate-[swing_2s_ease-in-out_infinite' : ''],
 					carousel: [indeterminate ? '' : ''],
 					'carousel-inverse': [indeterminate ? '' : ''],
-					elastic: [indeterminate ? '' : '']
-				}
+					elastic: [indeterminate ? '' : ''],
+				},
 			},
-			compoundVariants: []
+			compoundVariants: [],
 		})({
 			color,
-			animation: animation ?? 'swing'
-		})
+			animation: animation ?? 'swing',
+		}),
 	);
 </script>
 
 <div data-state-indeterminate={indeterminate}>
-	<div class={classes.root({ class: [ui.base] })} style:height={`${height || 8}px`}>
+	<div class={classes.root({ class: [ui.base] })} style:height={`${height}px`}>
 		<span class={classes.indicator({ class: ['h-full left-0'] })} style:width={`${percentage}%`}>
 		</span>
 	</div>
@@ -101,7 +101,7 @@
 		<p
 			class={[
 				'text-right transition',
-				value && value > 0 && max[value] ? 'text-primary-500' : 'text-surface-500'
+				value && value > 0 && max[value] ? 'text-primary-500' : 'text-surface-500',
 			]}
 		>
 			{(value && max[value]) || max[0]}

@@ -2,7 +2,7 @@ export * from './button.svelte';
 export { default as Button } from './button.svelte';
 export * from './input.svelte';
 export { default as Input } from './input.svelte';
-export * from './badge.svelte';
+export * from './input-time.svelte';
 export { default as InputTime } from './input-time.svelte';
 export * from './badge.svelte';
 export { default as Badge } from './badge.svelte';

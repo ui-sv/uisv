@@ -134,14 +134,14 @@ export function uisv(options: PluginOptions) {
 						if (typeof colors.surface !== 'object') return '';
 
 						const variables = `
-              --colors-DEFAULT: ${colors.surface['200']};
+              --colors-base: ${colors.surface['200']};
       				--colors-dimmed: ${colors.surface['500']};
       				--colors-muted: ${colors.surface['400']};
       				--colors-toned: ${colors.surface['300']};
       				--colors-highlighted: white;
       				--colors-inverted: ${colors.surface['900']};
 
-      				--colors-surface-DEFAULT: ${colors.surface['900']};
+      				--colors-surface-base: ${colors.surface['900']};
       				--colors-surface-muted: ${colors.surface['800']};
       				--colors-surface-elevated: ${colors.surface['800']};
       				--colors-surface-accented: ${colors.surface['700']};
@@ -170,7 +170,17 @@ export function uisv(options: PluginOptions) {
 				presetWebFonts(_opts.fonts),
 				presetIcons(_opts.icons),
 			],
-			transformers: [transformerVariantGroup(), transformerCompileClass(), transformerDirectives()],
+			transformers: [
+				transformerVariantGroup(),
+				transformerCompileClass(),
+				transformerDirectives(),
+				{
+					name: 'transformer-test',
+					transform(code, id, ctx) {
+						console.log(id);
+					},
+				},
+			],
 			extendTheme: (theme) => {
 				if (!('colors' in theme) || typeof theme.colors !== 'object') theme.colors = {};
 				const colors = theme.colors as Colors;
@@ -185,14 +195,14 @@ export function uisv(options: PluginOptions) {
 				}
 
 				if (typeof colors.surface === 'object') {
-					colors['DEFAULT'] = colors.surface['700'];
+					colors['base'] = colors.surface['700'];
 					colors['dimmed'] = colors.surface['400'];
 					colors['muted'] = colors.surface['500'];
 					colors['toned'] = colors.surface['600'];
 					colors['highlighted'] = colors.surface['900'];
 					colors['inverted'] = 'white';
 					colors['surface'] = defu(colors.surface, {
-						DEFAULT: 'white',
+						base: 'white',
 						muted: colors.surface['50'],
 						elevated: colors.surface['100'],
 						accented: colors.surface['200'],
