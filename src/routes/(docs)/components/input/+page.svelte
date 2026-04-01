@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { COLORS } from '$internal/index.js';
-	import { Input, type InputProps, type PropColor } from '$lib/index.js';
+	import Icon from '$lib/components/icon.svelte';
+	import { Button, Input, type InputProps, type PropColor } from '$lib/index.js';
 	import { pascalCase } from 'scule';
+	import TestComp from './test.svelte';
 
 	let value = $state('');
 	let variant = $state<InputProps['variant']>('outline');
@@ -57,4 +59,11 @@
 		{loading}
 		placeholder="Type something up..."
 	/>
+
+	<Input trailing={TestComp}></Input>
+	<Input>
+		{#snippet trailing()}
+			<Icon name="i-lucide:arrow-left" />
+		{/snippet}
+	</Input>
 </div>

@@ -41,8 +41,8 @@
 		value?: string;
 		icon?: string | Component;
 		iconposition?: 'leading' | 'trailing';
-		leading?: string | Component;
-		trailing?: string | Component;
+		leading?: string | Component | Snippet;
+		trailing?: string | Component | Snippet;
 		loading?: boolean;
 		loadingicon?: string | Component;
 		mask?: string | MaskInputOptions;
@@ -259,11 +259,11 @@
 			{#if !!trailing}
 				{#if typeof trailing === 'string'}
 					{trailing}
-				{:else if isSnippet(trailing)}
-					{@render trailing()}
 				{:else if isComponent(trailing)}
 					{@const Trailing = trailing}
 					<Trailing />
+				{:else if isSnippet(trailing)}
+					{@render trailing()}
 				{/if}
 			{:else if typeof icon === 'string'}
 				<div

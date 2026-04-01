@@ -13,7 +13,7 @@ import {
  * @returns true if the value is a component, false otherwise
  */
 export function isComponent(v: unknown): v is Component {
-	return typeof v === 'function' || (typeof v === 'object' && v !== null && !('$$render' in v));
+	return typeof v === 'function' && 'render' in v;
 }
 
 /**
@@ -22,7 +22,7 @@ export function isComponent(v: unknown): v is Component {
  * @returns true if the value is a snippet, false otherwise
  */
 export function isSnippet(v: unknown): v is Snippet {
-	return typeof v === 'object' && v !== null && '$$render' in v;
+	return typeof v === 'function' && !('render' in v);
 }
 
 /**
