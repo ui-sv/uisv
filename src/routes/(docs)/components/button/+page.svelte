@@ -8,7 +8,7 @@
 	let button_label = $state('Button');
 	let button_variant = $state<ButtonProps['variant']>('outline');
 	let button_size = $state<ButtonProps['size']>('md');
-	let button_icon = $state('i-solar:rocket-2-linear');
+	let button_icon = $state('i-lucide:rocket');
 	let loading = $state(false);
 	let icon_position = $state<ButtonProps['iconposition']>('left');
 </script>
@@ -114,11 +114,7 @@
 {#snippet buttons(props: ButtonProps, notext?: boolean)}
 	<div class="flex gap-1">
 		{#each COLORS as color (color)}
-			<Button {...props} {color}>
-				{#if !notext}
-					{pascalCase(color)}
-				{/if}
-			</Button>
+			<Button label={notext ? undefined : pascalCase(color)} {...props} {color} />
 		{/each}
 	</div>
 {/snippet}

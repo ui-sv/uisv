@@ -1,6 +1,6 @@
 {
 	"name": "uisv",
-	"version": "0.0.19",
+	"version": "0.0.20",
 	"description": "ui library for the rest of us",
 	"license": "MIT",
 	"repository": "ui-sv/uisv",
@@ -44,6 +44,11 @@
 			"types": "./dist/date.d.ts",
 			"svelte": "./dist/date.js",
 			"default": "./dist/date.js"
+		},
+		"./mode": {
+			"types": "./dist/mode.d.ts",
+			"svelte": "./dist/mode.js",
+			"default": "./dist/mode.js"
 		}
 	},
 	"peerDependencies": {
@@ -78,7 +83,7 @@
 	"dependencies": {
 		"@internationalized/date": "^3.11.0",
 		"@unocss/preset-web-fonts": "^66.6.0",
-		"bits-ui": "^2.16.2",
+		"bits-ui": "^2.16.5",
 		"colortranslator": "^5.0.0",
 		"defu": "^6.1.4",
 		"maska": "^3.2.0",

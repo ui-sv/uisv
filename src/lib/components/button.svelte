@@ -5,8 +5,10 @@
 	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
 	import { isSnippet } from '$lib/index.js';
 	import { tv } from 'tailwind-variants';
+	import type { SvelteHTMLElements } from 'svelte/elements';
+	import { Button } from 'bits-ui';
 
-	export type ButtonProps = {
+	export type ButtonProps = SvelteHTMLElements['button'] & {
 		/** The underlying DOM element being rendered. You can bind to this to get a reference to the element. */
 		ref?: HTMLButtonElement | HTMLAnchorElement;
 		/** Where to display the linked URL, as the name for a browsing context. */
@@ -47,7 +49,6 @@
 		block?: boolean;
 		/** Set loading state automatically based on the `@click` promise state */
 		loadingauto?: boolean;
-		onclick?: (event: MouseEvent) => void | Promise<void>;
 		ui?: {
 			base?: ClassNameValue;
 			icon?: ClassNameValue;
@@ -73,7 +74,7 @@
 		block,
 		label,
 		loadingauto,
-		onclick,
+		onclick = () => {},
 		ui = {},
 		disabled,
 		href,
@@ -84,6 +85,7 @@
 		type,
 		trailingicon,
 		leadingicon,
+		...rest
 	}: ButtonProps = $props();
 
 	let internal_loading = $state(false);
@@ -143,7 +145,7 @@
 				{
 					color: 'surface',
 					variant: 'solid',
-					class: 'bg-surface-inverted text-inverted hover:bg-toned',
+					class: 'bg-surface-inverted text-hightlighted hover:bg-toned',
 				},
 				{
 					color: 'info',
@@ -170,148 +172,136 @@
 					color: 'primary',
 					variant: 'outline',
 					class: {
-						base: [
-							'border-primary/50 text-primary-500 hover:bg-primary-50',
-							'dark:hover:bg-primary-950',
-						],
+						base: 'border-primary/50 text-primary-500 hover:bg-primary/10',
 					},
 				},
 				{
 					color: 'surface',
 					variant: 'outline',
 					class: {
-						base: [
-							'border-surface-accented text-surface-inverted hover:bg-surface/10',
-							'dark:hover:bg-surface-800',
-						],
+						base: 'border-surface-hightlighted text-surface-inverted hover:bg-surface/10',
 					},
 				},
 				{
 					color: 'info',
 					variant: 'outline',
 					class: {
-						base: ['border-info/50 text-info-500 hover:bg-info/10', 'dark:hover:bg-info-950'],
+						base: 'border-info/50 text-info-500 hover:bg-info/10',
 					},
 				},
 				{
 					color: 'success',
 					variant: 'outline',
 					class: {
-						base: [
-							'border-success/50 text-success-500 hover:bg-success/10',
-							'dark:hover:bg-success-950',
-						],
+						base: 'border-success/50 text-success-500 hover:bg-success/10',
 					},
 				},
 				{
 					color: 'error',
 					variant: 'outline',
 					class: {
-						base: ['border-error/50 text-error-500 hover:bg-error/10', 'dark:hover:bg-error-950'],
+						base: 'border-error/50 text-error-500 hover:bg-error/10',
 					},
 				},
 				{
 					color: 'warning',
 					variant: 'outline',
 					class: {
-						base: [
-							'border-warning/50 text-warning-500 hover:bg-warning/10',
-							'dark:hover:bg-warning-950',
-						],
+						base: 'border-warning/50 text-warning-500 hover:bg-warning/10',
 					},
 				},
 
 				{
 					color: 'primary',
 					variant: 'soft',
-					class: 'bg-primary-50 text-primary-500 hover:bg-primary-100',
+					class: 'bg-primary/10 text-primary-500 hover:bg-primary/15',
 				},
 				{
 					color: 'surface',
 					variant: 'soft',
-					class: 'bg-surface-100 text-surface-800 hover:bg-surface-200',
+					class: 'bg-surface/10 text-hightlighted hover:bg-surface/15',
 				},
 				{
 					color: 'info',
 					variant: 'soft',
-					class: 'bg-info-100 text-info-500 hover:bg-info-50',
+					class: 'bg-info/10 text-info-500 hover:bg-info/15',
 				},
 				{
 					color: 'success',
 					variant: 'soft',
-					class: 'bg-success-100 text-success-500 hover:bg-success-50',
+					class: 'bg-success/10 text-success-500 hover:bg-success/15',
 				},
 				{
 					color: 'error',
 					variant: 'soft',
-					class: 'bg-error-100 text-error-500 hover:bg-error-50',
+					class: 'bg-error/10 text-error-500 hover:bg-error/15',
 				},
 				{
 					color: 'warning',
 					variant: 'soft',
-					class: 'bg-warning-100 text-warning-500 hover:bg-warning-50',
+					class: 'bg-warning/10 text-warning-500 hover:bg-warning/15',
 				},
 
 				{
 					color: 'primary',
 					variant: 'subtle',
-					class: 'bg-primary-50 text-primary-500 border-primary-200 hover:bg-primary-100',
+					class: 'bg-primary/10 text-primary-500 border-primary/25 hover:bg-primary/15',
 				},
 				{
 					color: 'surface',
 					variant: 'subtle',
-					class: 'bg-surface-50 text-surface-800 border-surface-300 hover:bg-surface-100',
+					class: 'bg-surface/10 text-hightlighted border-surface/25 hover:bg-surface/15',
 				},
 				{
 					color: 'info',
 					variant: 'subtle',
-					class: 'bg-info-50 text-info-600 border-info-200 hover:bg-info-100',
+					class: 'bg-info/10 text-info-600 border-info/25 hover:bg-info/15',
 				},
 				{
 					color: 'success',
 					variant: 'subtle',
-					class: 'bg-success-100 text-success-600 border-success-300 hover:bg-success-100',
+					class: 'bg-success/10 text-success-600 border-success/25 hover:bg-success/15',
 				},
 				{
 					color: 'error',
 					variant: 'subtle',
-					class: 'bg-error-50 text-error-600 border-error-200 hover:bg-error-100',
+					class: 'bg-error/10 text-error-600 border-error/25 hover:bg-error/15',
 				},
 				{
 					color: 'warning',
 					variant: 'subtle',
-					class: 'bg-warning-50 text-warning-600 border-warning-300 hover:bg-warning-100',
+					class: 'bg-warning/10 text-warning-600 border-warning/25 hover:bg-warning/15',
 				},
 
 				{
 					color: 'primary',
 					variant: 'ghost',
-					class: 'text-primary-500 hover:bg-primary-100',
+					class: 'text-primary-500 hover:bg-primary/15',
 				},
 				{
 					color: 'surface',
 					variant: 'ghost',
-					class: 'text-surface-inverted hover:bg-surface-elevated',
+					class: 'text-highlighted hover:bg-surface/15',
 				},
 				{
 					color: 'info',
 					variant: 'ghost',
-					class: 'text-info-600 hover:bg-info-100',
+					class: 'text-info-600 hover:bg-info/15',
 				},
 				{
 					color: 'success',
 					variant: 'ghost',
-					class: 'text-success-600 hover:bg-success-100',
+					class: 'text-success-600 hover:bg-success/15',
 				},
 				{
 					color: 'error',
 					variant: 'ghost',
-					class: 'text-error-600 hover:bg-error-100',
+					class: 'text-error-600 hover:bg-error/15',
 				},
 				{
 					color: 'warning',
 					variant: 'ghost',
-					class: 'text-warning-600 hover:bg-warning-100',
+					class: 'text-warning-600 hover:bg-warning/15',
 				},
 
 				{
@@ -350,41 +340,36 @@
 
 	const only_icon = $derived(!(children || label) && !!icon);
 
-	async function onClickWrapper(event: MouseEvent) {
+	async function onClickWrapper(
+		e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement },
+	) {
 		if (!onclick) return;
 		internal_loading = true;
 
-		await onclick(event);
+		await onclick(e);
 
 		internal_loading = false;
 	}
+
+	$inspect(children, label, !!icon);
 </script>
 
-{#if href}
-	<a
-		{href}
-		{target}
-		class={variants.base({
-			class: [only_icon ? 'px-0 aspect-square justify-center' : '', 'cursor-pointer', ui.base],
-		})}
-		onclick={onClickWrapper}
-	>
-		{@render Content()}
-	</a>
-{:else}
-	<button
-		{type}
-		disabled={disabled || is_loading}
-		class={variants.base({
-			class: [only_icon ? 'px-0 aspect-square justify-center' : '', ui.base],
-		})}
-		onclick={onClickWrapper}
-	>
-		{@render Content()}
-	</button>
-{/if}
-
-{#snippet Content()}
+<svelte:element
+	this={href ? 'a' : 'button'}
+	data-button-root
+	type={href ? undefined : type}
+	href={href && !disabled ? href : undefined}
+	disabled={disabled || is_loading}
+	aria-disabled={href ? disabled : undefined}
+	role={href && disabled ? 'link' : undefined}
+	tabindex={href && disabled ? -1 : 0}
+	bind:this={ref}
+	class={variants.base({
+		class: [only_icon && 'px-0 aspect-square justify-center', href && 'cursor-pointer', ui.base],
+	})}
+	onclick={onClickWrapper}
+	{...rest}
+>
 	{#if iconposition === 'left' || leadingicon}
 		{@render Icon(is_loading ? loadingicon : leadingicon || icon, ui.leadingicon)}
 	{/if}
@@ -398,7 +383,7 @@
 	{#if iconposition !== 'left' || trailingicon}
 		{@render Icon(trailingicon || icon, ui.trailingicon)}
 	{/if}
-{/snippet}
+</svelte:element>
 
 {#snippet Icon(IconProp?: string | Snippet | Component, classvalue?: ClassNameValue)}
 	{#if typeof IconProp === 'string'}
