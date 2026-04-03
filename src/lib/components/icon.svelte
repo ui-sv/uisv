@@ -26,7 +26,6 @@
 							.replaceAll('"', '\"')
 							.replace('<', '%3C')
 							.replace('>', '%3E')}');
-    		display: inline-block;
     		width: 1em;
     		height: 1em;
     		background-color: currentColor;
@@ -46,6 +45,8 @@
 			resolve();
 		},
 	);
+
+	$inspect(isComponent(name), name);
 
 	useStyle(() => css_style);
 </script>
