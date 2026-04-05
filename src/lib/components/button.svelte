@@ -350,8 +350,6 @@
 
 		internal_loading = false;
 	}
-
-	$inspect(children, label, !!icon);
 </script>
 
 <svelte:element

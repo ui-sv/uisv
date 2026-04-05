@@ -46,8 +46,6 @@
 		},
 	);
 
-	$inspect(isComponent(name), name);
-
 	useStyle(() => css_style);
 </script>
 
