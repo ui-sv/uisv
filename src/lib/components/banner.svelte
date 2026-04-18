@@ -49,13 +49,14 @@
 	const close_props = $derived.by(() => {
 		return defu(typeof close === 'boolean' ? {} : close, {
 			icon: 'i-lucide-x',
-			variant: 'link',
-			color: variant === 'solid' ? 'surface' : color,
+			variant: 'ghost',
+			color: 'surface',
 			ui: {
-				icon: variant === 'solid' ? 'text-white' : '',
+				icon: variant === 'solid' ? 'text-inverted' : '',
 			},
 		} as ButtonProps);
 	});
+
 	const classes = $derived.by(() =>
 		tv({
 			slots: {
@@ -75,8 +76,8 @@
 				},
 				variant: {
 					solid: {
-						base: 'text-white',
-						description: 'text-white/90',
+						base: 'text-inverted',
+						description: 'text-inverted/90',
 					},
 					outline: 'border',
 					soft: '',
@@ -92,7 +93,7 @@
 				{
 					variant: 'solid',
 					color: 'surface',
-					class: 'bg-surface-900',
+					class: 'bg-surface-inverted',
 				},
 				{
 					variant: 'solid',
@@ -218,7 +219,7 @@
 	{target}
 	class={classes.base({ class: [ui.base] })}
 >
-	<div class="flex flex-grow gap-2 text-sm items-center">
+	<div class="flex grow gap-2 text-sm items-center">
 		{#if icon}
 			<div class="size-6">
 				{#if typeof icon === 'string'}

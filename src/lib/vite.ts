@@ -64,7 +64,7 @@ export type PluginOptions = {
 	icons?: Parameters<typeof presetIcons>[0];
 };
 
-export function uisv(options: PluginOptions) {
+export default (options: PluginOptions = {}) => {
 	const _opts: PluginOptions = defu(options, {
 		colors: {
 			primary: {
@@ -204,4 +204,4 @@ export function uisv(options: PluginOptions) {
 			},
 		}),
 	];
-}
+};

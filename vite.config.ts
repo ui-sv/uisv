@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 // @ts-expect-error ueah
-import { uisv } from './src/lib/vite';
+import uisv from './src/lib/vite';
 
 export default defineConfig({
 	plugins: [
