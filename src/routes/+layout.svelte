@@ -19,7 +19,7 @@
 
 <ModeWatcher />
 
-<nav class="sticky top-0 z-5 bg-surface-default/75 backdrop-blur w-full">
+<nav class="sticky top-0 z-5 bg-surface-base/90 backdrop-blur-lg w-full">
 	<div class="border-b border-surface-accented h-16 flex items-center">
 		<div class="container mx-auto flex items-center">
 			<div class="flex-1 flex items-center">
@@ -50,7 +50,7 @@
 				<Button
 					variant="ghost"
 					color="surface"
-					icon="i-lucide-swatch-book"
+					icon="i-lucide:swatch-book"
 					ui={{ base: 'text-primary' }}
 				/>
 
@@ -66,7 +66,7 @@
 					target="_blank"
 					variant="ghost"
 					color="surface"
-					icon="i-lucide-github"
+					icon="i-lucide:github"
 				/>
 
 				<Button

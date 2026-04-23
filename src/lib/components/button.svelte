@@ -6,7 +6,6 @@
 	import { isSnippet } from '$lib/index.js';
 	import { tv } from 'tailwind-variants';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import { Button } from 'bits-ui';
 
 	export type ButtonProps = SvelteHTMLElements['button'] & {
 		/** The underlying DOM element being rendered. You can bind to this to get a reference to the element. */
@@ -81,7 +80,6 @@
 		icon,
 		loading,
 		loadingicon = 'i-lucide-loader-circle',
-		target,
 		type,
 		trailingicon,
 		leadingicon,
@@ -145,7 +143,7 @@
 				{
 					color: 'surface',
 					variant: 'solid',
-					class: 'bg-surface-inverted text-hightlighted hover:bg-toned',
+					class: 'bg-surface-inverted text-inverted hover:bg-toned',
 				},
 				{
 					color: 'info',
@@ -179,7 +177,7 @@
 					color: 'surface',
 					variant: 'outline',
 					class: {
-						base: 'border-surface-hightlighted text-surface-inverted hover:bg-surface/10',
+						base: 'border-surface-accented text-surface-inverted hover:bg-surface/10',
 					},
 				},
 				{

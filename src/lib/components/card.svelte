@@ -32,18 +32,18 @@
 			variants: {
 				variant: {
 					solid: {
-						base: 'bg-surface-900 text-surface-50',
+						base: 'bg-surface-inverted text-inverted',
 						header: 'border-transparent',
 						footer: 'border-transparent',
 					},
 					outline: {
-						base: 'border border-surface-300 divide-y divide-surface-300',
+						base: 'border border-surface-accented divide-y divide-surface-accented',
 					},
 					soft: {
-						base: 'bg-surface-50 divide-y divide-surface-300',
+						base: 'bg-surface/10 divide-y divide-surface-accented',
 					},
 					subtle: {
-						base: 'bg-surface-50 border-surface-300 border divide-y divide-surface-300',
+						base: 'bg-surface/10 border-surface-accented border divide-y divide-surface-accented',
 					},
 				},
 			},

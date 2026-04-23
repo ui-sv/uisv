@@ -24,7 +24,7 @@
 		color = 'primary',
 		position = 'top-right',
 		size = 8,
-		ui = {}
+		ui = {},
 	}: ChipProps = $props();
 
 	const classes = $derived.by(() =>
@@ -32,39 +32,39 @@
 			slots: {
 				base: 'relative inline-flex items-center justify-center shrink-0',
 				chip: [
-					'absolute rounded-full ring ring-white flex items-center justify-center text-white font-medium whitespace-nowrap',
-					'-translate-y-1/2 translate-x-1/2 px-0.5'
-				]
+					'absolute rounded-full ring ring-inverted flex items-center justify-center text-inverted font-medium whitespace-nowrap',
+					'-translate-y-1/2 translate-x-1/2 px-0.5',
+				],
 			},
 			variants: {
 				color: {
 					primary: {
-						chip: 'bg-primary'
+						chip: 'bg-primary',
 					},
 					surface: {
-						chip: 'bg-surface'
+						chip: 'bg-surface',
 					},
 					success: {
-						chip: 'bg-success'
+						chip: 'bg-success',
 					},
 					info: {
-						chip: 'bg-info'
+						chip: 'bg-info',
 					},
 					warning: {
-						chip: 'bg-warning'
+						chip: 'bg-warning',
 					},
 					error: {
-						chip: 'bg-error'
-					}
+						chip: 'bg-error',
+					},
 				},
 				position: {
 					'top-right': { chip: 'top-0 right-0' },
 					'bottom-right': { chip: 'bottom-0 right-0' },
 					'top-left': { chip: 'top-0 left-0' },
-					'bottom-left': { chip: 'bottom-0 left-0' }
-				}
-			}
-		})({ color, position })
+					'bottom-left': { chip: 'bottom-0 left-0' },
+				},
+			},
+		})({ color, position }),
 	);
 </script>
 

@@ -71,7 +71,7 @@
 				{
 					color: 'surface',
 					variant: 'solid',
-					class: 'bg-surface-900',
+					class: 'bg-surface-inverted text-inverted',
 				},
 				{
 					color: 'info',
@@ -97,94 +97,94 @@
 				{
 					color: 'primary',
 					variant: 'outline',
-					class: 'border-primary-300 text-primary-400',
+					class: 'border-primary/50 text-primary',
 				},
 				{
 					color: 'surface',
 					variant: 'outline',
-					class: 'border-surface-300 text-surface-900',
+					class: 'border-surface-accented text-highlighted',
 				},
 				{
 					color: 'info',
 					variant: 'outline',
-					class: 'border-info-300 text-info-500',
+					class: 'border-info/50 text-info',
 				},
 				{
 					color: 'success',
 					variant: 'outline',
-					class: 'border-green-300 text-success-500',
+					class: 'border-green/50 text-success',
 				},
 				{
 					color: 'error',
 					variant: 'outline',
-					class: 'border-error-300 text-error-500',
+					class: 'border-error/50 text-error',
 				},
 				{
 					color: 'warning',
 					variant: 'outline',
-					class: 'border-warning-300 text-warning-500',
+					class: 'border-warning/50 text-warning',
 				},
 
 				{
 					color: 'primary',
 					variant: 'soft',
-					class: ' bg-primary-50 text-primary-500',
+					class: ' bg-primary/10 text-primary-500',
 				},
 				{
 					color: 'surface',
 					variant: 'soft',
-					class: 'bg-surface-100 text-surface-800',
+					class: 'bg-surface/10 text-highlighted',
 				},
 				{
 					color: 'info',
 					variant: 'soft',
-					class: 'bg-info-100 text-info-500',
+					class: 'bg-info/10 text-info-500',
 				},
 				{
 					color: 'success',
 					variant: 'soft',
-					class: 'bg-success-100 text-success-500',
+					class: 'bg-success/10 text-success-500',
 				},
 				{
 					color: 'error',
 					variant: 'soft',
-					class: 'bg-error-100 text-error-500',
+					class: 'bg-error/10 text-error-500',
 				},
 				{
 					color: 'warning',
 					variant: 'soft',
-					class: 'bg-warning-100 text-warning-500 ',
+					class: 'bg-warning/10 text-warning-500 ',
 				},
 
 				{
 					color: 'primary',
 					variant: 'subtle',
-					class: 'bg-primary-50 text-primary-500 border-primary-200 ',
+					class: 'bg-primary/10 text-primary-500 border-primary/20',
 				},
 				{
 					color: 'surface',
 					variant: 'subtle',
-					class: 'bg-surface-100 text-surface-800 border-surface-300 ',
+					class: 'bg-surface/10 text-highlighted border-surface/20 ',
 				},
 				{
 					color: 'info',
 					variant: 'subtle',
-					class: 'bg-info-50 text-info-600 border-info-200',
+					class: 'bg-info/10 text-info-600 border-info/20',
 				},
 				{
 					color: 'success',
 					variant: 'subtle',
-					class: 'bg-success-100 text-success-600 border-success-300',
+					class: 'bg-success/10 text-success-600 border-success/20',
 				},
 				{
 					color: 'error',
 					variant: 'subtle',
-					class: 'bg-error-50 text-error-600 border-error-200',
+					class: 'bg-error/10 text-error-600 border-error/20',
 				},
 				{
 					color: 'warning',
 					variant: 'subtle',
-					class: 'bg-warning-50 text-warning-600 border-warning-300',
+					class: 'bg-warning/10 text-warning-600 border-warning/20',
 				},
 			],
 		})({ variant, size, color });

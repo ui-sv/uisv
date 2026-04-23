@@ -10,7 +10,6 @@
 	import type { ClassNameValue } from 'tailwind-merge';
 	import { tv } from 'tailwind-variants';
 	import { defu } from 'defu';
-	import { useId } from 'bits-ui';
 
 	export type BannerProps = {
 		title: string | Snippet;
@@ -44,18 +43,6 @@
 		ui = {},
 		onclose = () => {},
 	}: BannerProps = $props();
-	const id = useId();
-
-	const close_props = $derived.by(() => {
-		return defu(typeof close === 'boolean' ? {} : close, {
-			icon: 'i-lucide-x',
-			variant: 'ghost',
-			color: 'surface',
-			ui: {
-				icon: variant === 'solid' ? 'text-inverted' : '',
-			},
-		} as ButtonProps);
-	});
 
 	const classes = $derived.by(() =>
 		tv({
@@ -119,94 +106,94 @@
 				{
 					variant: 'outline',
 					color: 'primary',
-					class: 'border-primary-300 text-primary-500',
+					class: 'border-primary/15 text-primary-500',
 				},
 				{
 					variant: 'outline',
 					color: 'surface',
-					class: 'border-surface-300 text-surface-900',
+					class: 'border-surface/15',
 				},
 				{
 					variant: 'outline',
 					color: 'info',
-					class: 'border-info-300 text-info-500',
+					class: 'border-info/15 text-info-500',
 				},
 				{
 					variant: 'outline',
 					color: 'success',
-					class: 'border-success-300 text-success-500',
+					class: 'border-success/15 text-success-500',
 				},
 				{
 					variant: 'outline',
 					color: 'warning',
-					class: 'border-warning-300 text-warning-500',
+					class: 'border-warning/15 text-warning-500',
 				},
 				{
 					variant: 'outline',
 					color: 'error',
-					class: 'border-error-300 text-error-500',
+					class: 'border-error/15 text-error-500',
 				},
 
 				{
 					variant: 'soft',
 					color: 'primary',
-					class: 'bg-primary-100 text-primary-500',
+					class: 'bg-primary/10 text-primary-500',
 				},
 				{
 					variant: 'soft',
 					color: 'surface',
-					class: 'bg-surface-50 text-surface-900',
+					class: 'bg-surface/10',
 				},
 				{
 					variant: 'soft',
 					color: 'info',
-					class: 'bg-info-50 text-info-500',
+					class: 'bg-info/10 text-info-500',
 				},
 				{
 					variant: 'soft',
 					color: 'success',
-					class: 'bg-success-50 text-success-500',
+					class: 'bg-success/10 text-success-500',
 				},
 				{
 					variant: 'soft',
 					color: 'warning',
-					class: 'bg-warning-50 text-warning-500',
+					class: 'bg-warning/10 text-warning-500',
 				},
 				{
 					variant: 'soft',
 					color: 'error',
-					class: 'bg-error-50 text-error-500',
+					class: 'bg-error/10 text-error-500',
 				},
 
 				{
 					variant: 'subtle',
 					color: 'primary',
-					class: 'bg-primary-100 text-primary-500 border-primary-300',
+					class: 'bg-primary/10 text-primary-500 border-primary/15',
 				},
 				{
 					variant: 'subtle',
 					color: 'surface',
-					class: 'bg-surface-50 text-surface-900 border-surface-300',
+					class: 'bg-surface/10 border-surface/15',
 				},
 				{
 					variant: 'subtle',
 					color: 'info',
-					class: 'bg-info-50 text-info-500 border-info-300',
+					class: 'bg-info/10 text-info-500 border-info/15',
 				},
 				{
 					variant: 'subtle',
 					color: 'success',
-					class: 'bg-success-50 text-success-500 border-success-300',
+					class: 'bg-success/10 text-success-500 border-success/15',
 				},
 				{
 					variant: 'subtle',
 					color: 'warning',
-					class: 'bg-warning-50 text-warning-500 border-warning-300',
+					class: 'bg-warning/10 text-warning-500 border-warning/15',
 				},
 				{
 					variant: 'subtle',
 					color: 'error',
-					class: 'bg-error-50 text-error-500  border-error-300',
+					class: 'bg-error/10 text-error-500  border-error/15',
 				},
 			],
 		})({ color, variant }),
@@ -255,7 +242,17 @@
 
 	{#if close}
 		<div>
-			<Button {...close_props} onclick={onclose} />
+			<Button
+				{...defu<ButtonProps, [ButtonProps]>(typeof close === 'boolean' ? {} : close, {
+					icon: 'i-lucide-x',
+					variant: 'ghost',
+					color: 'surface',
+					ui: {
+						icon: variant === 'solid' ? 'text-inverted' : '',
+					},
+				})}
+				onclick={onclose}
+			/>
 		</div>
 	{/if}
 </svelte:element>
