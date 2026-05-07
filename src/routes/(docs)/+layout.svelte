@@ -55,7 +55,9 @@
 								ui={{
 									base: [
 										'w-full font-normal',
-										href === page.url.pathname ? 'text-primary hover:text-primary' : 'text-muted',
+										href === page.url.pathname
+											? 'text-primary hover:text-primary'
+											: 'text-label-muted',
 									],
 								}}
 							/>

@@ -2,16 +2,15 @@
 	import { type ButtonProps, Button } from '$lib/index.js';
 	import { Collapsible } from 'bits-ui';
 	import { defu } from 'defu';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type CollapsibleProps = ButtonProps & {
 		open?: boolean;
 		disabled?: boolean;
-		class?: ClassNameValue;
+		class?: ClassValue;
 		ui?: {
-			root?: ClassNameValue;
-			content?: ClassNameValue;
+			root?: ClassValue;
+			content?: ClassValue;
 		};
 	};
 </script>

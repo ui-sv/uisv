@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import type { PropColor, PropVariant } from '$lib/index.js';
 	import { onMount } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type PinInputProps = {
 		value?: number[] | string[];
@@ -19,7 +18,7 @@
 		placeholder?: string;
 		required?: boolean;
 		type?: 'text' | 'number';
-		ui?: { root?: ClassNameValue; cell?: ClassNameValue };
+		ui?: { root?: ClassValue; cell?: ClassValue };
 	};
 </script>
 
@@ -59,7 +58,7 @@
 	const internal_id = $props.id();
 	let input_els = $state<HTMLInputElement[]>([]);
 
-	const classes = $derived(
+	const variants = $derived(
 		tv({
 			slots: { root: 'flex gap-2', cell: 'rounded text-center outline-none transition relative' },
 			variants: {
@@ -80,13 +79,13 @@
 				},
 				variant: {
 					outline: {
-						cell: 'border border-surface-300 focus:border-2',
+						cell: 'border border-surface-accented focus:border-2',
 					},
 					soft: {
-						cell: 'bg-surface-50 hover:bg-surface-100 focus:bg-surface-100',
+						cell: 'bg-surface-muted hover:bg-surface-elevated focus:bg-surface-elevated',
 					},
-					subtle: { cell: 'border border-surface-300 bg-surface-100 focus:border-2' },
-					ghost: { cell: 'hover:bg-surface-100 focus:bg-surface-100' },
+					subtle: { cell: 'border border-surface-accented bg-surface-elevated focus:border-2' },
+					ghost: { cell: 'hover:bg-surface-elevated focus:bg-surface-elevated' },
 					none: { cell: '' },
 				},
 			},
@@ -99,7 +98,7 @@
 				{
 					variant: ['outline', 'subtle'],
 					color: 'surface',
-					class: { cell: 'focus:border-surface-900' },
+					class: { cell: 'focus:border-surface-inverted' },
 				},
 				{
 					variant: ['outline', 'subtle'],
@@ -132,7 +131,7 @@
 	});
 </script>
 
-<div id={id || internal_id} class={classes.root({ class: ui.root })}>
+<div id={id || internal_id} class={variants.root({ class: ui.root })}>
 	{#each { length }, i (i)}
 		<input
 			bind:this={input_els[i]}
@@ -148,7 +147,7 @@
 					}
 				}
 			}
-			class={classes.cell({ class: ui.cell })}
+			class={variants.cell({ class: ui.cell })}
 			onkeydown={(e) => {
 				if (KEYS_TO_IGNORE.includes(e.key)) e.preventDefault();
 				if (type === 'number' && isNaN(parseInt(e.key))) e.preventDefault();

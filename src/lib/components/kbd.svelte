@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import type { PropColor, PropVariant } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type KbdProps = {
 		children?: Snippet;
@@ -10,7 +9,7 @@
 		color?: PropColor;
 		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		size?: 'sm' | 'md' | 'lg';
-		class?: ClassNameValue;
+		class?: ClassValue;
 	};
 
 	export const KBD_KEYS = {
@@ -110,7 +109,7 @@
 			{
 				color: 'surface',
 				variant: 'outline',
-				class: 'border-surface-600',
+				class: 'border-label-toned',
 			},
 			{
 				color: 'info',
@@ -142,7 +141,7 @@
 			{
 				color: 'surface',
 				variant: 'solid',
-				class: 'bg-surface-600 border-surface-700',
+				class: 'bg-label-toned border-label-highlighted',
 			},
 			{
 				color: 'info',
@@ -174,7 +173,7 @@
 			{
 				color: 'surface',
 				variant: 'soft',
-				class: 'bg-surface-100 text-surface-700',
+				class: 'bg-surface-elevated text-label-toned',
 			},
 			{
 				color: 'info',
@@ -206,7 +205,7 @@
 			{
 				color: 'surface',
 				variant: 'subtle',
-				class: 'bg-surface-100 border-surface-200 text-surface-700',
+				class: 'bg-surface-muted border-surface-accented text-label-toned',
 			},
 			{
 				color: 'info',

@@ -14,6 +14,7 @@ const config = {
 		alias: {
 			$internal: './src/internal',
 			$theme: './node_modules/uisv/theme',
+			'$uisv/*': '.svelte-kit/uisv/*',
 		},
 	},
 };

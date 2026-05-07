@@ -7,8 +7,7 @@
 		type PropVariant,
 	} from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import { defu } from 'defu';
 
 	export type AlertProps = {
@@ -21,10 +20,10 @@
 		actions?: ButtonProps[];
 		close?: boolean | ButtonProps;
 		ui?: {
-			base?: ClassNameValue;
-			icon?: ClassNameValue;
-			description?: ClassNameValue;
-			title?: ClassNameValue;
+			base?: ClassValue;
+			icon?: ClassValue;
+			description?: ClassValue;
+			title?: ClassValue;
 		};
 		onclose?: () => void | Promise<void>;
 	};
@@ -54,7 +53,7 @@
 			},
 		} as ButtonProps);
 	});
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				base: 'flex gap-2 font-sans p-4 rounded-lg',
@@ -99,7 +98,7 @@
 				{
 					variant: 'solid',
 					color: 'surface',
-					class: 'bg-surface-900',
+					class: 'bg-surface-inverted',
 				},
 				{
 					variant: 'solid',
@@ -130,7 +129,7 @@
 				{
 					variant: 'outline',
 					color: 'surface',
-					class: 'border-surface-300 text-surface-900',
+					class: 'border-surface-accented text-surface-inverted',
 				},
 				{
 					variant: 'outline',
@@ -161,7 +160,7 @@
 				{
 					variant: 'soft',
 					color: 'surface',
-					class: 'bg-surface-50 text-surface-900',
+					class: 'bg-surface-muted text-surface-inverted',
 				},
 				{
 					variant: 'soft',
@@ -192,7 +191,7 @@
 				{
 					variant: 'subtle',
 					color: 'surface',
-					class: 'bg-surface-50 text-surface-900 border-surface-300',
+					class: 'bg-surface-muted text-surface-inverted border-surface-accented',
 				},
 				{
 					variant: 'subtle',
@@ -219,12 +218,12 @@
 	);
 </script>
 
-<div class={classes.base({ class: [position === 'bottom' ? '' : 'flex', ui.base] })}>
-	<div class="flex gap-2 flex-grow">
+<div class={variants.base({ class: [position === 'bottom' ? '' : 'flex', ui.base] })}>
+	<div class="flex gap-2 grow">
 		{#if icon}
 			<div class="size-6">
 				{#if typeof icon === 'string'}
-					<div class={classes.icon({ class: [icon] })}></div>
+					<div class={variants.icon({ class: [icon] })}></div>
 				{:else if isSnippet(icon)}
 					{@render icon()}
 				{:else}
@@ -234,9 +233,9 @@
 			</div>
 		{/if}
 
-		<div class="space-y-1 flex-grow">
+		<div class="space-y-1 grow">
 			{#if title}
-				<div class={classes.title({ class: [ui.title] })}>
+				<div class={variants.title({ class: [ui.title] })}>
 					{#if isSnippet(title)}
 						{@render title()}
 					{:else}
@@ -246,7 +245,7 @@
 			{/if}
 
 			{#if description}
-				<div class={classes.description({ class: [ui.title] })}>
+				<div class={variants.description({ class: [ui.title] })}>
 					{#if isSnippet(description)}
 						{@render description()}
 					{:else}

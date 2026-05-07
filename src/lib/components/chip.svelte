@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import type { PropColor } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type ChipProps = {
 		children: Snippet;
@@ -11,8 +10,8 @@
 		position?: 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left';
 		size?: number;
 		ui?: {
-			base?: ClassNameValue;
-			chip?: ClassNameValue;
+			base?: ClassValue;
+			chip?: ClassValue;
 		};
 	};
 </script>
@@ -27,12 +26,12 @@
 		ui = {},
 	}: ChipProps = $props();
 
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				base: 'relative inline-flex items-center justify-center shrink-0',
 				chip: [
-					'absolute rounded-full ring ring-inverted flex items-center justify-center text-inverted font-medium whitespace-nowrap',
+					'absolute rounded-full ring ring-inverted flex items-center justify-center text-label-inverted font-medium whitespace-nowrap',
 					'-translate-y-1/2 translate-x-1/2 px-0.5',
 				],
 			},
@@ -68,11 +67,11 @@
 	);
 </script>
 
-<div class={classes.base({ class: [ui.base] })}>
+<div class={variants.base({ class: [ui.base] })}>
 	{@render children()}
 
 	<span
-		class={classes.chip({ class: ui.chip })}
+		class={variants.chip({ class: ui.chip })}
 		style:height="{size}px"
 		style:min-width="{size}px"
 		style:font-size="{size}px"

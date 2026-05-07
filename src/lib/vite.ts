@@ -1,4 +1,3 @@
-import uno_plugin from 'unocss/vite';
 import {
 	transformerVariantGroup,
 	transformerCompileClass,
@@ -13,6 +12,7 @@ import type { PropColor } from './index.js';
 import { getColors } from 'theme-colors';
 // import type { Plugin } from 'vite';
 // import { resolve } from 'node:path';
+import uno_plugin from 'unocss/vite';
 
 export type Colors = Record<string, string | Record<string, string>>;
 
@@ -100,19 +100,6 @@ export default (options: PluginOptions = {}) => {
 		},
 	} as PluginOptions);
 
-	// const theme_plugin: Plugin = {
-	// 	name: 'vite-plugin-uisv',
-	// 	enforce: 'pre',
-	// 	async configResolved() {
-	// 		const path = resolve('node_modules/uisv/theme.js');
-
-	// 		console.log(await write(path, `export const button = {}`));
-	// 	},
-	// 	resolveId(source, importer, options) {
-	// 		if (source === '$build') return resolve('node_modules/uisv/theme.js');
-	// 	},
-	// };
-
 	return [
 		uno_plugin({
 			content: {
@@ -134,14 +121,14 @@ export default (options: PluginOptions = {}) => {
 						if (typeof colors.surface !== 'object') return '';
 
 						const variables = `
-              --colors-base: ${colors.surface['200']};
-      				--colors-dimmed: ${colors.surface['500']};
-      				--colors-muted: ${colors.surface['400']};
-      				--colors-toned: ${colors.surface['300']};
-      				--colors-highlighted: white;
-      				--colors-inverted: ${colors.surface['900']};
+              --colors-label-DEFAULT: ${colors.surface['200']};
+      				--colors-label-dimmed: ${colors.surface['500']};
+      				--colors-label-muted: ${colors.surface['400']};
+      				--colors-label-toned: ${colors.surface['300']};
+      				--colors-label-highlighted: white;
+      				--colors-label-inverted: ${colors.surface['900']};
 
-      				--colors-surface-base: ${colors.surface['900']};
+      				--colors-surface-DEFAULT: ${colors.surface['900']};
       				--colors-surface-muted: ${colors.surface['800']};
       				--colors-surface-elevated: ${colors.surface['800']};
       				--colors-surface-accented: ${colors.surface['700']};
@@ -150,7 +137,7 @@ export default (options: PluginOptions = {}) => {
 
 						return `
 						body {
-						  background-color: var(--colors-inverted);
+						  background-color: var(--colors-label-inverted);
 						}
 
             .dark {
@@ -171,8 +158,8 @@ export default (options: PluginOptions = {}) => {
 				presetIcons(_opts.icons),
 			],
 			transformers: [transformerVariantGroup(), transformerCompileClass(), transformerDirectives()],
-			extendTheme: (theme) => {
-				if (!('colors' in theme) || typeof theme.colors !== 'object') theme.colors = {};
+			extendTheme: (theme: object) => {
+				if (!('colors' in theme) || typeof theme.colors !== 'object') return;
 				const colors = theme.colors as Colors;
 
 				for (const [color, value] of Object.entries(_opts.colors!)) {
@@ -184,21 +171,24 @@ export default (options: PluginOptions = {}) => {
 					colors[color] = in_theme ? in_theme : getColors(value);
 				}
 
-				if (typeof colors.surface === 'object') {
-					colors['base'] = colors.surface['700'];
-					colors['dimmed'] = colors.surface['400'];
-					colors['muted'] = colors.surface['500'];
-					colors['toned'] = colors.surface['600'];
-					colors['highlighted'] = colors.surface['900'];
-					colors['inverted'] = 'white';
-					colors['surface'] = defu(colors.surface, {
-						base: 'white',
-						muted: colors.surface['50'],
-						elevated: colors.surface['100'],
-						accented: colors.surface['200'],
-						inverted: colors.surface['900'],
-					});
-				}
+				if (typeof colors.surface !== 'object') colors.surface = {};
+				if (typeof colors.label === 'object') colors.label = {};
+
+				colors.label = defu(colors.label, {
+					DEFAULT: colors.surface['700'],
+					dimmed: colors.surface['400'],
+					muted: colors.surface['500'],
+					toned: colors.surface['600'],
+					highlighted: colors.surface['900'],
+					inverted: 'white',
+				});
+
+				colors['surface'] = defu(colors.surface, {
+					muted: colors.surface['50'],
+					elevated: colors.surface['100'],
+					accented: colors.surface['200'],
+					inverted: colors.surface['900'],
+				});
 
 				if (theme.colors) theme.colors = colors;
 			},

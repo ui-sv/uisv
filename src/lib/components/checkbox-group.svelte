@@ -1,6 +1,5 @@
 <script module lang="ts">
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import type { Component, Snippet } from 'svelte';
 	import { type PropColor, isComponent, isSnippet, Checkbox } from '$lib/index.js';
 
@@ -21,9 +20,9 @@
 		legend?: string | Snippet | Component;
 		orientation?: 'horizontal' | 'vertical';
 		ui?: {
-			root?: ClassNameValue;
-			container?: ClassNameValue;
-			checkbox?: ClassNameValue;
+			root?: ClassValue;
+			container?: ClassValue;
+			checkbox?: ClassValue;
 		};
 	};
 </script>
@@ -44,7 +43,7 @@
 		...props
 	}: CheckboxGroupProps = $props();
 
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				root: '',
@@ -96,10 +95,10 @@
 				},
 				variant: {
 					list: { container: 'gap-2' },
-					card: { container: 'gap-2', checkbox: 'p-4 rounded-lg border border-neutral-200' },
+					card: { container: 'gap-2', checkbox: 'p-4 rounded-lg border border-surface-accented' },
 					table: {
 						container: 'gap-0 ',
-						checkbox: 'border border-neutral-200 p-4 data-[state=checked]:z-1',
+						checkbox: 'border border-surface-accented p-4 data-[state=checked]:z-1',
 					},
 				},
 				orientation: {
@@ -128,7 +127,7 @@
 					selected: true,
 					variant: ['table', 'card'],
 					class: {
-						checkbox: 'border-surface-500',
+						checkbox: 'border-label-muted',
 					},
 				},
 				{
@@ -177,7 +176,7 @@
 					selected: true,
 					variant: ['table'],
 					class: {
-						checkbox: 'bg-surface-100',
+						checkbox: 'bg-surface-elevated',
 					},
 				},
 				{
@@ -217,7 +216,7 @@
 	);
 </script>
 
-<div class={classes.root({ class: [ui.root] })}>
+<div class={variants.root({ class: [ui.root] })}>
 	{#if typeof legend === 'string'}
 		<legend>{legend}</legend>
 	{:else if isSnippet(legend)}
@@ -227,7 +226,7 @@
 		<Legend />
 	{/if}
 
-	<fieldset class={classes.container({ class: [ui.container] })}>
+	<fieldset class={variants.container({ class: [ui.container] })}>
 		{#each items as item, index (index)}
 			{@const key = typeof item === 'object' ? item[valuekey] : item}
 
@@ -236,7 +235,7 @@
 				{color}
 				as={variant === 'list' ? 'div' : 'label'}
 				ui={{
-					root: classes.checkbox({
+					root: variants.checkbox({
 						class: [ui.checkbox],
 						selected: value.includes(key),
 					}),

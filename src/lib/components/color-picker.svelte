@@ -22,7 +22,7 @@
 
 	const translated = $derived(new ColorTranslator(value));
 
-	const classes = $derived(
+	const variants = $derived(
 		tv({
 			slots: {
 				root: '',

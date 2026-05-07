@@ -7,8 +7,7 @@
 		type PropVariant,
 	} from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import { defu } from 'defu';
 
 	export type BannerProps = {
@@ -21,10 +20,10 @@
 		href?: string;
 		target?: string;
 		ui?: {
-			base?: ClassNameValue;
-			icon?: ClassNameValue;
-			description?: ClassNameValue;
-			title?: ClassNameValue;
+			base?: ClassValue;
+			icon?: ClassValue;
+			description?: ClassValue;
+			title?: ClassValue;
 		};
 		onclose?: () => void | Promise<void>;
 	};
@@ -44,7 +43,7 @@
 		onclose = () => {},
 	}: BannerProps = $props();
 
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				base: 'flex items-center gap-2 font-sans p-4',
@@ -63,8 +62,8 @@
 				},
 				variant: {
 					solid: {
-						base: 'text-inverted',
-						description: 'text-inverted/90',
+						base: 'text-label-inverted',
+						description: 'text-label-inverted/90',
 					},
 					outline: 'border',
 					soft: '',
@@ -204,13 +203,13 @@
 	this={href ? 'a' : 'button'}
 	{href}
 	{target}
-	class={classes.base({ class: [ui.base] })}
+	class={variants.base({ class: [ui.base] })}
 >
 	<div class="flex grow gap-2 text-sm items-center">
 		{#if icon}
 			<div class="size-6">
 				{#if typeof icon === 'string'}
-					<div class={classes.icon({ class: [icon] })}></div>
+					<div class={variants.icon({ class: [icon] })}></div>
 				{:else if isSnippet(icon)}
 					{@render icon()}
 				{:else}
@@ -220,7 +219,7 @@
 			</div>
 		{/if}
 
-		<div class={classes.title({ class: [ui.title] })}>
+		<div class={variants.title({ class: [ui.title] })}>
 			{#if isSnippet(title)}
 				{@render title()}
 			{:else}
@@ -248,7 +247,7 @@
 					variant: 'ghost',
 					color: 'surface',
 					ui: {
-						icon: variant === 'solid' ? 'text-inverted' : '',
+						icon: variant === 'solid' ? 'text-label-inverted' : '',
 					},
 				})}
 				onclick={onclose}

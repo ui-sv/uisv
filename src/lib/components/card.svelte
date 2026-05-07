@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import type { PropVariant } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type CardProps = {
 		children: Snippet;
@@ -10,10 +9,10 @@
 		footer?: Snippet;
 		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		ui?: {
-			base?: ClassNameValue;
-			header?: ClassNameValue;
-			content?: ClassNameValue;
-			footer?: ClassNameValue;
+			base?: ClassValue;
+			header?: ClassValue;
+			content?: ClassValue;
+			footer?: ClassValue;
 		};
 	};
 </script>
@@ -21,7 +20,7 @@
 <script lang="ts">
 	let { header, children, footer, variant = 'solid', ui = {} }: CardProps = $props();
 
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				base: 'rounded overflow-hidden',
@@ -32,7 +31,7 @@
 			variants: {
 				variant: {
 					solid: {
-						base: 'bg-surface-inverted text-inverted',
+						base: 'bg-surface-inverted text-label-inverted',
 						header: 'border-transparent',
 						footer: 'border-transparent',
 					},
@@ -52,19 +51,19 @@
 	);
 </script>
 
-<div class={classes.base({ class: [ui.base] })}>
+<div class={variants.base({ class: [ui.base] })}>
 	{#if header}
-		<div class={classes.header({ class: [ui.header] })}>
+		<div class={variants.header({ class: [ui.header] })}>
 			{@render header()}
 		</div>
 	{/if}
 
-	<div class={classes.content({ class: ui.content })}>
+	<div class={variants.content({ class: ui.content })}>
 		{@render children()}
 	</div>
 
 	{#if footer}
-		<div class={classes.header({ class: [ui.header] })}>
+		<div class={variants.header({ class: [ui.header] })}>
 			{@render footer()}
 		</div>
 	{/if}

@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import { Slider } from 'bits-ui';
 	import type { PropColor } from '$lib/index.js';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type SliderProps<T> = {
 		value?: T;
@@ -16,9 +15,9 @@
 		min?: number;
 		max?: number;
 		ui?: {
-			root?: ClassNameValue;
-			range?: ClassNameValue;
-			thumb?: ClassNameValue;
+			root?: ClassValue;
+			range?: ClassValue;
+			thumb?: ClassValue;
 		};
 	};
 </script>
@@ -54,15 +53,15 @@
 		},
 	});
 	const thumbs = $derived(slider_value.get()?.length ?? 1);
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				root: [
-					'relative w-full flex rounded-full bg-neutral-300',
+					'relative w-full flex rounded-full bg-label-dimmed',
 					orientation === 'horizontal' ? 'items-center' : 'justify-center mx-1',
 				],
 				range: [
-					'rounded-full bg-neutral-200 p-0.5 relative transition',
+					'rounded-full bg-surface-accented p-0.5 relative transition',
 					orientation === 'horizontal' ? 'h-full' : 'w-full',
 				],
 				thumb: 'bg-white rounded-full border-2 outline-none transition',
@@ -76,8 +75,8 @@
 						thumb: 'border-primary-500',
 					},
 					surface: {
-						range: ['bg-neutral-900'],
-						thumb: 'border-neutral-900',
+						range: ['bg-surface-inverted'],
+						thumb: 'border-surface-inverted',
 					},
 					info: {
 						range: ['bg-info-500'],
@@ -149,18 +148,18 @@
 	{step}
 	{orientation}
 	{disabled}
-	class={classes.root({ class: [disabled ? 'opacity-75 cursor-not-allowed' : '', ui.root] })}
+	class={variants.root({ class: [disabled ? 'opacity-75 cursor-not-allowed' : '', ui.root] })}
 >
-	<Slider.Range class={classes.range({ class: [ui.range] })} />
+	<Slider.Range class={variants.range({ class: [ui.range] })} />
 
 	{#each { length: thumbs }, index (index)}
-		<Slider.Thumb {index} class={classes.thumb({ class: ['group', ui.thumb] })}>
+		<Slider.Thumb {index} class={variants.thumb({ class: ['group', ui.thumb] })}>
 			{#if thumblabel}
 				<Slider.ThumbLabel
 					{index}
 					position="bottom"
 					class={[
-						'opacity-0 transition pointer-events-none text-sm shadow-md px-2 h-6 flex items-center rounded-md mt-1 border border-surface-200',
+						'opacity-0 transition pointer-events-none text-sm shadow-md px-2 h-6 flex items-center rounded-md mt-1 border border-surface-accented',
 						'data-[active=""]:opacity-100 group-hover:opacity-100',
 					]}
 				>

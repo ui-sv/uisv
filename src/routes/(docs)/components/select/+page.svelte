@@ -40,4 +40,5 @@
 	<option value="xl">xl</option>
 </select>
 
-<Select bind:value {variant} {color} {highlight} {size} items={ITEMS}></Select>
+<Select bind:value {variant} {color} {highlight} {size} items={ITEMS} ui={{ base: 'w-42' }}
+></Select>

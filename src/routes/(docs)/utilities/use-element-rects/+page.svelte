@@ -4,11 +4,13 @@
 
 <H1 class="mb-0">useElementRects</H1>
 
-<P class="text-muted font-medium">Track an array of elements dimensions and position reactively</P>
+<P class="text-label-muted font-medium"
+	>Track an array of elements dimensions and position reactively</P
+>
 
 <hr class="border-surface-accented" />
 
-<P class="text-muted font-medium">
+<P class="text-label-muted font-medium">
 	`useElementRects` provides reactive access to an array of element's dimensions and position
 	information, automatically updating when the element's size or position changes.
 </P>

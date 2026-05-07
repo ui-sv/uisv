@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import { type PropColor, type PropVariant } from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import { Time } from '$lib/date.js';
 
 	export { default as InputTime } from './input-time.svelte';
@@ -45,11 +44,11 @@
 		value?: Time;
 		icon?: string | Snippet | Component;
 		ui?: {
-			root?: ClassNameValue;
-			leading?: ClassNameValue;
-			icon?: ClassNameValue;
-			trailing?: ClassNameValue;
-			segment?: ClassNameValue;
+			root?: ClassValue;
+			leading?: ClassValue;
+			icon?: ClassValue;
+			trailing?: ClassValue;
+			segment?: ClassValue;
 		};
 	};
 </script>
@@ -74,12 +73,12 @@
 		tv({
 			slots: {
 				root: 'inline-flex items-center rounded transition-all ring ring-inset ring-transparent',
-				leading: 'text-muted',
-				trailing: 'text-muted',
+				leading: 'text-label-muted',
+				trailing: 'text-label-muted',
 				icon: '',
 				segment: [
 					'rounded text-center outline-hidden transition-all focus:bg-surface-accented shrink',
-					'aria-[valuetext="Empty"]:text-dimmed data-[segment="literal"]:text-muted data-[segment="literal"]:px-1 data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75',
+					'aria-[valuetext="Empty"]:text-label-dimmed data-[segment="literal"]:text-label-muted data-[segment="literal"]:px-1 data-invalid:text-error data-disabled:cursor-not-allowed data-disabled:opacity-75',
 				],
 			},
 			variants: {
@@ -158,7 +157,7 @@
 					true: '',
 				},
 				type: {
-					file: 'file:me-1.5 file:font-medium file:text-muted file:outline-none',
+					file: 'file:me-1.5 file:font-medium file:text-label-muted file:outline-none',
 				},
 			},
 			compoundVariants: [
@@ -175,7 +174,7 @@
 					variant: ['outline', 'subtle'],
 					highlight: true,
 					class: {
-						root: 'ring-surface-800 ring-2',
+						root: 'ring-surface-inverted ring-2',
 					},
 				},
 				{

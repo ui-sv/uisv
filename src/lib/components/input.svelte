@@ -2,10 +2,9 @@
 	import { type PropColor, type PropVariant, isComponent, isSnippet } from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import type { ClassNameValue } from 'tailwind-merge';
 	import { maska } from 'maska/svelte';
 	import { type MaskInputOptions } from 'maska';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type InputProps = Omit<SvelteHTMLElements['input'], 'size'> & {
 		name?: string;
@@ -47,11 +46,11 @@
 		loadingicon?: string | Component;
 		mask?: string | MaskInputOptions;
 		ui?: {
-			root?: ClassNameValue;
-			base?: ClassNameValue;
-			leading?: ClassNameValue;
-			icon?: ClassNameValue;
-			trailing?: ClassNameValue;
+			root?: ClassValue;
+			base?: ClassValue;
+			leading?: ClassValue;
+			icon?: ClassValue;
+			trailing?: ClassValue;
 		};
 	};
 </script>
@@ -84,9 +83,9 @@
 		tv({
 			slots: {
 				root: 'inline-flex items-center rounded transition-all ring ring-inset ring-transparent',
-				base: 'appearance-none outline-none placeholder:text-muted',
-				leading: 'text-muted flex items-center',
-				trailing: 'text-muted flex items-center',
+				base: 'appearance-none outline-none placeholder:text-label-muted',
+				leading: 'text-label-muted flex items-center',
+				trailing: 'text-label-muted flex items-center',
 				icon: '',
 			},
 			variants: {
@@ -162,7 +161,7 @@
 					true: '',
 				},
 				type: {
-					file: 'file:me-1.5 file:font-medium file:text-muted file:outline-none',
+					file: 'file:me-1.5 file:font-medium file:text-label-muted file:outline-none',
 				},
 			},
 			compoundVariants: [
@@ -177,7 +176,7 @@
 					color: 'surface',
 					variant: ['outline', 'subtle'],
 					class: {
-						root: 'focus-within:ring-surface-800 focus-within:ring-2',
+						root: 'focus-within:ring-surface-inverted focus-within:ring-2',
 					},
 				},
 				{

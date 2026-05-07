@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import { type PropColor, Icon } from '$lib/index.js';
 	import type { Snippet, Component } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type SwitchProps = {
 		value?: boolean;
@@ -17,11 +16,11 @@
 		description?: string | Snippet;
 		required?: boolean;
 		ui?: {
-			root?: ClassNameValue;
-			container?: ClassNameValue;
-			thumb?: ClassNameValue;
-			label?: ClassNameValue;
-			description?: ClassNameValue;
+			root?: ClassValue;
+			container?: ClassValue;
+			thumb?: ClassValue;
+			label?: ClassValue;
+			description?: ClassValue;
 		};
 	};
 </script>
@@ -42,18 +41,18 @@
 		ui = {},
 	}: SwitchProps = $props();
 
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				root: 'flex-inline gap-2',
-				container: 'rounded-full bg-neutral-200 p-0.5 relative transition',
+				container: 'rounded-full bg-surface-accented p-0.5 relative transition',
 				thumb: [
 					'bg-white block rounded-full absolute top-0.5 transition grid place-items-center',
-					value ? 'translate-x-full' : 'text-neutral-500',
+					value ? 'translate-x-full' : 'text-label-muted',
 				],
 				icon: 'pi',
 				label: 'text-sm',
-				description: 'text-sm text-neutral-500',
+				description: 'text-sm text-label-muted',
 			},
 			variants: {
 				color: {
@@ -61,7 +60,7 @@
 						container: ['', value && 'bg-primary-500 text-primary-500'],
 					},
 					surface: {
-						container: ['', value && 'bg-neutral-900 text-neutral-900'],
+						container: ['', value && 'bg-surface-inverted text-surface-inverted'],
 					},
 					info: {
 						container: ['', value && 'bg-info-500 text-info-500'],
@@ -111,23 +110,23 @@
 
 <div
 	data-state={value ? 'checked' : 'unchecked'}
-	class={classes.root({
+	class={variants.root({
 		class: [(loading || disabled) && 'opacity-50', ui.thumb],
 	})}
 >
 	<button
 		aria-label="switch"
 		data-state={value ? 'checked' : 'unchecked'}
-		class={classes.container({ class: [loading && 'cursor-not-allowed', ui.thumb] })}
+		class={variants.container({ class: [loading && 'cursor-not-allowed', ui.thumb] })}
 		onclick={() => {
 			if (loading || disabled) return;
 			value = !value;
 		}}
 	>
-		<span data-state={value ? 'checked' : 'unchecked'} class={classes.thumb({ class: ui.thumb })}>
+		<span data-state={value ? 'checked' : 'unchecked'} class={variants.thumb({ class: ui.thumb })}>
 			<Icon
 				name={loading ? loadingicon : value ? checkedicon : uncheckedicon}
-				class={classes.icon({ class: [loading && 'animate-spin'] })}
+				class={variants.icon({ class: [loading && 'animate-spin'] })}
 			/>
 		</span>
 	</button>
@@ -135,7 +134,7 @@
 	{#if label}
 		<span>
 			<div
-				class={classes.label({
+				class={variants.label({
 					class: [required ? 'after:content-["*"] after:text-error-500' : '', ui.thumb],
 				})}
 			>
@@ -147,7 +146,7 @@
 			</div>
 
 			{#if description}
-				<div class={classes.description({ class: ui.thumb })}>
+				<div class={variants.description({ class: ui.thumb })}>
 					{#if typeof description === 'string'}
 						{description}
 					{:else}
@@ -158,7 +157,3 @@
 		</span>
 	{/if}
 </div>
-
-{#snippet icon(ico?: SwitchProps['checkedicon'], icon_class?: ClassNameValue)}
-	<div class={['absolute', icon_class]}></div>
-{/snippet}

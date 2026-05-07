@@ -1,6 +1,5 @@
 <script module lang="ts">
 	import type { Component, Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
 	import { Button, Icon, type ButtonProps } from './index.js';
 	import { tv } from 'tailwind-variants';
 	import { isSnippet } from '$lib/utilities.svelte.js';
@@ -9,18 +8,18 @@
 		label?: string;
 		icon?: string | Component;
 		snippet?: string;
-		[key: string]: any;
+		[key: string]: unknown;
 	};
 
 	export type BreadcrumbProps = {
 		items: BreadcrumbItem[];
 		seperator?: string | Component | Snippet;
 		labelkey?: string;
-		[key: string]: any | Snippet<[BreadcrumbItem]>;
+		[key: string]: unknown | Snippet<[BreadcrumbItem]>;
 	};
 </script>
 
-<script lang="ts" generics="T extends BreadcrumbItem">
+<script lang="ts">
 	let {
 		items,
 		labelkey = 'label',
@@ -53,7 +52,7 @@
 					{/if}
 				{:else}
 					<Button
-						label={item[labelkey]}
+						label={item[labelkey] as undefined}
 						icon={item.icon}
 						href={item.href}
 						variant="link"

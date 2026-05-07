@@ -4,7 +4,7 @@
 
 <H1 class="mb-0">isSnippet</H1>
 
-<P class="text-surface-500 font-medium">Checks if a value is a Svelte snippet</P>
+<P class="text-label-toned font-medium">Checks if a value is a Svelte snippet</P>
 
 <hr class="border-surface-accented" />
 

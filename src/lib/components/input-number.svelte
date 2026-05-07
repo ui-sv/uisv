@@ -7,9 +7,7 @@
 		type PropVariant,
 	} from '$lib/index.js';
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
-	import Accordion from './accordion.svelte';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import { useId } from 'bits-ui';
 
 	export type InputNumberProps = Omit<SvelteHTMLElements['input'], 'size' | 'value'> & {
@@ -38,10 +36,10 @@
 		focusonchange?: boolean;
 		autocomplete?: 'on' | 'off' | string;
 		ui?: {
-			root?: ClassNameValue;
-			base?: ClassNameValue;
-			increment?: ClassNameValue;
-			decrement?: ClassNameValue;
+			root?: ClassValue;
+			base?: ClassValue;
+			increment?: ClassValue;
+			decrement?: ClassValue;
 		};
 	};
 </script>

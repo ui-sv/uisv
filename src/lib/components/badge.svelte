@@ -1,8 +1,7 @@
 <script lang="ts" module>
 	import type { Component, Snippet } from 'svelte';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import { type PropColor, type PropVariant, isSnippet } from '$lib/index.js';
-	import type { ClassNameValue } from 'tailwind-merge';
 
 	export type BadgeProps = {
 		label?: string;
@@ -13,8 +12,8 @@
 		trailingicon?: boolean;
 		children?: Snippet;
 		ui?: {
-			base?: ClassNameValue;
-			icon?: ClassNameValue;
+			base?: ClassValue;
+			icon?: ClassValue;
 		};
 	};
 </script>
@@ -31,7 +30,7 @@
 		children,
 	}: BadgeProps = $props();
 
-	const classes = $derived.by(() => {
+	const variants = $derived.by(() => {
 		return tv({
 			slots: { icon: '', base: 'flex-inline items-center font-sans' },
 			variants: {
@@ -71,7 +70,7 @@
 				{
 					color: 'surface',
 					variant: 'solid',
-					class: 'bg-surface-inverted text-inverted',
+					class: 'bg-surface-inverted text-label-inverted',
 				},
 				{
 					color: 'info',
@@ -102,7 +101,7 @@
 				{
 					color: 'surface',
 					variant: 'outline',
-					class: 'border-surface-accented text-highlighted',
+					class: 'border-surface-accented text-label-highlighted',
 				},
 				{
 					color: 'info',
@@ -133,7 +132,7 @@
 				{
 					color: 'surface',
 					variant: 'soft',
-					class: 'bg-surface/10 text-highlighted',
+					class: 'bg-surface/10 text-label-highlighted',
 				},
 				{
 					color: 'info',
@@ -164,7 +163,7 @@
 				{
 					color: 'surface',
 					variant: 'subtle',
-					class: 'bg-surface/10 text-highlighted border-surface/20 ',
+					class: 'bg-surface/10 text-label-highlighted border-surface/20 ',
 				},
 				{
 					color: 'info',
@@ -192,7 +191,7 @@
 </script>
 
 <span
-	class={classes.base({
+	class={variants.base({
 		class: [icon && !(children || label) ? 'px-0 aspect-square justify-center' : '', ui.base],
 	})}
 >
@@ -214,7 +213,7 @@
 {#snippet Icon()}
 	{#if icon}
 		{#if typeof icon === 'string'}
-			<div class={['pi', icon, classes.icon(), ui.icon]}></div>
+			<div class={['pi', icon, variants.icon(), ui.icon]}></div>
 		{:else if isSnippet(icon)}
 			{@render icon()}
 		{:else}

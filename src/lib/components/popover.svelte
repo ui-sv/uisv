@@ -1,9 +1,8 @@
 <script module lang="ts">
 	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
 	import { Popover, type PopoverContentProps } from 'bits-ui';
-	import { cn, tv } from 'tailwind-variants';
-	import { type ButtonProps,Button } from '$lib/index.js';
+	import { cn, tv, type ClassValue } from 'tailwind-variants';
+	import { type ButtonProps, Button } from '$lib/index.js';
 	import type { PropColor } from '$lib/index.js';
 
 	export type PopoverContentSnippet = {
@@ -73,8 +72,8 @@
 		 *
 		 */
 		ui?: {
-			content?: ClassNameValue;
-			arrow?: ClassNameValue;
+			content?: ClassValue;
+			arrow?: ClassValue;
 		};
 		/**
 		 * @default `outline`
@@ -87,7 +86,7 @@
 		/**
 		 *
 		 */
-		class?: ClassNameValue;
+		class?: ClassValue;
 	};
 </script>
 
@@ -113,7 +112,7 @@
 		class: klass,
 	}: PopoverProps = $props();
 
-	const classes = $derived(
+	const variants = $derived(
 		tv({
 			slots: {
 				content:
@@ -136,7 +135,7 @@
 	</Popover.Trigger>
 	<Popover.Portal>
 		<Popover.Overlay />
-		<Popover.Content {...contentprops} class={classes.content({ class: ui.content })}>
+		<Popover.Content {...contentprops} class={variants.content({ class: ui.content })}>
 			{#snippet child(props)}
 				{#if content}
 					{@render content(props)}

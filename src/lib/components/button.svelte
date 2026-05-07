@@ -1,11 +1,10 @@
 <script module lang="ts">
 	import { type Component, type Snippet } from 'svelte';
 	import { isComponent, type PropColor, type PropVariant } from '$lib/index.js';
-	import type { ClassNameValue } from 'tailwind-merge';
 	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
 	import { isSnippet } from '$lib/index.js';
-	import { tv } from 'tailwind-variants';
 	import type { SvelteHTMLElements } from 'svelte/elements';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type ButtonProps = SvelteHTMLElements['button'] & {
 		/** The underlying DOM element being rendered. You can bind to this to get a reference to the element. */
@@ -49,10 +48,10 @@
 		/** Set loading state automatically based on the `@click` promise state */
 		loadingauto?: boolean;
 		ui?: {
-			base?: ClassNameValue;
-			icon?: ClassNameValue;
-			leadingicon?: ClassNameValue;
-			trailingicon?: ClassNameValue;
+			base?: ClassValue;
+			icon?: ClassValue;
+			leadingicon?: ClassValue;
+			trailingicon?: ClassValue;
 		};
 		children?: Snippet;
 	};
@@ -93,7 +92,7 @@
 		return false;
 	});
 
-	const variants = $derived(
+	const classnames = $derived(
 		tv({
 			slots: {
 				icon: '',
@@ -110,7 +109,7 @@
 				},
 				variant: {
 					link: '',
-					solid: 'text-inverted',
+					solid: 'text-label-inverted',
 					outline: 'border',
 					soft: '',
 					subtle: 'border',
@@ -143,7 +142,7 @@
 				{
 					color: 'surface',
 					variant: 'solid',
-					class: 'bg-surface-inverted text-inverted hover:bg-toned',
+					class: 'bg-surface-inverted text-label-inverted hover:bg-label-toned',
 				},
 				{
 					color: 'info',
@@ -177,7 +176,7 @@
 					color: 'surface',
 					variant: 'outline',
 					class: {
-						base: 'border-surface-accented text-surface-inverted hover:bg-surface/10',
+						base: 'border-surface-accented text-label hover:bg-surface-elevated',
 					},
 				},
 				{
@@ -217,7 +216,7 @@
 				{
 					color: 'surface',
 					variant: 'soft',
-					class: 'bg-surface/10 text-hightlighted hover:bg-surface/15',
+					class: 'bg-surface/10 text-label-highlighted hover:bg-surface/15',
 				},
 				{
 					color: 'info',
@@ -248,7 +247,7 @@
 				{
 					color: 'surface',
 					variant: 'subtle',
-					class: 'bg-surface/10 text-hightlighted border-surface/25 hover:bg-surface/15',
+					class: 'bg-surface/10 text-label-highlighted border-surface/25 hover:bg-surface/15',
 				},
 				{
 					color: 'info',
@@ -279,7 +278,7 @@
 				{
 					color: 'surface',
 					variant: 'ghost',
-					class: 'text-highlighted hover:bg-surface/15',
+					class: 'text-label-label-highlighted hover:bg-surface/15',
 				},
 				{
 					color: 'info',
@@ -310,7 +309,7 @@
 				{
 					color: 'surface',
 					variant: 'link',
-					class: 'text-muted hover:text-surface-inverted',
+					class: 'text-label-muted hover:text-surface-inverted',
 				},
 				{
 					color: 'info',
@@ -360,7 +359,7 @@
 	role={href && disabled ? 'link' : undefined}
 	tabindex={href && disabled ? -1 : 0}
 	bind:this={ref}
-	class={variants.base({
+	class={classnames.base({
 		class: [only_icon && 'px-0 aspect-square justify-center', href && 'cursor-pointer', ui.base],
 	})}
 	onclick={onClickWrapper}
@@ -381,10 +380,10 @@
 	{/if}
 </svelte:element>
 
-{#snippet Icon(IconProp?: string | Snippet | Component, classvalue?: ClassNameValue)}
+{#snippet Icon(IconProp?: string | Snippet | Component, classvalue?: ClassValue)}
 	{#if typeof IconProp === 'string'}
 		<div
-			class={variants.icon({
+			class={classnames.icon({
 				class: [is_loading && 'animate-spin', IconProp, ui.icon, classvalue],
 			})}
 		></div>

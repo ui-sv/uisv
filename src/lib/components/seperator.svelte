@@ -1,12 +1,11 @@
 <script module lang="ts">
 	import { Icon, type PropColor, isComponent, isSnippet } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import type { Component } from 'svelte';
 
 	export type SeperatorProps = {
-		label?: string | Snippet<[ClassNameValue]> | Component;
+		label?: string | Snippet<[ClassValue]> | Component;
 		icon?: string | Component;
 		color?: PropColor;
 		type?: 'dashed' | 'solid' | 'dotted';
@@ -14,10 +13,10 @@
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		orientation?: 'horizontal' | 'vertical';
 		ui?: {
-			root?: ClassNameValue;
-			border?: ClassNameValue;
-			icon?: ClassNameValue;
-			label?: ClassNameValue;
+			root?: ClassValue;
+			border?: ClassValue;
+			icon?: ClassValue;
+			label?: ClassValue;
 		};
 	};
 </script>

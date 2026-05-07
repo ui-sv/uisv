@@ -1,8 +1,7 @@
 <script lang="ts" module>
 	import type { Component, Snippet } from 'svelte';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import { type PropColor, type PropVariant, isSnippet } from '$lib/index.js';
-	import type { ClassNameValue } from 'tailwind-merge';
 	import { type DateValue, today } from '$lib/date.js';
 	import { Calendar, type CalendarRootProps } from 'bits-ui';
 
@@ -11,8 +10,8 @@
 		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		ui?: {
-			base?: ClassNameValue;
-			icon?: ClassNameValue;
+			base?: ClassValue;
+			icon?: ClassValue;
 		};
 	};
 </script>
@@ -30,7 +29,7 @@
 		children,
 	}: CalendarProps = $props();
 
-	const classes = $derived.by(() => {
+	const variants = $derived.by(() => {
 		return tv({
 			slots: { icon: '', base: '' },
 			variants: {
@@ -63,7 +62,7 @@
 	});
 </script>
 
-<Calendar.Root type={type as typeof type} bind:value>
+<Calendar.Root type={type as 'single'} bind:value={() => value as DateValue, (v) => (value = v)}>
 	{#snippet children({ months, weekdays })}
 		<Calendar.Header>
 			<Calendar.PrevButton />
@@ -71,7 +70,7 @@
 			<Calendar.NextButton />
 		</Calendar.Header>
 
-		{#each months as month}
+		{#each months as month (month)}
 			<Calendar.Grid>
 				<Calendar.GridHead>
 					<Calendar.GridRow>

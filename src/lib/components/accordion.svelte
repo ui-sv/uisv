@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import { Accordion } from 'bits-ui';
 	import type { Component, Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type AccordionItem = {
 		label: string;
@@ -25,15 +24,15 @@
 		content?: Snippet<[{ item: AccordionItem; index: number; open: boolean }]>;
 		body?: Snippet<[{ item: AccordionItem; index: number; open: boolean }]>;
 		ui?: {
-			root?: ClassNameValue;
-			item?: ClassNameValue;
-			header?: ClassNameValue;
-			trigger?: ClassNameValue;
-			content?: ClassNameValue;
-			body?: ClassNameValue;
-			leadingicon?: ClassNameValue;
-			trailingicon?: ClassNameValue;
-			label?: ClassNameValue;
+			root?: ClassValue;
+			item?: ClassValue;
+			header?: ClassValue;
+			trigger?: ClassValue;
+			content?: ClassValue;
+			body?: ClassValue;
+			leadingicon?: ClassValue;
+			trailingicon?: ClassValue;
+			label?: ClassValue;
 		};
 	};
 </script>
@@ -51,9 +50,9 @@
 		trailing,
 		content,
 		body,
-		ui = {}
+		ui = {},
 	}: AccordionProps = $props();
-	const classes = $derived(
+	const variants = $derived(
 		tv({
 			slots: {
 				root: 'w-full',
@@ -67,23 +66,23 @@
 				leadingIcon: 'shrink-0 size-5',
 				trailingIcon:
 					'shrink-0 size-5 ms-auto group-data-[state=open]:rotate-180 transition-transform duration-200',
-				label: 'text-start break-words'
+				label: 'text-start break-words',
 			},
 			variants: {
 				disabled: {
 					true: {
-						trigger: 'cursor-not-allowed opacity-75'
-					}
-				}
-			}
+						trigger: 'cursor-not-allowed opacity-75',
+					},
+				},
+			},
 		})({
-			disabled
-		})
+			disabled,
+		}),
 	);
 </script>
 
 <Accordion.Root
-	class={classes.root({ class: ui.root })}
+	class={variants.root({ class: ui.root })}
 	type="multiple"
 	bind:value={
 		() => {

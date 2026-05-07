@@ -2,14 +2,15 @@
 	import type { PropColor, PropVariant } from '$lib/index.js';
 	import { Select } from 'bits-ui';
 	import type { Component, Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
+	import Icon from './icon.svelte';
 
 	export type SelectItem<T> =
 		| T
 		| {
 				icon?: string | Component;
-				label: string | Component;
+				iconposition?: 'leading' | 'trailing';
+				label: string | Component | Snippet;
 				value: T;
 		  };
 
@@ -23,34 +24,26 @@
 		highlight?: boolean;
 		placeholder?: string;
 		ui?: {
-			base?: ClassNameValue;
-			leading?: ClassNameValue;
-			leadingIcon?: ClassNameValue;
-			leadingAvatar?: ClassNameValue;
-			leadingAvatarSize?: ClassNameValue;
-			trailing?: ClassNameValue;
-			trailingIcon?: ClassNameValue;
-			value?: ClassNameValue;
-			placeholder?: ClassNameValue;
-			arrow?: ClassNameValue;
-			content?: ClassNameValue;
-			viewport?: ClassNameValue;
-			group?: ClassNameValue;
-			empty?: ClassNameValue;
-			label?: ClassNameValue;
-			separator?: ClassNameValue;
-			item?: ClassNameValue;
-			itemLeadingIcon?: ClassNameValue;
-			itemLeadingAvatar?: ClassNameValue;
-			itemLeadingAvatarSize?: ClassNameValue;
-			itemLeadingChip?: ClassNameValue;
-			itemLeadingChipSize?: ClassNameValue;
-			itemTrailing?: ClassNameValue;
-			itemTrailingIcon?: ClassNameValue;
-			itemWrapper?: ClassNameValue;
-			itemLabel?: ClassNameValue;
-			itemDescription?: ClassNameValue;
+			base?: ClassValue;
+			leading?: ClassValue;
+			icon?: ClassValue;
+			leadingAvatar?: ClassValue;
+			leadingAvatarSize?: ClassValue;
+			trailing?: ClassValue;
+			value?: ClassValue;
+			placeholder?: ClassValue;
+			arrow?: ClassValue;
+			content?: ClassValue;
+			viewport?: ClassValue;
+			group?: ClassValue;
+			empty?: ClassValue;
+			label?: ClassValue;
+			separator?: ClassValue;
+			item?: ClassValue;
+			itemicon?: ClassValue;
+			dropdownicon?: ClassValue;
 		};
+		dropdownicon?: string | Component;
 	} & (
 		| {
 				value?: T;
@@ -76,37 +69,39 @@
 		highlight,
 		placeholder,
 		ui = {},
+		dropdownicon = 'i-lucide:chevron-down',
 	}: SelectProps<T> = $props();
 
-	const classes = $derived(
+	const variants = $derived(
 		tv({
 			slots: {
 				base: [
-					'relative group rounded-md inline-flex items-center focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
+					'relative group rounded-md inline-flex items-center justify-between focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
 					'transition-colors',
 				],
 				leading: 'absolute inset-y-0 start-0 flex items-center',
-				leadingIcon: 'shrink-0 text-dimmed',
+				leadingIcon: 'shrink-0 text-label-dimmed',
 				leadingAvatar: 'shrink-0',
 				leadingAvatarSize: '',
 				trailing: 'absolute inset-y-0 end-0 flex items-center',
-				trailingIcon: 'shrink-0 text-dimmed',
+				trailingIcon: 'shrink-0 text-label-dimmed',
 				value: 'truncate pointer-events-none',
-				placeholder: 'truncate text-dimmed',
+				placeholder: 'truncate text-label-dimmed',
 				arrow: 'fill-bg stroke-default',
 				content:
-					'max-h-60 w-(--bits-select-anchor-width) bg-inverted shadow-lg rounded-md ring ring-surface-accented overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--bits-select-content-transform-origin) pointer-events-auto flex flex-col',
+					'max-h-60 w-(--bits-select-anchor-width) bg-label-inverted shadow-lg rounded-md ring p-1 ring-surface-accented overflow-hidden data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--bits-select-content-transform-origin) pointer-events-auto flex flex-col',
 				viewport: 'relative divide-y divide-base scroll-py-1 overflow-y-auto flex-1',
 				group: 'p-1 isolate',
-				empty: 'text-center text-muted',
-				label: 'font-semibold text-highlighted',
+				empty: 'text-center text-label-muted',
+				label: 'font-semibold text-label-highlighted',
 				separator: '-mx-1 my-1 h-px bg-border',
 				item: [
-					'group relative w-full flex items-start select-none outline-none before:absolute before:content-[""] before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 text-default data-highlighted:not-data-disabled:text-highlighted data-highlighted:not-[data-disabled]:before:bg-surface-elevated/50',
-					'transition-colors before:transition-colors',
+					'group relative w-full flex items-start select-none outline-none whitespace-nowrap text-default rounded transition',
+					'data-disabled:cursor-not-allowed data-disabled:opacity-75',
+					'not-[data-disabled]:hover:text-label-highlighted not-[data-disabled]:hover:bg-surface-elevated/50',
 				],
 				itemLeadingIcon: [
-					'shrink-0 text-dimmed group-data-highlighted:not-group-data-disabled:text-default',
+					'shrink-0 text-label-dimmed group-data-highlighted:not-group-data-disabled:text-default',
 					'transition-colors',
 				],
 				itemLeadingAvatar: 'shrink-0',
@@ -117,7 +112,7 @@
 				itemTrailingIcon: 'shrink-0',
 				itemWrapper: 'flex-1 flex flex-col min-w-0',
 				itemLabel: 'truncate',
-				itemDescription: 'truncate text-muted',
+				itemDescription: 'truncate text-label-muted',
 			},
 			variants: {
 				fieldGroup: {
@@ -210,13 +205,13 @@
 				},
 				variant: {
 					outline:
-						'text-highlighted bg-default ring ring-inset ring-surface-accented hover:bg-surface-elevated disabled:bg-surface-default',
-					soft: 'text-highlighted bg-surface-elevated/50 hover:bg-surface-elevated focus:bg-surface-elevated disabled:bg-surface-elevated/50',
+						'text-label-highlighted bg-default ring ring-inset ring-surface-accented hover:bg-surface-elevated disabled:bg-surface-default',
+					soft: 'text-label-highlighted bg-surface-elevated/50 hover:bg-surface-elevated focus:bg-surface-elevated disabled:bg-surface-elevated/50',
 					subtle:
-						'text-highlighted bg-surface-elevated ring ring-inset ring-accented hover:bg-surface-accented/75 disabled:bg-surface-elevated',
+						'text-label-highlighted bg-surface-elevated ring ring-inset ring-accented hover:bg-surface-accented/75 disabled:bg-surface-elevated',
 					ghost:
-						'text-highlighted bg-transparent hover:bg-surface-elevated focus:bg-surface-elevated disabled:bg-transparent dark:disabled:bg-transparent',
-					none: 'text-highlighted bg-transparent',
+						'text-label-highlighted bg-transparent hover:bg-surface-elevated focus:bg-surface-elevated disabled:bg-transparent dark:disabled:bg-transparent',
+					none: 'text-label-highlighted bg-transparent',
 				},
 				color: {
 					primary: '',
@@ -242,7 +237,7 @@
 					false: '',
 				},
 				type: {
-					file: 'file:me-1.5 file:font-medium file:text-muted file:outline-none',
+					file: 'file:me-1.5 file:font-medium file:text-label-muted file:outline-none',
 				},
 			},
 			compoundVariants: [
@@ -407,13 +402,13 @@
 		(v) => (value = v as T | T[] | undefined)
 	}
 >
-	<Select.Trigger class={classes.base({ class: ui.base })}>
+	<Select.Trigger class={variants.base({ class: ui.base })}>
 		{value || placeholder}
-		<div class="i-lucide-chevron-down size-4"></div>
+		<Icon name={dropdownicon} class="size-4" />
 	</Select.Trigger>
 	<Select.Portal>
 		<Select.Content
-			class={classes.content({ class: ui.content })}
+			class={variants.content({ class: ui.content })}
 			preventScroll={true}
 			sideOffset={8}
 		>
@@ -425,13 +420,13 @@
 							<Select.GroupHeading />
 
 							{#each item as group_item, gidx (gidx)}
-								<Select.Item class={classes.item({ class: ui.item })} value=""></Select.Item>
+								<Select.Item class={variants.item({ class: ui.item })} value=""></Select.Item>
 							{/each}
 						</Select.Group>
 					{:else}
 						{@const is_object = typeof item === 'object' && item !== null && 'value' in item}
 						<Select.Item
-							class={classes.item({ class: ui.item })}
+							class={variants.item({ class: ui.item })}
 							value={(is_object ? item.value : item) as string}
 						>
 							{item}

@@ -1,19 +1,10 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-// @ts-expect-error ueah
+// @ts-expect-error idek
 import uisv from './src/lib/vite';
 
 export default defineConfig({
-	plugins: [
-		sveltekit(),
-		uisv({
-			fonts: {
-				fonts: {
-					quicksand: 'Quicksand:600,700',
-				},
-			},
-		}),
-	],
+	plugins: [sveltekit(), uisv()],
 	// test: {
 	// 	expect: { requireAssertions: true },
 	// 	projects: [

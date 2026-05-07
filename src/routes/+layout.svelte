@@ -2,8 +2,8 @@
 	import { ModeWatcher } from '$lib/mode.js';
 	import { page } from '$app/state';
 	import { Button } from '$lib/index.js';
-	import 'virtual:uno.css';
 	import { links } from '$internal/index.js';
+	import 'virtual:uno.css';
 
 	const { children } = $props();
 
@@ -19,7 +19,7 @@
 
 <ModeWatcher />
 
-<nav class="sticky top-0 z-5 bg-surface-base/90 backdrop-blur-lg w-full">
+<nav class="sticky top-0 z-5 bg-label-inverted backdrop-blur-lg w-full">
 	<div class="border-b border-surface-accented h-16 flex items-center">
 		<div class="container mx-auto flex items-center">
 			<div class="flex-1 flex items-center">

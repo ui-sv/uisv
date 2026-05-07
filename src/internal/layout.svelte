@@ -42,7 +42,7 @@
 </svelte:head>
 
 <div class="flex gap-2">
-	<h1 class="flex-1 text-3xl sm:text-4xl text-pretty font-bold text-highlighted">{title}</h1>
+	<h1 class="flex-1 text-3xl sm:text-4xl text-pretty font-bold text-label-highlighted">{title}</h1>
 
 	{#if bits}
 		<Button
@@ -74,7 +74,7 @@
 	/>
 </div>
 
-<p class="text-lg text-pretty text-muted mt-4">{desc}</p>
+<p class="text-lg text-pretty text-label-muted mt-4">{desc}</p>
 
 <div class="h-px bg-surface-accented my-8"></div>
 

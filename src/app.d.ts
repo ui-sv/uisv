@@ -10,10 +10,4 @@ declare global {
 	}
 }
 
-declare module '$theme/button' {
-	import t from '$lib/theme/button.ts';
-
-	export default t;
-}
-
 export {};

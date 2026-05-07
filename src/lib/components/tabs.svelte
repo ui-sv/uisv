@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import { Tabs } from 'bits-ui';
 	import { isComponent, isSnippet, useElementRects, type PropColor } from '$lib/index.js';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import { type Component, type Snippet } from 'svelte';
 	import { ElementRect } from 'runed';
 
@@ -24,12 +23,12 @@
 		disabled?: boolean;
 		orientation?: 'vertical' | 'horizontal';
 		ui?: {
-			root?: ClassNameValue;
-			item?: ClassNameValue;
-			list?: ClassNameValue;
-			content?: ClassNameValue;
-			icon?: ClassNameValue;
-			indicator?: ClassNameValue;
+			root?: ClassValue;
+			item?: ClassValue;
+			list?: ClassValue;
+			content?: ClassValue;
+			icon?: ClassValue;
+			indicator?: ClassValue;
 		};
 		[k: `content_${string}`]: Snippet<[{ item: TabItem; value: number }]>;
 	};
@@ -65,12 +64,12 @@
 		return result;
 	});
 
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				root: '',
 				list: 'flex relative p-1',
-				item: 'flex items-center justify-center text-muted data-[state="inactive"]:hover:text-highlighted font-medium z-1 transition-all',
+				item: 'flex items-center justify-center text-label-muted data-[state="inactive"]:hover:text-label-highlighted font-medium z-1 transition-all',
 				icon: '',
 				content: 'mt-2',
 				indicator: 'absolute z-0 transition-all duration-200 rounded-md w---width',
@@ -79,7 +78,7 @@
 				variant: {
 					pill: {
 						list: 'bg-surface-elevated rounded-lg',
-						item: 'flex-1 data-[state="active"]:text-inverted',
+						item: 'flex-1 data-[state="active"]:text-label-inverted',
 						trigger: 'flex-1',
 						indicator: 'rounded-md shadow-xs',
 					},
@@ -96,8 +95,8 @@
 						indicator: 'bg-primary-500',
 					},
 					surface: {
-						item: 'data-[variant="link"]:data-[state="active"]:text-surface-500',
-						indicator: 'bg-surface-900',
+						item: 'data-[variant="link"]:data-[state="active"]:text-label-muted',
+						indicator: 'bg-surface-inverted',
 					},
 					info: {
 						item: 'data-[variant="link"]:data-[state="active"]:text-info-500',
@@ -183,10 +182,10 @@
 <Tabs.Root
 	{disabled}
 	bind:value={() => value.toString(), (v) => (value = parseInt(v))}
-	class={classes.root({ class: ui.root })}
+	class={variants.root({ class: ui.root })}
 	{orientation}
 >
-	<Tabs.List bind:ref={container_el} class={classes.list({ class: ui.list })}>
+	<Tabs.List bind:ref={container_el} class={variants.list({ class: ui.list })}>
 		{#each items as item, idx (idx)}
 			{@const label = typeof item === 'string' ? item : item.label}
 
@@ -201,7 +200,7 @@
 					}
 				}
 				value={idx.toString()}
-				class={classes.item({ class: ui.item })}
+				class={variants.item({ class: ui.item })}
 				data-variant={variant}
 			>
 				{@render RenderIcon(typeof item === 'string' ? undefined : item.icon)}
@@ -211,7 +210,7 @@
 		{/each}
 
 		<span
-			class={classes.indicator({ class: ui.indicator })}
+			class={variants.indicator({ class: ui.indicator })}
 			style:--width="{rect.w}px"
 			style:--left="{rect.l}px"
 			style:--height="{rect.w}px"
@@ -221,7 +220,7 @@
 	{#each items as item, idx (idx)}
 		{#if typeof item === 'object' && item.content}
 			{@const Content = item.content}
-			<Tabs.Content value={idx.toString()} class={classes.content({ class: ui.content })}>
+			<Tabs.Content value={idx.toString()} class={variants.content({ class: ui.content })}>
 				{#if `content_${idx}` in rest}
 					{@render rest[`content_${idx}`]({ item, value: idx })}
 				{:else if typeof Content === 'string'}
@@ -238,8 +237,8 @@
 	{#if isSnippet(IconProp)}
 		{@render IconProp()}
 	{:else if isComponent(IconProp)}
-		<IconProp class={classes.icon({ class: ui.icon })} />
+		<IconProp class={variants.icon({ class: ui.icon })} />
 	{:else if typeof IconProp === 'string'}
-		<div class={classes.icon({ class: [IconProp, ui.icon] })}></div>
+		<div class={variants.icon({ class: [IconProp, ui.icon] })}></div>
 	{/if}
 {/snippet}

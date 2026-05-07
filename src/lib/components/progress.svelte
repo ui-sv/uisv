@@ -1,7 +1,6 @@
 <script module lang="ts">
 	import type { PropColor } from '$lib/index.js';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type ProgressProps = {
 		value?: number;
@@ -13,10 +12,10 @@
 		inverted?: boolean;
 		status?: boolean;
 		ui?: {
-			base?: ClassNameValue;
-			header?: ClassNameValue;
-			content?: ClassNameValue;
-			footer?: ClassNameValue;
+			base?: ClassValue;
+			header?: ClassValue;
+			content?: ClassValue;
+			footer?: ClassValue;
 		};
 	};
 </script>
@@ -47,10 +46,10 @@
 
 		return false;
 	});
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
-				root: 'relative w-full rounded-full overflow-hidden bg-surface-300',
+				root: 'relative w-full rounded-full overflow-hidden bg-surface-accented',
 				status: '',
 				indicator: 'absolute transition-all rounded-full',
 				steps: '',
@@ -61,7 +60,7 @@
 						indicator: 'bg-primary-500',
 					},
 					surface: {
-						indicator: 'bg-surface-500',
+						indicator: 'bg-label-muted',
 					},
 					info: {
 						indicator: 'bg-info-500',
@@ -92,8 +91,8 @@
 </script>
 
 <div data-state-indeterminate={indeterminate}>
-	<div class={classes.root({ class: [ui.base] })} style:height={`${height}px`}>
-		<span class={classes.indicator({ class: ['h-full left-0'] })} style:width={`${percentage}%`}>
+	<div class={variants.root({ class: [ui.base] })} style:height={`${height}px`}>
+		<span class={variants.indicator({ class: ['h-full left-0'] })} style:width={`${percentage}%`}>
 		</span>
 	</div>
 
@@ -101,7 +100,7 @@
 		<p
 			class={[
 				'text-right transition',
-				value && value > 0 && max[value] ? 'text-primary-500' : 'text-surface-500',
+				value && value > 0 && max[value] ? 'text-primary-500' : 'text-label-muted',
 			]}
 		>
 			{(value && max[value]) || max[0]}
@@ -110,15 +109,17 @@
 </div>
 
 <style>
-	@keyframe swing {
-		0% {
-			width: 0%;
-		}
-		50% {
-			width: 100%;
-		}
-		100% {
-			width: 0%;
+	:global {
+		@keyframes swing {
+			0% {
+				width: 0%;
+			}
+			50% {
+				width: 100%;
+			}
+			100% {
+				width: 0%;
+			}
 		}
 	}
 </style>

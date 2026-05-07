@@ -1,8 +1,7 @@
 <script module lang="ts">
 	import { type PropColor, isComponent, isSnippet } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
-	import type { ClassNameValue } from 'tailwind-merge';
-	import { tv } from 'tailwind-variants';
+	import { tv, type ClassValue } from 'tailwind-variants';
 	import type { Component } from 'vitest-browser-svelte';
 
 	export type CheckboxProps = {
@@ -18,11 +17,11 @@
 		indicator?: 'start' | 'end' | 'hidden';
 		as?: string;
 		ui?: {
-			root?: ClassNameValue;
-			container?: ClassNameValue;
-			icon?: ClassNameValue;
-			label?: ClassNameValue;
-			description?: ClassNameValue;
+			root?: ClassValue;
+			container?: ClassValue;
+			icon?: ClassValue;
+			label?: ClassValue;
+			description?: ClassValue;
 		};
 	};
 </script>
@@ -40,89 +39,91 @@
 		required,
 		indicator = 'start',
 		as = 'div',
-		ui = {}
+		ui = {},
 	}: CheckboxProps = $props();
 	const id = $props.id();
 
-	const classes = $derived.by(() =>
+	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				root: 'relative flex-inline gap-2',
 				container:
-					'rounded-md border border-neutral-200 relative transition m-0.5 mr-0 grid place-items-center',
+					'rounded-md border border-surface-accented relative transition m-0.5 mr-0 grid place-items-center',
 				icon: 'pi text-white',
 				label: 'text-sm font-medium',
-				description: 'text-sm text-neutral-500'
+				description: 'text-sm text-label-muted',
 			},
 			variants: {
 				color: {
 					primary: {
-						container: [value && 'bg-primary-500 border-primary-500 text-primary-500']
+						container: [value && 'bg-primary-500 border-primary-500 text-primary-500'],
 					},
 					surface: {
-						container: [value && 'bg-neutral-900 border-neutral-900 text-neutral-900']
+						container: [
+							value && 'bg-surface-inverted border-surface-inverted text-surface-inverted',
+						],
 					},
 					info: {
-						container: [value && 'bg-info-500 border-info-500 text-info-500']
+						container: [value && 'bg-info-500 border-info-500 text-info-500'],
 					},
 					success: {
-						container: [value && 'bg-success-500 border-success-500 text-success-500']
+						container: [value && 'bg-success-500 border-success-500 text-success-500'],
 					},
 					warning: {
-						container: [value && 'bg-warning-500 border-warning-500 text-warning-500']
+						container: [value && 'bg-warning-500 border-warning-500 text-warning-500'],
 					},
 					error: {
-						container: [value && 'bg-error-500 border-error-500 text-error-500']
-					}
+						container: [value && 'bg-error-500 border-error-500 text-error-500'],
+					},
 				},
 				size: {
 					xs: {
 						container: 'size-3',
-						icon: 'size-3'
+						icon: 'size-3',
 					},
 					sm: {
 						container: 'size-3.5',
-						icon: 'size-3.5'
+						icon: 'size-3.5',
 					},
 					md: {
 						container: 'size-4',
-						icon: 'size-4'
+						icon: 'size-4',
 					},
 					lg: {
 						container: 'size-4.5',
-						icon: 'size-4.5'
+						icon: 'size-4.5',
 					},
 					xl: {
 						container: 'size-5',
-						icon: 'size-5'
-					}
+						icon: 'size-5',
+					},
 				},
 				indicator: {
 					start: '',
 					end: {
-						root: 'flex-row-reverse'
+						root: 'flex-row-reverse',
 					},
 					hidden: {
-						container: 'hidden'
-					}
-				}
+						container: 'hidden',
+					},
+				},
 			},
-			compoundVariants: []
-		})({ color, size, indicator })
+			compoundVariants: [],
+		})({ color, size, indicator }),
 	);
 </script>
 
 <svelte:element
 	this={as}
 	data-state={value ? 'checked' : 'unchecked'}
-	class={classes.root({
-		class: [disabled && 'opacity-50', ui.root]
+	class={variants.root({
+		class: [disabled && 'opacity-50', ui.root],
 	})}
 >
 	<button
 		{id}
 		aria-label="checkbox"
-		class={classes.container({ class: [ui.container] })}
+		class={variants.container({ class: [ui.container] })}
 		onclick={() => {
 			if (disabled) return;
 			if (value === 'intermediate') return (value = true);
@@ -137,8 +138,8 @@
 		<div class="flex flex-col justify-start">
 			<label
 				for={id}
-				class={classes.label({
-					class: [required ? 'after:content-["*"] after:text-error-500' : '', ui.label]
+				class={variants.label({
+					class: [required ? 'after:content-["*"] after:text-error-500' : '', ui.label],
 				})}
 			>
 				{#if typeof label === 'string'}
@@ -149,7 +150,7 @@
 			</label>
 
 			{#if description}
-				<div class={classes.description({ class: ui.description })}>
+				<div class={variants.description({ class: ui.description })}>
 					{#if typeof description === 'string'}
 						{description}
 					{:else}
@@ -161,10 +162,10 @@
 	{/if}
 </svelte:element>
 
-{#snippet Icon(ico?: CheckboxProps['icon'], icon_class?: ClassNameValue)}
+{#snippet Icon(ico?: CheckboxProps['icon'], icon_class?: ClassValue)}
 	<div class={['absolute', icon_class]}>
 		{#if typeof ico === 'string'}
-			<div class={classes.icon({ class: [ico, ui.icon] })}></div>
+			<div class={variants.icon({ class: [ico, ui.icon] })}></div>
 		{:else if isSnippet(ico)}
 			{@render ico()}
 		{:else if isComponent(ico)}
