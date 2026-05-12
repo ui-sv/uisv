@@ -6,7 +6,7 @@
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { tv, type ClassValue } from 'tailwind-variants';
 
-	export type ButtonProps = SvelteHTMLElements['button'] & {
+	export type ButtonBaseProps = {
 		/** The underlying DOM element being rendered. You can bind to this to get a reference to the element. */
 		ref?: HTMLButtonElement | HTMLAnchorElement;
 		/** Where to display the linked URL, as the name for a browsing context. */
@@ -55,6 +55,8 @@
 		};
 		children?: Snippet;
 	};
+
+	export type ButtonProps = SvelteHTMLElements['button'] & ButtonBaseProps;
 </script>
 
 <script lang="ts">

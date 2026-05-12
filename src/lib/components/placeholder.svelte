@@ -3,16 +3,16 @@
 	import { cn } from 'tailwind-variants';
 
 	let { class: classes, ...rest }: SvelteHTMLElements['svg'] = $props();
-
-	const classname = $derived(
-		cn(
-			'inset-0 w-full stroke-surface-elevated border border-dashed border-surface-accented rounded-md',
-			classes,
-		),
-	);
 </script>
 
-<svg {...rest} class={classname} fill="none">
+<svg
+	{...rest}
+	class={cn(
+		'inset-0 w-full stroke-surface-elevated border border-dashed border-surface-accented rounded-md',
+		classes,
+	)}
+	fill="none"
+>
 	<defs>
 		<pattern
 			id="pattern-5c1e4f0e-62d5-498b-8ff0-cf77bb448c8e"

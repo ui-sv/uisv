@@ -121,14 +121,14 @@ export default (options: PluginOptions = {}) => {
 						if (typeof colors.surface !== 'object') return '';
 
 						const variables = `
-              --colors-label-DEFAULT: ${colors.surface['200']};
+              --colors-label-base: ${colors.surface['200']};
       				--colors-label-dimmed: ${colors.surface['500']};
       				--colors-label-muted: ${colors.surface['400']};
       				--colors-label-toned: ${colors.surface['300']};
       				--colors-label-highlighted: white;
       				--colors-label-inverted: ${colors.surface['900']};
 
-      				--colors-surface-DEFAULT: ${colors.surface['900']};
+      				--colors-surface-base: ${colors.surface['900']};
       				--colors-surface-muted: ${colors.surface['800']};
       				--colors-surface-elevated: ${colors.surface['800']};
       				--colors-surface-accented: ${colors.surface['700']};
@@ -175,7 +175,7 @@ export default (options: PluginOptions = {}) => {
 				if (typeof colors.label === 'object') colors.label = {};
 
 				colors.label = defu(colors.label, {
-					DEFAULT: colors.surface['700'],
+					base: colors.surface['700'],
 					dimmed: colors.surface['400'],
 					muted: colors.surface['500'],
 					toned: colors.surface['600'],
@@ -184,6 +184,7 @@ export default (options: PluginOptions = {}) => {
 				});
 
 				colors['surface'] = defu(colors.surface, {
+					base: 'white',
 					muted: colors.surface['50'],
 					elevated: colors.surface['100'],
 					accented: colors.surface['200'],

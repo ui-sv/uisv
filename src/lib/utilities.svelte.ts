@@ -22,7 +22,7 @@ export function isComponent(v: unknown): v is Component {
  * @param v - The value to check
  * @returns true if the value is a snippet, false otherwise
  */
-export function isSnippet(v: unknown): v is Snippet {
+export function isSnippet<T>(v: unknown): v is Snippet<[T]> {
 	return typeof v === 'function' && !('render' in v);
 }
 

@@ -1,9 +1,8 @@
 <script module lang="ts">
 	import type { Snippet } from 'svelte';
-	import { Popover, type PopoverContentProps } from 'bits-ui';
-	import { cn, tv, type ClassValue } from 'tailwind-variants';
-	import { type ButtonProps, Button } from '$lib/index.js';
-	import type { PropColor } from '$lib/index.js';
+	import { Popover, type PopoverArrowProps, type PopoverContentProps } from 'bits-ui';
+	import { tv, type ClassValue } from 'tailwind-variants';
+	import { type ButtonBaseProps, Button } from '$lib/index.js';
 
 	export type PopoverContentSnippet = {
 		props: Record<string, unknown>;
@@ -11,7 +10,7 @@
 		wrapperProps: Record<string, unknown>;
 	};
 
-	export type PopoverProps = {
+	export type PopoverProps = ButtonBaseProps & {
 		/**
 		 * The display mode of the popover.
 		 */
@@ -20,20 +19,15 @@
 		 * The props for the content of popover.
 		 */
 		contentprops?: PopoverContentProps;
-		content?: Snippet<[PopoverContentSnippet]>;
 		children?: Snippet<[]>;
-		/**
-		 * Snippet if you want to implement your own trigger button
-		 */
-		trigger?: Snippet<[Record<string, unknown>]>;
 		/**
 		 * Display an arrow alongside the popover.
 		 */
-		arrow?: boolean;
+		arrow?: boolean | PopoverArrowProps;
 		/**
 		 * Render the popover in a portal.
 		 */
-		portal?: string | false | true | HTMLElement;
+		// portal?: string | false | true | HTMLElement;
 		/**
 		 * The reference (or anchor) element that is being referred to for positioning. If not provided will use the current component as anchor.
 		 */
@@ -48,10 +42,6 @@
 		 * When `false`, the popover will not close when clicking outside or pressing escape.
 		 */
 		dismissible?: boolean;
-		/**
-		 * The open state of the popover when it is initially rendered. Use when you do not need to control its open state.
-		 */
-		defaultopen?: boolean;
 		/**
 		 * The controlled open state of the popover.
 		 */
@@ -74,19 +64,8 @@
 		ui?: {
 			content?: ClassValue;
 			arrow?: ClassValue;
+			trigger?: ClassValue;
 		};
-		/**
-		 * @default `outline`
-		 */
-		variant?: ButtonProps['variant'];
-		/**
-		 * @default primary
-		 */
-		color?: PropColor;
-		/**
-		 *
-		 */
-		class?: ClassValue;
 	};
 </script>
 
@@ -94,57 +73,51 @@
 	let {
 		mode = 'click',
 		contentprops = { side: 'bottom', sideOffset: 8, collisionPadding: 8 },
-		content,
 		children,
-		trigger,
-		arrow = true,
-		portal = true,
-		reference,
+		arrow = false,
 		dismissible = true,
-		defaultopen,
 		open = $bindable(false),
-		modal = false,
 		opendelay = 0,
 		closedelay = 0,
 		ui = {},
-		variant = 'outline',
-		color = 'primary',
-		class: klass,
+		...rest
 	}: PopoverProps = $props();
 
 	const variants = $derived(
 		tv({
 			slots: {
-				content:
-					'bg-default shadow-lg rounded-md ring ring-default data-[state=open]:animate-[scale-in_100ms_ease-out] data-[state=closed]:animate-[scale-out_100ms_ease-in] origin-(--reka-popover-content-transform-origin) focus:outline-none pointer-events-auto',
-				arrow: 'fill-default',
+				content: [
+					'bg-surface-base z-30 w-full shadow-lg rounded-md border border-surface-accented p-4',
+					'origin-(--bits-popover-content-transform-origin)',
+					'',
+				],
+				arrow: 'text-surface-accented',
 			},
 		})({}),
 	);
 </script>
 
 <Popover.Root bind:open>
-	<Popover.Trigger>
+	<Popover.Trigger openOnHover={mode === 'hover'} openDelay={opendelay} closeDelay={closedelay}>
 		{#snippet child({ props })}
-			{#if trigger}
-				{@render trigger(props)}
-			{:else}
-				<Button {...props} {variant} {color} ui={{ base: klass }} />
-			{/if}
+			<Button {...rest} {...props} ui={{ base: ui.trigger }} />
 		{/snippet}
 	</Popover.Trigger>
-	<Popover.Portal>
-		<Popover.Overlay />
-		<Popover.Content {...contentprops} class={variants.content({ class: ui.content })}>
-			{#snippet child(props)}
-				{#if content}
-					{@render content(props)}
-				{:else}
-					{@render children?.()}
-				{/if}
-			{/snippet}
 
-			<Popover.Arrow />
+	<Popover.Portal>
+		<Popover.Content
+			{...contentprops}
+			class={variants.content({ class: ui.content })}
+			interactOutsideBehavior={dismissible ? 'close' : 'ignore'}
+		>
+			{@render children?.()}
+
+			{#if arrow}
+				<Popover.Arrow
+					{...typeof arrow === 'object' ? arrow : {}}
+					class={variants.arrow({ class: ui.arrow })}
+				/>
+			{/if}
 		</Popover.Content>
 	</Popover.Portal>
 </Popover.Root>

@@ -55,3 +55,5 @@ export * from './breadcrumb.svelte';
 export { default as Breadcrumb } from './breadcrumb.svelte';
 export * from './input-number.svelte';
 export { default as InputNumber } from './input-number.svelte';
+export * from './modal.svelte';
+export { default as Modal } from './modal.svelte';

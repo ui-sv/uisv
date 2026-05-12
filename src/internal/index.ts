@@ -49,7 +49,7 @@ export const links: Links = {
 			},
 			// Data: {},
 			Navigation: { Breadcrumb: '', Tabs: 'A set of tab panels that are displayed one at a time.' },
-			Overlay: { Popover: '' },
+			Overlay: { Modal: '', Popover: '' },
 		},
 	},
 	utilities: {
