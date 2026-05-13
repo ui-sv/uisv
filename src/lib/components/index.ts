@@ -57,3 +57,7 @@ export * from './input-number.svelte';
 export { default as InputNumber } from './input-number.svelte';
 export * from './modal.svelte';
 export { default as Modal } from './modal.svelte';
+export * from './tooltip.svelte';
+export { default as Tooltip } from './tooltip.svelte';
+export * from './app.svelte';
+export { default as App } from './app.svelte';

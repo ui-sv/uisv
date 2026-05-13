@@ -1,10 +1,10 @@
 <script module lang="ts">
 	import { type Component, type Snippet } from 'svelte';
-	import { isComponent, type PropColor, type PropVariant } from '$lib/index.js';
+	import { type PropColor, type PropVariant, Icon } from '$lib/index.js';
 	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
-	import { isSnippet } from '$lib/index.js';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { tv, type ClassValue } from 'tailwind-variants';
+	import { app_icons } from '$lib/contexts.js';
 
 	export type ButtonBaseProps = {
 		/** The underlying DOM element being rendered. You can bind to this to get a reference to the element. */
@@ -17,15 +17,15 @@
 		/** The type of the button when not a link. */
 		type?: 'submit' | 'reset' | 'button' | null | undefined;
 		/** When true, the icon will be displayed on the right side. */
-		loadingicon?: string | Snippet | Component;
+		loadingicon?: string | Component;
 		/** When true, the loading icon will be displayed. */
 		loading?: boolean;
 		/** The position of the icon, including the loading icon */
-		iconposition?: 'left' | 'right';
+		iconposition?: 'leading' | 'trailing';
 		/** Icon when `loading` is `false` */
-		icon?: string | Snippet | Component;
-		leadingicon?: string | Snippet | Component;
-		trailingicon?: string | Snippet | Component;
+		icon?: string | Component;
+		leadingicon?: string | Component;
+		trailingicon?: string | Component;
 		/** Route Location the link should navigate to when clicked on. */
 		href?: string;
 		label?: string;
@@ -66,7 +66,7 @@
 		size = 'md',
 		variant = 'solid',
 		color = 'primary',
-		iconposition = 'left',
+		iconposition = 'leading',
 		children,
 		// active,
 		// activecolor,
@@ -80,7 +80,7 @@
 		href,
 		icon,
 		loading,
-		loadingicon = 'i-lucide-loader-circle',
+		loadingicon = app_icons.get().loading,
 		type,
 		trailingicon,
 		leadingicon,
@@ -353,7 +353,6 @@
 
 <svelte:element
 	this={href ? 'a' : 'button'}
-	data-button-root
 	type={href ? undefined : type}
 	href={href && !disabled ? href : undefined}
 	disabled={disabled || is_loading}
@@ -367,8 +366,11 @@
 	onclick={onClickWrapper}
 	{...rest}
 >
-	{#if iconposition === 'left' || leadingicon}
-		{@render Icon(is_loading ? loadingicon : leadingicon || icon, ui.leadingicon)}
+	{#if iconposition === 'leading' || leadingicon || loading}
+		<Icon
+			name={is_loading ? loadingicon : leadingicon || icon}
+			class={[ui.leadingicon, loading && 'animate-spin', iconposition === 'leading' && ui.icon]}
+		/>
 	{/if}
 
 	{#if label}
@@ -377,21 +379,10 @@
 		{@render children?.()}
 	{/if}
 
-	{#if iconposition !== 'left' || trailingicon}
-		{@render Icon(trailingicon || icon, ui.trailingicon)}
+	{#if iconposition === 'trailing' || trailingicon}
+		<Icon
+			name={trailingicon || icon}
+			class={[ui.trailingicon, iconposition === 'trailing' && ui.icon]}
+		/>
 	{/if}
 </svelte:element>
-
-{#snippet Icon(IconProp?: string | Snippet | Component, classvalue?: ClassValue)}
-	{#if typeof IconProp === 'string'}
-		<div
-			class={classnames.icon({
-				class: [is_loading && 'animate-spin', IconProp, ui.icon, classvalue],
-			})}
-		></div>
-	{:else if isSnippet(IconProp)}
-		{@render IconProp()}
-	{:else if isComponent(IconProp)}
-		<IconProp />
-	{/if}
-{/snippet}

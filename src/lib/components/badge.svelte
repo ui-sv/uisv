@@ -2,6 +2,7 @@
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import { type PropColor, type PropVariant, isSnippet } from '$lib/index.js';
+	import Icon from './icon.svelte';
 
 	export type BadgeProps = {
 		label?: string;
@@ -196,7 +197,11 @@
 	})}
 >
 	{#if !trailingicon}
-		{@render Icon()}
+		{#if isSnippet(icon)}
+			{@render icon()}
+		{:else}
+			<Icon name={icon} class={variants.icon({ class: ui.icon })} />
+		{/if}
 	{/if}
 
 	{#if label}
@@ -206,19 +211,10 @@
 	{/if}
 
 	{#if trailingicon}
-		{@render Icon()}
-	{/if}
-</span>
-
-{#snippet Icon()}
-	{#if icon}
-		{#if typeof icon === 'string'}
-			<div class={['pi', icon, variants.icon(), ui.icon]}></div>
-		{:else if isSnippet(icon)}
+		{#if isSnippet(icon)}
 			{@render icon()}
 		{:else}
-			{@const Icon = icon}
-			<Icon />
+			<Icon name={icon} class={variants.icon({ class: ui.icon })} />
 		{/if}
 	{/if}
-{/snippet}
+</span>

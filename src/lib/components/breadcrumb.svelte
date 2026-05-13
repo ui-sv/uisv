@@ -3,6 +3,7 @@
 	import { Button, Icon, type ButtonProps } from './index.js';
 	import { tv } from 'tailwind-variants';
 	import { isSnippet } from '$lib/utilities.svelte.js';
+	import { app_icons } from '$lib/contexts.js';
 
 	export type BreadcrumbItem = Omit<ButtonProps, 'label'> & {
 		label?: string;
@@ -23,7 +24,7 @@
 	let {
 		items,
 		labelkey = 'label',
-		seperator = 'i-lucide:chevron-right',
+		seperator = app_icons.get().chevronright,
 		...rest
 	}: BreadcrumbProps = $props();
 

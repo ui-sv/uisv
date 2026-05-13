@@ -5,10 +5,12 @@
 		type ButtonProps,
 		Button,
 		type PropVariant,
+		Icon,
 	} from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import { defu } from 'defu';
+	import { app_icons } from '$lib/contexts.js';
 
 	export type AlertProps = {
 		title?: string | Snippet;
@@ -45,7 +47,7 @@
 
 	const close_props = $derived.by(() => {
 		return defu(typeof close === 'boolean' ? {} : close, {
-			icon: 'i-lucide-x',
+			icon: app_icons.get().close,
 			variant: 'link',
 			color: variant === 'solid' ? 'surface' : color,
 			ui: {
@@ -220,17 +222,10 @@
 
 <div class={variants.base({ class: [position === 'bottom' ? '' : 'flex', ui.base] })}>
 	<div class="flex gap-2 grow">
-		{#if icon}
-			<div class="size-6">
-				{#if typeof icon === 'string'}
-					<div class={variants.icon({ class: [icon] })}></div>
-				{:else if isSnippet(icon)}
-					{@render icon()}
-				{:else}
-					{@const Icon = icon}
-					<Icon />
-				{/if}
-			</div>
+		{#if isSnippet(icon)}
+			{@render icon()}
+		{:else}
+			<Icon name={icon} class={variants.icon({ class: ui.icon })} />
 		{/if}
 
 		<div class="space-y-1 grow">
