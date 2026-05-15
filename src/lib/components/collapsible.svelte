@@ -16,6 +16,8 @@
 </script>
 
 <script lang="ts">
+	import { getAppIcons } from '$lib/contexts.js';
+
 	let {
 		open = $bindable(false),
 		children,
@@ -40,7 +42,7 @@
 		{#snippet child({ props })}
 			<Button
 				{...props}
-				trailingicon="i-lucide-chevron-down"
+				trailingicon={getAppIcons().chevrondown}
 				{...rest}
 				block
 				ui={defu(ui, { trailingicon: 'ms-auto' })}

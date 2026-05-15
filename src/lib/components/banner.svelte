@@ -10,7 +10,7 @@
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import { defu } from 'defu';
-	import { app_icons } from '$lib/contexts.js';
+	import { getAppIcons } from '$lib/contexts.js';
 
 	export type BannerProps = {
 		title: string | Snippet;
@@ -238,7 +238,7 @@
 		<div>
 			<Button
 				{...defu<ButtonProps, [ButtonProps]>(typeof close === 'boolean' ? {} : close, {
-					icon: app_icons.get().close,
+					icon: getAppIcons().close,
 					variant: 'ghost',
 					color: 'surface',
 					ui: {

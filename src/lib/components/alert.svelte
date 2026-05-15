@@ -10,7 +10,7 @@
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import { defu } from 'defu';
-	import { app_icons } from '$lib/contexts.js';
+	import { getAppIcons } from '$lib/contexts.js';
 
 	export type AlertProps = {
 		title?: string | Snippet;
@@ -47,7 +47,7 @@
 
 	const close_props = $derived.by(() => {
 		return defu(typeof close === 'boolean' ? {} : close, {
-			icon: app_icons.get().close,
+			icon: getAppIcons().close,
 			variant: 'link',
 			color: variant === 'solid' ? 'surface' : color,
 			ui: {

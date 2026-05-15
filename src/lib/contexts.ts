@@ -1,6 +1,4 @@
-import { Context } from 'runed';
-
-export const app_icons = new Context<Record<AppIcons, string>>('app-config');
+import { createContext } from 'svelte';
 
 export type AppIcons = keyof typeof DEFAULT_ICONS;
 
@@ -48,3 +46,5 @@ export const DEFAULT_ICONS = {
 	upload: 'i-lucide:upload',
 	warning: 'i-lucide:warning',
 };
+
+export const [getAppIcons, setAppIcons] = createContext<Record<AppIcons, string>>();

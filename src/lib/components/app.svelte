@@ -1,6 +1,6 @@
 <script module lang="ts">
-	import { app_icons, DEFAULT_ICONS, type AppIcons } from '$lib/contexts.js';
-	import { ModeWatcher, type ModeWatcherProps } from '$lib/mode.js';
+	import { DEFAULT_ICONS, setAppIcons, type AppIcons } from '$lib/contexts.js';
+	import { mode, ModeWatcher, type ModeWatcherProps } from '$lib/mode.js';
 	import { Tooltip } from 'bits-ui';
 	import defu from 'defu';
 	import { type Snippet } from 'svelte';
@@ -18,37 +18,44 @@
 </script>
 
 <script lang="ts">
-	let { children, modewatcher, toaster, tooltip, icons = {} }: AppProps = $props();
+	let { children, modewatcher = {}, toaster = {}, tooltip = {}, icons = {} }: AppProps = $props();
 
 	const _icons = boxWith(() => defu(icons, DEFAULT_ICONS));
 
-	app_icons.set(_icons.current);
+	setAppIcons(_icons.current);
 </script>
 
 <ModeWatcher {...modewatcher} />
-<Toaster {...toaster}>
+
+<Toaster
+	theme={mode.current}
+	{...defu(toaster, <ToasterProps>{
+		visibleToasts: 5,
+		toastOptions: { duration: 6000 },
+	})}
+>
 	{#snippet infoIcon()}
-		<Icon name={app_icons.get().info} />
+		<Icon name={_icons.current.info} />
 	{/snippet}
 
 	{#snippet closeIcon()}
-		<Icon name={app_icons.get().close} />
+		<Icon name={_icons.current.close} />
 	{/snippet}
 
 	{#snippet errorIcon()}
-		<Icon name={app_icons.get().error} />
+		<Icon name={_icons.current.error} />
 	{/snippet}
 
 	{#snippet loadingIcon()}
-		<Icon name={app_icons.get().loading} />
+		<Icon name={_icons.current.loading} />
 	{/snippet}
 
 	{#snippet successIcon()}
-		<Icon name={app_icons.get().success} />
+		<Icon name={_icons.current.success} />
 	{/snippet}
 
 	{#snippet warningIcon()}
-		<Icon name={app_icons.get().warning} />
+		<Icon name={_icons.current.warning} />
 	{/snippet}
 </Toaster>
 

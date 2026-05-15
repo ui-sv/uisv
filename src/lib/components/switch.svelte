@@ -1,4 +1,5 @@
 <script module lang="ts">
+	import { getAppIcons } from '$lib/contexts.js';
 	import { type PropColor, Icon } from '$lib/index.js';
 	import type { Snippet, Component } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
@@ -32,7 +33,7 @@
 		size = 'md',
 		disabled,
 		loading,
-		loadingicon = 'i-lucide-loader-circle',
+		loadingicon = getAppIcons().loading,
 		uncheckedicon,
 		checkedicon,
 		label,

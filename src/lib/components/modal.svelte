@@ -6,7 +6,7 @@
 	import defu from 'defu';
 	import { fade, scale } from 'svelte/transition';
 	import { cubicIn } from 'svelte/easing';
-	import { app_icons } from '$lib/contexts.js';
+	import { getAppIcons } from '$lib/contexts.js';
 
 	export type ModalProps = {
 		open?: boolean;
@@ -160,7 +160,7 @@
 										{...defu(typeof close === 'boolean' ? {} : close, <ButtonProps>{
 											variant: 'ghost',
 											color: 'surface',
-											icon: app_icons.get().close,
+											icon: getAppIcons().close,
 											onclick() {
 												open = false;
 											},

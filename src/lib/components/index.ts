@@ -61,3 +61,4 @@ export * from './tooltip.svelte';
 export { default as Tooltip } from './tooltip.svelte';
 export * from './app.svelte';
 export { default as App } from './app.svelte';
+export * from './toast.svelte.js';

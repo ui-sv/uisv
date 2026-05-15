@@ -1,4 +1,5 @@
 <script module lang="ts">
+	import { getAppIcons } from '$lib/contexts.js';
 	import { type PropColor, isComponent, isSnippet } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
@@ -32,8 +33,8 @@
 		color = 'primary',
 		size = 'md',
 		disabled,
-		icon = 'i-lucide-check',
-		intermediateicon = 'i-lucide-minus',
+		icon = getAppIcons().check,
+		intermediateicon = getAppIcons().minus,
 		label,
 		description,
 		required,

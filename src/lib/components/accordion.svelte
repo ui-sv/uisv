@@ -1,4 +1,5 @@
 <script module lang="ts">
+	import { getAppIcons } from '$lib/contexts.js';
 	import { Accordion } from 'bits-ui';
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
@@ -44,7 +45,7 @@
 		collapsible = true,
 		disabled,
 		type = 'single',
-		trailingicon = 'i-lucide-baret-down',
+		trailingicon = getAppIcons().chevrondown,
 		leading,
 		default: defau,
 		trailing,

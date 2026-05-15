@@ -10,7 +10,7 @@
 	let button_size = $state<ButtonProps['size']>('md');
 	let button_icon = $state('i-lucide:rocket');
 	let loading = $state(false);
-	let icon_position = $state<ButtonProps['iconposition']>('left');
+	let icon_position = $state<ButtonProps['iconposition']>('leading');
 </script>
 
 <div class="space-y-4 p-4">
@@ -72,7 +72,7 @@
 		icon: button_icon,
 		size: button_size,
 		variant: button_variant,
-		iconposition: 'right',
+		iconposition: 'trailing',
 	})}
 
 	<h1>Icon only</h1>

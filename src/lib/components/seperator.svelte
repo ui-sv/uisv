@@ -198,7 +198,7 @@
 		{:else if typeof label === 'string' && label.length > 0}
 			<span class={variants.label({ class: ui.label })}>{label}</span>
 		{:else if isSnippet(label)}
-			{@render label()}
+			{@render label(variants.label({ class: ui.label }))}
 		{:else if isComponent(label)}
 			{@const Label = label}
 			<Label class={variants.label({ class: ui.label })} />

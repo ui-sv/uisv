@@ -9,6 +9,7 @@
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import { useId } from 'bits-ui';
+	import { getAppIcons } from '$lib/contexts.js';
 
 	export type InputNumberProps = Omit<SvelteHTMLElements['input'], 'size' | 'value'> & {
 		value?: number;
@@ -154,7 +155,7 @@
 	{#if increment}
 		<Button
 			variant="link"
-			icon="i-lucide:minus"
+			icon={getAppIcons().minus}
 			onclick={() => {
 				value = value === undefined ? 0 : value - 1;
 			}}
@@ -164,7 +165,7 @@
 	{#if increment}
 		<Button
 			variant="link"
-			icon="i-lucide:plus"
+			icon={getAppIcons().plus}
 			onclick={() => {
 				value = value === undefined ? 0 : value + 1;
 			}}

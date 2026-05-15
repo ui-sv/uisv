@@ -1,9 +1,8 @@
 <script module lang="ts">
 	import type { Component, Snippet } from 'svelte';
-	import { Button, Icon, type ButtonProps } from './index.js';
+	import { Button, Icon, type ButtonProps, isSnippet } from '$lib/index.js';
 	import { tv } from 'tailwind-variants';
-	import { isSnippet } from '$lib/utilities.svelte.js';
-	import { app_icons } from '$lib/contexts.js';
+	import { getAppIcons } from '$lib/contexts.js';
 
 	export type BreadcrumbItem = Omit<ButtonProps, 'label'> & {
 		label?: string;
@@ -24,7 +23,7 @@
 	let {
 		items,
 		labelkey = 'label',
-		seperator = app_icons.get().chevronright,
+		seperator = getAppIcons().chevronright,
 		...rest
 	}: BreadcrumbProps = $props();
 

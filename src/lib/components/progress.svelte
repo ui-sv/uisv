@@ -6,9 +6,9 @@
 		value?: number;
 		max?: number | string[];
 		animation?: 'swing' | 'carousel' | 'carousel-inverse' | 'elastic';
-		orientation?: 'horizontal' | 'veritcal';
+		orientation?: 'horizontal' | 'vertical';
 		color?: PropColor;
-		height?: number;
+		size?: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 		inverted?: boolean;
 		status?: boolean;
 		ui?: {
@@ -16,6 +16,7 @@
 			header?: ClassValue;
 			content?: ClassValue;
 			footer?: ClassValue;
+			indicator?: ClassValue;
 		};
 	};
 </script>
@@ -26,10 +27,10 @@
 		animation,
 		inverted,
 		status,
-		value,
+		value = 0,
 		orientation = 'horizontal',
 		color = 'primary',
-		height = 8,
+		size = 'md',
 		ui = {},
 	}: ProgressProps = $props();
 
@@ -75,6 +76,19 @@
 						indicator: 'bg-error-500',
 					},
 				},
+				size: {
+					'2xs': '',
+					xs: '',
+					sm: '',
+					md: '',
+					lg: '',
+					xl: '',
+					'2xl': '',
+				},
+				orientation: {
+					vertical: { indicator: 'w-full top-0 h-(--ui-progress-percentage)' },
+					horizontal: { indicator: 'h-full left-0 w-(--ui-progress-percentage)' },
+				},
 				animation: {
 					swing: [indeterminate ? 'animate-[swing_2s_ease-in-out_infinite' : ''],
 					carousel: [indeterminate ? '' : ''],
@@ -82,17 +96,38 @@
 					elastic: [indeterminate ? '' : ''],
 				},
 			},
-			compoundVariants: [],
+			compoundVariants: [
+				{ orientation: 'horizontal', size: '2xs', class: { root: 'h-px' } },
+				{ orientation: 'horizontal', size: 'xs', class: { root: 'h-0.5' } },
+				{ orientation: 'horizontal', size: 'sm', class: { root: 'h-1' } },
+				{ orientation: 'horizontal', size: 'md', class: { root: 'h-2' } },
+				{ orientation: 'horizontal', size: 'lg', class: { root: 'h-3' } },
+				{ orientation: 'horizontal', size: 'xl', class: { root: 'h-4' } },
+				{ orientation: 'horizontal', size: '2xl', class: { root: 'h-5' } },
+
+				{ orientation: 'vertical', size: '2xs', class: { root: 'w-px' } },
+				{ orientation: 'vertical', size: 'xs', class: { root: 'w-0.5' } },
+				{ orientation: 'vertical', size: 'sm', class: { root: 'w-1' } },
+				{ orientation: 'vertical', size: 'md', class: { root: 'w-2' } },
+				{ orientation: 'vertical', size: 'lg', class: { root: 'w-3' } },
+				{ orientation: 'vertical', size: 'xl', class: { root: 'w-4' } },
+				{ orientation: 'vertical', size: '2xl', class: { root: 'w-5' } },
+			],
 		})({
 			color,
 			animation: animation ?? 'swing',
+			size,
+			orientation,
 		}),
 	);
 </script>
 
 <div data-state-indeterminate={indeterminate}>
-	<div class={variants.root({ class: [ui.base] })} style:height={`${height}px`}>
-		<span class={variants.indicator({ class: ['h-full left-0'] })} style:width={`${percentage}%`}>
+	<div class={variants.root({ class: [ui.base] })}>
+		<span
+			class={variants.indicator({ class: ui.indicator })}
+			style:--ui-progress-percentage={`${percentage}%`}
+		>
 		</span>
 	</div>
 

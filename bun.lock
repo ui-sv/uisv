@@ -7,7 +7,6 @@
       "dependencies": {
         "@internationalized/date": "^3.12.1",
         "@unocss/preset-web-fonts": "^66.6.8",
-        "@unocss/svelte-scoped": "^66.6.8",
         "bits-ui": "^2.18.1",
         "colortranslator": "^6.1.1",
         "defu": "^6.1.7",
@@ -53,6 +52,9 @@
         "svelte": "^5.0.0",
       },
     },
+  },
+  "patchedDependencies": {
+    "svelte-sonner@1.1.1": "patches/svelte-sonner@1.1.1.patch",
   },
   "packages": {
     "@antfu/install-pkg": ["@antfu/install-pkg@1.1.0", "", { "dependencies": { "package-manager-detector": "^1.3.0", "tinyexec": "^1.0.1" } }, "sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ=="],
@@ -349,11 +351,7 @@
 
     "@unocss/preset-wind4": ["@unocss/preset-wind4@66.6.8", "", { "dependencies": { "@unocss/core": "66.6.8", "@unocss/extractor-arbitrary-variants": "66.6.8", "@unocss/rule-utils": "66.6.8" } }, "sha512-CheOm7KXOsTI5t4RXgeYz95CO5p589F6jsyYp+inOCk4N0/d+DWiDHrQ+V0x0HWs3JXWlD+/Va/yXjlc3o2sIw=="],
 
-    "@unocss/reset": ["@unocss/reset@66.6.8", "", {}, "sha512-H+YP3ltizUiPO9FzFgFhv8WGsefO7fTgT1If1/9ritPDqZlvzTqMmjelhcq8D8MGoQ1RQBUvtkZ5HJoKVY0Tgw=="],
-
     "@unocss/rule-utils": ["@unocss/rule-utils@66.6.8", "", { "dependencies": { "@unocss/core": "^66.6.8", "magic-string": "^0.30.21" } }, "sha512-WR35L07mLP6PElD4hlUHo5KbQ48uz2HT/XCuJyAsHP+15Gv6539hPWA5SresPuva9r8rl+PeGIgMSIKf4A5Ihw=="],
-
-    "@unocss/svelte-scoped": ["@unocss/svelte-scoped@66.6.8", "", { "dependencies": { "@unocss/config": "66.6.8", "@unocss/core": "66.6.8", "@unocss/preset-uno": "66.6.8", "@unocss/preset-wind3": "66.6.8", "@unocss/reset": "66.6.8", "acorn": "^8.16.0", "css-tree": "^3.2.1", "magic-string": "^0.30.21", "zimmerframe": "^1.1.4" } }, "sha512-YkgLkN0KZBvHc2b1WuoP1sd/YNsWjQL/0AQgRUKLgwNQ29YeLBJLGhnq+6KWGMoHA29ut7i/OS9LriTGdy+yNA=="],
 
     "@unocss/transformer-attributify-jsx": ["@unocss/transformer-attributify-jsx@66.6.8", "", { "dependencies": { "@unocss/core": "66.6.8", "oxc-parser": "^0.124.0", "oxc-walker": "^0.7.0" } }, "sha512-g+7lvm+8V1MnJ21ialTxFBonCTtenn/KcZQbm0JfvQjgG+KuuSnt3BGEcXAHQZu3eBDGuJuasTHiXWwzCYIRBQ=="],
 

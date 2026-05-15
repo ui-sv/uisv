@@ -1,10 +1,11 @@
 <script module lang="ts">
-	import { type PropColor, type PropVariant, isComponent, isSnippet } from '$lib/index.js';
+	import { type PropColor, type PropVariant, isComponent, isSnippet, Icon } from '$lib/index.js';
 	import type { Component, Snippet } from 'svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { maska } from 'maska/svelte';
 	import { type MaskInputOptions } from 'maska';
 	import { tv, type ClassValue } from 'tailwind-variants';
+	import { getAppIcons } from '$lib/contexts.js';
 
 	export type InputProps = Omit<SvelteHTMLElements['input'], 'size'> & {
 		name?: string;
@@ -56,8 +57,6 @@
 </script>
 
 <script lang="ts">
-	import Icon from './icon.svelte';
-
 	let {
 		type,
 		value = $bindable(),
@@ -70,7 +69,7 @@
 		highlight,
 		leading,
 		loading,
-		loadingicon = 'i-lucide-loader-circle',
+		loadingicon = getAppIcons().loading,
 		required,
 		trailing,
 		mask,
@@ -223,7 +222,7 @@
 
 <div class={variants.root({ class: ui.root })}>
 	{#if leading || (icon && iconposition === 'leading') || loading}
-		{@const TrailingIcon = loading ? loadingicon : icon}
+		{@const leadingicon = loading ? loadingicon : icon}
 
 		<span class={variants.leading({ class: ui.leading })}>
 			{#if !!leading && !loading}
@@ -237,7 +236,7 @@
 				{/if}
 			{:else}
 				<Icon
-					name={TrailingIcon}
+					name={leadingicon}
 					class={variants.icon({ class: [loading ? 'animate-spin' : ''] })}
 				/>
 			{/if}
@@ -251,6 +250,7 @@
 		class={variants.base({ class: [ui.base] })}
 		{...rest}
 		use:maska={mask}
+		bind:value
 	/>
 
 	{#if trailing || (icon && iconposition === 'trailing')}
@@ -264,17 +264,8 @@
 				{:else if isSnippet(trailing)}
 					{@render trailing()}
 				{/if}
-			{:else if typeof icon === 'string'}
-				<div
-					class={variants.icon({
-						class: [icon, ui.icon],
-					})}
-				></div>
-			{:else if isSnippet(icon)}
-				{@render icon()}
-			{:else if isComponent(icon)}
-				{@const Icon = icon}
-				<Icon class={variants.icon({ class: [ui.icon] })} />
+			{:else}
+				<Icon name={icon} class={variants.icon({ class: [ui.icon] })} />
 			{/if}
 		</span>
 	{/if}
