@@ -4,7 +4,7 @@
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import Icon from './icon.svelte';
-	import { getAppIcons } from '$lib/contexts.js';
+	import { getAppContext } from '$lib/contexts.js';
 
 	export type SelectItem<T> =
 		| T
@@ -70,7 +70,7 @@
 		highlight,
 		placeholder,
 		ui = {},
-		dropdownicon = getAppIcons().chevrondown,
+		dropdownicon = getAppContext().icons.chevrondown,
 	}: SelectProps<T> = $props();
 
 	const variants = $derived(

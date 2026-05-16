@@ -5,7 +5,7 @@
 	import { maska } from 'maska/svelte';
 	import { type MaskInputOptions } from 'maska';
 	import { tv, type ClassValue } from 'tailwind-variants';
-	import { getAppIcons } from '$lib/contexts.js';
+	import { getAppContext } from '$lib/contexts.js';
 
 	export type InputProps = Omit<SvelteHTMLElements['input'], 'size'> & {
 		name?: string;
@@ -69,7 +69,7 @@
 		highlight,
 		leading,
 		loading,
-		loadingicon = getAppIcons().loading,
+		loadingicon = getAppContext().icons.loading,
 		required,
 		trailing,
 		mask,

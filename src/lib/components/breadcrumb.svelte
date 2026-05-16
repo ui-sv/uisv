@@ -2,7 +2,7 @@
 	import type { Component, Snippet } from 'svelte';
 	import { Button, Icon, type ButtonProps, isSnippet } from '$lib/index.js';
 	import { tv } from 'tailwind-variants';
-	import { getAppIcons } from '$lib/contexts.js';
+	import { getAppContext } from '$lib/contexts.js';
 
 	export type BreadcrumbItem = Omit<ButtonProps, 'label'> & {
 		label?: string;
@@ -23,7 +23,7 @@
 	let {
 		items,
 		labelkey = 'label',
-		seperator = getAppIcons().chevronright,
+		seperator = getAppContext().icons.chevronright,
 		...rest
 	}: BreadcrumbProps = $props();
 

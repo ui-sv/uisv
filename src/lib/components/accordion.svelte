@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { getAppIcons } from '$lib/contexts.js';
+	import { getAppContext } from '$lib/contexts.js';
 	import { Accordion } from 'bits-ui';
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
@@ -45,7 +45,7 @@
 		collapsible = true,
 		disabled,
 		type = 'single',
-		trailingicon = getAppIcons().chevrondown,
+		trailingicon = getAppContext().icons.chevrondown,
 		leading,
 		default: defau,
 		trailing,

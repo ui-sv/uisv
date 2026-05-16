@@ -12,7 +12,7 @@
 	import { tv } from 'tailwind-variants';
 	import defu from 'defu';
 	import { onDestroy, onMount } from 'svelte';
-	import { getAppIcons } from '$lib/contexts.js';
+	import { getAppContext } from '$lib/contexts.js';
 
 	export type ToastProps = ToastOptions & {
 		closeToast?: () => void;
@@ -28,10 +28,10 @@
 		actions = [],
 		close = true,
 		color = 'primary',
-		duration = 6000,
+		duration = getAppContext().toaster.duration!,
 		icon,
 		progress = true,
-		orientation = 'horizontal',
+		orientation = 'vertical',
 		expanded = false,
 		ui = {},
 	}: ToastProps = $props();
@@ -50,7 +50,7 @@
 				icon: 'shrink-0 size-5',
 				avatar: 'shrink-0',
 				avatarSize: '2xl',
-				actions: 'flex gap-1.5 shrink-0',
+				actions: 'flex gap-1.5 shrink-0 m-4',
 				progress: '',
 				close: 'p-0',
 			},
@@ -132,7 +132,7 @@
 		{#if close}
 			<Button
 				{...defu(typeof close === 'boolean' ? {} : close, <ButtonProps>{
-					icon: getAppIcons().close,
+					icon: getAppContext().icons.close,
 					color: 'surface',
 					variant: 'link',
 					onclick: closeToast,

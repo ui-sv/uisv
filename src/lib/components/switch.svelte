@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { getAppIcons } from '$lib/contexts.js';
+	import { getAppContext } from '$lib/contexts.js';
 	import { type PropColor, Icon } from '$lib/index.js';
 	import type { Snippet, Component } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
@@ -33,7 +33,7 @@
 		size = 'md',
 		disabled,
 		loading,
-		loadingicon = getAppIcons().loading,
+		loadingicon = getAppContext().icons.loading,
 		uncheckedicon,
 		checkedicon,
 		label,

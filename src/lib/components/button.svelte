@@ -4,7 +4,7 @@
 	// import { FORM_LOADING_CONTEXT_KEY } from '$lib/utils/keys.js';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { tv, type ClassValue } from 'tailwind-variants';
-	import { getAppIcons } from '$lib/contexts.js';
+	import { getAppContext } from '$lib/contexts.js';
 
 	export type ButtonBaseProps = {
 		/** The underlying DOM element being rendered. You can bind to this to get a reference to the element. */
@@ -80,7 +80,7 @@
 		href,
 		icon,
 		loading,
-		loadingicon = getAppIcons().loading,
+		loadingicon = getAppContext().icons.loading,
 		type,
 		trailingicon,
 		leadingicon,

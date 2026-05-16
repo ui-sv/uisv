@@ -1,6 +1,7 @@
 import { createContext } from 'svelte';
-
-export type AppIcons = keyof typeof DEFAULT_ICONS;
+import type { ToasterProps } from 'svelte-sonner';
+import type { ModeWatcherProps } from './mode.js';
+import type { TooltipProviderProps } from 'bits-ui';
 
 export const DEFAULT_ICONS = {
 	arrowdown: 'i-lucide:arrow-down',
@@ -47,4 +48,11 @@ export const DEFAULT_ICONS = {
 	warning: 'i-lucide:warning',
 };
 
-export const [getAppIcons, setAppIcons] = createContext<Record<AppIcons, string>>();
+export type AppContext = {
+	icons: Partial<typeof DEFAULT_ICONS>;
+	toaster: Partial<ToasterProps>;
+	modewatcher: ModeWatcherProps;
+	tooltip: TooltipProviderProps;
+};
+
+export const [getAppContext, setAppContext] = createContext<AppContext>();
