@@ -50,10 +50,10 @@
 			"svelte": "./dist/mode.js",
 			"default": "./dist/mode.js"
 		},
-		"./context": {
-			"types": "./dist/context.d.ts",
-			"svelte": "./dist/context.js",
-			"default": "./dist/context.js"
+		"./contexts": {
+			"types": "./dist/contexts.d.ts",
+			"svelte": "./dist/contexts.js",
+			"default": "./dist/contexts.js"
 		}
 	},
 	"peerDependencies": {
