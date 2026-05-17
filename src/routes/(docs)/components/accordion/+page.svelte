@@ -1,23 +1,23 @@
 <script lang="ts">
-	import { Accordion, type AccordionProps, type PropColor } from '$lib/index.js';
+	import { Accordion, type AccordionProps } from '$lib/index.js';
 
 	const ITEMS: AccordionProps['items'] = [
 		{
 			label: 'Icons',
 			icon: 'i-lucide-smile',
-			content: 'You have nothing to do, @nuxt/icon will handle it automatically.'
+			content: 'You have nothing to do, @nuxt/icon will handle it automatically.',
 		},
 		{
 			label: 'Colors',
 			icon: 'i-lucide-palette',
-			content: 'Choose a primary and a surface color from your UnoCSS theme.'
+			content: 'Choose a primary and a surface color from your UnoCSS theme.',
 		},
 		{
 			label: 'Components',
 			icon: 'i-lucide-box',
 			content:
-				'You can customize components by using the `class` / `ui` props or in your vite.config.ts.'
-		}
+				'You can customize components by using the `class` / `ui` props or in your vite.config.ts.',
+		},
 	];
 </script>
 

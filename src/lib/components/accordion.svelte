@@ -82,23 +82,9 @@
 	);
 </script>
 
-<Accordion.Root
-	class={variants.root({ class: ui.root })}
-	type="multiple"
-	bind:value={
-		() => {
-			if (!value) return;
-			if (Array.isArray(value)) return value;
-			return [value];
-		},
-		(val) => {
-			if (!val) return (value = val);
-			value = type === 'single' ? val[0] : val;
-		}
-	}
->
+<Accordion.Root class={variants.root({ class: ui.root })} {type} bind:value>
 	{#each items as item, idx (idx)}
-		<Accordion.Item value="item-1">
+		<Accordion.Item value="item-{idx}">
 			<Accordion.Header>
 				<Accordion.Trigger>{item.label}</Accordion.Trigger>
 			</Accordion.Header>

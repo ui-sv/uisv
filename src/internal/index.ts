@@ -35,6 +35,9 @@ export const links: Links = {
 				Placeholder: '',
 				Seperator: 'Separates content horizontally or vertically.',
 			},
+			Data: {
+				Accordion: '',
+			},
 			Form: {
 				Checkbox: '',
 				CheckboxGroup: '',
