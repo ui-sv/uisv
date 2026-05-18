@@ -18,7 +18,6 @@
 		icon?: string | Snippet | Component;
 		color?: PropColor;
 		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
-		position?: 'bottom' | 'right';
 		actions?: ButtonProps[];
 		close?: boolean | ButtonProps;
 		ui?: {
@@ -27,7 +26,8 @@
 			description?: ClassValue;
 			title?: ClassValue;
 		};
-		onclose?: () => void | Promise<void>;
+		onclose?: () => unknown | Promise<() => unknown>;
+		orientation?: 'horizontal' | 'vertical';
 	};
 </script>
 
@@ -40,29 +40,19 @@
 		actions = [],
 		color = 'primary',
 		variant = 'solid',
-		position = 'bottom',
 		ui = {},
 		onclose = () => {},
+		orientation = 'vertical',
 	}: AlertProps = $props();
 
-	const close_props = $derived.by(() => {
-		return defu(typeof close === 'boolean' ? {} : close, {
-			icon: getAppContext().icons.close,
-			variant: 'link',
-			color: variant === 'solid' ? 'surface' : color,
-			ui: {
-				icon: variant === 'solid' ? 'text-white' : '',
-			},
-		} as ButtonProps);
-	});
 	const variants = $derived.by(() =>
 		tv({
 			slots: {
 				base: 'flex gap-2 font-sans p-4 rounded-lg',
 				icon: 'pi size-6',
-				actions: '',
-				description: 'text-opacity-50 text-sm',
-				title: 'font-medium',
+				actions: 'flex flex-wrap gap-1.5 shrink-0',
+				description: 'opacity-90 text-sm',
+				title: 'font-medium font-md',
 			},
 			variants: {
 				color: {
@@ -75,20 +65,16 @@
 				},
 				variant: {
 					solid: {
-						base: 'text-white',
-						description: 'text-white/90',
+						base: 'text-surface-base',
+						description: 'text-surface-base/90',
 					},
 					outline: 'border',
 					soft: '',
 					subtle: 'border',
 				},
-				position: {
-					right: {
-						base: '',
-					},
-					bottom: {
-						base: 'flex-col',
-					},
+				orientation: {
+					horizontal: '',
+					vertical: 'flex-col',
 				},
 			},
 			compoundVariants: [
@@ -216,12 +202,12 @@
 					class: 'bg-error-50 text-error-500  border-error-300',
 				},
 			],
-		})({ color, variant, position }),
+		})({ color, variant, orientation }),
 	);
 </script>
 
-<div class={variants.base({ class: [position === 'bottom' ? '' : 'flex', ui.base] })}>
-	<div class="flex gap-2 grow">
+<div class={variants.base({ class: [ui.base] })}>
+	<div class="flex gap-2 flex-1">
 		{#if isSnippet(icon)}
 			{@render icon()}
 		{:else}
@@ -252,18 +238,25 @@
 
 		{#if close}
 			<div>
-				<Button {...close_props} onclick={onclose} />
+				<Button
+					{...defu(typeof close === 'boolean' ? {} : close, {
+						icon: getAppContext().icons.close,
+						variant: 'link',
+						color: 'surface',
+						onclick: onclose,
+					} as ButtonProps)}
+				/>
 			</div>
 		{/if}
 	</div>
 
-	{#if actions.length > 0}
+	{#if actions.length}
 		<div class="flex gap-2 items-center pl-8">
-			{#each actions as action (action.label)}
+			{#each actions as action, idx (idx)}
 				<Button
-					{...defu(action, {
+					{...defu(action, <ButtonProps>{
 						size: 'xs',
-					} as ButtonProps)}
+					})}
 				/>
 			{/each}
 		</div>

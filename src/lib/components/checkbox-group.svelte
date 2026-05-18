@@ -3,18 +3,16 @@
 	import type { Component, Snippet } from 'svelte';
 	import { type PropColor, isComponent, isSnippet, Checkbox } from '$lib/index.js';
 
-	/* eslint @typescript-eslint/no-explicit-any: 0 */
-
 	export type CheckboxGroupProps = {
 		color?: PropColor;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		icon?: string | Snippet | Component;
 		required?: boolean;
 		indicator?: 'start' | 'end' | 'hidden';
-		value?: any[];
+		value?: string[];
 		valuekey?: string;
 		variant?: 'list' | 'card' | 'table';
-		items: Array<any>;
+		items: Array<string>;
 		labelkey?: string;
 		descriptionkey?: string;
 		legend?: string | Snippet | Component;
