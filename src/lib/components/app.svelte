@@ -7,27 +7,14 @@
 	import { Toaster } from 'svelte-sonner';
 	import { boxWith } from 'svelte-toolbelt';
 	import { Icon } from './index.js';
-	import type { VariantsConfig } from '$lib/theme/index.js';
 
 	export type AppProps = Partial<AppContext> & {
 		children?: Snippet;
-		modewatcher?: ModeWatcherProps;
-		toaster?: ToasterProps;
-		tooltip?: Tooltip.ProviderProps;
-		icons?: Partial<Record<AppIcons, `i-${string}:${string}`>>;
-		theme?: VariantsConfig;
 	};
 </script>
 
 <script lang="ts">
-	let {
-		children,
-		modewatcher = {},
-		toaster = {},
-		tooltip = {},
-		icons = {},
-		theme,
-	}: AppProps = $props();
+	let { children, modewatcher = {}, toaster = {}, tooltip = {}, icons = {} }: AppProps = $props();
 
 	const context = boxWith(() =>
 		defu({ icons, toaster, modewatcher, tooltip }, <AppContext>{

@@ -49,10 +49,10 @@
 		tv({
 			slots: {
 				base: 'flex gap-2 font-sans p-4 rounded-lg',
-				icon: 'pi size-6',
+				icon: 'pi size-5',
 				actions: 'flex flex-wrap gap-1.5 shrink-0',
-				description: 'opacity-90 text-sm',
-				title: 'font-medium font-md',
+				description: 'opacity-90 mt-1 text-sm',
+				title: 'font-medium font-sm',
 			},
 			variants: {
 				color: {
@@ -68,9 +68,9 @@
 						base: 'text-surface-base',
 						description: 'text-surface-base/90',
 					},
-					outline: 'border',
+					outline: 'ring ring-inset',
 					soft: '',
-					subtle: 'border',
+					subtle: 'ring ring-inset',
 				},
 				orientation: {
 					horizontal: '',
@@ -112,38 +112,38 @@
 				{
 					variant: 'outline',
 					color: 'primary',
-					class: 'border-primary-300 text-primary-500',
+					class: 'ring-primary/50 text-primary-500',
 				},
 				{
 					variant: 'outline',
 					color: 'surface',
-					class: 'border-surface-accented text-surface-inverted',
+					class: 'ring-surface-accented text-surface-inverted',
 				},
 				{
 					variant: 'outline',
 					color: 'info',
-					class: 'border-info-300 text-info-500',
+					class: 'ring-info/50 text-info-500',
 				},
 				{
 					variant: 'outline',
 					color: 'success',
-					class: 'border-success-300 text-success-500',
+					class: 'ring-success/50 text-success-500',
 				},
 				{
 					variant: 'outline',
 					color: 'warning',
-					class: 'border-warning-300 text-warning-500',
+					class: 'ring-warning/50 text-warning-500',
 				},
 				{
 					variant: 'outline',
 					color: 'error',
-					class: 'border-error-300 text-error-500',
+					class: 'ring-error/50 text-error-500',
 				},
 
 				{
 					variant: 'soft',
 					color: 'primary',
-					class: 'bg-primary-100 text-primary-500',
+					class: 'bg-primary/10 text-primary-500',
 				},
 				{
 					variant: 'soft',
@@ -153,53 +153,53 @@
 				{
 					variant: 'soft',
 					color: 'info',
-					class: 'bg-info-50 text-info-500',
+					class: 'bg-info/10 text-info-500',
 				},
 				{
 					variant: 'soft',
 					color: 'success',
-					class: 'bg-success-50 text-success-500',
+					class: 'bg-success/10 text-success-500',
 				},
 				{
 					variant: 'soft',
 					color: 'warning',
-					class: 'bg-warning-50 text-warning-500',
+					class: 'bg-warning/10 text-warning-500',
 				},
 				{
 					variant: 'soft',
 					color: 'error',
-					class: 'bg-error-50 text-error-500',
+					class: 'bg-error/10 text-error-500',
 				},
 
 				{
 					variant: 'subtle',
 					color: 'primary',
-					class: 'bg-primary-100 text-primary-500 border-primary-300',
+					class: 'bg-primary/10 text-primary/50 ring-primary-300',
 				},
 				{
 					variant: 'subtle',
 					color: 'surface',
-					class: 'bg-surface-muted text-surface-inverted border-surface-accented',
+					class: 'bg-surface-muted text-surface-inverted ring-surface-accented',
 				},
 				{
 					variant: 'subtle',
 					color: 'info',
-					class: 'bg-info-50 text-info-500 border-info-300',
+					class: 'bg-info/10 text-info-500 ring-info/50',
 				},
 				{
 					variant: 'subtle',
 					color: 'success',
-					class: 'bg-success-50 text-success-500 border-success-300',
+					class: 'bg-success/10 text-success-500 ring-success/50',
 				},
 				{
 					variant: 'subtle',
 					color: 'warning',
-					class: 'bg-warning-50 text-warning-500 border-warning-300',
+					class: 'bg-warning/10 text-warning-500 ring-warning/50',
 				},
 				{
 					variant: 'subtle',
 					color: 'error',
-					class: 'bg-error-50 text-error-500  border-error-300',
+					class: 'bg-error/10 text-error-500  ring-error/50',
 				},
 			],
 		})({ color, variant, orientation }),
@@ -236,6 +236,10 @@
 			{/if}
 		</div>
 
+		{#if orientation === 'horizontal'}
+			{@render actions_snippet()}
+		{/if}
+
 		{#if close}
 			<div>
 				<Button
@@ -250,6 +254,12 @@
 		{/if}
 	</div>
 
+	{#if orientation === 'vertical'}
+		{@render actions_snippet()}
+	{/if}
+</div>
+
+{#snippet actions_snippet()}
 	{#if actions.length}
 		<div class="flex gap-2 items-center pl-8">
 			{#each actions as action, idx (idx)}
@@ -261,4 +271,4 @@
 			{/each}
 		</div>
 	{/if}
-</div>
+{/snippet}

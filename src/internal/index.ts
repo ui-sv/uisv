@@ -20,7 +20,9 @@ export const links: Links = {
 	components: {
 		icon: 'lucide:code-square',
 		sections: {
-			// Layout: {},
+			Layout: {
+				App: '',
+			},
 			Element: {
 				Alert: '',
 				Badge: '',

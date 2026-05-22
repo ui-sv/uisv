@@ -63,7 +63,7 @@
 	</div>
 
 	{#if footer}
-		<div class={variants.header({ class: [ui.header] })}>
+		<div class={variants.footer({ class: [ui.footer] })}>
 			{@render footer()}
 		</div>
 	{/if}

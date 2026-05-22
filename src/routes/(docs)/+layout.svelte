@@ -7,19 +7,6 @@
 
 	const { children } = $props();
 	const section = $derived(page.url.pathname.split('/')[1]);
-	const component = $derived(page.url.pathname.split('/')[2]);
-
-	const original_label = $derived.by(() => {
-		for (const a of Object.values(links)) {
-			for (const b of Object.values(a.sections)) {
-				for (const [label, desc] of Object.entries(b)) {
-					if (kebabCase(label) === component) return { label, desc };
-				}
-			}
-		}
-
-		return { label: '', desc: '' };
-	});
 
 	const toHref = (str: string) =>
 		kebabCase(
@@ -49,15 +36,15 @@
 						>
 							<Button
 								color="surface"
-								variant="ghost"
+								variant="link"
 								{href}
 								{label}
 								ui={{
 									base: [
 										'w-full font-normal',
 										href === page.url.pathname
-											? 'text-primary hover:text-primary'
-											: 'text-label-muted',
+											? 'text-primary hover:(text-primary bg-surface-muted)'
+											: 'hover:bg-surface-muted',
 									],
 								}}
 							/>
@@ -74,3 +61,9 @@
 		</main>
 	</div>
 </div>
+
+<style>
+	:global(.shiki) {
+		@apply p-4 sm:p-6 text-sm;
+	}
+</style>
