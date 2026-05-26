@@ -131,7 +131,7 @@
 					},
 				},
 				variant: {
-					outline: { root: 'ring ring-dimmed' },
+					outline: { root: 'ring ring-surface-accented' },
 					soft: {
 						root: 'bg-surface-muted hover:bg-surface-elevated focus-within:bg-surface-elevated',
 					},

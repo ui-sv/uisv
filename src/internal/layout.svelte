@@ -15,67 +15,30 @@
 	import type { Snippet } from 'svelte';
 	import './docs.css';
 
-	type Props = {
-		children?: Snippet;
-		title?: string;
-		code?: string;
-		desc?: string;
-		docs: string;
-		bits?: string;
-	};
+	// type Props = {
+	// 	children?: Snippet;
+	// 	title?: string;
+	// 	code?: string;
+	// 	desc?: string;
+	// 	docs: string;
+	// 	bits?: string;
+	// };
 
-	const { children, title, code, desc, docs, bits }: Props = $props();
+	// const { children, title, code, desc, docs, bits }: Props = $props();
 
-	let nav_opened = false;
+	// let nav_opened = false;
 
-	$effect(() => {
-		nav_opened = nav_opened;
+	// $effect(() => {
+	// 	nav_opened = nav_opened;
 
-		if (typeof document !== 'undefined') {
-			document.body.classList[nav_opened ? 'add' : 'remove']('overflow-hidden');
-		}
-	});
+	// 	if (typeof document !== 'undefined') {
+	// 		document.body.classList[nav_opened ? 'add' : 'remove']('overflow-hidden');
+	// 	}
+	// });
 </script>
 
 <svelte:head>
-	<title>{title} - uisv</title>
+	<title>{'what'} - uisv</title>
 </svelte:head>
 
-<div class="flex gap-2">
-	<h1 class="flex-1 text-3xl sm:text-4xl text-pretty font-bold text-label-highlighted">{title}</h1>
-
-	{#if bits}
-		<Button
-			href="https://bits-ui.com/{bits}"
-			label={title}
-			target="_blank"
-			icon="lucide:circle"
-			variant="outline"
-			color="surface"
-		/>
-	{/if}
-
-	<Button
-		href="https://github.com/ui-sv/uisv/blob/main/src/lib/{code}"
-		label="Github"
-		target="_blank"
-		icon="simple-icons:github"
-		variant="outline"
-		color="surface"
-	/>
-
-	<Button
-		href="https://github.com/ui-sv/uisv/blob/main/src/routes/(docs)/{docs}"
-		label="Edit Docs"
-		target="_blank"
-		icon="lucide:file-pen"
-		variant="outline"
-		color="surface"
-	/>
-</div>
-
-<p class="text-lg text-pretty text-label-muted mt-4">{desc}</p>
-
-<div class="h-px bg-surface-accented my-8"></div>
-
-{@render children?.()}
+<slot />
