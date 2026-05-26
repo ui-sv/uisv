@@ -48,6 +48,7 @@ export const links: Links = {
 				InputTime: 'An input for selecting a time.',
 				InputNumber: '',
 				PinInput: '',
+				RadioGroup: '',
 				Select: 'A select element to choose from a list of options.',
 				Slider: '',
 				Switch: '',

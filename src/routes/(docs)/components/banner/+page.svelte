@@ -23,20 +23,20 @@
 		</select>
 	</div>
 
-	{@render components({
+	{@render componentsnippet({
 		variant: button_variant,
 	})}
 
 	<h1>Icon</h1>
 
-	{@render components({
+	{@render componentsnippet({
 		icon: button_icon,
 		variant: button_variant,
 	})}
 
 	<h1>Close</h1>
 
-	{@render components({
+	{@render componentsnippet({
 		icon: button_icon,
 		variant: button_variant,
 		close: true,
@@ -44,7 +44,7 @@
 
 	<h1>Custom close icon</h1>
 
-	{@render components({
+	{@render componentsnippet({
 		icon: button_icon,
 		variant: button_variant,
 		close: {
@@ -54,7 +54,7 @@
 
 	<h1>Actions</h1>
 
-	{@render components({
+	{@render componentsnippet({
 		icon: button_icon,
 		variant: button_variant,
 		actions: [{ label: 'Accept' }, { label: 'Cancel', color: 'surface', variant: 'subtle' }],
@@ -62,7 +62,7 @@
 
 	<h1>Href</h1>
 
-	{@render components({
+	{@render componentsnippet({
 		icon: button_icon,
 		variant: button_variant,
 		href: 'https://github.com/ui-sv/uisv',
@@ -70,7 +70,7 @@
 	})}
 </div>
 
-{#snippet components(props: Omit<BannerProps, 'title'>, text?: string)}
+{#snippet componentsnippet(props: Omit<BannerProps, 'title'>, text?: string)}
 	{#each COLORS as color (color)}
 		<Banner
 			{...props}
@@ -79,9 +79,3 @@
 		/>
 	{/each}
 {/snippet}
-
-<style>
-	h1:not(:first-child) {
-		padding-top: 2rem;
-	}
-</style>

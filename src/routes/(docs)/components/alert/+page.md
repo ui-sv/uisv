@@ -137,7 +137,7 @@ Use the `actions` prop to add some Button actions to the Alert.
       actions.push({ label: id, variant: actions.length ? 'outline' : 'solid', onclick() { toast({ title: id + ' action event.' })}})
     }} />
 
-    <Button label="Delete action" onclick={() => actions.pop()} />
+    <Button label="Delete action" variant="outline" onclick={() => actions.pop()} />
   {/snippet}
 
   <Alert

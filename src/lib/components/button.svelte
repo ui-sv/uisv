@@ -94,7 +94,7 @@
 		return false;
 	});
 
-	const classnames = $derived(
+	const variants = $derived(
 		tv({
 			slots: {
 				icon: '',
@@ -124,7 +124,7 @@
 					},
 					sm: { base: 'font-medium text-xs px-2 h-7 rounded gap-1', icon: 'size-4' },
 					md: { base: 'font-medium text-sm rounded-md px-2 h-8 gap-2', icon: 'size-5' },
-					lg: { base: 'font-medium text-sm px-3 h-9 rounded-md gap-2', icon: 'size-6' },
+					lg: { base: 'font-medium text-sm px-3 h-9 rounded-md gap-2', icon: 'size-5' },
 					xl: { base: 'font-medium px-3 h-10 rounded-md gap-2', icon: 'size-6' },
 				},
 				block: {
@@ -353,14 +353,14 @@
 
 <svelte:element
 	this={href ? 'a' : 'button'}
+	bind:this={ref}
 	type={href ? undefined : type}
 	href={href && !disabled ? href : undefined}
 	disabled={disabled || is_loading}
 	aria-disabled={href ? disabled : undefined}
 	role={href && disabled ? 'link' : undefined}
 	tabindex={href && disabled ? -1 : 0}
-	bind:this={ref}
-	class={classnames.base({
+	class={variants.base({
 		class: [only_icon && 'px-0 aspect-square justify-center', href && 'cursor-pointer', ui.base],
 	})}
 	onclick={onClickWrapper}
@@ -369,7 +369,9 @@
 	{#if iconposition === 'leading' || leadingicon || loading}
 		<Icon
 			name={is_loading ? loadingicon : leadingicon || icon}
-			class={[ui.leadingicon, loading && 'animate-spin', iconposition === 'leading' && ui.icon]}
+			class={variants.icon({
+				class: [ui.leadingicon, loading && 'animate-spin', iconposition === 'leading' && ui.icon],
+			})}
 		/>
 	{/if}
 
@@ -382,7 +384,7 @@
 	{#if iconposition === 'trailing' || trailingicon}
 		<Icon
 			name={trailingicon || icon}
-			class={[ui.trailingicon, iconposition === 'trailing' && ui.icon]}
+			class={variants.icon({ class: [ui.trailingicon, iconposition === 'trailing' && ui.icon] })}
 		/>
 	{/if}
 </svelte:element>

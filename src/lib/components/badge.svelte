@@ -9,9 +9,11 @@
 		color?: PropColor;
 		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-		icon?: string | Snippet | Component;
-		trailingicon?: boolean;
+		icon?: string | Component;
+		iconposition?: 'leading' | 'trailing';
 		children?: Snippet;
+		leading?: Snippet;
+		trailing?: Snippet;
 		ui?: {
 			base?: ClassValue;
 			icon?: ClassValue;
@@ -23,12 +25,14 @@
 	let {
 		icon,
 		label,
-		trailingicon,
+		iconposition = 'leading',
 		color = 'primary',
 		size = 'md',
 		variant = 'solid',
 		ui = {},
 		children,
+		leading,
+		trailing,
 	}: BadgeProps = $props();
 
 	const variants = $derived.by(() => {
@@ -45,7 +49,7 @@
 				},
 				variant: {
 					link: '',
-					solid: 'text-white',
+					solid: 'text-label-inverted',
 					outline: 'border',
 					soft: '',
 					subtle: 'border',
@@ -196,12 +200,10 @@
 		class: [icon && !(children || label) ? 'px-0 aspect-square justify-center' : '', ui.base],
 	})}
 >
-	{#if !trailingicon}
-		{#if isSnippet(icon)}
-			{@render icon()}
-		{:else}
-			<Icon name={icon} class={variants.icon({ class: ui.icon })} />
-		{/if}
+	{#if leading}
+		{@render leading()}
+	{:else if iconposition === 'leading'}
+		<Icon name={icon} class={variants.icon({ class: ui.icon })} />
 	{/if}
 
 	{#if label}
@@ -210,11 +212,9 @@
 		{@render children?.()}
 	{/if}
 
-	{#if trailingicon}
-		{#if isSnippet(icon)}
-			{@render icon()}
-		{:else}
-			<Icon name={icon} class={variants.icon({ class: ui.icon })} />
-		{/if}
+	{#if trailing}
+		{@render trailing()}
+	{:else if iconposition === 'trailing'}
+		<Icon name={icon} class={variants.icon({ class: ui.icon })} />
 	{/if}
 </span>

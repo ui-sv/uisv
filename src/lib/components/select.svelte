@@ -17,7 +17,6 @@
 
 	export type SelectProps<T> = {
 		items: (SelectItem<T> | SelectItem<T>[])[];
-		defaultvalue?: T;
 		item?: Snippet<[{ item: SelectItem<T> }]>;
 		color?: PropColor;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -57,13 +56,12 @@
 	);
 </script>
 
-<script lang="ts" generics="T extends unknown">
+<script lang="ts" generics="T">
 	let {
 		value = $bindable(),
 		items,
 		type = 'single',
-		defaultvalue,
-		item,
+		item: item_snippet,
 		color = 'primary',
 		size = 'md',
 		variant = 'outline',
@@ -110,7 +108,7 @@
 				itemLeadingChip: 'shrink-0',
 				itemLeadingChipSize: '',
 				itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
-				itemTrailingIcon: 'shrink-0',
+				itemtrailingicon: 'shrink-0',
 				itemWrapper: 'flex-1 flex flex-col min-w-0',
 				itemLabel: 'truncate',
 				itemDescription: 'truncate text-label-muted',
@@ -426,11 +424,20 @@
 						</Select.Group>
 					{:else}
 						{@const is_object = typeof item === 'object' && item !== null && 'value' in item}
-						<Select.Item
-							class={variants.item({ class: ui.item })}
-							value={(is_object ? item.value : item) as string}
-						>
-							{item}
+						{@const item_value = is_object ? item.value : item}
+						{@const item_selected = item_value === value}
+
+						<Select.Item class={variants.item({ class: ui.item })} value={item_value as string}>
+							{#if item_snippet}
+								{@render item_snippet({ item })}
+							{:else}
+								{item}
+
+								<Icon
+									name={getAppContext().icons.check}
+									class={['ml-auto', !item_selected && 'opacity-0']}
+								/>
+							{/if}
 						</Select.Item>
 					{/if}
 				{/each}

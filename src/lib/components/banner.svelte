@@ -14,7 +14,7 @@
 
 	export type BannerProps = {
 		title: string | Snippet;
-		icon?: string | Snippet | Component;
+		icon?: string | Component;
 		color?: PropColor;
 		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		actions?: ButtonProps[];
@@ -27,7 +27,7 @@
 			description?: ClassValue;
 			title?: ClassValue;
 		};
-		onclose?: () => void | Promise<void>;
+		onclose?: () => void | Promise<() => void>;
 	};
 </script>
 
@@ -208,11 +208,7 @@
 	class={variants.base({ class: [ui.base] })}
 >
 	<div class="flex grow gap-2 text-sm items-center">
-		{#if isSnippet(icon)}
-			{@render icon()}
-		{:else}
-			<Icon name={icon} class={variants.icon({ class: ui.icon })} />
-		{/if}
+		<Icon name={icon} class={variants.icon({ class: ui.icon })} />
 
 		<div class={variants.title({ class: [ui.title] })}>
 			{#if isSnippet(title)}
@@ -222,13 +218,13 @@
 			{/if}
 		</div>
 
-		{#if actions.length > 0}
-			{#each actions as action (action.label)}
+		{#if actions.length}
+			{#each actions as action, idx (idx)}
 				<Button
-					{...defu(action, {
+					{...defu(action, <ButtonProps>{
 						size: 'xs',
 						color: 'surface',
-					} as ButtonProps)}
+					})}
 				/>
 			{/each}
 		{/if}
@@ -237,15 +233,15 @@
 	{#if close}
 		<div>
 			<Button
-				{...defu<ButtonProps, [ButtonProps]>(typeof close === 'boolean' ? {} : close, {
+				{...defu(typeof close === 'boolean' ? {} : close, <ButtonProps>{
 					icon: getAppContext().icons.close,
 					variant: 'ghost',
 					color: 'surface',
 					ui: {
 						icon: variant === 'solid' ? 'text-label-inverted' : '',
 					},
+					onclick: onclose,
 				})}
-				onclick={onclose}
 			/>
 		</div>
 	{/if}

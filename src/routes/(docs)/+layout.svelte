@@ -63,7 +63,13 @@
 </div>
 
 <style>
-	:global(.shiki) {
-		@apply p-4 sm:p-6 text-sm;
+	:global {
+		.shiki {
+			@apply 'p-4 sm:p-6 text-sm dark:bg-[var(--shiki-dark-bg)]! dark:text-[var(--shiki-dark)]!';
+		}
+
+		span.line span {
+			@apply 'dark:text-[var(--shiki-dark)]!';
+		}
 	}
 </style>

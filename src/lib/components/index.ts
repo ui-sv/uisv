@@ -62,3 +62,7 @@ export { default as Tooltip } from './tooltip.svelte';
 export * from './app.svelte';
 export { default as App } from './app.svelte';
 export * from './toast.svelte.js';
+export * from './popover.svelte';
+export { default as Popover } from './popover.svelte';
+export * from './radio-group.svelte';
+export { default as RadioGroup } from './radio-group.svelte';
