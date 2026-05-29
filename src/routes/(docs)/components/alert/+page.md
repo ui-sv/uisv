@@ -2,15 +2,15 @@
 	import { Alert, Button, Select, Card, Checkbox, toast } from '$lib/index.js';
 	import { useId } from 'bits-ui';
 
-	let title = $state('Heads up!');
-	let description = $state('You can change the primary color in your app config.');
-	let icon = $state('i-lucide:terminal');
-	let color = $state('primary');
-	let variant = $state('outline');
-	let close = $state(true)
+	let title = 'Heads up!';
+	let description = 'You can change the primary color in your app config.'
+	let icon = 'i-lucide:terminal'
+	let color = 'primary'
+	let variant = 'outline'
+	let close = true
 	const close_onclick = () => toast({ title: 'Alert close event.'})
-	let actions = $state([]);
-	let orientation = $state('vertical');
+	let actions = []
+	let orientation = 'vertical'
 </script>
 
 ### Title and Description
