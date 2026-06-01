@@ -1,4 +1,6 @@
 <script module lang="ts">
+	import './docs.css';
+
 	export {
 		P as p,
 		H1 as h1,
@@ -11,10 +13,7 @@
 </script>
 
 <script lang="ts">
-	import { Button } from '$lib/index.js';
-	import type { Snippet } from 'svelte';
-	import './docs.css';
-
+	export let title: string | undefined;
 	// type Props = {
 	// 	children?: Snippet;
 	// 	title?: string;
@@ -38,7 +37,7 @@
 </script>
 
 <svelte:head>
-	<title>{'what'} - uisv</title>
+	<title>{title ? `${title} - UI Svelte` : 'UI Svelte'}</title>
 </svelte:head>
 
 <slot />

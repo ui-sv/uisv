@@ -2,6 +2,7 @@ import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex, escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
+import { resolve } from 'path';
 
 const highlighter = await createHighlighter({
 	themes: ['one-dark-pro', 'one-light'],
@@ -14,7 +15,7 @@ const config = {
 	preprocess: [
 		vitePreprocess(),
 		mdsvex({
-			layout: './src/internal/layout.svelte',
+			layout: resolve('./src/internal/layout.svelte'),
 			extensions: ['.md'],
 			highlight: {
 				highlighter: async (code, lang = 'text') => {
