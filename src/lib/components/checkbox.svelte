@@ -1,17 +1,17 @@
 <script module lang="ts">
 	import { getAppContext } from '$lib/contexts.js';
-	import { type PropColor, isComponent, isSnippet } from '$lib/index.js';
+	import { type PropColor, type Component, isComponent, isSnippet } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
-	import type { Component } from 'vitest-browser-svelte';
+	import Icon from './icon.svelte';
 
 	export type CheckboxProps = {
 		value?: boolean | 'intermediate';
 		color?: PropColor;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		disabled?: boolean;
-		icon?: string | Snippet | Component;
-		intermediateicon?: string | Snippet | Component;
+		icon?: string | Component;
+		intermediateicon?: string | Component;
 		label?: string | Snippet;
 		description?: string | Snippet;
 		required?: boolean;
@@ -131,8 +131,10 @@
 			value = !value;
 		}}
 	>
-		{@render Icon(icon, [value !== true && 'opacity-0'])}
-		{@render Icon(intermediateicon, [value !== 'intermediate' && 'opacity-0'])}
+		<Icon
+			name={value === 'intermediate' ? intermediateicon : value !== true ? icon : undefined}
+			class={variants.icon({ class: [ui.icon] })}
+		/>
 	</button>
 
 	{#if label}
@@ -162,16 +164,3 @@
 		</div>
 	{/if}
 </svelte:element>
-
-{#snippet Icon(ico?: CheckboxProps['icon'], icon_class?: ClassValue)}
-	<div class={['absolute', icon_class]}>
-		{#if typeof ico === 'string'}
-			<div class={variants.icon({ class: [ico, ui.icon] })}></div>
-		{:else if isSnippet(ico)}
-			{@render ico()}
-		{:else if isComponent(ico)}
-			{@const Iconn = ico}
-			<Iconn />
-		{/if}
-	</div>
-{/snippet}

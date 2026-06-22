@@ -57,16 +57,16 @@
 		return navigator.userAgent.match(/Macintosh;/);
 	});
 
-	const kbdKeysSpecificMap = $derived({
-		meta: macOS ? KBD_KEYS.command : 'Ctrl',
-		alt: macOS ? KBD_KEYS.command : 'Ctrl',
-		ctrl: macOS ? KBD_KEYS.option : 'Alt',
+	const kbdKeysSpecificMap = $derived.by(() => {
+		return {
+			meta: macOS?.length ? KBD_KEYS.command : 'Ctrl',
+			alt: macOS?.length ? KBD_KEYS.command : 'Ctrl',
+			ctrl: macOS?.length ? KBD_KEYS.option : 'Alt',
+		};
 	});
 
-	function getKey(value?: KbdKey | string) {
-		if (!value) {
-			return;
-		}
+	function getKey(value: KbdKey | string | undefined) {
+		if (!value) return;
 
 		if (['meta', 'alt', 'ctrl'].includes(value)) {
 			return kbdKeysSpecificMap[value as KbdSpecificKey];
