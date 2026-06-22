@@ -76,7 +76,7 @@
 		{@const is_obj = typeof item === 'object'}
 		<div class={variants.item({})}>
 			{#if indicator === 'start'}
-				{@render indicator_snippet()}
+				{@render indicator_snippet(item)}
 			{/if}
 
 			{#if item_snippet}
@@ -88,13 +88,13 @@
 			{/if}
 
 			{#if indicator === 'start'}
-				{@render indicator_snippet()}
+				{@render indicator_snippet(item)}
 			{/if}
 		</div>
 	{/each}
 </RadioGroup.Root>
 
-{#snippet indicator_snippet()}
+{#snippet indicator_snippet(item: RadioGroupItem)}
 	<RadioGroup.Item
 		value={typeof item === 'string' ? item : (item[valuekey] as string)}
 		class={variants.indicator({})}

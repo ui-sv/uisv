@@ -6,7 +6,7 @@
 	export type CheckboxGroupProps = {
 		color?: PropColor;
 		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-		icon?: string | Snippet | Component;
+		icon?: string | Component;
 		required?: boolean;
 		indicator?: 'start' | 'end' | 'hidden';
 		value?: string[];

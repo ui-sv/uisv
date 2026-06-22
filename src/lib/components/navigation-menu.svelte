@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import { mergeProps, NavigationMenu } from 'bits-ui';
 	import type { Snippet } from 'svelte';
-	import type { ButtonProps } from './button.svelte';
+	import type { ButtonProps } from '$lib/index.js';
 	import type { PropColor } from '$lib/types.js';
 	import { tv } from 'tailwind-variants';
 	import { Button } from './index.js';
@@ -71,9 +71,9 @@
 						link: 'before:outline-primary/25',
 						child_link: 'before:outline-primary/25',
 					},
-					secondary: {
-						link: 'before:outline-secondary/25',
-						child_link: 'before:outline-secondary/25',
+					surface: {
+						link: 'before:outline-inverted/25',
+						child_link: 'before:outline-inverted/25',
 					},
 					success: {
 						link: 'before:outline-success/25',
@@ -90,10 +90,6 @@
 					error: {
 						link: 'before:outline-error/25',
 						child_link: 'before:outline-error/25',
-					},
-					neutral: {
-						link: 'before:outline-inverted/25',
-						child_link: 'before:outline-inverted/25',
 					},
 				},
 				highlight_color: {
@@ -275,7 +271,7 @@
 					},
 				},
 				{
-					color: 'neutral',
+					color: 'surface',
 					variant: 'pill',
 					active: true,
 					class: {
@@ -329,7 +325,7 @@
 					},
 				},
 				{
-					color: 'neutral',
+					color: 'surface',
 					variant: 'link',
 					active: true,
 					class: {
@@ -347,7 +343,7 @@
 					},
 				},
 				{
-					highlight_color: 'neutral',
+					highlight_color: 'surface',
 					highlight: true,
 					level: true,
 					active: true,
@@ -397,7 +393,7 @@
 				{/snippet}
 			</NavigationMenu.Link>
 		{:else}
-			<NavigationMenu.Trigger class={variants.({})}>
+			<NavigationMenu.Trigger class={variants.link({})}>
 				{#snippet child({ props })}
 					{@render trigger_snippet({ props, item })}
 				{/snippet}
