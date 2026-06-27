@@ -2,15 +2,11 @@
 	import { page } from '$app/state';
 	import { Button, App, Popover, Select, Icon, useStyle } from '$lib/index.js';
 	import { links } from '$internal/index.js';
-	import {
-		COLORS_PRIMARY,
-		COLORS_SURFACE,
-		ICONS_PHOSPHOR,
-		ICONS_TABLER,
-	} from '$internal/customizationism.js';
+	import { COLORS_PRIMARY, COLORS_SURFACE } from '$internal/customizationism.js';
 	import { PersistedState } from 'runed';
 	import 'virtual:uno.css';
 	import { DEFAULT_ICONS } from '$lib/contexts.js';
+	import { PHOSPHOR, TABLER } from '$lib/icons.js';
 
 	const ICONS_OBJ = {
 		lucide: {
@@ -22,7 +18,7 @@
 			},
 		},
 		phosphor: {
-			icons: ICONS_PHOSPHOR,
+			icons: PHOSPHOR,
 			logo: 'i-simple-icons:phosphoricons',
 			extraicons: {
 				github: 'i-ph:github-logo',
@@ -30,7 +26,7 @@
 			},
 		},
 		tabler: {
-			icons: ICONS_TABLER,
+			icons: TABLER,
 			logo: 'i-lucide:terminal',
 			extraicons: {
 				github: 'i-tabler:brand-github',
