@@ -60,8 +60,8 @@
 	const kbdKeysSpecificMap = $derived.by(() => {
 		return {
 			meta: macOS?.length ? KBD_KEYS.command : 'Ctrl',
-			alt: macOS?.length ? KBD_KEYS.command : 'Ctrl',
-			ctrl: macOS?.length ? KBD_KEYS.option : 'Alt',
+			alt: macOS?.length ? KBD_KEYS.command : 'Alt',
+			ctrl: macOS?.length ? KBD_KEYS.option : 'Ctrl',
 		};
 	});
 
