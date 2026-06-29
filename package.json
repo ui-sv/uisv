@@ -75,6 +75,7 @@
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
 		"@types/node": "^25.9.4",
 		"@vitest/browser": "^4.1.9",
+		"downkit": "^0.0.2",
 		"eslint": "^10.5.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.19.0",
