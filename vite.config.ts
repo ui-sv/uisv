@@ -1,11 +1,10 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-import { downkit } from 'downkit';
 // @ts-expect-error idek
-import uisv from './src/lib/vite';
+import uisv from './src/lib/vite.ts';
 
 export default defineConfig({
-	plugins: [sveltekit(), downkit(), uisv()],
+	plugins: [sveltekit(), uisv()],
 	// test: {
 	// 	expect: { requireAssertions: true },
 	// 	projects: [
