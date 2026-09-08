@@ -1,4 +1,3 @@
-export * from './components/index.js';
+// Reexport your entry components here
 export * from './utilities/index.js';
-export * from './types.js';
-export { ModeWatcher } from 'mode-watcher';
+export * from './components/index.js';

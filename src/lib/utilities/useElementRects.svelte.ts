@@ -3,7 +3,7 @@ import {
 	useMutationObserver,
 	useResizeObserver,
 	type ElementSizeOptions,
-	type MaybeGetter,
+	type MaybeGetter
 } from 'runed';
 
 /**
@@ -17,7 +17,7 @@ import {
  */
 export function useElementRects(
 	nodes: MaybeGetter<HTMLElement[]>,
-	options: ElementSizeOptions = {},
+	options: ElementSizeOptions = {}
 ) {
 	const rects = $state<DOMRect[]>(extract(nodes).map((v) => v.getBoundingClientRect()));
 
@@ -35,8 +35,8 @@ export function useElementRects(
 			stops.push(
 				useMutationObserver(() => v, update, {
 					attributeFilter: ['style', 'class'],
-					window: options.window,
-				}).stop,
+					window: options.window
+				}).stop
 			);
 		});
 

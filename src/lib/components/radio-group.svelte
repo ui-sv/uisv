@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import type { PropColor, PropSize, PropVariant } from '$lib/types.js';
+	import type { PropColor, PropSize, PropVariant } from '../types.js';
 	import { RadioGroup } from 'bits-ui';
 	import type { Snippet } from 'svelte';
 	import { tv } from 'tailwind-variants';
@@ -76,7 +76,7 @@
 		{@const is_obj = typeof item === 'object'}
 		<div class={variants.item({})}>
 			{#if indicator === 'start'}
-				{@render indicator_snippet(item)}
+				{@render indicator_snippet()}
 			{/if}
 
 			{#if item_snippet}
@@ -88,13 +88,13 @@
 			{/if}
 
 			{#if indicator === 'start'}
-				{@render indicator_snippet(item)}
+				{@render indicator_snippet()}
 			{/if}
 		</div>
 	{/each}
 </RadioGroup.Root>
 
-{#snippet indicator_snippet(item: RadioGroupItem)}
+{#snippet indicator_snippet()}
 	<RadioGroup.Item
 		value={typeof item === 'string' ? item : (item[valuekey] as string)}
 		class={variants.indicator({})}

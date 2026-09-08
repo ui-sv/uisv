@@ -1,0 +1,14 @@
+diff --git a/package.json b/package.json
+index bab6269ac35c31033d1cc8a06368155afe26173d..47955d073567d0dbe4b7a7118fbebf2637075cdd 100644
+--- a/package.json
++++ b/package.json
+@@ -48,7 +48,8 @@
+       "default": "./src/easing/index.js"
+     },
+     "./elements": {
+-      "types": "./elements.d.ts"
++      "types": "./elements.d.ts",
++      "default": "./elements.d.ts"
+     },
+     "./internal": {
+       "default": "./src/internal/index.js"

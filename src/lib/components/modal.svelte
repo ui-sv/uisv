@@ -1,12 +1,12 @@
 <script module lang="ts">
 	import { Dialog, type DialogContentProps, type PortalProps } from 'bits-ui';
 	import { tv, type ClassValue } from 'tailwind-variants';
-	import { Button, isComponent, isSnippet, type ButtonProps } from '$lib/index.js';
+	import { Button, isComponent, isSnippet, type ButtonProps } from '../index.js';
 	import type { Component, Snippet } from 'svelte';
 	import defu from 'defu';
 	import { fade, scale } from 'svelte/transition';
 	import { cubicIn } from 'svelte/easing';
-	import { getAppContext } from '$lib/contexts.js';
+	import { getAppContext } from '../contexts.js';
 
 	export type ModalProps = {
 		open?: boolean;

@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import type { Component } from 'svelte';
-	import { useStyle, isComponent } from '$lib/index.js';
+	import { useStyle, isComponent } from '../index.js';
 	import { useDebounce, watch } from 'runed';
 
 	export type IconProps = SvelteHTMLElements['base'] & {

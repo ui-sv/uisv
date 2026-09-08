@@ -1,6 +1,6 @@
 <script module lang="ts">
-	import { DEFAULT_ICONS, setAppContext, type AppContext } from '$lib/contexts.js';
-	import { mode, ModeWatcher } from '$lib/mode.js';
+	import { LUCIDE, setAppContext, type AppContext } from '../contexts.js';
+	import { mode, ModeWatcher } from '../mode.js';
 	import { Tooltip } from 'bits-ui';
 	import defu from 'defu';
 	import { type Snippet } from 'svelte';
@@ -10,25 +10,35 @@
 
 	export type AppProps = Partial<AppContext> & {
 		children?: Snippet;
+		siblings?: Snippet;
 	};
 </script>
 
 <script lang="ts">
-	let { children, modewatcher = {}, toaster = {}, tooltip = {}, icons = {} }: AppProps = $props();
+	let {
+		children,
+		modewatcher = {},
+		toaster = {},
+		tooltip = {},
+		icons = {},
+		siblings
+	}: AppProps = $props();
 
 	const context = boxWith(() =>
 		defu({ icons, toaster, modewatcher, tooltip }, <AppContext>{
-			icons: DEFAULT_ICONS,
+			icons: LUCIDE,
 			toaster: {
 				visibleToasts: 5,
 				duration: 6000,
-				theme: mode.current,
+				theme: mode.current
 			},
-			modewatcher: {},
-		}),
+			modewatcher: {}
+		})
 	);
 	setAppContext(context.current);
 </script>
+
+{@render siblings?.()}
 
 <ModeWatcher {...context.current.modewatcher} />
 

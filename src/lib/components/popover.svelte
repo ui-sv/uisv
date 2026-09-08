@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import { Popover, type PopoverArrowProps, type PopoverContentProps } from 'bits-ui';
 	import { tv, type ClassValue } from 'tailwind-variants';
-	import { type ButtonBaseProps, Button } from '$lib/index.js';
+	import { type ButtonBaseProps, Button } from '../index.js';
 
 	export type PopoverContentSnippet = {
 		props: Record<string, unknown>;

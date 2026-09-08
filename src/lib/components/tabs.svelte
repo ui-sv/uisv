@@ -1,6 +1,6 @@
 <script module lang="ts">
 	import { Tabs } from 'bits-ui';
-	import { isComponent, Icon, useElementRects, type PropColor } from '$lib/index.js';
+	import { isComponent, isSnippet, useElementRects, type PropColor } from '../index.js';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import { type Component, type Snippet } from 'svelte';
 	import { ElementRect } from 'runed';
@@ -9,7 +9,7 @@
 		| string
 		| {
 				label: string;
-				icon?: string | Component;
+				icon?: string | Component | Snippet;
 				iconposition?: 'before' | 'after';
 				content?: string | Component;
 		  };
@@ -203,7 +203,7 @@
 				class={variants.item({ class: ui.item })}
 				data-variant={variant}
 			>
-				<Icon name={typeof item === 'string' ? undefined : item.icon} />
+				{@render RenderIcon(typeof item === 'string' ? undefined : item.icon)}
 
 				{label}
 			</Tabs.Trigger>
@@ -232,3 +232,13 @@
 		{/if}
 	{/each}
 </Tabs.Root>
+
+{#snippet RenderIcon(IconProp?: string | Component | Snippet)}
+	{#if isSnippet(IconProp)}
+		{@render IconProp()}
+	{:else if isComponent(IconProp)}
+		<IconProp class={variants.icon({ class: ui.icon })} />
+	{:else if typeof IconProp === 'string'}
+		<div class={variants.icon({ class: [IconProp, ui.icon] })}></div>
+	{/if}
+{/snippet}

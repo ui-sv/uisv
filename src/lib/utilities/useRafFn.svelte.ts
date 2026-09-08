@@ -41,7 +41,7 @@ export interface UseRafFnOptions {
  */
 export function useRafFn(
 	fn: (args: UseRafFnCallbackArguments) => void,
-	options: UseRafFnOptions = {},
+	options: UseRafFnOptions = {}
 ) {
 	const { immediate = true, fpslimit = -1, once = false } = options;
 
@@ -95,6 +95,6 @@ export function useRafFn(
 	return {
 		is_active,
 		pause,
-		resume,
+		resume
 	};
 }

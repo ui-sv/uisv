@@ -1,6 +1,6 @@
 <script module lang="ts">
 	import { Slider } from 'bits-ui';
-	import type { PropColor } from '$lib/index.js';
+	import type { PropColor } from '../index.js';
 	import { tv, type ClassValue } from 'tailwind-variants';
 
 	export type SliderProps<T> = {

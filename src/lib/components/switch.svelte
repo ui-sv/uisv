@@ -1,6 +1,6 @@
 <script module lang="ts">
-	import { getAppContext } from '$lib/contexts.js';
-	import { type PropColor, Icon } from '$lib/index.js';
+	import { getAppContext } from '../contexts.js';
+	import { type PropColor, Icon } from '../index.js';
 	import type { Snippet, Component } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
 

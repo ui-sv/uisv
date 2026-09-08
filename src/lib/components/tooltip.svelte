@@ -1,7 +1,7 @@
 <script module lang="ts">
 	import type { TooltipContentProps, TooltipArrowProps, PortalProps } from 'bits-ui';
 	import { Tooltip } from 'bits-ui';
-	import { type KbdProps, type ButtonProps, isSnippet, Button, Kbd } from '$lib/index.js';
+	import { type KbdProps, type ButtonProps, isSnippet, Button, Kbd } from '../index.js';
 	import type { Snippet } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import { tv, type ClassValue } from 'tailwind-variants';

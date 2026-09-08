@@ -1,11 +1,11 @@
 <script module lang="ts">
-	import { type PropColor, type PropVariant, isComponent, isSnippet, Icon } from '$lib/index.js';
+	import { type PropColor, type PropVariant, isComponent, isSnippet, Icon } from '../index.js';
 	import type { Component, Snippet } from 'svelte';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { maska } from 'maska/svelte';
 	import { type MaskInputOptions } from 'maska';
 	import { tv, type ClassValue } from 'tailwind-variants';
-	import { getAppContext } from '$lib/contexts.js';
+	import { getAppContext } from '../contexts.js';
 
 	export type InputProps = Omit<SvelteHTMLElements['input'], 'size'> & {
 		name?: string;

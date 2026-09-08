@@ -1,8 +1,8 @@
 <script module lang="ts">
-	import { type PropColor, type PropVariant } from '$lib/index.js';
+	import { type PropColor, type PropVariant } from '../index.js';
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
-	import { Time } from '$lib/date.js';
+	import { Time } from '../date.js';
 
 	export { default as InputTime } from './input-time.svelte';
 

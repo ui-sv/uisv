@@ -1,5 +1,5 @@
 <script module lang="ts">
-	import { Icon, type PropColor, isComponent, isSnippet } from '$lib/index.js';
+	import { Icon, type PropColor, isComponent, isSnippet } from '../index.js';
 	import type { Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import type { Component } from 'svelte';

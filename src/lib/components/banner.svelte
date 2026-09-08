@@ -1,22 +1,13 @@
 <script module lang="ts">
-	import {
-		isSnippet,
-		type PropColor,
-		type ButtonProps,
-		Button,
-		type PropVariant,
-		Icon,
-	} from '$lib/index.js';
+	import { isSnippet, type ButtonProps, Button, Icon } from '../index.js';
 	import type { Component, Snippet } from 'svelte';
-	import { tv, type ClassValue } from 'tailwind-variants';
+	import { cn, type ClassValue } from 'tailwind-variants';
 	import { defu } from 'defu';
-	import { getAppContext } from '$lib/contexts.js';
+	import { getAppContext } from '../contexts.js';
 
 	export type BannerProps = {
 		title: string | Snippet;
 		icon?: string | Component;
-		color?: PropColor;
-		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
 		actions?: ButtonProps[];
 		close?: boolean | ButtonProps;
 		href?: string;
@@ -26,8 +17,15 @@
 			icon?: ClassValue;
 			description?: ClassValue;
 			title?: ClassValue;
+			header?: ClassValue;
+			leading?: ClassValue;
+			trailing?: ClassValue;
+			center?: ClassValue;
 		};
 		onclose?: () => void | Promise<() => void>;
+		button?: Snippet<[ButtonProps]>;
+		leading?: Snippet;
+		trailing?: Snippet;
 	};
 </script>
 
@@ -39,178 +37,23 @@
 		href,
 		target,
 		actions = [],
-		color = 'primary',
-		variant = 'solid',
 		ui = {},
 		onclose = () => {},
+		button,
+		leading,
+		trailing
 	}: BannerProps = $props();
-
-	const variants = $derived.by(() =>
-		tv({
-			slots: {
-				base: 'flex items-center gap-2 font-sans p-4',
-				icon: 'pi size-6',
-				actions: '',
-				title: '',
-			},
-			variants: {
-				color: {
-					primary: '',
-					surface: '',
-					info: '',
-					success: '',
-					warning: '',
-					error: '',
-				},
-				variant: {
-					solid: {
-						base: 'text-label-inverted',
-						description: 'text-label-inverted/90',
-					},
-					outline: 'border',
-					soft: '',
-					subtle: 'border',
-				},
-			},
-			compoundVariants: [
-				{
-					variant: 'solid',
-					color: 'primary',
-					class: 'bg-primary-500',
-				},
-				{
-					variant: 'solid',
-					color: 'surface',
-					class: 'bg-surface-inverted',
-				},
-				{
-					variant: 'solid',
-					color: 'info',
-					class: 'bg-info-500',
-				},
-				{
-					variant: 'solid',
-					color: 'success',
-					class: 'bg-success-500',
-				},
-				{
-					variant: 'solid',
-					color: 'warning',
-					class: 'bg-warning-500',
-				},
-				{
-					variant: 'solid',
-					color: 'error',
-					class: 'bg-error-500',
-				},
-
-				{
-					variant: 'outline',
-					color: 'primary',
-					class: 'border-primary/15 text-primary-500',
-				},
-				{
-					variant: 'outline',
-					color: 'surface',
-					class: 'border-surface/15',
-				},
-				{
-					variant: 'outline',
-					color: 'info',
-					class: 'border-info/15 text-info-500',
-				},
-				{
-					variant: 'outline',
-					color: 'success',
-					class: 'border-success/15 text-success-500',
-				},
-				{
-					variant: 'outline',
-					color: 'warning',
-					class: 'border-warning/15 text-warning-500',
-				},
-				{
-					variant: 'outline',
-					color: 'error',
-					class: 'border-error/15 text-error-500',
-				},
-
-				{
-					variant: 'soft',
-					color: 'primary',
-					class: 'bg-primary/10 text-primary-500',
-				},
-				{
-					variant: 'soft',
-					color: 'surface',
-					class: 'bg-surface/10',
-				},
-				{
-					variant: 'soft',
-					color: 'info',
-					class: 'bg-info/10 text-info-500',
-				},
-				{
-					variant: 'soft',
-					color: 'success',
-					class: 'bg-success/10 text-success-500',
-				},
-				{
-					variant: 'soft',
-					color: 'warning',
-					class: 'bg-warning/10 text-warning-500',
-				},
-				{
-					variant: 'soft',
-					color: 'error',
-					class: 'bg-error/10 text-error-500',
-				},
-
-				{
-					variant: 'subtle',
-					color: 'primary',
-					class: 'bg-primary/10 text-primary-500 border-primary/15',
-				},
-				{
-					variant: 'subtle',
-					color: 'surface',
-					class: 'bg-surface/10 border-surface/15',
-				},
-				{
-					variant: 'subtle',
-					color: 'info',
-					class: 'bg-info/10 text-info-500 border-info/15',
-				},
-				{
-					variant: 'subtle',
-					color: 'success',
-					class: 'bg-success/10 text-success-500 border-success/15',
-				},
-				{
-					variant: 'subtle',
-					color: 'warning',
-					class: 'bg-warning/10 text-warning-500 border-warning/15',
-				},
-				{
-					variant: 'subtle',
-					color: 'error',
-					class: 'bg-error/10 text-error-500  border-error/15',
-				},
-			],
-		})({ color, variant }),
-	);
 </script>
 
-<svelte:element
-	this={href ? 'a' : 'button'}
-	{href}
-	{target}
-	class={variants.base({ class: [ui.base] })}
->
-	<div class="flex grow gap-2 text-sm items-center">
-		<Icon name={icon} class={variants.icon({ class: ui.icon })} />
+<svelte:element this={href ? 'a' : 'button'} {href} {target} class={cn(ui.base)} data-slot="root">
+	<div data-slot="leading" class={cn(ui.leading)}>
+		{@render leading?.()}
+	</div>
 
-		<div class={variants.title({ class: [ui.title] })}>
+	<div data-slot="center" class={cn(ui.center)}>
+		<Icon name={icon} class={cn(ui.icon)} />
+
+		<div class={cn(ui.title)}>
 			{#if isSnippet(title)}
 				{@render title()}
 			{:else}
@@ -220,29 +63,29 @@
 
 		{#if actions.length}
 			{#each actions as action, idx (idx)}
-				<Button
-					{...defu(action, <ButtonProps>{
-						size: 'xs',
-						color: 'surface',
-					})}
-				/>
+				{#if button}
+					{@render button(action)}
+				{:else}
+					<Button {...defu(action, <ButtonProps>{})} />
+				{/if}
 			{/each}
 		{/if}
 	</div>
 
-	{#if close}
-		<div>
-			<Button
-				{...defu(typeof close === 'boolean' ? {} : close, <ButtonProps>{
-					icon: getAppContext().icons.close,
-					variant: 'ghost',
-					color: 'surface',
-					ui: {
-						icon: variant === 'solid' ? 'text-label-inverted' : '',
-					},
-					onclick: onclose,
-				})}
-			/>
-		</div>
-	{/if}
+	<div data-slot="trailing" class={cn(ui.trailing)}>
+		{#if trailing}
+			{@render trailing()}
+		{:else if close}
+			{@const props = defu(typeof close === 'boolean' ? {} : close, <ButtonProps>{
+				icon: getAppContext().icons.close,
+				onclick: onclose
+			})}
+
+			{#if button}
+				{@render button(props)}
+			{:else}
+				<Button {...props} />
+			{/if}
+		{/if}
+	</div>
 </svelte:element>

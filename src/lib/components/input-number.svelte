@@ -5,11 +5,11 @@
 		type PropColor,
 		type PropSize,
 		type PropVariant,
-	} from '$lib/index.js';
+	} from '../index.js';
 	import type { SvelteHTMLElements } from 'svelte/elements';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import { useId } from 'bits-ui';
-	import { getAppContext } from '$lib/contexts.js';
+	import { getAppContext } from '../contexts.js';
 
 	export type InputNumberProps = Omit<SvelteHTMLElements['input'], 'size' | 'value'> & {
 		value?: number;

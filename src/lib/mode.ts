@@ -1,5 +1,6 @@
 import { setMode } from 'mode-watcher';
 
+export * from 'mode-watcher';
 export type Mode = Parameters<typeof setMode>['0'];
 export type ThemeColors = { dark: string; light: string } | undefined;
 
@@ -97,5 +98,3 @@ export type ModeWatcherProps = {
 	 */
 	synchronousModeChanges?: boolean;
 };
-
-export * from 'mode-watcher';

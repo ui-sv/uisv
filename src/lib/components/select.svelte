@@ -1,10 +1,10 @@
 <script module lang="ts">
-	import type { PropColor, PropVariant } from '$lib/index.js';
+	import type { PropColor, PropVariant } from '../index.js';
 	import { Select } from 'bits-ui';
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
 	import Icon from './icon.svelte';
-	import { getAppContext } from '$lib/contexts.js';
+	import { getAppContext } from '../contexts.js';
 
 	export type SelectItem<T> =
 		| T

@@ -1,8 +1,8 @@
 <script lang="ts" module>
 	import type { Component, Snippet } from 'svelte';
 	import { tv, type ClassValue } from 'tailwind-variants';
-	import { type PropColor, type PropVariant, isSnippet } from '$lib/index.js';
-	import { type DateValue, today } from '$lib/date.js';
+	import { type PropColor, type PropVariant, isSnippet } from '../index.js';
+	import { type DateValue, today } from '../date.js';
 	import { Calendar, type CalendarRootProps } from 'bits-ui';
 
 	export type CalendarProps = CalendarRootProps & {

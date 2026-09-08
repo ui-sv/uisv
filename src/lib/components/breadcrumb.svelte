@@ -1,8 +1,8 @@
 <script module lang="ts">
 	import type { Component, Snippet } from 'svelte';
-	import { Button, Icon, type ButtonProps, isSnippet } from '$lib/index.js';
-	import { tv } from 'tailwind-variants';
-	import { getAppContext } from '$lib/contexts.js';
+	import { Button, Icon, type ButtonProps, isSnippet } from '../index.js';
+	import { cn } from 'tailwind-variants';
+	import { getAppContext } from '../contexts.js';
 
 	export type BreadcrumbItem = Omit<ButtonProps, 'label'> & {
 		label?: string;
@@ -26,24 +26,12 @@
 		seperator = getAppContext().icons.chevronright,
 		...rest
 	}: BreadcrumbProps = $props();
-
-	const variants = $derived(
-		tv({
-			slots: {
-				root: '',
-				list: 'flex items-center',
-				item: '',
-				seperator: '',
-			},
-			variants: {},
-		})(),
-	);
 </script>
 
-<nav class={variants.root({})}>
-	<ol class={variants.list({})}>
+<nav class={cn()}>
+	<ol class={cn({})}>
 		{#each items as item, idx (idx)}
-			<li class={variants.item({})}>
+			<li class={cn({})}>
 				{#if item.snippet}
 					{@const render = rest[item.snippet]}
 
@@ -51,14 +39,7 @@
 						{@render (render as Snippet<[BreadcrumbItem]>)(item)}
 					{/if}
 				{:else}
-					<Button
-						label={item[labelkey] as undefined}
-						icon={item.icon}
-						href={item.href}
-						variant="link"
-						color="surface"
-						{...item}
-					/>
+					<Button label={item[labelkey] as undefined} icon={item.icon} href={item.href} {...item} />
 				{/if}
 			</li>
 

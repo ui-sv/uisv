@@ -1,14 +1,10 @@
 <script module lang="ts">
-	import type { PropColor, PropVariant } from '$lib/index.js';
 	import type { Snippet } from 'svelte';
-	import { tv, type ClassValue } from 'tailwind-variants';
+	import { cn, type ClassValue } from 'tailwind-variants';
 
 	export type KbdProps = {
 		children?: Snippet;
 		value?: string;
-		color?: PropColor;
-		variant?: Exclude<PropVariant, 'none' | 'ghost'>;
-		size?: 'sm' | 'md' | 'lg';
 		class?: ClassValue;
 	};
 
@@ -34,7 +30,7 @@
 		pageup: '⇞',
 		pagedown: '⇟',
 		home: '↖',
-		end: '↘',
+		end: '↘'
 	};
 
 	export type KbdKey = keyof typeof KBD_KEYS;
@@ -42,14 +38,7 @@
 </script>
 
 <script lang="ts">
-	const {
-		children,
-		value,
-		color = 'primary',
-		variant = 'outline',
-		size = 'md',
-		class: klass,
-	}: KbdProps = $props();
+	const { children, value, class: classname }: KbdProps = $props();
 
 	const macOS = $derived.by(() => {
 		if (typeof navigator === 'undefined') return null;
@@ -57,16 +46,16 @@
 		return navigator.userAgent.match(/Macintosh;/);
 	});
 
-	const kbdKeysSpecificMap = $derived.by(() => {
-		return {
-			meta: macOS?.length ? KBD_KEYS.command : 'Ctrl',
-			alt: macOS?.length ? KBD_KEYS.command : 'Alt',
-			ctrl: macOS?.length ? KBD_KEYS.option : 'Ctrl',
-		};
+	const kbdKeysSpecificMap = $derived({
+		meta: macOS ? KBD_KEYS.command : 'Ctrl',
+		alt: macOS ? KBD_KEYS.command : 'Ctrl',
+		ctrl: macOS ? KBD_KEYS.option : 'Alt'
 	});
 
-	function getKey(value: KbdKey | string | undefined) {
-		if (!value) return;
+	function getKey(value?: KbdKey | string) {
+		if (!value) {
+			return;
+		}
 
 		if (['meta', 'alt', 'ctrl'].includes(value)) {
 			return kbdKeysSpecificMap[value as KbdSpecificKey];
@@ -76,160 +65,7 @@
 	}
 </script>
 
-<kbd
-	class={tv({
-		base: 'inline-flex items-center justify-center px-1 rounded-sm font-medium font-sans text-xs',
-		variants: {
-			color: {
-				primary: '',
-				surface: '',
-				info: '',
-				success: '',
-				warning: '',
-				error: '',
-			},
-			variant: {
-				solid: 'text-white border border-b-3 border-r-2',
-				outline: 'border border-b-3 border-r-2',
-				soft: '',
-				subtle: 'border border-b-3 border-r-2',
-			},
-			size: {
-				sm: 'h-4 min-w-4',
-				md: 'h-5 min-w-5',
-				lg: 'h-6 min-w-6',
-			},
-		},
-		compoundVariants: [
-			{
-				color: 'primary',
-				variant: 'outline',
-				class: 'border-primary text-primary',
-			},
-			{
-				color: 'surface',
-				variant: 'outline',
-				class: 'border-label-toned',
-			},
-			{
-				color: 'info',
-				variant: 'outline',
-				class: 'border-info text-info',
-			},
-			{
-				color: 'success',
-				variant: 'outline',
-				class: 'border-success text-success',
-			},
-			{
-				color: 'warning',
-				variant: 'outline',
-				class: 'border-warning text-warning',
-			},
-			{
-				color: 'error',
-				variant: 'outline',
-				class: 'border-error text-error',
-			},
-
-			// SOLID
-			{
-				color: 'primary',
-				variant: 'solid',
-				class: 'bg-primary border-primary-600',
-			},
-			{
-				color: 'surface',
-				variant: 'solid',
-				class: 'bg-label-toned border-label-highlighted',
-			},
-			{
-				color: 'info',
-				variant: 'solid',
-				class: 'bg-info border-info-600',
-			},
-			{
-				color: 'success',
-				variant: 'solid',
-				class: 'bg-success border-success-600',
-			},
-			{
-				color: 'warning',
-				variant: 'solid',
-				class: 'bg-warning border-warning-600',
-			},
-			{
-				color: 'error',
-				variant: 'solid',
-				class: 'bg-error border-error-600',
-			},
-
-			// SOFT
-			{
-				color: 'primary',
-				variant: 'soft',
-				class: 'bg-primary-100 text-primary',
-			},
-			{
-				color: 'surface',
-				variant: 'soft',
-				class: 'bg-surface-elevated text-label-toned',
-			},
-			{
-				color: 'info',
-				variant: 'soft',
-				class: 'bg-info-100 text-info',
-			},
-			{
-				color: 'success',
-				variant: 'soft',
-				class: 'bg-success-100 text-success',
-			},
-			{
-				color: 'warning',
-				variant: 'soft',
-				class: 'bg-warning-100 text-warning',
-			},
-			{
-				color: 'error',
-				variant: 'soft',
-				class: 'bg-error-100 text-error',
-			},
-
-			// SUBTLE
-			{
-				color: 'primary',
-				variant: 'subtle',
-				class: 'bg-primary-100 border-primary-200 text-primary',
-			},
-			{
-				color: 'surface',
-				variant: 'subtle',
-				class: 'bg-surface-muted border-surface-accented text-label-toned',
-			},
-			{
-				color: 'info',
-				variant: 'subtle',
-				class: 'bg-info-100 border-info-200 text-info',
-			},
-			{
-				color: 'success',
-				variant: 'subtle',
-				class: 'bg-success-100 border-success-200 text-success',
-			},
-			{
-				color: 'warning',
-				variant: 'subtle',
-				class: 'bg-warning-100 border-warning-200 text-warning',
-			},
-			{
-				color: 'error',
-				variant: 'subtle',
-				class: 'bg-error-100 border-error-200 text-error',
-			},
-		],
-	})({ color, variant, size, class: [klass] })}
->
+<kbd class={cn(classname)}>
 	{#if value}
 		{getKey(value)}
 	{:else}

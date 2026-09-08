@@ -3,7 +3,7 @@ import type { ToasterProps } from 'svelte-sonner';
 import type { ModeWatcherProps } from './mode.js';
 import type { TooltipProviderProps } from 'bits-ui';
 
-export const DEFAULT_ICONS = {
+export const LUCIDE = {
 	arrowdown: 'i-lucide:arrow-down',
 	arrowleft: 'i-lucide:arrow-left',
 	arrowright: 'i-lucide:arrow-right',
@@ -45,11 +45,11 @@ export const DEFAULT_ICONS = {
 	system: 'i-lucide:monitor',
 	tip: 'i-lucide:lightbulb',
 	upload: 'i-lucide:upload',
-	warning: 'i-lucide:warning',
+	warning: 'i-lucide:warning'
 };
 
 export type AppContext = {
-	icons: Partial<typeof DEFAULT_ICONS>;
+	icons: Partial<typeof LUCIDE>;
 	toaster: Partial<ToasterProps>;
 	modewatcher: ModeWatcherProps;
 	tooltip: TooltipProviderProps;
