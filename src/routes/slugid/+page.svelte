@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import Aside from '$site/aside.svelte';
 
 	let { data } = $props();
@@ -18,4 +18,4 @@
 			<p>can't find it... the page prob got up and walk away.</p>
 		</div>
 	{/if}
-</div>
+</div> -->

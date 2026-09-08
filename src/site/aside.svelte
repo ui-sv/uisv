@@ -38,8 +38,8 @@
 						icon: 'i-lucide:rocket',
 					},
 					{
-						href: '/colors',
-						label: 'Colors',
+						href: '/theming',
+						label: 'Theming',
 						icon: 'i-lucide:swatch-book',
 					},
 				],
@@ -82,30 +82,36 @@
 	});
 </script>
 
-<aside
-	class="w-68 sticky top-[calc(var(--spacing)*16+1px)] max-h-[calc(100vh-1px-var(--spacing)*16)] p-4 space-y-1 border-x border-gray/25"
->
-	{#each link_section as section (section.label)}
-		<div class="text-xs font-semibold text-black/60 h-8 flex items-center uppercase">
-			<Icon name={section.icon} />
+{#if link_section.length}
+	<aside
+		class="w-68 sticky top-[calc(var(--spacing)*16+1px)] max-h-[calc(100vh-1px-var(--spacing)*16)] p-4 space-y-1 border-x border-gray/25"
+	>
+		{#each link_section as section, idx (section.label)}
+			{#if idx}
+				<hr class="border-surface-accented my-4" />
+			{/if}
 
-			{section.label}
-		</div>
+			<div class="text-xs font-semibold h-8 flex items-center uppercase">
+				<Icon name={section.icon} />
 
-		{#each section.sublinks as link (link.href)}
-			<Button
-				{...link}
-				href="{section.base_href}{link.href}"
-				ui={{
-					base: [
-						'text-sm text-black/50 flex items-center gap-2 transition px-2 h-8',
-						`${section.base_href || ''}${link.href}` === page.url.pathname
-							? 'bg-gray/10 text-black/75'
-							: 'hover:(bg-gray/10)',
-					],
-					icon: 'size-4.5',
-				}}
-			/>
+				{section.label}
+			</div>
+
+			{#each section.sublinks as link (link.href)}
+				<Button
+					{...link}
+					href="{section.base_href}{link.href}"
+					ui={{
+						base: [
+							'text-sm flex items-center gap-2 transition h-8',
+							`${section.base_href || ''}${link.href}` === page.url.pathname
+								? 'text-primary'
+								: 'hover:text-primary text-label-muted',
+						],
+						icon: 'size-4.5',
+					}}
+				/>
+			{/each}
 		{/each}
-	{/each}
-</aside>
+	</aside>
+{/if}

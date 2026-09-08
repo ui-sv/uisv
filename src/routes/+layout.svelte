@@ -21,7 +21,7 @@
 	:global {
 		html,
 		body {
-			@apply bg-white dark:bg-gray-900 min-h-screen;
+			@apply bg-surface-base text-label-base min-h-screen;
 		}
 	}
 </style>

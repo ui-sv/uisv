@@ -2,7 +2,14 @@ import adapter from '@sveltejs/adapter-auto';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import uisv from './src/lib/vite.ts';
-import { mdsvex } from 'mdsvex';
+import { mdsvex, escapeSvelte } from 'mdsvex';
+import { createHighlighter } from 'shiki';
+import autolink from 'rehype-autolink-headings';
+
+const highlighter = await createHighlighter({
+	themes: ['one-dark-pro', 'one-light'],
+	langs: ['svelte', 'sh'],
+});
 
 export default defineConfig({
 	plugins: [
@@ -17,8 +24,12 @@ export default defineConfig({
 			fonts: {
 				families: {
 					sans: {
-						name: 'Public Sans',
-						weights: [400, 500, 600],
+						name: 'Geist',
+						weights: [400, 500, 600, 700, 800],
+					},
+					mono: {
+						name: 'Geist Mono',
+						weights: [400, 500],
 					},
 				},
 			},
@@ -47,8 +58,26 @@ export default defineConfig({
 			adapter: adapter(),
 			preprocess: [
 				mdsvex({
+					rehypePlugins: [
+						() => {
+							const link = autolink();
+							return (tree) => link(tree as Parameters<typeof link>['0']);
+						},
+					],
 					extensions: ['.md'],
-					highlight: { highlighter(code, lang, metastring, filename, optimise) {} },
+					highlight: {
+						async highlighter(code, lang) {
+							const html = highlighter.codeToHtml(code, {
+								lang: lang || 'text',
+								themes: {
+									dark: 'one-dark-pro',
+									light: 'one-light',
+								},
+							});
+
+							return `{@html \`${escapeSvelte(html)}\` }`;
+						},
+					},
 				}),
 			],
 		}),

@@ -25,7 +25,7 @@
 </script>
 
 <nav
-	class="bg-white border-b border-gray/25 dark:(bg-gray-800) sticky top-0 z-50 flex items-center gap-2 px-12"
+	class="bg-surface-base border-b border-surface-accented sticky top-0 z-50 flex items-center gap-2 px-12"
 >
 	<a href="/" class="flex gap-2 items-center">
 		<Logo class="size-7 text-svelte text-shadow" />
@@ -49,8 +49,10 @@
 
 			<span
 				class={[
-					'h-px absolute w-full left-0 top-full transition',
-					is_link(label, href) ? 'bg-svelte' : 'group-hover:bg-gray/50',
+					'h-px absolute w-full left-0 top-full transition-all duration-300',
+					is_link(label, href)
+						? 'bg-svelte scale-x-full'
+						: 'group-hover:(bg-surface/75 scale-x-full) scale-x-0',
 				]}
 			></span>
 		</a>
@@ -59,7 +61,7 @@
 	<span class="grow"></span>
 
 	<Button
-		href="https://github.com/ui-sv/kilobits"
+		href="https://github.com/ui-sv/uisv"
 		icon="i-lucide:github"
 		target="_blank"
 		class="size-8 flex items-center justify-center hover:bg-gray/10 transition"
