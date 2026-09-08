@@ -98,6 +98,16 @@ export default function (options: KilobitsOptions = {}): Plugin[] {
 			presets,
 			transformers,
 			preflights: [],
+			content: {
+				pipeline: {
+					include: [
+						// the default
+						/\.(vue|svelte|[jt]sx|vine.ts|mdx?|astro|elm|php|phtml|marko|html)($|\?)/,
+						// include js/ts files
+						'src/**/*.{js,ts}',
+					],
+				},
+			},
 		});
 
 		if (options.colors !== false) {

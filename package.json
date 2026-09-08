@@ -1,6 +1,6 @@
 {
 	"name": "uisv",
-	"version": "0.0.26",
+	"version": "0.0.27",
 	"description": "ui library for the rest of us",
 	"license": "MIT",
 	"repository": "ui-sv/uisv",
@@ -33,10 +33,10 @@
 			"svelte": "./dist/index.js",
 			"default": "./dist/index.js"
 		},
-		"./context": {
-			"types": "./dist/context.d.ts",
-			"svelte": "./dist/context.js",
-			"default": "./dist/context.js"
+		"./contexts": {
+			"types": "./dist/contexts.d.ts",
+			"svelte": "./dist/contexts.js",
+			"default": "./dist/contexts.js"
 		},
 		"./date": {
 			"types": "./dist/date.d.ts",
