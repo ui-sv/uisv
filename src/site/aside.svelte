@@ -84,7 +84,7 @@
 
 {#if link_section.length}
 	<aside
-		class="w-68 sticky top-[calc(var(--spacing)*16+1px)] max-h-[calc(100vh-1px-var(--spacing)*16)] p-4 space-y-1 border-x border-gray/25"
+		class="w-68 min-w-68 sticky top-[calc(var(--spacing)*16+1px)] max-h-[calc(100vh-1px-var(--spacing)*16)] p-4 space-y-1 border-x border-gray/25 whitespace-nowrap"
 	>
 		{#each link_section as section, idx (section.label)}
 			{#if idx}

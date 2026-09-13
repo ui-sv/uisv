@@ -30,7 +30,7 @@ User Interface SVelte? heh? It is all lowercase because `UISv`, `UiSv`, `UISV`, 
 
 ## Example
 
-That is an example of how I would style and structure it with `uisv` to make it reusable intead of rewriting the whole code for every project like in [Modal's code](https://github.com/ui-sv/uisv/blob/main/src/lib/components/modal.svelte)
+This is an example of how I would style and structure components to make it reusable intead of rewriting the whole code for every project like in [Modal's code](https://github.com/ui-sv/uisv/blob/main/src/lib/components/modal.svelte)
 
 ```svelte
 <script lang="ts">

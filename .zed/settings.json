@@ -1,0 +1,6 @@
+{
+	"file_types": {
+		"Markdown": ["mdsv"],
+	},
+	"languages": { "CSS": { "language_servers": ["tailwind-language-server", "..."] } },
+}

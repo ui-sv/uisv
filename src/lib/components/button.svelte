@@ -24,8 +24,9 @@
 		iconposition?: 'leading' | 'trailing';
 		/** Icon when `loading` is `false` */
 		icon?: string | Component;
-		leadingicon?: string | Component;
 		trailingicon?: string | Component;
+		leading?: Snippet;
+		trailing?: Snippet;
 		/** Route Location the link should navigate to when clicked on. */
 		href?: string;
 		label?: string;
@@ -60,7 +61,8 @@
 		loadingicon = getAppContext().icons.loading,
 		type,
 		trailingicon,
-		leadingicon,
+		leading,
+		trailing,
 		...rest
 	}: ButtonProps = $props();
 
@@ -96,7 +98,7 @@
 	aria-disabled={href ? disabled : undefined}
 	role={href && disabled ? 'link' : undefined}
 	tabindex={href && disabled ? -1 : 0}
-	class={cn(ui.base, rest.class)}
+	class={cn('uisv-button', ui.base, rest.class)}
 	onclick={onClickWrapper}
 	data-loading={is_loading ? '' : undefined}
 	data-disabled={href ? disabled : undefined}
@@ -105,12 +107,16 @@
 </svelte:element>
 
 {#snippet content()}
-	{#if iconposition === 'leading' || leadingicon || is_loading}
-		<Icon
-			name={is_loading ? loadingicon : leadingicon || icon}
-			class={cn(ui.leadingicon, iconposition === 'leading' && ui.icon)}
-			data-loading={is_loading ? '' : undefined}
-		/>
+	{#if iconposition === 'leading' || leading || is_loading}
+		{#if leading}
+			{@render leading()}
+		{:else}
+			<Icon
+				name={is_loading ? loadingicon : icon}
+				class={cn('uisv-button-icon', ui.leadingicon, iconposition === 'leading' && ui.icon)}
+				data-loading={is_loading ? '' : undefined}
+			/>
+		{/if}
 	{/if}
 
 	{#if label}
@@ -119,12 +125,16 @@
 		{@render children?.()}
 	{/if}
 
-	{#if iconposition === 'trailing' || trailingicon}
-		<Icon
-			name={trailingicon || icon}
-			class={cn(ui.trailingicon, iconposition === 'trailing' && ui.icon)}
-			data-loading={is_loading ? '' : undefined}
-			data-disabled={href ? disabled : undefined}
-		/>
+	{#if iconposition === 'trailing' || trailing || trailingicon}
+		{#if trailing}
+			{@render trailing()}
+		{:else}
+			<Icon
+				name={trailingicon || icon}
+				class={cn('uisv-button-icon', ui.trailingicon, iconposition === 'trailing' && ui.icon)}
+				data-loading={is_loading ? '' : undefined}
+				data-disabled={href ? disabled : undefined}
+			/>
+		{/if}
 	{/if}
 {/snippet}

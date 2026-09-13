@@ -2,6 +2,7 @@ import adapter from '@sveltejs/adapter-auto';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import uisv from './src/lib/vite.ts';
+import process_md from './src/site/preprocess.ts';
 import { mdsvex, escapeSvelte } from 'mdsvex';
 import { createHighlighter } from 'shiki';
 import autolink from 'rehype-autolink-headings';
@@ -35,11 +36,9 @@ export default defineConfig({
 			},
 		}),
 		sveltekit({
-			extensions: ['.md', '.svelte'],
+			extensions: ['.mdsv', '.md', '.svelte'],
 			alias: {
 				$site: './src/site',
-				$velite: './.velite',
-				content: './.content-collections/generated',
 			},
 			compilerOptions: {
 				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
@@ -57,6 +56,7 @@ export default defineConfig({
 			// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 			adapter: adapter(),
 			preprocess: [
+				process_md(),
 				mdsvex({
 					rehypePlugins: [
 						() => {
@@ -64,7 +64,7 @@ export default defineConfig({
 							return (tree) => link(tree as Parameters<typeof link>['0']);
 						},
 					],
-					extensions: ['.md'],
+					extensions: ['.mdsv', '.md'],
 					highlight: {
 						async highlighter(code, lang) {
 							const html = highlighter.codeToHtml(code, {

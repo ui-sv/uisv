@@ -11,7 +11,7 @@
 	{#if page.error}
 		<div></div>
 	{:else}
-		<main class="grow p-4">
+		<main class="grow p-4 max-w-full overflow-x-hidden">
 			<div class="mx-auto max-w-4xl space-y-4">
 				{@render children()}
 			</div>
@@ -39,10 +39,17 @@
 
 		p {
 			@apply text-label-toned;
+
+			& > code {
+				@apply text-sm p-0.5 bg-surface-muted border border-surface-accented text-label-highlighted font-medium inline-block;
+			}
 		}
 
-		p > code {
-			@apply text-sm p-0.5 bg-surface-muted border border-surface-accented text-label-highlighted font-medium;
+		table {
+			& td,
+			& th {
+				@apply p-4 text-left border border-surface-accented;
+			}
 		}
 
 		html.dark .shiki,

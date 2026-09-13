@@ -88,6 +88,7 @@
 		"@internationalized/date": "^3.12.4",
 		"bits-ui": "^2.19.0",
 		"colortranslator": "^6.1.1",
+		"dedent": "^1.7.2",
 		"defu": "^6.1.7",
 		"maska": "^3.2.1",
 		"mode-watcher": "^1.1.0",
