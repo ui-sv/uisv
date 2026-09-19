@@ -10,7 +10,7 @@ export function useStyle(css: MaybeGetter<string>) {
 	let el = $state<HTMLStyleElement>();
 
 	$effect(() => {
-		if (!el) {
+		if (!el && css.length) {
 			el = (document.getElementById(id) || document.createElement('style')) as HTMLStyleElement;
 
 			if (!el.isConnected) {
@@ -19,7 +19,11 @@ export function useStyle(css: MaybeGetter<string>) {
 			}
 		}
 
-		el.textContent = extract(css);
+		if (el && css.length) el.textContent = extract(css);
+		else if (el) {
+			el.remove();
+			el = undefined;
+		}
 	});
 
 	return { id };

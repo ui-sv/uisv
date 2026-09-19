@@ -37,15 +37,21 @@
 			@apply text-xl font-bold mt-6 mb-4;
 		}
 
+		code {
+			@apply text-xs p-0.5 bg-surface-muted border border-surface-accented text-label-highlighted inline-block;
+		}
+
 		p {
 			@apply text-label-toned;
 
 			& > code {
-				@apply text-sm p-0.5 bg-surface-muted border border-surface-accented text-label-highlighted font-medium inline-block;
+				@apply font-medium text-sm;
 			}
 		}
 
 		table {
+			@apply w-full;
+
 			& td,
 			& th {
 				@apply p-4 text-left border border-surface-accented;

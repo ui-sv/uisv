@@ -3,6 +3,7 @@
 	import type { Component } from 'svelte';
 	import { useStyle, isComponent } from '../index.js';
 	import { useDebounce, watch } from 'runed';
+	import { on } from 'svelte/events';
 
 	export type IconProps = SvelteHTMLElements['base'] & {
 		name?: string | Component;
@@ -12,6 +13,7 @@
 <script lang="ts">
 	let { class: classname, name, ...rest }: IconProps = $props();
 
+	let element = $state<HTMLDivElement>();
 	let css_style = $state('');
 
 	const resolve = useDebounce(async () => {
@@ -44,13 +46,14 @@
 		() => {
 			resolve();
 		},
+		{ lazy: true },
 	);
 
 	useStyle(() => css_style);
 </script>
 
 {#if typeof name === 'string' && name.length > 0}
-	<div {...rest as SvelteHTMLElements['div']} class={[name, classname]}></div>
+	<div bind:this={element} {...rest as SvelteHTMLElements['div']} class={[name, classname]}></div>
 {:else if isComponent(name)}
 	{@const Icon = name}
 	<Icon {...rest} class={classname} />

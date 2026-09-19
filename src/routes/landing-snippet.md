@@ -1,15 +1,22 @@
 ```svelte
 <script>
-	import { Tabs } from 'uisv';
+	import { Accordion } from 'uisv';
+
+	const items = [
+		{
+			label: 'What is uisv?',
+			content: 'uisv is an unstyled component library for Svelte.',
+		},
+		{
+			label: 'Why is uisv?',
+			content: why_is_uisv,
+		},
+	];
 </script>
 
-<Tabs items={['overview', 'setting']}>
-	{#snippet content_1()}
-		Settings content
-	{/snippet}
-</Tabs>
+<Accordion {items} />
 
-{#snippet content_0()}
-	Overview content
+{#snippet why_is_uisv()}
+	Because it simplifies customizing Bits UI components, or so I think.
 {/snippet}
 ```

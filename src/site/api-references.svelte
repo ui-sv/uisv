@@ -3,7 +3,7 @@
 		props?: Array<{
 			name: string;
 			type: string;
-			bindable?: false;
+			bindable?: true;
 			default?: string;
 			description: string;
 		}>;
@@ -47,29 +47,25 @@
 			{#each props_list as item, idx (idx)}
 				<tr>
 					<td>
-						<p>
-							<code>{item.name}</code>
-							{#if item.bindable}
-								<span class="text-primary text-xs">$bindable</span>
-							{/if}
-						</p>
+						<code>{item.name}</code>
+						{#if item.bindable}
+							<span class="text-primary text-xs border border-primary px-1 font-medium"
+								>$bindable</span
+							>
+						{/if}
 					</td>
 					<td>
-						<p>
-							<code>{item.type}</code>
-						</p>
+						<code>{item.type}</code>
 					</td>
 					<td>
 						{item.description}
 
-						<p>
-							Default:
-							{#if item.default}
-								<code>{item.default}</code>
-							{:else}
-								---
-							{/if}
-						</p>
+						Default:
+						{#if item.default}
+							<code>{item.default}</code>
+						{:else}
+							---
+						{/if}
 					</td>
 				</tr>
 			{/each}
@@ -93,14 +89,10 @@
 				{#each t.items as item, idx (idx)}
 					<tr>
 						<td>
-							<p>
-								<code>{item.name}</code>
-							</p>
+							<code>{item.name}</code>
 						</td>
 						<td>
-							<p>
-								<code>{item.type}</code>
-							</p>
+							<code>{item.type}</code>
 						</td>
 						<td>
 							{item.description}
@@ -127,18 +119,14 @@
 			{#each snippets as item, idx (idx)}
 				<tr>
 					<td>
-						<p>
-							<code>{item.name}</code>
-						</p>
+						<code>{item.name}</code>
 					</td>
 					<td>
-						<p>
-							{#if item.props}
-								<code>{item.props}</code>
-							{:else}
-								---
-							{/if}
-						</p>
+						{#if item.props}
+							<code>{item.props}</code>
+						{:else}
+							---
+						{/if}
 					</td>
 					<td>
 						{item.description}
@@ -161,35 +149,29 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each props_list as item, idx (idx)}
+			{#each ui as item, idx (idx)}
 				<tr>
 					<td>
-						<p>
-							<code>{item.name}</code>
-							{#if item.bindable}
-								<span class="text-primary text-xs">$bindable</span>
-							{/if}
-						</p>
+						<code>{item.name}</code>
 					</td>
 					<td>
-						<p>
-							<code>{item.type}</code>
-						</p>
+						<code>{item.class}</code>
 					</td>
 					<td>
-						{item.description}
-
-						<p>
-							Default:
-							{#if item.default}
-								<code>{item.default}</code>
-							{:else}
-								---
-							{/if}
-						</p>
+						<div class="inline-flex gap-2 flex-wrap">
+							{#each item.attrs as attr (attr)}
+								<code>{attr}</code>
+							{/each}
+						</div>
 					</td>
 				</tr>
 			{/each}
 		</tbody>
 	</table>
 {/if}
+
+<style>
+	code {
+		@apply px-1;
+	}
+</style>

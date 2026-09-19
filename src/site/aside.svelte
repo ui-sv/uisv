@@ -15,6 +15,11 @@
 				base_href: '/components',
 				sublinks: [
 					{
+						href: '/accordion',
+						label: 'Accordion',
+						icon: 'i-lucide:list-collapse',
+					},
+					{
 						href: '/button',
 						label: 'Button',
 						icon: 'i-lucide:mouse-pointer-click',

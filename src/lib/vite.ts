@@ -95,6 +95,20 @@ export default function (options: KilobitsOptions = {}): Plugin[] {
 		}
 
 		const config = defu(options.unocss, <UnocssConfig>{
+			theme: {
+				animation: {
+					keyframes: {
+						'accordion-down':
+							'{0% {height: 0; } 100% {height: var(--bits-accordion-content-height);}}',
+						'accordion-up':
+							'{0% {height: var(--bits-accordion-content-height); } 100% {height:0;}}',
+					},
+					durations: {
+						'accordion-down': '200ms',
+						'accordion-up': '200ms',
+					},
+				},
+			},
 			presets,
 			transformers,
 			preflights: [],

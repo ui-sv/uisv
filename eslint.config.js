@@ -39,6 +39,7 @@ export default defineConfig(
 		rules: {
 			'svelte/no-navigation-without-resolve': 'off',
 			'svelte/no-at-html-tags': 'off',
+			'@typescript-eslint/no-explicit-any': 'off',
 		},
 	},
 );

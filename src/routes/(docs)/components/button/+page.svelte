@@ -149,11 +149,6 @@
 			type: 'boolean',
 			default: 'true',
 		},
-		{
-			name: 'children',
-			description: '',
-			type: 'Snippet',
-		},
 	]}
 	snippets={[
 		{
@@ -169,5 +164,26 @@
 			description: 'An optional snippet when you want more than a leading icon.',
 		},
 	]}
-	ui={[]}
+	ui={[
+		{
+			name: 'base',
+			class: 'uisv-button',
+			attrs: ['data-disabled', 'data-loading'],
+		},
+		{
+			name: 'icon',
+			class: 'uisv-button-icon',
+			attrs: ['data-disabled', 'data-loading'],
+		},
+		{
+			name: 'leadingicon',
+			class: 'uisv-button-icon-leading',
+			attrs: ['data-disabled', 'data-loading'],
+		},
+		{
+			name: 'trailingicon',
+			class: 'uisv-button-icon-trailing',
+			attrs: ['data-disabled', 'data-loading'],
+		},
+	]}
 />

@@ -113,8 +113,13 @@
 		{:else}
 			<Icon
 				name={is_loading ? loadingicon : icon}
-				class={cn('uisv-button-icon', ui.leadingicon, iconposition === 'leading' && ui.icon)}
+				class={cn(
+					'uisv-button-icon uisv-button-icon-leading',
+					ui.leadingicon,
+					iconposition === 'leading' && ui.icon,
+				)}
 				data-loading={is_loading ? '' : undefined}
+				data-disabled={href ? disabled : undefined}
 			/>
 		{/if}
 	{/if}
@@ -131,7 +136,11 @@
 		{:else}
 			<Icon
 				name={trailingicon || icon}
-				class={cn('uisv-button-icon', ui.trailingicon, iconposition === 'trailing' && ui.icon)}
+				class={cn(
+					'uisv-button-icon uisv-button-icon-trailing',
+					ui.trailingicon,
+					iconposition === 'trailing' && ui.icon,
+				)}
 				data-loading={is_loading ? '' : undefined}
 				data-disabled={href ? disabled : undefined}
 			/>
